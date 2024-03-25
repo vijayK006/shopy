@@ -26,7 +26,7 @@ p{
     color: white;
 } */
 
-.custom-header, .css-gl260s-MuiDataGrid-columnHeadersInner,.css-1iyq7zh-MuiDataGrid-columnHeaders {
+.custom-header, .css-gl260s-MuiDataGrid-columnHeadersInner,.css-1iyq7zh-MuiDataGrid-columnHeaders,.css-y599qu {
     background-color:  #FF5733 !important;
     color: white !important;
   }
