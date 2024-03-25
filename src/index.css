@@ -1,0 +1,256 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+p{
+    margin-bottom: 0px !important;
+}
+
+/* Tabel */
+.css-ptiqhd-MuiSvgIcon-root {
+    color: white;
+}
+
+.css-1iyq7zh-MuiDataGrid-columnHeaders {
+    background-color: #FF5733;
+    color: white;
+}
+/* -------------- */
+
+/* ---------------------------------------------------------------------------------------------------------------------- */
+.top-bar .menu-icon{
+  padding: 5px;
+  color: black;
+  cursor: pointer;
+  font-size: 35px;
+  position: fixed;
+      left: 5px;
+  }
+  
+  .start-container{
+      display: flex;
+      align-items: center;
+  }
+  
+  .nav-logo{
+  margin: 0px;
+  letter-spacing: 1px;
+  color: black;
+  }
+  
+  .top-bar{
+      position: fixed;
+  display: flex;
+  height: 65px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 80px;
+  z-index: 111;
+  background-color: white;
+  box-shadow: 0px 2px 20px 0px #00000036;
+  }
+  
+  
+  .side-bar{
+      position: fixed;
+      overflow: hidden;
+      width: 50px;
+      height: 95vh;
+      bottom: 0px;
+      background-color: #36454F;
+      transition: all 0.2s ease-in-out;
+  }
+  .sidetoggle{
+      width: 200px;
+  }
+  
+  
+  .main-content{
+      position: absolute;
+      left: 50px;
+      width: calc(100% - 50px);
+      padding: 100px 30px 0px 30px;
+      transition: all 0.2s ease-in-out;
+  }
+  
+  .maintoggle{
+      left: 200px;
+      width: calc(100% - 200px);
+  }
+  
+  
+  .menu{
+      list-style-type: none;
+      margin: 0px;
+      padding: 40px 0px;
+  }
+  
+  .menu .items{
+      padding: 10px 0px 10px 10px;
+  border-radius: 4px;
+  }
+  
+  .items{
+      color: white;
+      background-color: #36454F;
+      margin: 5px 5px;
+      transition: all 0.3s ease-in-out;
+  }
+  
+  .items:hover{
+      color: #36454F;
+      background-color: white;
+      margin: 5px 5px;
+  }
+  
+  .items.active {
+      background-color: white;
+      color: #36454F;
+    }
+  
+  .icons{
+      margin-bottom: 5px;
+  }
+  
+  .disble-decoration{
+      text-decoration: none;
+  }
+  
+  .resp{
+      position: absolute;
+      width: max-content;
+      left: 50px;
+  }
+  
+  .submenu{
+      list-style-type: none;
+      padding: 5px 0px;
+  }
+  
+  .submenu li{
+      padding: 5px 0px;
+      font-weight: 500;
+  }
+  
+  .dropmenu{
+      height: 45px;
+      overflow: hidden;
+  }
+  
+  
+  .opensubmenu1{
+      height: 150px;
+  }
+  
+  .opensubmenu2{
+      height: 150px;
+  
+  }
+  
+  .opensubmenu{
+      height: 150px;
+  
+  }
+  
+  
+  
+  .logo Img{
+      height: auto;
+      width: 40px;
+      padding: 5px 0px;
+  }
+  
+  .top-menu-bar ul{
+  padding: 0px;
+  list-style-type: none;
+  display: flex;
+  margin: 0px;
+  }
+  
+  .top-menu-bar ul li{
+  font-weight: 500;
+  margin: 0px 5px;
+  padding :0px 5px;
+  color: black;
+  }
+  
+  
+  
+  .footer-body{
+      position: fixed;
+      left: 50px;
+      width: calc(100% - 50px);
+      bottom: 0px;
+  z-index: 111;
+  background-color: black;
+  }
+  
+  .footer p{
+  margin: 0px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 3;
+  color: white;
+  }
+
+  .margin-0{
+
+    margin: 0px !important;
+  }
+
+
+  a{
+text-decoration: none !important;
+    color: inherit;
+  }
+
+  .text-sm{
+    font-size: 13px;
+  }
+
+  .font-w-500{
+    font-weight: 500;
+  }
+
+  .btn-bg-orange{
+    background-color: #FF5733;
+    color: white;
+  }
+
+  .btn-bg-orange:hover{
+    border: 1px solid #FF5733;
+    color: #FF5733;
+
+  }
+
+.warning{
+    color: #FF5733;
+margin: 0px 10px;
+font-weight: 500;
+font-size: 12px;
+}
+
+.img-format{
+    height: 200px;
+    width: 100%;
+    background-color: rgb(216, 216, 216);
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.img-format img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
