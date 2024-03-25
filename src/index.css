@@ -16,7 +16,7 @@ p{
     margin-bottom: 0px !important;
 }
 
-/* Tabel */
+/* Tabel
 .css-ptiqhd-MuiSvgIcon-root {
     color: white;
 }
@@ -24,7 +24,19 @@ p{
 .css-1iyq7zh-MuiDataGrid-columnHeaders {
     background-color: #FF5733;
     color: white;
-}
+} */
+
+.custom-header {
+    background-color:  #FF5733
+  }
+
+  .css-y599qu {
+    background:  #FF5733 !important;
+  }
+
+ .MuiDataGrid-colCell {
+    background-color:  #FF5733 !important;
+  }
 /* -------------- */
 
 /* ---------------------------------------------------------------------------------------------------------------------- */
