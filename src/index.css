@@ -26,17 +26,11 @@ p{
     color: white;
 } */
 
-.custom-header {
-    background-color:  #FF5733
-  }
-
-  .css-y599qu {
-    background:  #FF5733 !important;
-  }
-
- .MuiDataGrid-colCell {
+.custom-header, .css-gl260s-MuiDataGrid-columnHeadersInner,.css-1iyq7zh-MuiDataGrid-columnHeaders {
     background-color:  #FF5733 !important;
+    color: white !important;
   }
+
 /* -------------- */
 
 /* ---------------------------------------------------------------------------------------------------------------------- */
