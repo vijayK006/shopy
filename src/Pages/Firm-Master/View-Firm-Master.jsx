@@ -12,9 +12,9 @@ import axios from 'axios';
 
 const View_Firm_Master = () => {
     const { id } = useParams();
-    const [ownerimage, setOwnerimg] = useState();
-    const [logoimage, setLogoimg] = useState();
-    const [signimage, setSignimg] = useState();
+    const [owner_image, setOwnerimg] = useState();
+    const [logo, setLogoimg] = useState();
+    const [sign, setSignimg] = useState();
     const [firm_name, setFirmName] = useState('');
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
@@ -83,6 +83,9 @@ const View_Firm_Master = () => {
             pin,
             state,
             taluka,
+            owner_image,
+            logo,
+            sign,
         })
             .then(result => {
                 console.log(result.data)
@@ -107,7 +110,7 @@ const View_Firm_Master = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Business Logo</label>
                                 <div className='img-format'>
-                                    <img src={`https://shopee-firm.000webhostapp.com/api/firm/${logoimage}`} alt='' />
+                                    <img src={`https://shopee-firm.000webhostapp.com/api/firm/${logo}`} alt='' />
                                 </div>
                                 <input type='file' className='form-control' />
                             </div>
@@ -116,7 +119,7 @@ const View_Firm_Master = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Business Owner Photo</label>
                                 <div className='img-format'>
-                                    <img src={`https://shopee-firm.000webhostapp.com/api/firm/${ownerimage}`} alt='' />
+                                    <img src={`https://shopee-firm.000webhostapp.com/api/firm/${owner_image}`} alt='' />
                                 </div>
                                 <input type='file' className='form-control' />
                             </div>
@@ -124,7 +127,7 @@ const View_Firm_Master = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Business Owner Sign</label>
                                 <div className='img-format'>
-                                    <img src={`https://shopee-firm.000webhostapp.com/api/firm/${signimage}`} alt='' />
+                                    <img src={`https://shopee-firm.000webhostapp.com/api/firm/${sign}`} alt='' />
                                 </div>
                                 <input type='file' className='form-control' />
                             </div>
@@ -137,48 +140,48 @@ const View_Firm_Master = () => {
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Owner Name</label>
-                                <input type='text' className='form-control' placeholder='Please enter owner name' value={owner_name} onChange={(e) => setOwnername(e.target.value)}/>
+                                <input type='text' className='form-control' placeholder='Please enter owner name' value={owner_name} onChange={(e) => setOwnername(e.target.value)} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>DOB</label>
-                                <input type='text' className='form-control' placeholder='Please enter date of birth' value={date} onChange={(e) => setDob(e.target.value)}/>
+                                <input type='text' className='form-control' placeholder='Please enter date of birth' value={date} onChange={(e) => setDob(e.target.value)} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Mobile No.</label>
-                                <input type='number' className='form-control' placeholder='Please enter mobile no.' value={phone} onChange={(e) => setPhone(e.target.value)}/>
+                                <input type='number' className='form-control' placeholder='Please enter mobile no.' value={phone} onChange={(e) => setPhone(e.target.value)} />
                             </div>
 
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Alternate mobile No.</label>
-                                <input type='number' className='form-control' placeholder='Please enter alternate mobile no. (Optional)' value={alt_phone} onChange={(e) => setAltmobileno(e.target.value)}/>
+                                <input type='number' className='form-control' placeholder='Please enter alternate mobile no. (Optional)' value={alt_phone} onChange={(e) => setAltmobileno(e.target.value)} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Email ID</label>
-                                <input type='email' className='form-control' placeholder='Please enter email-id' value={email} onChange={(e) => setEmail(e.target.value)}/>
+                                <input type='email' className='form-control' placeholder='Please enter email-id' value={email} onChange={(e) => setEmail(e.target.value)} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Business Type</label>
-                                <input type='text' className='form-control' placeholder='Please enter email-id' value={business_type} onChange={(e) => setBusinesstype(e.target.value)}/>
+                                <input type='text' className='form-control' placeholder='Please enter email-id' value={business_type} onChange={(e) => setBusinesstype(e.target.value)} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Business Category</label>
-                                <input type='text' className='form-control' placeholder='Please enter business category' value={business_category} onChange={(e) => setBusinesscat(e.target.value)}/>
+                                <input type='text' className='form-control' placeholder='Please enter business category' value={business_category} onChange={(e) => setBusinesscat(e.target.value)} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Office Address</label>
-                                <input type='text' className='form-control' placeholder='Please enter office address' value={address} onChange={(e) => setAddress(e.target.value)}/>
+                                <input type='text' className='form-control' placeholder='Please enter office address' value={address} onChange={(e) => setAddress(e.target.value)} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Pin Code</label>
-                                <input type='text' className='form-control' placeholder='Please enter pin code' value={pin} onChange={(e) => setPin(e.target.value)}/>
+                                <input type='text' className='form-control' placeholder='Please enter pin code' value={pin} onChange={(e) => setPin(e.target.value)} />
                             </div>
 
                             <div className='col-md-4 py-1' style={{ display: "none" }}>
@@ -202,7 +205,7 @@ const View_Firm_Master = () => {
           placeHolder="Select State"
         /> */}
 
-                                <input type='text' className='form-control' placeholder='Please enter State' value={state} onChange={(e) => setState(e.target.value)}/>
+                                <input type='text' className='form-control' placeholder='Please enter State' value={state} onChange={(e) => setState(e.target.value)} />
 
                             </div>
 
@@ -216,13 +219,13 @@ const View_Firm_Master = () => {
           }}
           placeHolder="Select City"
         /> */}
-                                <input type='text' className='form-control' placeholder='Please enter District' value={district} onChange={(e) => setDistrict(e.target.value)}/>
+                                <input type='text' className='form-control' placeholder='Please enter District' value={district} onChange={(e) => setDistrict(e.target.value)} />
 
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Taluka</label>
-                                <input type='text' className='form-control' placeholder='Please enter Taluka' value={taluka} onChange={(e) => setTaluka(e.target.value)}/>
+                                <input type='text' className='form-control' placeholder='Please enter Taluka' value={taluka} onChange={(e) => setTaluka(e.target.value)} />
                             </div>
 
                         </div>
