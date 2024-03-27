@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Topbar from '../../layouts/Topbar'
 import Sidebar from '../../layouts/Sidebar'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
     CitySelect,
     CountrySelect,
@@ -14,6 +14,7 @@ const Add_Firm_Master = () => {
 
     const [countryid, setCountryid] = useState(0);
     const [stateid, setstateid] = useState(0);
+    const navigate = useNavigate();
 
     const [alertname, setAlertname] = useState();
 
@@ -82,7 +83,10 @@ const Add_Firm_Master = () => {
             'Content-Type': 'multipart/form-data'
           }
         })
-        .then(res => console.log('Form Submitted Successfully'))
+        .then(res => {
+            navigate('/firm-master')
+            console.log('Form Submitted Successfully')
+        })
         .catch(err => console.log(err));
       };
 
@@ -159,7 +163,7 @@ const Add_Firm_Master = () => {
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Business Type</label>
-                                <input type='text' className='form-control' value={valueData.business_type} name='business_type'  placeholder='Please enter email-id' onChange={handleChange} />
+                                <input type='text' className='form-control' value={valueData.business_type} name='business_type'  placeholder='Please enter business type' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
