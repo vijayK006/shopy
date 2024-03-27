@@ -159,7 +159,7 @@ const Add_Firm_Master = () => {
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Business Type</label>
-                                <input type='email' className='form-control' value={valueData.business_type} name='business_type'  placeholder='Please enter email-id' onChange={handleChange} />
+                                <input type='text' className='form-control' value={valueData.business_type} name='business_type'  placeholder='Please enter email-id' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>

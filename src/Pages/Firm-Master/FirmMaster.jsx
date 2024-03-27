@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Topbar from '../../layouts/Topbar';
 import Sidebar from '../../layouts/Sidebar';
 import { FaRegEdit } from "react-icons/fa";
