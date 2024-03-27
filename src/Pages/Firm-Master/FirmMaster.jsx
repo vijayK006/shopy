@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Topbar from '../../layouts/Topbar';
 import Sidebar from '../../layouts/Sidebar';
 import axios from 'axios';
@@ -17,13 +17,27 @@ const columns = [
     field: 'actions', // Adding a new field for actions
     headerName: 'Actions', // Header for actions column
     sortable: false,
-    width: 160,
+    width: 300,
     renderCell: (params) => (
-      <Link to={`/view-firm-master/${params.row.id}`} className='btn btn-warning'>
-        View / Edit
+      <>
+        <Link to={`/view-firm-master/${params.row.id}`} className='btn btn-warning'>
+        View 
       </Link>
-    ),
+      &nbsp;
+      &nbsp;
+      <Link to={`/edit-firm-master/${params.row.id}`} className='btn btn-primary'>
+        Edit 
+      </Link>
+      &nbsp;
+      &nbsp;
+      <Link  className='btn btn-danger' data-bs-toggle="modal" data-bs-target="#myModal">
+        Delete
+      </Link>
+      </>
+      
+    ), 
   },
+
 ];
 
 // const handleButtonClick = (row) => {
@@ -41,6 +55,8 @@ const columns = [
 
 const FirmMaster = () => {
     const [apiDatas, setApiDatas] = useState([]);
+    const navigate = useNavigate();
+
     useEffect(() => {
       axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
         .then(res => {
@@ -53,15 +69,19 @@ const FirmMaster = () => {
     }, []);
 
   
-    
-      // const rows = apiDatas.map((item) => ({
-      //   id: item.id,
-      //   firmname: item.firm_name,
-      //   ownername: item.owner_name,
-      //   mobileno: item.phone,
-      //   businesstype: item.business_type,
-      //   businesscategory: item.business_category,
-      // }));
+    // const deletefirm=()=>{
+    //   axios.post(`https://shopee-firm.000webhostapp.com/api/firm/edit-by-id-firm.php?id=${id}`, {
+    //       headers: {
+    //         'Content-Type': 'multipart/form-data'
+    //       }
+    //     })
+    //     .then(res => {
+    //         console.log('Form Deleted Successfully')
+    //         navigate('/firm-master')
+    // })
+    //     .catch(err => console.log(err));
+    // }
+      
 
       const rows = apiDatas.length > 0 ? 
       apiDatas.map((item) => ({
@@ -95,9 +115,35 @@ const FirmMaster = () => {
       />
     </div>
 </div>
+
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        Sure you want to delete the Firm?
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        {/* <button type="button" className='btn bnt-danger' onClick={deletefirm}>Delete</button> */}
+      </div>
+
+    </div>
+  </div>
+</div>
+
     </>
     
   );
 };
 
 export default FirmMaster;
+
+
+
