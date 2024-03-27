@@ -3,13 +3,15 @@ import { DataGrid } from '@mui/x-data-grid';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Topbar from '../../layouts/Topbar';
 import Sidebar from '../../layouts/Sidebar';
+import { FaRegEdit } from "react-icons/fa";
+import { AiOutlineDelete } from "react-icons/ai";
 import axios from 'axios';
 
 const columns = [
   // { field: 'id', headerName: 'ID', width: 70 },
   { field: 'firmname', headerName: 'Firm Name', width: 130 },
-  { field: 'ownername', headerName: 'Owner Name', width: 200 },
-  { field: 'mobileno', headerName: 'Mobile No.', width: 200 },
+  { field: 'ownername', headerName: 'Owner Name', width: 150 },
+  { field: 'mobileno', headerName: 'Mobile No.', width: 150 },
   { field: 'businesstype', headerName: 'Business Type', width: 200 },
   { field: 'businesscategory', headerName: 'Business Category', width: 200 },
 //   {   field: 'age', headerName: 'Age', type: 'number', width: 90,},
@@ -20,18 +22,13 @@ const columns = [
     width: 300,
     renderCell: (params) => (
       <>
-        <Link to={`/view-firm-master/${params.row.id}`} className='btn btn-warning'>
-        View 
+      <Link to={`/edit-firm-master/${params.row.id}`} className='btn btn-outline-primary btn-sm'>
+      <FaRegEdit  style={{fontSize:'15px', marginBottom:'4px'}}/>  View / Edit 
       </Link>
       &nbsp;
       &nbsp;
-      <Link to={`/edit-firm-master/${params.row.id}`} className='btn btn-primary'>
-        Edit 
-      </Link>
-      &nbsp;
-      &nbsp;
-      <Link  className='btn btn-danger' data-bs-toggle="modal" data-bs-target="#myModal">
-        Delete
+      <Link  className='btn btn-outline-danger btn-sm' data-bs-toggle="modal" data-bs-target="#myModal">
+       <AiOutlineDelete style={{fontSize:'15px', marginBottom:'4px'}}/> Delete
       </Link>
       </>
       
@@ -111,7 +108,7 @@ const FirmMaster = () => {
         rows={rows}
         columns={columns}
         pageSize={5} // Specify the page size
-        checkboxSelection
+        // checkboxSelection
       />
     </div>
 </div>
