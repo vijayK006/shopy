@@ -113,13 +113,13 @@ const Add_Firm_Master = () => {
             <Sidebar />
             <div className='main-content' id='mainbody'>
 
-                    <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                        <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/firm-master'>Firm Master</Link> / <Link className='t-theme-color'>Add Firm Master Details</Link></p>
+                <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
+                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/firm-master'>Firm Master</Link> / <Link className='t-theme-color'>Add Firm Master Details</Link></p>
 
-                    </div>
+                </div>
 
-<div className='container-fluid mb-5'>
-      <form onSubmit={handleSubmit}>
+                <div className='container-fluid mb-5'>
+                    <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
                             <div className='col-md-4 py-1'>
@@ -198,29 +198,46 @@ const Add_Firm_Master = () => {
                             </div> */}
 
                             <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter State</label>
-                                {/* <StateSelect
+                                <label className='text-sm font-w-500 p-2'>Select State</label>
+
+                                <StateSelect
                                     countryid={countryid}
                                     onChange={(e) => {
                                         setstateid(e.id);
+                                        console.log("Selected state:", e);
+                                        setValueData({
+                                            ...valueData,
+                                            state: e.name // Assuming e.id contains the state value
+                                        });
                                     }}
                                     placeHolder="Select State"
-                                /> */}
-                                <input type='text' className='form-control' value={valueData.state} name='state' placeholder='Please enter state' onChange={handleChange} />
+                                    value={valueData.state}
+                                    
+                                />
+
+                                {/* <input type='text' className='form-control' value={valueData.state} name='state' placeholder='Please enter state' onChange={handleChange} /> */}
 
                             </div>
 
                             <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter district</label>
-                                {/* <CitySelect
+                                <label className='text-sm font-w-500 p-2'>Select District</label>
+
+                                <CitySelect
                                     countryid={countryid}
                                     stateid={stateid}
                                     onChange={(e) => {
-                                        console.log(e);
+                                        console.log("Selected city:", e);
+                                        setValueData({
+                                            ...valueData,
+                                            district: e.name // Assuming e.id contains the city value
+                                        });
                                     }}
-                                    placeHolder="Select City"
-                                /> */}
-                                <input type='text' className='form-control' value={valueData.district} name='district' placeholder='Please enter City' onChange={handleChange} />
+                                    placeHolder="Select district"
+                                    value={valueData.district}
+                                    
+                                />
+
+                                {/* <input type='text' className='form-control' value={valueData.district} name='district' placeholder='Please enter City' onChange={handleChange} /> */}
 
                             </div>
 
@@ -238,10 +255,10 @@ const Add_Firm_Master = () => {
 
 
                     </form>
-</div>
-                  
+                </div>
 
-              
+
+
             </div>
         </>
     )

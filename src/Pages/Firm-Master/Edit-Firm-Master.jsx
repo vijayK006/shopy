@@ -108,7 +108,8 @@ const Edit_Firm_Master = () => {
           return;
         }
 
-    
+        const confirmDelete = window.confirm("Are you sure you want to update this Firm Master");
+        if (confirmDelete) {
         axios.post(`https://shopee-firm.000webhostapp.com/api/firm/edit-by-id-firm.php?id=${id}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
@@ -119,6 +120,9 @@ const Edit_Firm_Master = () => {
             navigate('/firm-master')
     })
         .catch(err => console.log(err));
+
+}
+
       };
 
 

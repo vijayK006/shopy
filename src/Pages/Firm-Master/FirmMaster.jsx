@@ -11,7 +11,6 @@ import axios from 'axios';
 
 const FirmMaster = () => {
     const [apiDatas, setApiDatas] = useState([]);
-
  
     useEffect(() => {
       fetchData();
@@ -22,6 +21,7 @@ const FirmMaster = () => {
         .then(res => {
           console.log(res.data)
           setApiDatas(res.data)
+
         })
         .catch(err => {
           console.error('Error fetching data:', err);
@@ -39,22 +39,36 @@ const FirmMaster = () => {
         });
     }, []);
 
+    // const handleDelete = (id) => {
+    //   axios.post(`https://shopee-firm.000webhostapp.com/api/firm/delete-by-id-firm.php?id=${id}`)
+    //     .then(res => {
+    //       console.log(res.data);
+    //       // After successful deletion, refetch the data to update the UI
+    //       fetchData();
+    //     })
+    //     .catch(err => {
+    //       console.error('Error deleting data:', err);
+    //     });
+    // }
+
     const handleDelete = (id) => {
-      axios.post(`https://shopee-firm.000webhostapp.com/api/firm/delete-by-id-firm.php?id=${id}`)
-        .then(res => {
-          console.log(res.data);
-          // After successful deletion, refetch the data to update the UI
-          fetchData();
-        })
-        .catch(err => {
-          console.error('Error deleting data:', err);
-        });
-    }
+      const confirmDelete = window.confirm("Are you sure you want to delete this Firm Master");
+      if (confirmDelete) {
+          axios.post(`https://shopee-firm.000webhostapp.com/api/firm/delete-by-id-firm.php?id=${id}`)
+              .then(res => {
+                  fetchData();
+              })
+              .catch(err => {
+                  console.error('Error deleting data:', err);
+              });
+      }
+  }
+
 
     const columns = [
-      // { field: 'id', headerName: 'ID', width: 70 },
-      { field: 'firmname', headerName: 'Firm Name', width: 130 },
-      { field: 'ownername', headerName: 'Owner Name', width: 150 },
+      { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
+      { field: 'firmname', headerName: 'Firm Name', width: 200 },
+      { field: 'ownername', headerName: 'Owner Name', width: 200 },
       { field: 'mobileno', headerName: 'Mobile No.', width: 150 },
       { field: 'businesstype', headerName: 'Business Type', width: 200 },
       { field: 'businesscategory', headerName: 'Business Category', width: 200 },
@@ -63,7 +77,7 @@ const FirmMaster = () => {
         field: 'actions', // Adding a new field for actions
         headerName: 'Actions', // Header for actions column
         sortable: false,
-        width: 300,
+        width: 230,
         renderCell: (params) => (
           <>
           <Link to={`/edit-firm-master/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
@@ -82,8 +96,9 @@ const FirmMaster = () => {
     ];
 
       const rows = apiDatas.length > 0 ? 
-      apiDatas.map((item) => ({
-    id: item.id,
+      apiDatas.map((item, index) => ({
+        id: item.id || index,
+    displayOrder: index + 1,
     firmname: item.firm_name,
     ownername: item.owner_name,
     mobileno: item.phone,
@@ -99,13 +114,13 @@ const FirmMaster = () => {
     <Sidebar/>
 <div className='main-content' id='mainbody'>
 
-<div className='shadow px-3 py-2 mb-5 d-flex justify-content-between align-items-center bg-white b-radius-50'>
+<div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50'>
 <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/firm-master' className='t-theme-color'>Firm Master</Link></p>
 <Link to='/add-firm-master' className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
 </div>
 
 
-    <div style={{ height: 400, width: '100%' }} className="bg-white">
+    <div style={{ height: '75vh', width: '100%' }} className="bg-white">
       <DataGrid
         rows={rows}
         columns={columns}

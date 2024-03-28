@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Topbar from '../layouts/Topbar'
 import Sidebar from '../layouts/Sidebar'
@@ -12,7 +12,19 @@ import { MdOutlineSettingsInputComponent } from "react-icons/md";
 
 
 const Home = () => {
+  const [firmmastercount, setFirmmasterCount] = useState([]);
 
+  useEffect(() => {
+    axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
+      .then(res => {
+     
+        console.log(res.data.length)
+        setFirmmasterCount(res.data.length)
+      })
+      .catch(err => {
+        console.error('Error fetching data:', err);
+      });
+  }, []);
   return (
     <>
 
@@ -31,6 +43,7 @@ const Home = () => {
        cardbg='#ff3e57' 
        borderRcolor='3px solid #ff3e57'
        circlebg='white'
+       datacount={firmmastercount}
        >
        </Admincards>
         
@@ -40,6 +53,8 @@ const Home = () => {
        cardbg='#00cebe' 
        borderRcolor='3px solid #00cebe'
        circlebg='white'
+       datacount='0'
+
        >
        </Admincards>
        
@@ -49,6 +64,8 @@ const Home = () => {
        cardbg='#f927a8' 
        borderRcolor='3px solid #ff3e57'
        circlebg='white'
+       datacount='0'
+
        >
        </Admincards>
         
@@ -58,6 +75,8 @@ const Home = () => {
        cardbg='#ff4c00' 
        borderRcolor='3px solid #ff3e57'
        circlebg='white'
+       datacount='0'
+
        >
        </Admincards>
 
