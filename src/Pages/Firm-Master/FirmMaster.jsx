@@ -101,13 +101,13 @@ const FirmMaster = () => {
     <Sidebar/>
 <div className='main-content' id='mainbody'>
 
-<div className='shadow p-3 mb-5 d-flex justify-content-between align-items-center'>
+<div className='shadow p-3 mb-5 d-flex justify-content-between align-items-center bg-white'>
 <p className='margin-0 font-w-500'><Link to='/'>Dashboard Home</Link> - <Link to='/firm-master'>Firm Master</Link> - <Link>View Firm Details</Link></p>
 <Link to='/add-firm-master' className='btn btn-bg-orange'>Add Firm Master</Link>
 </div>
 
 
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: 400, width: '100%' }} className="bg-white">
       <DataGrid
         rows={rows}
         columns={columns}

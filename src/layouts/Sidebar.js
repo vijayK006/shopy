@@ -45,13 +45,13 @@ const Sidebar = () => {
       }
     };
     
-  return (
+  return ( 
     <>
       <div className='side-bar' id='sidemenu'>
 
 <div className='side-navbar'>
     <ul className='menu'>
-        <NavLink className="disble-decoration" to=""><li className='items'><BiHomeAlt2 className="icons"/> <span className='resp'>Home</span></li></NavLink>
+        <NavLink className="disble-decoration" to="/"><li className='items'><BiHomeAlt2 className="icons"/> <span className='resp'>Home</span></li></NavLink>
         <NavLink className="disble-decoration" to="/firm-master"><li className='items'><BiCategory className="icons"/> <span className='resp'>Firm Master</span></li></NavLink>
         <NavLink className="disble-decoration" to="/client-master"><li className='items'><BiCategory className="icons"/> <span className='resp'>Client Master</span></li></NavLink>
 
@@ -59,9 +59,9 @@ const Sidebar = () => {
         <NavLink className="disble-decoration " to=""><li className='items'><FiEdit className="icons"/> <span className='resp'>Expenses Master</span></li></NavLink>
     </ul>
 </div>
-        </div> 
+        </div>
     </>
   )
 }
 
-export default Sidebar
+export default Sidebar;
