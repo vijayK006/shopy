@@ -9,8 +9,6 @@ import axios from 'axios';
 
 
 
-
-
 const FirmMaster = () => {
     const [apiDatas, setApiDatas] = useState([]);
 
@@ -68,7 +66,7 @@ const FirmMaster = () => {
         width: 300,
         renderCell: (params) => (
           <>
-          <Link to={`/edit-firm-master/${params.row.id}`} className='btn btn-outline-primary btn-sm'>
+          <Link to={`/edit-firm-master/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
           <FaRegEdit  style={{fontSize:'15px', marginBottom:'4px'}}/>  View / Edit 
           </Link>
           &nbsp;
@@ -101,9 +99,9 @@ const FirmMaster = () => {
     <Sidebar/>
 <div className='main-content' id='mainbody'>
 
-<div className='shadow p-3 mb-5 d-flex justify-content-between align-items-center bg-white'>
-<p className='margin-0 font-w-500'><Link to='/'>Dashboard Home</Link> - <Link to='/firm-master'>Firm Master</Link> - <Link>View Firm Details</Link></p>
-<Link to='/add-firm-master' className='btn btn-bg-orange'>Add Firm Master</Link>
+<div className='shadow px-3 py-2 mb-5 d-flex justify-content-between align-items-center bg-white b-radius-50'>
+<p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/firm-master' className='t-theme-color'>Firm Master</Link></p>
+<Link to='/add-firm-master' className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
 </div>
 
 

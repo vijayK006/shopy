@@ -265,6 +265,10 @@ text-decoration: none !important;
     color: white;
   }
 
+  .t-theme-color{
+    color: #2196F3;
+  }
+
   .btn-bg-orange:hover{
     border: 1px solid #2196F3;
     color: #2196F3;
@@ -454,3 +458,18 @@ font-size: 12px;
         margin: 5px 0px;
     }
     
+    .b-radius-5{
+        border-radius: 5px !important;
+    }
+
+    .b-radius-10{
+        border-radius: 10px !important;
+    }
+
+    .b-radius-50{
+        border-radius: 50px !important;
+    }
+
+    .btn-outline-warning:hover{
+        color: white !important;
+    }

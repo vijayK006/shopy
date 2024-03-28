@@ -25,28 +25,28 @@ const Add_Firm_Master = () => {
     }, []);
 
     const [valueData, setValueData] = useState({
-        firm_name:'',
-        owner_name:'',
-        phone:'',
-        alt_phone:'',
-        email:'',
-        business_type:'',
-        business_category:'',
-        address:'',
-        state:'',
-        district:'',
-        taluk:'',
-        pin:'',
-        logo:null,
-        owner_image:null,
-        sign:null
+        firm_name: '',
+        owner_name: '',
+        phone: '',
+        alt_phone: '',
+        email: '',
+        business_type: '',
+        business_category: '',
+        address: '',
+        state: '',
+        district: '',
+        taluk: '',
+        pin: '',
+        logo: null,
+        owner_image: null,
+        sign: null
     })
 
     const handleSubmit = (e) => {
         e.preventDefault();
-    
+
         const formData = new FormData();
-      
+
         formData.append('firm_name', valueData.firm_name);
         formData.append('owner_name', valueData.owner_name);
         formData.append('phone', valueData.phone);
@@ -62,49 +62,49 @@ const Add_Firm_Master = () => {
         formData.append('logo', valueData.logo);
         formData.append('owner_image', valueData.owner_image);
         formData.append('sign', valueData.sign);
-       
+
 
         const reglName = /^(([A-Za-z]+[,.]?[ ]?|[a-z]+['-]?)+)$/;
         if (reglName.test(valueData.firm_name)) {
-          setAlertname("");
+            setAlertname("");
         } else if (!reglName.test(valueData.firm_name) && valueData.firm_name === "") {
-          setAlertname("Please fill you last name");
-        //   e.preventDefault();
-        return;
+            setAlertname("Please fill you last name");
+            //   e.preventDefault();
+            return;
         } else {
-          setAlertname("Name should not be in a number ");
-        //   e.preventDefault();
-          return;
+            setAlertname("Name should not be in a number ");
+            //   e.preventDefault();
+            return;
         }
 
-    
+
         axios.post('https://shopee-firm.000webhostapp.com/api/firm/add-firm.php', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
         })
-        .then(res => {
-            navigate('/firm-master')
-            console.log('Form Submitted Successfully')
-        })
-        .catch(err => console.log(err));
-      };
+            .then(res => {
+                navigate('/firm-master')
+                console.log('Form Submitted Successfully')
+            })
+            .catch(err => console.log(err));
+    };
 
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         if (name === 'logo' || name === 'owner_image' || name === 'sign') {
             setValueData({
-            ...valueData,
-            [name]: e.target.files[0]
-          });
+                ...valueData,
+                [name]: e.target.files[0]
+            });
         } else {
             setValueData({
-            ...valueData,
-            [name]: value
-          });
+                ...valueData,
+                [name]: value
+            });
         }
-      };
+    };
 
 
     return (
@@ -113,9 +113,14 @@ const Add_Firm_Master = () => {
             <Sidebar />
             <div className='main-content' id='mainbody'>
 
-                <div className='container-fluid'>
-                    <form onSubmit={handleSubmit}>
-                        <div className='row shadow p-3 mt-5'>
+                    <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
+                        <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/firm-master'>Firm Master</Link> / <Link className='t-theme-color'>Add Firm Master Details</Link></p>
+
+                    </div>
+
+<div className='container-fluid mb-5'>
+      <form onSubmit={handleSubmit}>
+                        <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Business Logo</label>
@@ -124,12 +129,12 @@ const Add_Firm_Master = () => {
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Business Owner Photo</label>
-                                <input type='file' className='form-control' name='owner_image' onChange={handleChange}/>
+                                <input type='file' className='form-control' name='owner_image' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Business Owner Sign</label>
-                                <input type='file' className='form-control' name='sign' onChange={handleChange}/>
+                                <input type='file' className='form-control' name='sign' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
@@ -153,32 +158,32 @@ const Add_Firm_Master = () => {
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Alternate mobile No.</label>
-                                <input type='number' className='form-control' value={valueData.alt_phone} name='alt_phone'  placeholder='Please enter alternate mobile no. (Optional)' onChange={handleChange} />
+                                <input type='number' className='form-control' value={valueData.alt_phone} name='alt_phone' placeholder='Please enter alternate mobile no. (Optional)' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Email ID</label>
-                                <input type='email' className='form-control' value={valueData.email} name='email'  placeholder='Please enter email-id' onChange={handleChange} />
+                                <input type='email' className='form-control' value={valueData.email} name='email' placeholder='Please enter email-id' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Business Type</label>
-                                <input type='text' className='form-control' value={valueData.business_type} name='business_type'  placeholder='Please enter business type' onChange={handleChange} />
+                                <input type='text' className='form-control' value={valueData.business_type} name='business_type' placeholder='Please enter business type' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Business Category</label>
-                                <input type='text' className='form-control' value={valueData.business_category} name='business_category'  placeholder='Please enter business category' onChange={handleChange} />
+                                <input type='text' className='form-control' value={valueData.business_category} name='business_category' placeholder='Please enter business category' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Office Address</label>
-                                <input type='text' className='form-control' value={valueData.address} name='address'  placeholder='Please enter office address' onChange={handleChange} />
+                                <input type='text' className='form-control' value={valueData.address} name='address' placeholder='Please enter office address' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Pin Code</label>
-                                <input type='text' className='form-control' value={valueData.pin} name='pin'  placeholder='Please enter pin code' onChange={handleChange} />
+                                <input type='text' className='form-control' value={valueData.pin} name='pin' placeholder='Please enter pin code' onChange={handleChange} />
                             </div>
 
                             {/* <div className='col-md-4 py-1' style={{ display: "none" }}>
@@ -201,7 +206,7 @@ const Add_Firm_Master = () => {
                                     }}
                                     placeHolder="Select State"
                                 /> */}
-                                <input type='text' className='form-control' value={valueData.state} name='state'  placeholder='Please enter state' onChange={handleChange} />
+                                <input type='text' className='form-control' value={valueData.state} name='state' placeholder='Please enter state' onChange={handleChange} />
 
                             </div>
 
@@ -215,13 +220,13 @@ const Add_Firm_Master = () => {
                                     }}
                                     placeHolder="Select City"
                                 /> */}
-                                <input type='text' className='form-control' value={valueData.district} name='district'  placeholder='Please enter City' onChange={handleChange} />
+                                <input type='text' className='form-control' value={valueData.district} name='district' placeholder='Please enter City' onChange={handleChange} />
 
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Taluka</label>
-                                <input type='text' className='form-control' value={valueData.taluk} name='taluk'  placeholder='Please enter Taluka' onChange={handleChange}/>
+                                <input type='text' className='form-control' value={valueData.taluk} name='taluk' placeholder='Please enter Taluka' onChange={handleChange} />
                             </div>
 
                             <div className='d-flex justify-content-end pt-4'>
@@ -233,8 +238,10 @@ const Add_Firm_Master = () => {
 
 
                     </form>
+</div>
+                  
 
-                </div>
+              
             </div>
         </>
     )
