@@ -117,13 +117,13 @@ const Add_Firm_Master = () => {
             setAlertemail("Please enter email-id");
             //   e.preventDefault();
             return;
-        } else if(!regemail.test(valueData.email)){
+        } else if (!regemail.test(valueData.email)) {
             setAlertemail("Email-id is not valid");
             //   e.preventDefault();
             return;
         }
 
-        
+
         const regstate = /^[a-zA-Z\s]+$/;
         if (regstate.test(valueData.state)) {
             setAlertstate("");
@@ -133,7 +133,7 @@ const Add_Firm_Master = () => {
             return;
         }
 
-        
+
         const regdistrict = /^[a-zA-Z\s]+$/;
         if (regdistrict.test(valueData.district)) {
             setAlertdestrict("");
@@ -213,7 +213,7 @@ const Add_Firm_Master = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Owner Name</label>
                                 <input type='text' className='form-control' value={valueData.owner_name} name='owner_name' placeholder='Please enter owner name' onChange={handleChange} />
-                                
+
                                 <p className='warning'>{alertowner}</p>
                             </div>
 
@@ -230,8 +230,8 @@ const Add_Firm_Master = () => {
                                 <input type='number' className='form-control' value={valueData.alt_phone} name='alt_phone' placeholder='Please enter alternate mobile no. (Optional)' onChange={handleChange} />
                                 {/* <p className='warning'>{alertaltphone}</p> */}
 
-                                
-                                 </div>
+
+                            </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Email ID</label>
@@ -244,6 +244,17 @@ const Add_Firm_Master = () => {
                                 <label className='text-sm font-w-500 p-2'>Enter Business Type</label>
                                 <input type='text' className='form-control' value={valueData.business_type} name='business_type' placeholder='Please enter business type' onChange={handleChange} />
                             </div>
+
+                            {/* <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Select Business Type</label>
+                                <select className='form-control' value={valueData.business_type} name='business_type' onChange={handleChange}>
+                                    <option value="">Please select business type</option>
+                                    <option value="type1">Type 1</option>
+                                    <option value="type2">Type 2</option>
+                                    <option value="type3">Type 3</option>
+
+                                </select>
+                            </div> */}
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Business Category</label>
@@ -286,7 +297,7 @@ const Add_Firm_Master = () => {
                                     }}
                                     placeHolder="Select State"
                                     value={valueData.state}
-                                    
+
                                 />
                                 <p className='warning'>{alertstate}</p>
 
@@ -312,7 +323,7 @@ const Add_Firm_Master = () => {
                                     }}
                                     placeHolder="Select district"
                                     value={valueData.district}
-                                    
+
                                 />
                                 <p className='warning'>{alertdestrict}</p>
 

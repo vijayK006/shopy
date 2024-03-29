@@ -26,28 +26,28 @@ const Edit_Firm_Master = () => {
     }, []);
 
     const [valueData, setValueData] = useState({
-        firm_name:'',
-        owner_name:'',
-        phone:'',
-        alt_phone:'',
-        email:'',
-        business_type:'',
-        business_category:'',
-        address:'',
-        state:'',
-        district:'',
-        taluk:'',
-        pin:'',
-        logo:null,
-        owner_image:null,
-        sign:null
+        firm_name: '',
+        owner_name: '',
+        phone: '',
+        alt_phone: '',
+        email: '',
+        business_type: '',
+        business_category: '',
+        address: '',
+        state: '',
+        district: '',
+        taluk: '',
+        pin: '',
+        logo: null,
+        owner_image: null,
+        sign: null
     })
 
 
     useEffect(() => {
         axios.get(`https://shopee-firm.000webhostapp.com/api/firm/get-by-id-firm.php?id=${id}`)
             .then(response => {
-            
+
                 const firmData = response.data[0]; // Assuming response.data contains the firm data
                 setValueData({
                     firm_name: firmData.firm_name,
@@ -75,9 +75,9 @@ const Edit_Firm_Master = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-    
+
         const formData = new FormData();
-      
+
         formData.append('firm_name', valueData.firm_name);
         formData.append('owner_name', valueData.owner_name);
         formData.append('phone', valueData.phone);
@@ -93,53 +93,53 @@ const Edit_Firm_Master = () => {
         formData.append('logo', valueData.logo);
         formData.append('owner_image', valueData.owner_image);
         formData.append('sign', valueData.sign);
-       
+
 
         const reglName = /^(([A-Za-z]+[,.]?[ ]?|[a-z]+['-]?)+)$/;
         if (reglName.test(valueData.firm_name)) {
-          setAlertname("");
+            setAlertname("");
         } else if (!reglName.test(valueData.firm_name) && valueData.firm_name === "") {
-          setAlertname("Please fill you last name");
-        //   e.preventDefault();
-        return;
+            setAlertname("Please fill you last name");
+            //   e.preventDefault();
+            return;
         } else {
-          setAlertname("Name should not be in a number ");
-        //   e.preventDefault();
-          return;
+            setAlertname("Name should not be in a number ");
+            //   e.preventDefault();
+            return;
         }
 
         const confirmDelete = window.confirm("Are you sure you want to update this Firm Master");
         if (confirmDelete) {
-        axios.post(`https://shopee-firm.000webhostapp.com/api/firm/edit-by-id-firm.php?id=${id}`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        })
-        .then(res => {
-            console.log('Form Updated Successfully')
-            navigate('/firm-master')
-    })
-        .catch(err => console.log(err));
+            axios.post(`https://shopee-firm.000webhostapp.com/api/firm/edit-by-id-firm.php?id=${id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then(res => {
+                    console.log('Form Updated Successfully')
+                    navigate('/firm-master')
+                })
+                .catch(err => console.log(err));
 
-}
+        }
 
-      };
+    };
 
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         if (name === 'logo' || name === 'owner_image' || name === 'sign') {
             setValueData({
-            ...valueData,
-            [name]: e.target.files[0]
-          });
+                ...valueData,
+                [name]: e.target.files[0]
+            });
         } else {
             setValueData({
-            ...valueData,
-            [name]: value
-          });
+                ...valueData,
+                [name]: value
+            });
         }
-      };
+    };
 
 
     return (
@@ -147,10 +147,10 @@ const Edit_Firm_Master = () => {
             <Topbar />
             <Sidebar />
             <div className='main-content' id='mainbody'>
-            <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                        <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/firm-master'>Firm Master</Link> / <Link className='t-theme-color'>Edit View Firm Master Details</Link></p>
+                <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
+                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/firm-master'>Firm Master</Link> / <Link className='t-theme-color'>Edit View Firm Master Details</Link></p>
 
-                    </div>
+                </div>
 
                 <div className='container-fluid mb-5'>
                     <form onSubmit={handleSubmit}>
@@ -169,7 +169,7 @@ const Edit_Firm_Master = () => {
                                 <div className='img-format'>
                                     <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.owner_image}`} alt='' />
                                 </div>
-                                <input type='file' className='form-control' name='owner_image' onChange={handleChange}/>
+                                <input type='file' className='form-control' name='owner_image' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
@@ -177,14 +177,14 @@ const Edit_Firm_Master = () => {
                                 <div className='img-format'>
                                     <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.sign}`} alt='' />
                                 </div>
-                                <input type='file'  className='form-control' name='sign' onChange={handleChange}/>
+                                <input type='file' className='form-control' name='sign' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Firm Name</label>
                                 <input type='text' className='form-control' value={valueData.firm_name} name='firm_name' placeholder='Please enter name' onChange={handleChange} />
 
-                                <p className='warning'>{alertname}</p> 
+                                <p className='warning'>{alertname}</p>
                             </div>
 
 
@@ -201,12 +201,12 @@ const Edit_Firm_Master = () => {
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Alternate mobile No.</label>
-                                <input type='number' className='form-control' value={valueData.alt_phone} name='alt_phone'  placeholder='Please enter alternate mobile no. (Optional)' onChange={handleChange} />
+                                <input type='number' className='form-control' value={valueData.alt_phone} name='alt_phone' placeholder='Please enter alternate mobile no. (Optional)' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Email ID</label>
-                                <input type='email' className='form-control' value={valueData.email} name='email'  placeholder='Please enter email-id' onChange={handleChange} />
+                                <input type='email' className='form-control' value={valueData.email} name='email' placeholder='Please enter email-id' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
@@ -214,19 +214,30 @@ const Edit_Firm_Master = () => {
                                 <input type='text' className='form-control' value={valueData.business_type} name='business_type'  placeholder='Please enter email-id' onChange={handleChange} />
                             </div>
 
+                            {/* <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Select Business Type</label>
+                                <select className='form-control' value={valueData.business_type} name='business_type' onChange={handleChange}>
+                                    <option value="">Please select business type</option>
+                                    <option value="type1">Type 1</option>
+                                    <option value="type2">Type 2</option>
+                                    <option value="type3">Type 3</option>
+
+                                </select>
+                            </div> */}
+
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Business Category</label>
-                                <input type='text' className='form-control' value={valueData.business_category} name='business_category'  placeholder='Please enter business category' onChange={handleChange} />
+                                <input type='text' className='form-control' value={valueData.business_category} name='business_category' placeholder='Please enter business category' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Office Address</label>
-                                <input type='text' className='form-control' value={valueData.address} name='address'  placeholder='Please enter office address' onChange={handleChange} />
+                                <input type='text' className='form-control' value={valueData.address} name='address' placeholder='Please enter office address' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Pin Code</label>
-                                <input type='text' className='form-control' value={valueData.pin} name='pin'  placeholder='Please enter pin code' onChange={handleChange} />
+                                <input type='text' className='form-control' value={valueData.pin} name='pin' placeholder='Please enter pin code' onChange={handleChange} />
                             </div>
 
                             {/* <div className='col-md-4 py-1' style={{ display: "none" }}>
@@ -249,7 +260,7 @@ const Edit_Firm_Master = () => {
                                     }}
                                     placeHolder="Select State"
                                 /> */}
-                                <input type='text' className='form-control' value={valueData.state} name='state'  placeholder='Please enter state' onChange={handleChange} />
+                                <input type='text' className='form-control' value={valueData.state} name='state' placeholder='Please enter state' onChange={handleChange} />
 
                             </div>
 
@@ -263,13 +274,13 @@ const Edit_Firm_Master = () => {
                                     }}
                                     placeHolder="Select City"
                                 /> */}
-                                <input type='text' className='form-control' value={valueData.district} name='district'  placeholder='Please enter City' onChange={handleChange} />
+                                <input type='text' className='form-control' value={valueData.district} name='district' placeholder='Please enter City' onChange={handleChange} />
 
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Taluka</label>
-                                <input type='text' className='form-control' value={valueData.taluk} name='taluk'  placeholder='Please enter Taluka' onChange={handleChange}/>
+                                <input type='text' className='form-control' value={valueData.taluk} name='taluk' placeholder='Please enter Taluka' onChange={handleChange} />
                             </div>
 
                             <div className='d-flex justify-content-end pt-4'>
