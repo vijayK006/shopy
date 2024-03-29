@@ -59,18 +59,18 @@ p{
   }
 
   .css-qvtrhg-MuiDataGrid-virtualScroller::-webkit-scrollbar-track , .css-1pzb349::-webkit-scrollbar{
-    background: #e9e9e9; /* Color of the track */
+    background: #e9e9e9 !important; /* Color of the track */
   }
 
   .css-qvtrhg-MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb , .css-1pzb349::-webkit-scrollbar{
-    background: #cfe9ff; /* Color of the scrollbar handle */
+    background: #cfe9ff ; /* Color of the scrollbar handle */
     border-radius: 6px; /* Rounded corners */
   }
 
 
 
   .css-qvtrhg-MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb:hover , .css-1pzb349::-webkit-scrollbar{
-    background:#028dff ; /* Darker color on hover */
+    background:#028dff  !important; /* Darker color on hover */
   }
 /* -------------- */
 
