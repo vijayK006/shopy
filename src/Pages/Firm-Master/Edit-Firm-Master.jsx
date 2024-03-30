@@ -253,28 +253,39 @@ const Edit_Firm_Master = () => {
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> State</label>
-                                {/* <StateSelect
-                                    countryid={countryid}
-                                    onChange={(e) => {
-                                        setstateid(e.id);
-                                    }}
-                                    placeHolder="Select State"
-                                /> */}
-                                <input type='text' className='form-control' value={valueData.state} name='state' placeholder='Please enter state' onChange={handleChange} />
+                                <StateSelect
+                                   countryid={countryid}
+                                   onChange={(e) => {
+                                       setstateid(e.id);
+                                       console.log("Selected state:", e);
+                                       setValueData({
+                                           ...valueData,
+                                           state: e.name // Assuming e.id contains the state value
+                                       });
+                                   }}
+                                   placeHolder={valueData.state}
+                                   value={valueData.state}
+                                />
+                                {/* <input type='text' className='form-control' value={valueData.state} name='state' placeholder='Please enter state' onChange={handleChange} /> */}
 
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> district</label>
-                                {/* <CitySelect
-                                    countryid={countryid}
-                                    stateid={stateid}
-                                    onChange={(e) => {
-                                        console.log(e);
-                                    }}
-                                    placeHolder="Select City"
-                                /> */}
-                                <input type='text' className='form-control' value={valueData.district} name='district' placeholder='Please enter City' onChange={handleChange} />
+                                <CitySelect
+                                  countryid={countryid}
+                                  stateid={stateid}
+                                  onChange={(e) => {
+                                      console.log("Selected city:", e);
+                                      setValueData({
+                                          ...valueData,
+                                          district: e.name // Assuming e.id contains the city value
+                                      });
+                                  }}
+                                  placeHolder={valueData.district}
+                                  value={valueData.district}
+                                />
+                                {/* <input type='text' className='form-control' value={valueData.district} name='district' placeholder='Please enter City' onChange={handleChange} /> */}
 
                             </div>
 

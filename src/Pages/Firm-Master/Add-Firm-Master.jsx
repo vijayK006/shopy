@@ -13,6 +13,7 @@ import axios from 'axios';
 const Add_Firm_Master = () => {
 
     const [countryid, setCountryid] = useState(0);
+
     const [stateid, setstateid] = useState(0);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -28,8 +29,8 @@ const Add_Firm_Master = () => {
     useEffect(() => {
         // Set default country to India after the component mounts
         const defaultCountry = { id: 101, name: "India" };
-        setCountryid(defaultCountry.name);
-        console.log(defaultCountry.name)
+        setCountryid(defaultCountry.id);
+    
     }, []);
 
     const [valueData, setValueData] = useState({
@@ -289,16 +290,16 @@ const Add_Firm_Master = () => {
                                 <input type='text' className='form-control' value={valueData.pin} name='pin' placeholder='Please enter pin code' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1' >
+                            {/* <div className='col-md-4 py-1' style={{display:"none"}}>
                                 <label className='text-sm font-w-500 p-2'>Enter Country</label>
                                 <CountrySelect
                                     onChange={(e) => {
                                         setCountryid(e.id);
                                     }}
-                                    placeHolder={countryid}
+                                    placeHolder={countryname}
                                     value={countryid}
                                 />
-                            </div>
+                            </div> */}
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Select State</label>

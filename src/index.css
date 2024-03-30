@@ -297,7 +297,7 @@ font-size: 12px;
 .img-format{
     height: 200px;
     width: 100%;
-    background-color: rgb(216, 216, 216);
+    background-color: rgb(245, 245, 245);
     overflow: hidden;
     border-radius: 10px;
 }
@@ -305,7 +305,7 @@ font-size: 12px;
 .img-format img{
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 
