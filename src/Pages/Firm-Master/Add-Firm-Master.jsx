@@ -14,6 +14,7 @@ const Add_Firm_Master = () => {
 
     const [countryid, setCountryid] = useState(0);
     const [stateid, setstateid] = useState(0);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const [alertname, setAlertname] = useState();
@@ -74,39 +75,48 @@ const Add_Firm_Master = () => {
         const regname = /^[a-zA-Z\s]+$/;
         if (regname.test(valueData.firm_name)) {
             setAlertname("");
+            setLoading(true);
         } else if (!regname.test(valueData.firm_name) && valueData.firm_name === "") {
             setAlertname("Please fill your firm name");
             //   e.preventDefault();
+            setLoading(false);
             return;
         } else {
             setAlertname("Name should not be in a number");
             //   e.preventDefault();
+            setLoading(false);
             return;
         }
 
         const regnameowner = /^(([A-Za-z]+[,.]?[ ]?|[a-z]+['-]?)+)$/;
         if (regnameowner.test(valueData.owner_name)) {
             setAlertowner("");
+            setLoading(true);
         } else if (!regnameowner.test(valueData.owner_name) && valueData.owner_name === "") {
             setAlertowner("Please fill owner name");
             //   e.preventDefault();
+            setLoading(false);
             return;
         } else {
             setAlertowner("Name should not be in a number ");
             //   e.preventDefault();
+            setLoading(false);
             return;
         }
 
         const regnumber = /^[0-9]{10}$/;
         if (regnumber.test(valueData.phone)) {
             setAlertphone("");
+            setLoading(true);
         } else if (!regnumber.test(valueData.phone) && valueData.phone === "") {
             setAlertphone("Please enter your mobile Number");
             //   e.preventDefault();
+            setLoading(false);
             return;
         } else {
             setAlertphone("Mobile number should be 10 digits (no letters and spaces allowed).");
             //   e.preventDefault();
+            setLoading(false);
             return;
         }
 
@@ -114,13 +124,16 @@ const Add_Firm_Master = () => {
         const regemail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (regemail.test(valueData.email)) {
             setAlertemail("");
+            setLoading(true);
         } else if (valueData.email === "") {
             setAlertemail("Please enter email-id");
             //   e.preventDefault();
+            setLoading(false);
             return;
         } else if (!regemail.test(valueData.email)) {
             setAlertemail("Email-id is not valid");
             //   e.preventDefault();
+            setLoading(false);
             return;
         }
 
@@ -128,9 +141,11 @@ const Add_Firm_Master = () => {
         const regstate = /^[a-zA-Z\s]+$/;
         if (regstate.test(valueData.state)) {
             setAlertstate("");
+            setLoading(true);
         } else if (!regstate.test(valueData.state) && valueData.state === "") {
             setAlertstate("Select your state");
             //   e.preventDefault();
+            setLoading(false);
             return;
         }
 
@@ -138,9 +153,11 @@ const Add_Firm_Master = () => {
         const regdistrict = /^[a-zA-Z\s]+$/;
         if (regdistrict.test(valueData.district)) {
             setAlertdestrict("");
+            setLoading(true);
         } else if (!regdistrict.test(valueData.district) && valueData.district === "") {
             setAlertdestrict("Select district");
             //   e.preventDefault();
+            setLoading(false);
             return;
         }
 
@@ -339,7 +356,18 @@ const Add_Firm_Master = () => {
                             </div>
 
                             <div className='d-flex justify-content-end pt-4'>
-                                <button type='submit' className='btn btn-bg-orange' style={{ width: "200px" }} >Submit</button>
+                                {/* <button type='submit' className='btn btn-bg-orange' style={{ width: "200px" }} >Submit</button> */}
+
+                                <button type='submit' className='btn btn-bg-orange' style={{ width: "200px" }} disabled={loading}>
+                                    {loading ? ( // Conditional rendering for loading popup
+                                        <>
+                                            Submit &nbsp; &nbsp;
+                                            <div className="spinner-border text-info spinner-border-sm scaleonload"></div>
+                                        </>
+                                    ) : (
+                                        "Submit"
+                                    )}
+                                </button>
                             </div>
 
                         </div>
