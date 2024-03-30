@@ -27,7 +27,8 @@ const Add_Firm_Master = () => {
     useEffect(() => {
         // Set default country to India after the component mounts
         const defaultCountry = { id: 101, name: "India" };
-        setCountryid(defaultCountry.id);
+        setCountryid(defaultCountry.name);
+        console.log(defaultCountry.name)
     }, []);
 
     const [valueData, setValueData] = useState({
@@ -271,16 +272,16 @@ const Add_Firm_Master = () => {
                                 <input type='text' className='form-control' value={valueData.pin} name='pin' placeholder='Please enter pin code' onChange={handleChange} />
                             </div>
 
-                            {/* <div className='col-md-4 py-1' style={{ display: "none" }}>
+                            <div className='col-md-4 py-1' >
                                 <label className='text-sm font-w-500 p-2'>Enter Country</label>
                                 <CountrySelect
                                     onChange={(e) => {
                                         setCountryid(e.id);
                                     }}
-                                    placeHolder="Select Country"
+                                    placeHolder={countryid}
                                     value={countryid}
                                 />
-                            </div> */}
+                            </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Select State</label>
