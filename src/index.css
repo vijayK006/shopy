@@ -300,12 +300,15 @@ font-size: 12px;
     background-color: rgb(245, 245, 245);
     overflow: hidden;
     border-radius: 10px;
+    border: 1px solid #e0e0e0;
 }
 
 .img-format img{
     height: 100%;
     width: 100%;
+    border-radius: 10px;
     object-fit: contain;
+    /* border: 1px solid #e0e0e0; */
 }
 
 

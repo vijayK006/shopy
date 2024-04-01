@@ -158,7 +158,7 @@ const Edit_Firm_Master = () => {
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Business Logo</label>
-                                <div className='img-format'>
+                                <div className='img-format mb-1'>
                                     <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.logo}`} alt='' />
                                 </div>
                                 <input type='file' className='form-control' name='logo' onChange={handleChange} />
@@ -166,7 +166,7 @@ const Edit_Firm_Master = () => {
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Business Owner Photo</label>
-                                <div className='img-format'>
+                                <div className='img-format mb-1'>
                                     <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.owner_image}`} alt='' />
                                 </div>
                                 <input type='file' className='form-control' name='owner_image' onChange={handleChange} />
@@ -174,7 +174,7 @@ const Edit_Firm_Master = () => {
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Business Owner Sign</label>
-                                <div className='img-format'>
+                                <div className='img-format mb-1'>
                                     <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.sign}`} alt='' />
                                 </div>
                                 <input type='file' className='form-control' name='sign' onChange={handleChange} />

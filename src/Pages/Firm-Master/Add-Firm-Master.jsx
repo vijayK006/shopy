@@ -13,7 +13,9 @@ import axios from 'axios';
 const Add_Firm_Master = () => {
 
     const [countryid, setCountryid] = useState(0);
-
+const [logoimg, setLogoimg] = useState(null)
+const [ownerimg, setOwnerimg] = useState(null)
+const [signimg, setSignimg] = useState(null)
     const [stateid, setstateid] = useState(0);
     const [loading, setLoading] = useState(false);
     const [getFirmMobilenumber, setGetFirmMobilenumber] = useState([])
@@ -196,13 +198,78 @@ const Add_Firm_Master = () => {
 
 
 
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     if (name === 'logo' || name === 'owner_image' || name === 'sign') {
+    //         setValueData({
+    //             ...valueData,
+    //             [name]: e.target.files[0]
+    //         });
+    //     } else {
+    //         setValueData({
+    //             ...valueData,
+    //             [name]: value
+    //         });
+    //     }
+
+
+    // if we want to display images preview
+    //     const file = e.target.files[0];
+    //     const reader = new FileReader();
+
+    //     reader.onloadend = () => {
+    //         setImage(reader.result);
+    //     };
+
+    //     if (file) {
+    //         reader.readAsDataURL(file);
+    //     }else {
+    //     setValueData({
+    //         ...valueData,
+    //         [name]: value
+    //     });
+    // }
+
+    // };
+
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         if (name === 'logo' || name === 'owner_image' || name === 'sign') {
-            setValueData({
-                ...valueData,
-                [name]: e.target.files[0]
-            });
+            const file = e.target.files && e.target.files[0]; // Check if e.target.files exists
+            if (file) {
+                setValueData({
+                    ...valueData,
+                    [name]: file
+                });
+    
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    // Update the corresponding state variable based on the uploaded file name
+                    if (name === 'logo') {
+                        setLogoimg(reader.result);
+                    } else if (name === 'owner_image') {
+                        setOwnerimg(reader.result);
+                    } else if (name === 'sign') {
+                        setSignimg(reader.result);
+                    }
+                };
+                reader.readAsDataURL(file);
+            } else {
+                setValueData({
+                    ...valueData,
+                    [name]: null
+                });
+    
+                // Reset the corresponding image state variable to null
+                if (name === 'logo') {
+                    setLogoimg(null);
+                } else if (name === 'owner_image') {
+                    setOwnerimg(null);
+                } else if (name === 'sign') {
+                    setSignimg(null);
+                }
+            }
         } else {
             setValueData({
                 ...valueData,
@@ -211,6 +278,7 @@ const Add_Firm_Master = () => {
         }
     };
 
+    
 
     return (
         <>
@@ -229,16 +297,25 @@ const Add_Firm_Master = () => {
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Business Logo</label>
+                                <div className='img-format mb-1'>
+                                    <img src={logoimg} alt='' />
+                                </div>
                                 <input type='file' className='form-control' name='logo' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Business Owner Photo</label>
+                                <div className='img-format mb-1'>
+                                    <img src={ownerimg} alt='' />
+                                </div>
                                 <input type='file' className='form-control' name='owner_image' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Business Owner Sign</label>
+                                <div className='img-format mb-1'>
+                                    <img src={signimg} alt='' />
+                                </div>
                                 <input type='file' className='form-control' name='sign' onChange={handleChange} />
                             </div>
 
