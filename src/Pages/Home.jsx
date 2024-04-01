@@ -13,18 +13,47 @@ import { MdOutlineSettingsInputComponent } from "react-icons/md";
 
 const Home = () => {
   const [firmmastercount, setFirmmasterCount] = useState([]);
+  const [clientmastercount, setClientmastercount] = useState([]);
+
+  
+
+  // useEffect(() => {
+  //   axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
+  //     .then(res => {
+  //       setFirmmasterCount(res.data.length)
+  //     })
+  //     .catch(err => {
+  //       console.error('Error fetching data:', err);
+  //     });
+  // }, []);
+
+  const runfirm =()=>{
+    axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
+    .then(res => {
+      setFirmmasterCount(res.data.length)
+    })
+    .catch(err => {
+      console.error('Error fetching data:', err);
+    });
+  }
 
   useEffect(() => {
-    axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
+    runfirm();
+  }, []);
+
+  const runclient=()=>{
+    axios.get('https://shopee-firm.000webhostapp.com/api/client/get-client.php')
       .then(res => {
-     
-        console.log(res.data.length)
-        setFirmmasterCount(res.data.length)
+        setClientmastercount(res.data.length)
       })
       .catch(err => {
         console.error('Error fetching data:', err);
       });
+  }
+    useEffect(() => {
+    runclient();
   }, []);
+  
   return (
     <>
 
@@ -53,7 +82,7 @@ const Home = () => {
        cardbg='#00cebe' 
        borderRcolor='3px solid #00cebe'
        circlebg='white'
-       datacount='0'
+       datacount={clientmastercount}
 
        >
        </Admincards>

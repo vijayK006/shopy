@@ -10,17 +10,16 @@ import {
 import "react-country-state-city/dist/react-country-state-city.css";
 import axios from 'axios';
 
-const Add_Firm_Master = () => {
+const Add_Client_Master = () => {
 
     const [countryid, setCountryid] = useState(0);
-
     const [stateid, setstateid] = useState(0);
     const [loading, setLoading] = useState(false);
-    const [getFirmMobilenumber, setGetFirmMobilenumber] = useState([])
+const [getfirmnames, setGetfirmnames] = useState([])
     const navigate = useNavigate();
 
     const [alertname, setAlertname] = useState();
-    const [alertowner, setAlertowner] = useState();
+    const [alertprofession, setAlertprofession] = useState();
     const [alertphone, setAlertphone] = useState();
     const [alertemail, setAlertemail] = useState();
     const [alertstate, setAlertstate] = useState();
@@ -31,67 +30,66 @@ const Add_Firm_Master = () => {
         // Set default country to India after the component mounts
         const defaultCountry = { id: 101, name: "India" };
         setCountryid(defaultCountry.id);
-    
+
     }, []);
 
-    useEffect(() => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
-          .then(res => {
-            const migratephone = res.data.map(firm=> firm.phone)
-            setGetFirmMobilenumber(migratephone)
-            console.log(migratephone)
-          })
-          .catch(err => {
-            console.error('Error fetching data:', err);
-          });
-      }, []);
-
     const [valueData, setValueData] = useState({
-        firm_name: '',
-        owner_name: '',
+        address: '',
+        adhaar: '',
         phone: '',
         alt_phone: '',
         email: '',
-        business_type: '',
-        business_category: '',
-        address: '',
+        date: '',
+        category: '',
         state: '',
         district: '',
         taluk: '',
         pin: '',
-        logo: null,
-        owner_image: null,
-        sign: null
+        license: '',
+        name: '',
+        pan: '',
+        ration: '',
+        reference: '',
+        voter_id: '',
+        profession: '',
+
+        client_photo: null,
     })
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
+
         const formData = new FormData();
 
-        formData.append('firm_name', valueData.firm_name);
-        formData.append('owner_name', valueData.owner_name);
+        formData.append('address', valueData.address);
+        formData.append('adhaar', valueData.adhaar);
         formData.append('phone', valueData.phone);
         formData.append('alt_phone', valueData.alt_phone);
         formData.append('email', valueData.email);
-        formData.append('business_type', valueData.business_type);
-        formData.append('business_category', valueData.business_category);
-        formData.append('address', valueData.address);
+        formData.append('date', valueData.date);
+        formData.append('category', valueData.category);
         formData.append('state', valueData.state);
         formData.append('district', valueData.district);
         formData.append('taluk', valueData.taluk);
         formData.append('pin', valueData.pin);
-        formData.append('logo', valueData.logo);
-        formData.append('owner_image', valueData.owner_image);
-        formData.append('sign', valueData.sign);
+        formData.append('license', valueData.license);
+        formData.append('name', valueData.name);
+        formData.append('pan', valueData.pan);
+        formData.append('profession', valueData.profession);
+        formData.append('ration', valueData.ration);
+        formData.append('reference', valueData.reference);
+        formData.append('voter_id', valueData.voter_id);
+
+        formData.append('client_photo', valueData.client_photo);
 
 
         const regname = /^[a-zA-Z\s]+$/;
-        if (regname.test(valueData.firm_name)) {
+        if (regname.test(valueData.name)) {
             setAlertname("");
             setLoading(true);
-        } else if (!regname.test(valueData.firm_name) && valueData.firm_name === "") {
-            setAlertname("Please fill your firm name");
+        } else if (!regname.test(valueData.name) && valueData.name === "") {
+            setAlertname("Please fill your client name");
             //   e.preventDefault();
             setLoading(false);
             return;
@@ -102,24 +100,18 @@ const Add_Firm_Master = () => {
             return;
         }
 
-        const regnameowner = /^(([A-Za-z]+[,.]?[ ]?|[a-z]+['-]?)+)$/;
-        if (regnameowner.test(valueData.owner_name)) {
-            setAlertowner("");
+        const regprofession = /^[a-zA-Z\s]+$/;
+        if (regprofession.test(valueData.profession)) {
+            setAlertprofession("");
             setLoading(true);
-        } else if (!regnameowner.test(valueData.owner_name) && valueData.owner_name === "") {
-            setAlertowner("Please fill owner name");
+        } else if (!regprofession.test(valueData.profession) && valueData.profession === "") {
+            setAlertprofession("Please fill profession ");
             //   e.preventDefault();
             setLoading(false);
             return;
         } else {
-            setAlertowner("Name should not be in a number ");
+            setAlertprofession("Name should not be in a number ");
             //   e.preventDefault();
-            setLoading(false);
-            return;
-        }
-        
-        if (getFirmMobilenumber.includes(valueData.phone)) {
-            setAlertphone("This mobile number already exists. Please enter a different mobile number.");
             setLoading(false);
             return;
         }
@@ -181,24 +173,35 @@ const Add_Firm_Master = () => {
             return;
         }
 
-        axios.post('https://shopee-firm.000webhostapp.com/api/firm/add-firm.php', formData, {
+        axios.post('https://shopee-firm.000webhostapp.com/api/client/add-client.php', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
             .then(res => {
-                navigate('/firm-master')
-                console.log('Form Submitted Successfully')
+                navigate('/client-master')
+                console.log('Client info Submitted Successfully')
             })
             .catch(err => console.log(err));
     };
 
 
+ 
+    useEffect(() => {
+        axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
+          .then(res => {
+            const migratefirmname = res.data.map(firm=> firm.firm_name)
+            setGetfirmnames(migratefirmname)
+          })
+          .catch(err => {
+            console.error('Error fetching data:', err);
+          });
+      }, []);
 
-
-    const handleChange = (e) => {
+      const handleChange = (e) => {
         const { name, value } = e.target;
-        if (name === 'logo' || name === 'owner_image' || name === 'sign') {
+        setValueData({ ...valueData, [name]: value });
+        if (name === 'client_photo') {
             setValueData({
                 ...valueData,
                 [name]: e.target.files[0]
@@ -219,7 +222,7 @@ const Add_Firm_Master = () => {
             <div className='main-content' id='mainbody'>
 
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/firm-master'>Firm Master</Link> / <Link className='t-theme-color'>Add Firm Master Details</Link></p>
+                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/client-master'>Client Master</Link> / <Link className='t-theme-color'>Add Client Master Details</Link></p>
 
                 </div>
 
@@ -228,33 +231,23 @@ const Add_Firm_Master = () => {
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
                             <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Business Logo</label>
-                                <input type='file' className='form-control' name='logo' onChange={handleChange} />
+                                <label className='text-sm font-w-500 p-2'>Add Client Profile Picture</label>
+                                <input type='file' className='form-control' name='client_photo' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Business Owner Photo</label>
-                                <input type='file' className='form-control' name='owner_image' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Business Owner Sign</label>
-                                <input type='file' className='form-control' name='sign' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Firm Name</label>
-                                <input type='text' className='form-control' value={valueData.firm_name} name='firm_name' placeholder='Please enter name' onChange={handleChange} />
+                                <label className='text-sm font-w-500 p-2'>Enter Client Name</label>
+                                <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Please enter name' onChange={handleChange} />
 
                                 <p className='warning'>{alertname}</p>
                             </div>
 
 
                             <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Owner Name</label>
-                                <input type='text' className='form-control' value={valueData.owner_name} name='owner_name' placeholder='Please enter owner name' onChange={handleChange} />
+                                <label className='text-sm font-w-500 p-2'>Enter Profession</label>
+                                <input type='text' className='form-control' value={valueData.profession} name='profession' placeholder='Please enter client profession' onChange={handleChange} />
 
-                                <p className='warning'>{alertowner}</p>
+                                <p className='warning'>{alertprofession}</p>
                             </div>
 
                             <div className='col-md-4 py-1'>
@@ -280,30 +273,55 @@ const Add_Firm_Master = () => {
                                 <p className='warning'>{alertemail}</p>
                             </div>
 
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Business Type</label>
-                                <input type='text' className='form-control' value={valueData.business_type} name='business_type' placeholder='Please enter business type' onChange={handleChange} />
-                            </div>
-
                             {/* <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Select Business Type</label>
-                                <select className='form-control' value={valueData.business_type} name='business_type' onChange={handleChange}>
-                                    <option value="">Please select business type</option>
-                                    <option value="type1">Type 1</option>
-                                    <option value="type2">Type 2</option>
-                                    <option value="type3">Type 3</option>
-
-                                </select>
+                                <label className='text-sm font-w-500 p-2'>Enter Category</label>
+                                <input type='text' className='form-control' value={valueData.category} name='category' placeholder='Please enter category' onChange={handleChange} />
                             </div> */}
 
                             <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Business Category</label>
-                                <input type='text' className='form-control' value={valueData.business_category} name='business_category' placeholder='Please enter business category' onChange={handleChange} />
+                                <label className='text-sm font-w-500 p-2'>Select Category</label>
+                                <select className='form-control' value={valueData.category} name='category' onChange={handleChange}>
+                                <option value="">Select client category </option>
+                                    {getfirmnames.map((name, index) => (
+                                        <option key={index} value={name}>{name}</option>
+                                    ))}
+                                </select>
                             </div>
 
                             <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Office Address</label>
-                                <input type='text' className='form-control' value={valueData.address} name='address' placeholder='Please enter office address' onChange={handleChange} />
+                                <label className='text-sm font-w-500 p-2'>Enter D O B</label>
+                                <input type='date' className='form-control' value={valueData.date} name='date' placeholder='Please enter date of birth' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Enter License Number</label>
+                                <input type='text' className='form-control' value={valueData.license} name='license' placeholder='Please enter license number' onChange={handleChange} />
+                            </div>
+
+
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Enter Aadhar Number</label>
+                                <input type='text' className='form-control' value={valueData.adhaar} name='adhaar' placeholder='Please enter aadhar card number' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Enter PAN Card Number</label>
+                                <input type='text' className='form-control' value={valueData.pan} name='pan' placeholder='Please enter PAN card number' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Enter Ration Card Number</label>
+                                <input type='text' className='form-control' value={valueData.ration} name='ration' placeholder='Please enter ration card number' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Enter Voter-id</label>
+                                <input type='text' className='form-control' value={valueData.voter_id} name='voter_id' placeholder='Please enter voter-id' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Enter Reference</label>
+                                <input type='text' className='form-control' value={valueData.reference} name='reference' placeholder='Please enter reference' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
@@ -406,4 +424,4 @@ const Add_Firm_Master = () => {
     )
 }
 
-export default Add_Firm_Master
+export default Add_Client_Master
