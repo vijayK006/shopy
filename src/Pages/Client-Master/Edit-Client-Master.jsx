@@ -26,6 +26,7 @@ const Edit_Client_Master = () => {
         setCountryid(defaultCountry.id);
     }, []);
 
+
     const [valueData, setValueData] = useState({
         address: '',
         adhaar: '',
@@ -38,15 +39,24 @@ const Edit_Client_Master = () => {
         district: '',
         taluk: '',
         pin: '',
-        license:'',
-        name:'',
-        pan:'',
-        ration:'',
-        reference:'',
-        voter_id:'',
-        profession:'',
+        license: '',
+        name: '',
+        pan: '',
+        ration: '',
+        reference: '',
+        voter_id: '',
+        profession: '',
+        other: '',
+        dob: '',
+
 
         client_photo: null,
+        adhaar_photo: null,
+        pan_photo: null,
+        voter_id_photo: null,
+        license_photo: null,
+        ration_photo: null,
+        other_photo: null,
     })
 
 
@@ -61,7 +71,7 @@ const Edit_Client_Master = () => {
                     phone: firmData.phone,
                     alt_phone: firmData.alt_phone,
                     email: firmData.email,
-                    date: firmData.date,
+                    dob: firmData.dob,
                     category: firmData.category,
                     state: firmData.state,
                     district: firmData.district,
@@ -74,9 +84,17 @@ const Edit_Client_Master = () => {
                     ration: firmData.ration,
                     reference: firmData.reference,
                     voter_id: firmData.voter_id,
+                    other: firmData.other,
+                    dob: firmData.dob,
 
                     // Assuming these are the correct keys for client_photo, owner_image, and sign
                     client_photo: firmData.client_photo,
+                    adhaar_photo: firmData.adhaar_photo,
+                    pan_photo: firmData.pan_photo,
+                    voter_id_photo: firmData.voter_id_photo,
+                    license_photo: firmData.license_photo,
+                    ration_photo: firmData.ration_photo,
+                    other_photo: firmData.other_photo,
                 });
             })
             .catch(error => {
@@ -107,9 +125,17 @@ const Edit_Client_Master = () => {
         formData.append('ration', valueData.ration);
         formData.append('reference', valueData.reference);
         formData.append('voter_id', valueData.voter_id);
-        
+        formData.append('other', valueData.other);
+        formData.append('dob', valueData.dob);
+
         formData.append('client_photo', valueData.client_photo);
-   
+        formData.append('adhaar_photo', valueData.adhaar_photo);
+        formData.append('pan_photo', valueData.pan_photo);
+        formData.append('voter_id_photo', valueData.voter_id_photo);
+        formData.append('license_photo', valueData.license_photo);
+        formData.append('ration_photo', valueData.ration_photo);
+        formData.append('other_photo', valueData.other_photo);
+
 
 
         const reglName = /^(([A-Za-z]+[,.]?[ ]?|[a-z]+['-]?)+)$/;
@@ -144,19 +170,19 @@ const Edit_Client_Master = () => {
 
     useEffect(() => {
         axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
-          .then(res => {
-            const migratefirmname = res.data.map(firm=> firm.firm_name)
-            setGetfirmnames(migratefirmname)
-          })
-          .catch(err => {
-            console.error('Error fetching data:', err);
-          });
-      }, []);
+            .then(res => {
+                const migratefirmname = res.data.map(firm => firm.firm_name)
+                setGetfirmnames(migratefirmname)
+            })
+            .catch(err => {
+                console.error('Error fetching data:', err);
+            });
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setValueData({ ...valueData, [name]: value });
-        if (name === 'client_photo') {
+        if (name === 'client_photo' || name === 'adhaar_photo' || name === 'pan_photo' || name === 'voter_id_photo' || name === 'license_photo' || name === 'ration_photo' || name === 'other_photo') {
             setValueData({
                 ...valueData,
                 [name]: e.target.files[0]
@@ -191,18 +217,79 @@ const Edit_Client_Master = () => {
                                 </div>
                                 <input type='file' className='form-control' name='client_photo' onChange={handleChange} />
                             </div>
-                            <div className='col-md-4 py-1'/>
-                            <div className='col-md-4 py-1'/>
+                            <div className='col-md-4 py-1' />
+                            <div className='col-md-4 py-1' />
 
                             <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'> Client Name</label>
+                                <label className='text-sm font-w-500 p-2'>Aadhar Card</label>
+                                <div className='img-format'>
+                                <img src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.adhaar_photo}`} alt='' />
+                                </div>
+                                <input type='file' className='form-control' name='adhaar_photo' onChange={handleChange} />
+
+                                <input type='text' className='form-control' value={valueData.adhaar} name='adhaar' placeholder='Please enter aadhar card number' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Pan Card</label>
+                                <div className='img-format'>
+                                                                    <img src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.pan_photo}`} alt='' />
+                                </div>
+                                <input type='file' className='form-control' name='pan_photo' onChange={handleChange} />
+
+                                <input type='text' className='form-control' value={valueData.pan} name='pan' placeholder='Please enter PAN card number' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Voter-id</label>
+                                <div className='img-format'>
+                                                                    <img src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.voter_id_photo}`} alt='' />
+                                </div>
+                                <input type='file' className='form-control' name='voter_id_photo' onChange={handleChange} />
+
+                                <input type='text' className='form-control' value={valueData.voter_id} name='voter_id' placeholder='Please enter voter-id' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500    p-2'>License</label>
+                                <div className='img-format'>
+                                                                    <img src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.license_photo}`} alt='' />
+                                </div>
+                                <input type='file' className='form-control' name='license_photo' onChange={handleChange} />
+
+                                <input type='text' className='form-control' value={valueData.license} name='license' placeholder='Please enter license number' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Ration Card </label>
+                                <div className='img-format'>
+                                                                    <img src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.ration_photo}`} alt='' />
+                                </div>
+                                <input type='file' className='form-control' name='ration_photo' onChange={handleChange} />
+
+                                <input type='text' className='form-control' value={valueData.ration} name='ration' placeholder='Please enter ration card number' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Other Document</label>
+                                <div className='img-format'>
+                                                                    <img src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.other_photo}`} alt='' />
+                                </div>
+                                <input type='file' className='form-control' name='other_photo' onChange={handleChange} />
+
+                                         
+                                <input type='text' className='form-control' value={valueData.other} name='other' placeholder='Please enter other document' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Client Name</label>
                                 <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Please enter name' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertname}</p> */}
                             </div>
 
                             <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'> Mobile No.</label>
+                                <label className='text-sm font-w-500 p-2'>Mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.phone} name='phone' placeholder='Please enter mobile no.' onChange={handleChange} />
                             </div>
 
@@ -213,7 +300,7 @@ const Edit_Client_Master = () => {
                             </div>
 
                             <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'> Email ID</label>
+                                <label className='text-sm font-w-500 p-2'>Email ID</label>
                                 <input type='email' className='form-control' value={valueData.email} name='email' placeholder='Please enter email-id' onChange={handleChange} />
                             </div>
 
@@ -225,7 +312,7 @@ const Edit_Client_Master = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Client Category</label>
                                 <select className='form-control' value={valueData.category} name='category' onChange={handleChange}>
-                                <option value="">Select client category </option>
+                                    <option value="">Select client category </option>
                                     {getfirmnames.map((name, index) => (
                                         <option key={index} value={name}>{name}</option>
                                     ))}
@@ -233,8 +320,8 @@ const Edit_Client_Master = () => {
                             </div>
 
                             <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'> D O B</label>
-                                <input type='text' className='form-control' value={valueData.date} name='date' placeholder='Please enter Date of birth' onChange={handleChange} />
+                                <label className='text-sm font-w-500 p-2'>D O B</label>
+                                <input type='date' className='form-control' value={valueData.dob} name='dob' placeholder='Please enter Date of birth' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
@@ -243,28 +330,8 @@ const Edit_Client_Master = () => {
                             </div>
 
                             <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>PAN Card Number</label>
-                                <input type='text' className='form-control' value={valueData.pan} name='pan' placeholder='Please enter client pan number' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Client Profession</label>
                                 <input type='text' className='form-control' value={valueData.profession} name='profession' placeholder='Please enter client profession' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Ration Card Number</label>
-                                <input type='text' className='form-control' value={valueData.ration} name='ration' placeholder='Please enter client ration' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Aadhaar Card Number</label>
-                                <input type='text' className='form-control' value={valueData.adhaar} name='adhaar' placeholder='Please enter adhaar number' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Voter-id</label>
-                                <input type='text' className='form-control' value={valueData.voter_id} name='voter_id' placeholder='Please enter client voter_id' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
@@ -291,17 +358,17 @@ const Edit_Client_Master = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> State</label>
                                 <StateSelect
-                                   countryid={countryid}
-                                   onChange={(e) => {
-                                       setstateid(e.id);
-                                       console.log("Selected state:", e);
-                                       setValueData({
-                                           ...valueData,
-                                           state: e.name // Assuming e.id contains the state value
-                                       });
-                                   }}
-                                   placeHolder={valueData.state}
-                                   value={valueData.state}
+                                    countryid={countryid}
+                                    onChange={(e) => {
+                                        setstateid(e.id);
+                                        console.log("Selected state:", e);
+                                        setValueData({
+                                            ...valueData,
+                                            state: e.name // Assuming e.id contains the state value
+                                        });
+                                    }}
+                                    placeHolder={valueData.state}
+                                    value={valueData.state}
                                 />
                                 {/* <input type='text' className='form-control' value={valueData.state} name='state' placeholder='Please enter state' onChange={handleChange} /> */}
 
@@ -310,17 +377,17 @@ const Edit_Client_Master = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> district</label>
                                 <CitySelect
-                                  countryid={countryid}
-                                  stateid={stateid}
-                                  onChange={(e) => {
-                                      console.log("Selected city:", e);
-                                      setValueData({
-                                          ...valueData,
-                                          district: e.name // Assuming e.id contains the city value
-                                      });
-                                  }}
-                                  placeHolder={valueData.district}
-                                  value={valueData.district}
+                                    countryid={countryid}
+                                    stateid={stateid}
+                                    onChange={(e) => {
+                                        console.log("Selected city:", e);
+                                        setValueData({
+                                            ...valueData,
+                                            district: e.name // Assuming e.id contains the city value
+                                        });
+                                    }}
+                                    placeHolder={valueData.district}
+                                    value={valueData.district}
                                 />
                                 {/* <input type='text' className='form-control' value={valueData.district} name='district' placeholder='Please enter City' onChange={handleChange} /> */}
 

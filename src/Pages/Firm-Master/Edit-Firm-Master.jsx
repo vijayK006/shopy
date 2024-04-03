@@ -16,6 +16,9 @@ const Edit_Firm_Master = () => {
     const [countryid, setCountryid] = useState(0);
     const [stateid, setstateid] = useState(0);
 
+    const [getFirmMobilenumber, setGetFirmMobilenumber] = useState([])
+    const [alertphone, setAlertphone] = useState();
+
     const [alertname, setAlertname] = useState();
     const navigate = useNavigate();
 
@@ -24,6 +27,19 @@ const Edit_Firm_Master = () => {
         const defaultCountry = { id: 101, name: "India" };
         setCountryid(defaultCountry.id);
     }, []);
+
+    
+    useEffect(() => {
+        axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
+          .then(res => {
+            const migratephone = res.data.map(firm=> firm.phone)
+            setGetFirmMobilenumber(migratephone)
+            console.log(migratephone)
+          })
+          .catch(err => {
+            console.error('Error fetching data:', err);
+          });
+      }, []);
 
     const [valueData, setValueData] = useState({
         firm_name: '',
@@ -108,6 +124,8 @@ const Edit_Firm_Master = () => {
             return;
         }
 
+       
+
         const confirmDelete = window.confirm("Are you sure you want to update this Firm Master");
         if (confirmDelete) {
             axios.post(`https://shopee-firm.000webhostapp.com/api/firm/edit-by-id-firm.php?id=${id}`, formData, {
@@ -126,6 +144,7 @@ const Edit_Firm_Master = () => {
     };
 
 
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
         if (name === 'logo' || name === 'owner_image' || name === 'sign') {
@@ -196,6 +215,9 @@ const Edit_Firm_Master = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.phone} name='phone' placeholder='Please enter mobile no.' onChange={handleChange} />
+
+                                <p className='warning'>{alertphone}</p>
+
                             </div>
 
 

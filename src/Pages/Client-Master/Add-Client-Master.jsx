@@ -52,8 +52,17 @@ const [getfirmnames, setGetfirmnames] = useState([])
         reference: '',
         voter_id: '',
         profession: '',
+        other:'',
+        dob:'',
+
 
         client_photo: null,
+        adhaar_photo: null,
+        pan_photo: null,
+        voter_id_photo: null,
+        license_photo: null,
+        ration_photo: null,
+        other_photo: null,
     })
 
     const handleSubmit = (e) => {
@@ -80,8 +89,16 @@ const [getfirmnames, setGetfirmnames] = useState([])
         formData.append('ration', valueData.ration);
         formData.append('reference', valueData.reference);
         formData.append('voter_id', valueData.voter_id);
+        formData.append('other', valueData.other);
+        formData.append('dob', valueData.dob);
 
         formData.append('client_photo', valueData.client_photo);
+        formData.append('adhaar_photo', valueData.adhaar_photo);
+        formData.append('pan_photo', valueData.pan_photo);
+        formData.append('voter_id_photo', valueData.voter_id_photo);
+        formData.append('license_photo', valueData.license_photo);
+        formData.append('ration_photo', valueData.ration_photo);
+        formData.append('other_photo', valueData.other_photo);
 
 
         const regname = /^[a-zA-Z\s]+$/;
@@ -201,7 +218,7 @@ const [getfirmnames, setGetfirmnames] = useState([])
       const handleChange = (e) => {
         const { name, value } = e.target;
         setValueData({ ...valueData, [name]: value });
-        if (name === 'client_photo') {
+        if (name === 'client_photo' || name === 'adhaar_photo'  || name === 'pan_photo'  || name === 'voter_id_photo'  || name === 'license_photo' || name === 'ration_photo' || name === 'other_photo' ) {
             setValueData({
                 ...valueData,
                 [name]: e.target.files[0]
@@ -230,9 +247,55 @@ const [getfirmnames, setGetfirmnames] = useState([])
                     <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Add Client Profile Picture</label>
+                            <div className='col-md-12 pt-1 pb-4'>
+                            <div className='col-md-4'>
+                                 <label className='text-sm font-w-500 p-2'>Add Client Profile Picture</label>
                                 <input type='file' className='form-control' name='client_photo' onChange={handleChange} />
+                            </div>
+                               
+                            </div>
+
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Add Aadhar Card</label>
+                                <input type='file' className='form-control' name='adhaar_photo' onChange={handleChange} />
+
+                                <input type='text' className='form-control' value={valueData.adhaar} name='adhaar' placeholder='Please enter aadhar card number' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Add Pan Card</label>
+                                <input type='file' className='form-control' name='pan_photo' onChange={handleChange} />
+
+                                <input type='text' className='form-control' value={valueData.pan} name='pan' placeholder='Please enter PAN card number' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Add Voter-id</label>
+                                <input type='file' className='form-control' name='voter_id_photo' onChange={handleChange} />
+
+                                <input type='text' className='form-control' value={valueData.voter_id} name='voter_id' placeholder='Please enter voter-id' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500    p-2'>Add License</label>
+                                <input type='file' className='form-control' name='license_photo' onChange={handleChange} />
+
+                                <input type='text' className='form-control' value={valueData.license} name='license' placeholder='Please enter license number' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Add Ration Card </label>
+                                <input type='file' className='form-control' name='ration_photo' onChange={handleChange} />
+
+                                <input type='text' className='form-control' value={valueData.ration} name='ration' placeholder='Please enter ration card number' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Add Other Document</label>
+                                <input type='file' className='form-control' name='other_photo' onChange={handleChange} />
+
+                                         
+                                <input type='text' className='form-control' value={valueData.other} name='other' placeholder='Please enter other document' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
@@ -290,33 +353,7 @@ const [getfirmnames, setGetfirmnames] = useState([])
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter D O B</label>
-                                <input type='date' className='form-control' value={valueData.date} name='date' placeholder='Please enter date of birth' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter License Number</label>
-                                <input type='text' className='form-control' value={valueData.license} name='license' placeholder='Please enter license number' onChange={handleChange} />
-                            </div>
-
-
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Aadhar Number</label>
-                                <input type='text' className='form-control' value={valueData.adhaar} name='adhaar' placeholder='Please enter aadhar card number' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter PAN Card Number</label>
-                                <input type='text' className='form-control' value={valueData.pan} name='pan' placeholder='Please enter PAN card number' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Ration Card Number</label>
-                                <input type='text' className='form-control' value={valueData.ration} name='ration' placeholder='Please enter ration card number' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Voter-id</label>
-                                <input type='text' className='form-control' value={valueData.voter_id} name='voter_id' placeholder='Please enter voter-id' onChange={handleChange} />
+                                <input type='date' className='form-control' value={valueData.dob} name='dob' placeholder='Please enter date of birth' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
