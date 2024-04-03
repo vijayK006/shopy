@@ -145,13 +145,41 @@ const Edit_Firm_Master = () => {
 
 
     
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     if (name === 'logo' || name === 'owner_image' || name === 'sign') {
+    //         setValueData({
+    //             ...valueData,
+    //             [name]: e.target.files[0]
+    //         });
+    //     } else {
+    //         setValueData({
+    //             ...valueData,
+    //             [name]: value
+    //         });
+    //     }
+    // };
+
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         if (name === 'logo' || name === 'owner_image' || name === 'sign') {
+            // Update state for image file
             setValueData({
                 ...valueData,
                 [name]: e.target.files[0]
             });
+    
+            // Create URL for selected file and set it as src attribute of the img tag
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const imgSrc = event.target.result;
+                const imgTag = document.getElementById(`${name}-preview`);
+                if (imgTag) {
+                    imgTag.src = imgSrc;
+                }
+            };
+            reader.readAsDataURL(e.target.files[0]);
         } else {
             setValueData({
                 ...valueData,
@@ -159,7 +187,7 @@ const Edit_Firm_Master = () => {
             });
         }
     };
-
+    
 
     return (
         <>
@@ -167,7 +195,7 @@ const Edit_Firm_Master = () => {
             <Sidebar />
             <div className='main-content' id='mainbody'>
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/firm-master'>Firm Master</Link> / <Link className='t-theme-color'>Edit View Firm Master Details</Link></p>
+                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/firm-master'>Firm Master</Link> / <Link className='t-theme-color'>Edit Firm Master Details</Link></p>
 
                 </div>
 
@@ -178,7 +206,7 @@ const Edit_Firm_Master = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Business Logo</label>
                                 <div className='img-format mb-1'>
-                                    <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.logo}`} alt='' />
+                                    <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.logo}`} alt='' id="logo-preview"/>
                                 </div>
                                 <input type='file' className='form-control' name='logo' onChange={handleChange} />
                             </div>
@@ -186,7 +214,7 @@ const Edit_Firm_Master = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Business Owner Photo</label>
                                 <div className='img-format mb-1'>
-                                    <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.owner_image}`} alt='' />
+                                    <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.owner_image}`} alt='' id="owner_image-preview"/>
                                 </div>
                                 <input type='file' className='form-control' name='owner_image' onChange={handleChange} />
                             </div>
@@ -194,7 +222,7 @@ const Edit_Firm_Master = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Business Owner Sign</label>
                                 <div className='img-format mb-1'>
-                                    <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.sign}`} alt='' />
+                                    <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.sign}`} alt='' id="sign-preview" />
                                 </div>
                                 <input type='file' className='form-control' name='sign' onChange={handleChange} />
                             </div>

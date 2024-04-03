@@ -55,7 +55,7 @@ const Sidebar = () => {
         <NavLink className="disble-decoration" to="/firm-master"><li className='items'><BiCategory className="icons"/> <span className='resp'>Firm Master</span></li></NavLink>
         <NavLink className="disble-decoration" to="/client-master"><li className='items'><BiCategory className="icons"/> <span className='resp'>Client Master</span></li></NavLink>
 
-        <NavLink className="disble-decoration " to=""><li className='items'><MdOutlineMiscellaneousServices className="icons"/> <span className='resp'>Service Master</span></li></NavLink>
+        <NavLink className="disble-decoration " to="/service-master"><li className='items'><MdOutlineMiscellaneousServices className="icons"/> <span className='resp'>Service Master</span></li></NavLink>
         <NavLink className="disble-decoration " to=""><li className='items'><FiEdit className="icons"/> <span className='resp'>Expenses Master</span></li></NavLink>
     </ul>
 </div>

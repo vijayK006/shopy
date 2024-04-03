@@ -15,6 +15,11 @@ import Clientmaster from './Pages/Client-Master/Clientmaster';
 import Edit_Client_Master from './Pages/Client-Master/Edit-Client-Master';
 import Add_Client_Master from './Pages/Client-Master/Add-Client-Master';
 
+//Service Master
+import Servicemaster from './Pages/Service-Master/Servicemaster';
+import Add_Service_Master from './Pages/Service-Master/Add-Service-Master';
+import Edit_Service_Master from './Pages/Service-Master/Edit-Service-Master';
+
 const App = () => {
   return (
     <>
@@ -33,6 +38,11 @@ const App = () => {
 <Route path="/client-master" element={<Clientmaster/>}/>
 <Route path="/edit-client-master/:id" element={<Edit_Client_Master/>}/>
 <Route path="/add-client-master" element={<Add_Client_Master/>}/>
+
+{/* Service Master */}
+<Route path="/service-master" element={<Servicemaster/>}/>
+<Route path="/add-service-master" element={<Add_Service_Master/>}/>
+<Route path="/edit-service-master/:id" element={<Edit_Service_Master/>}/>
 
   <Route path="/details/:id" element={<Details/>}/>
 

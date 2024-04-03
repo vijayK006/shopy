@@ -14,34 +14,21 @@ import { MdOutlineSettingsInputComponent } from "react-icons/md";
 const Home = () => {
   const [firmmastercount, setFirmmasterCount] = useState([]);
   const [clientmastercount, setClientmastercount] = useState([]);
+  const [servicemastercount, setServicemastercount] = useState([]);
 
   
 
-  // useEffect(() => {
-  //   axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
-  //     .then(res => {
-  //       setFirmmasterCount(res.data.length)
-  //     })
-  //     .catch(err => {
-  //       console.error('Error fetching data:', err);
-  //     });
-  // }, []);
-
-  const runfirm =()=>{
-    axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
-    .then(res => {
-      setFirmmasterCount(res.data.length)
-    })
-    .catch(err => {
-      console.error('Error fetching data:', err);
-    });
-  }
-
   useEffect(() => {
-    runfirm();
+    axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
+      .then(res => {
+        setFirmmasterCount(res.data.length)
+      })
+      .catch(err => {
+        console.error('Error fetching data:', err);
+      });
   }, []);
 
-  const runclient=()=>{
+  useEffect(() => {
     axios.get('https://shopee-firm.000webhostapp.com/api/client/get-client.php')
       .then(res => {
         setClientmastercount(res.data.length)
@@ -49,9 +36,16 @@ const Home = () => {
       .catch(err => {
         console.error('Error fetching data:', err);
       });
-  }
-    useEffect(() => {
-    runclient();
+  }, []);
+
+  useEffect(() => {
+    axios.get('https://shopee-firm.000webhostapp.com/api/service/get-service.php')
+      .then(res => {
+        setServicemastercount(res.data.length)
+      })
+      .catch(err => {
+        console.error('Error fetching data:', err);
+      });
   }, []);
   
   return (
@@ -93,7 +87,7 @@ const Home = () => {
        cardbg='#f927a8' 
        borderRcolor='3px solid #ff3e57'
        circlebg='white'
-       datacount='0'
+       datacount={servicemastercount}
 
        >
        </Admincards>

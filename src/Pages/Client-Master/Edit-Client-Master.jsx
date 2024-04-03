@@ -179,14 +179,41 @@ const Edit_Client_Master = () => {
             });
     }, []);
 
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setValueData({ ...valueData, [name]: value });
+    //     if (name === 'client_photo' || name === 'adhaar_photo' || name === 'pan_photo' || name === 'voter_id_photo' || name === 'license_photo' || name === 'ration_photo' || name === 'other_photo') {
+    //         setValueData({
+    //             ...valueData,
+    //             [name]: e.target.files[0]
+    //         });
+    //     } else {
+    //         setValueData({
+    //             ...valueData,
+    //             [name]: value
+    //         });
+    //     }
+    // };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setValueData({ ...valueData, [name]: value });
         if (name === 'client_photo' || name === 'adhaar_photo' || name === 'pan_photo' || name === 'voter_id_photo' || name === 'license_photo' || name === 'ration_photo' || name === 'other_photo') {
+            // Update state for image file
             setValueData({
                 ...valueData,
                 [name]: e.target.files[0]
             });
+
+            // Create URL for selected file and set it as src attribute of the img tag
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const imgSrc = event.target.result;
+                const imgTag = document.getElementById(`${name}-preview`);
+                if (imgTag) {
+                    imgTag.src = imgSrc;
+                }
+            };
+            reader.readAsDataURL(e.target.files[0]);
         } else {
             setValueData({
                 ...valueData,
@@ -202,7 +229,7 @@ const Edit_Client_Master = () => {
             <Sidebar />
             <div className='main-content' id='mainbody'>
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/client-master'>Client Master</Link> / <Link className='t-theme-color'>Edit View Firm Master Details</Link></p>
+                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/client-master'>Client Master</Link> / <Link className='t-theme-color'>Edit Firm Master Details</Link></p>
 
                 </div>
 
@@ -213,7 +240,7 @@ const Edit_Client_Master = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Client Profile Picture</label>
                                 <div className='img-format'>
-                                    <img src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.client_photo}`} alt='' />
+                                    <img id="client_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.client_photo}`} alt='' />
                                 </div>
                                 <input type='file' className='form-control' name='client_photo' onChange={handleChange} />
                             </div>
@@ -223,17 +250,26 @@ const Edit_Client_Master = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Aadhar Card</label>
                                 <div className='img-format'>
-                                <img src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.adhaar_photo}`} alt='' />
+                                    <img id="adhaar_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.adhaar_photo}`} alt='' />
                                 </div>
-                                <input type='file' className='form-control' name='adhaar_photo' onChange={handleChange} />
 
-                                <input type='text' className='form-control' value={valueData.adhaar} name='adhaar' placeholder='Please enter aadhar card number' onChange={handleChange} />
+                                <div className='row'>
+                                    <div className="col-md-3">
+                                        <label for='adhaar_photo'>Edit</label>
+                                        <input type='file' className='form-control' id='adhaar_photo' name='adhaar_photo' onChange={handleChange} style={{display:"none"}} />
+                                    </div>
+
+                                    <div className="col-md-9">
+                                        <input type='text' className='form-control' value={valueData.adhaar} name='adhaar' placeholder='Please enter aadhar card number' onChange={handleChange} />
+                                    </div>
+                                </div>
+
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Pan Card</label>
                                 <div className='img-format'>
-                                                                    <img src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.pan_photo}`} alt='' />
+                                    <img id="pan_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.pan_photo}`} alt='' />
                                 </div>
                                 <input type='file' className='form-control' name='pan_photo' onChange={handleChange} />
 
@@ -243,7 +279,7 @@ const Edit_Client_Master = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Voter-id</label>
                                 <div className='img-format'>
-                                                                    <img src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.voter_id_photo}`} alt='' />
+                                    <img id="voter_id_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.voter_id_photo}`} alt='' />
                                 </div>
                                 <input type='file' className='form-control' name='voter_id_photo' onChange={handleChange} />
 
@@ -253,7 +289,7 @@ const Edit_Client_Master = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500    p-2'>License</label>
                                 <div className='img-format'>
-                                                                    <img src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.license_photo}`} alt='' />
+                                    <img id="license_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.license_photo}`} alt='' />
                                 </div>
                                 <input type='file' className='form-control' name='license_photo' onChange={handleChange} />
 
@@ -263,7 +299,7 @@ const Edit_Client_Master = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Ration Card </label>
                                 <div className='img-format'>
-                                                                    <img src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.ration_photo}`} alt='' />
+                                    <img id="ration_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.ration_photo}`} alt='' />
                                 </div>
                                 <input type='file' className='form-control' name='ration_photo' onChange={handleChange} />
 
@@ -273,11 +309,11 @@ const Edit_Client_Master = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Other Document</label>
                                 <div className='img-format'>
-                                                                    <img src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.other_photo}`} alt='' />
+                                    <img id="other_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.other_photo}`} alt='' />
                                 </div>
                                 <input type='file' className='form-control' name='other_photo' onChange={handleChange} />
 
-                                         
+
                                 <input type='text' className='form-control' value={valueData.other} name='other' placeholder='Please enter other document' onChange={handleChange} />
                             </div>
 
