@@ -66,6 +66,7 @@ const Home = () => {
        borderRcolor='3px solid #ff3e57'
        circlebg='white'
        datacount={firmmastercount}
+       pageLink = '/firm-master'
        >
        </Admincards>
         
@@ -76,7 +77,7 @@ const Home = () => {
        borderRcolor='3px solid #00cebe'
        circlebg='white'
        datacount={clientmastercount}
-
+       pageLink = '/client-master'
        >
        </Admincards>
        
@@ -87,7 +88,7 @@ const Home = () => {
        borderRcolor='3px solid #ff3e57'
        circlebg='white'
        datacount={servicemastercount}
-
+       pageLink = '/service-master'
        >
        </Admincards>
         

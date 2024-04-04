@@ -228,7 +228,7 @@ const Edit_Client_Master = () => {
             <Sidebar />
             <div className='main-content' id='mainbody'>
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/client-master'>Client Master</Link> / <Link className='t-theme-color'>Edit Firm Master Details</Link></p>
+                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/client-master'>Client Master</Link> / <Link className='t-theme-color'>Edit Client Master Details</Link></p>
 
                 </div>
 

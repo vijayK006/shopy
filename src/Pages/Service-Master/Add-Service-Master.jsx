@@ -113,7 +113,7 @@ const Add_Service_Master = () => {
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Service Expense</label>
-                                <input type='number' className='form-control' value={valueData.expense} name='expense' placeholder='Please enter expense' onChange={handleChange} />
+                                <input type='text' className='form-control' value={valueData.expense} name='expense' placeholder='Please enter expense' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertphone}</p> */}
                             </div>

@@ -1,9 +1,6 @@
 import React from 'react';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './Pages/Home';
-import Users from './Pages/Users';
-import Details from './Pages/Details';
-
 
 // Firm Master
 import FirmMaster from './Pages/Firm-Master/FirmMaster';
@@ -23,32 +20,27 @@ import Edit_Service_Master from './Pages/Service-Master/Edit-Service-Master';
 const App = () => {
   return (
     <>
-     <BrowserRouter>
-<Routes>
-  <Route path="/" element={<Home/>}/>
-  <Route path="/User" element={<Users/>}/>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
 
+          {/* Firm Master */}
+          <Route path="/firm-master" element={<FirmMaster />} />
+          <Route path="/edit-firm-master/:id" element={<Edit_Firm_Master />} />
+          <Route path="/add-firm-master" element={<Add_Firm_Master />} />
 
-{/* Firm Master */}
-  <Route path="/firm-master" element={<FirmMaster/>}/>
-  <Route path="/edit-firm-master/:id" element={<Edit_Firm_Master/>}/>
-  <Route path="/add-firm-master" element={<Add_Firm_Master/>}/>
+          {/* Client Master */}
+          <Route path="/client-master" element={<Clientmaster />} />
+          <Route path="/edit-client-master/:id" element={<Edit_Client_Master />} />
+          <Route path="/add-client-master" element={<Add_Client_Master />} />
 
-{/* Client Master */}
-<Route path="/client-master" element={<Clientmaster/>}/>
-<Route path="/edit-client-master/:id" element={<Edit_Client_Master/>}/>
-<Route path="/add-client-master" element={<Add_Client_Master/>}/>
+          {/* Service Master */}
+          <Route path="/service-master" element={<Servicemaster />} />
+          <Route path="/add-service-master" element={<Add_Service_Master />} />
+          <Route path="/edit-service-master/:id" element={<Edit_Service_Master />} />
 
-{/* Service Master */}
-<Route path="/service-master" element={<Servicemaster/>}/>
-<Route path="/add-service-master" element={<Add_Service_Master/>}/>
-<Route path="/edit-service-master/:id" element={<Edit_Service_Master/>}/>
-
-  <Route path="/details/:id" element={<Details/>}/>
-
-
-</Routes>
-     </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }

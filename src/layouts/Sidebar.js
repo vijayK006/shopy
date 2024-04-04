@@ -1,9 +1,12 @@
 import React from 'react';
 import {BiHomeAlt2, BiCategory} from 'react-icons/bi';
-import {FiEdit} from 'react-icons/fi';
-import { MdOutlineMiscellaneousServices } from "react-icons/md";
-
+import {BsDatabaseAdd} from 'react-icons/bs';
 import { NavLink } from 'react-router-dom';
+import { IoIosArrowDown } from "react-icons/io";
+import { GrUserManager } from "react-icons/gr";
+import { IoSettingsOutline } from "react-icons/io5";
+import { MdOutlineSettingsInputComponent } from "react-icons/md";
+
 
 const Sidebar = () => {
 
@@ -53,10 +56,21 @@ const Sidebar = () => {
     <ul className='menu'>
         <NavLink className="disble-decoration" to="/"><li className='items'><BiHomeAlt2 className="icons"/> <span className='resp'>Home</span></li></NavLink>
         <NavLink className="disble-decoration" to="/firm-master"><li className='items'><BiCategory className="icons"/> <span className='resp'>Firm Master</span></li></NavLink>
-        <NavLink className="disble-decoration" to="/client-master"><li className='items'><BiCategory className="icons"/> <span className='resp'>Client Master</span></li></NavLink>
+        <NavLink className="disble-decoration" to="/client-master"><li className='items'><GrUserManager className="icons"/> <span className='resp'>Client Master</span></li></NavLink>
 
-        <NavLink className="disble-decoration " to="/service-master"><li className='items'><MdOutlineMiscellaneousServices className="icons"/> <span className='resp'>Service Master</span></li></NavLink>
-        <NavLink className="disble-decoration " to=""><li className='items'><FiEdit className="icons"/> <span className='resp'>Expenses Master</span></li></NavLink>
+        <NavLink className="disble-decoration " to="/service-master"><li className='items'><IoSettingsOutline  className="icons"/> <span className='resp'>Service Master</span></li></NavLink>
+    
+        <NavLink className="disble-decoration" to="" >
+        <li className='items dropmenu' onClick={()=> toggleDropdown('dropitems1')} id='dropitems1'>
+        <MdOutlineSettingsInputComponent  className="icons"/> <span className='resp'>Expense Master <IoIosArrowDown/></span> 
+        <ul className='submenu'>
+        <li>Add Expenses</li>
+        <li>Expenses Manager</li>
+        <li>Employee Manager</li>
+        </ul>
+        </li>
+        </NavLink>
+
     </ul>
 </div>
         </div>

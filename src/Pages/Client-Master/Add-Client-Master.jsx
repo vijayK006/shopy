@@ -448,7 +448,7 @@ const Add_Client_Master = () => {
 
                             <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Enter D O B</label>
-                                <input type='text' className='form-control' value={valueData.dob} name='dob' placeholder='Please enter date of birth' onChange={handleChange} />
+                                <input type='date' className='form-control' value={valueData.dob} name='dob' placeholder='Please enter date of birth' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-3'>
