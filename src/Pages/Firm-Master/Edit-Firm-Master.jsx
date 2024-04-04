@@ -9,6 +9,8 @@ import {
 } from "react-country-state-city/dist/cjs/index.js";
 import "react-country-state-city/dist/react-country-state-city.css";
 import axios from 'axios';
+import { AiFillPicture } from "react-icons/ai";
+
 
 const Edit_Firm_Master = () => {
     const { id } = useParams();
@@ -21,6 +23,7 @@ const Edit_Firm_Master = () => {
 
     const [alertname, setAlertname] = useState();
     const navigate = useNavigate();
+    
 
     useEffect(() => {
         // Set default country to India after the component mounts
@@ -205,26 +208,30 @@ const Edit_Firm_Master = () => {
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Business Logo</label>
-                                <div className='img-format mb-1'>
+                                <div className='img-format mb-1 main-field'>
                                     <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.logo}`} alt='' id="logo-preview"/>
+                                    <label for='logo' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
                                 </div>
-                                <input type='file' className='form-control' name='logo' onChange={handleChange} />
+                                <input type='file' className='form-control d-none' id='logo' name='logo' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Business Owner Photo</label>
-                                <div className='img-format mb-1'>
+                                <div className='img-format mb-1 main-field'>
                                     <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.owner_image}`} alt='' id="owner_image-preview"/>
+                                    <label for='owner_image' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
+                                
                                 </div>
-                                <input type='file' className='form-control' name='owner_image' onChange={handleChange} />
+                                <input type='file' className='form-control d-none' id='owner_image' name='owner_image' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Business Owner Sign</label>
-                                <div className='img-format mb-1'>
+                                <div className='img-format mb-1 main-field'>
                                     <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.sign}`} alt='' id="sign-preview" />
+                                    <label for='sign' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
                                 </div>
-                                <input type='file' className='form-control' name='sign' onChange={handleChange} />
+                                <input type='file' className='form-control d-none' id='sign' name='sign' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
@@ -235,12 +242,12 @@ const Edit_Firm_Master = () => {
                             </div>
 
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Owner Name</label>
                                 <input type='text' className='form-control' value={valueData.owner_name} name='owner_name' placeholder='Please enter owner name' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.phone} name='phone' placeholder='Please enter mobile no.' onChange={handleChange} />
 
@@ -249,22 +256,22 @@ const Edit_Firm_Master = () => {
                             </div>
 
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Alternate mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.alt_phone} name='alt_phone' placeholder='Please enter alternate mobile no. (Optional)' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Email ID</label>
                                 <input type='email' className='form-control' value={valueData.email} name='email' placeholder='Please enter email-id' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Business Type</label>
                                 <input type='text' className='form-control' value={valueData.business_type} name='business_type'  placeholder='Please enter email-id' onChange={handleChange} />
                             </div>
 
-                            {/* <div className='col-md-4 py-1'>
+                            {/* <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Select Business Type</label>
                                 <select className='form-control' value={valueData.business_type} name='business_type' onChange={handleChange}>
                                     <option value="">Please select business type</option>
@@ -275,22 +282,22 @@ const Edit_Firm_Master = () => {
                                 </select>
                             </div> */}
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Business Category</label>
                                 <input type='text' className='form-control' value={valueData.business_category} name='business_category' placeholder='Please enter business category' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Office Address</label>
                                 <input type='text' className='form-control' value={valueData.address} name='address' placeholder='Please enter office address' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Pin Code</label>
                                 <input type='text' className='form-control' value={valueData.pin} name='pin' placeholder='Please enter pin code' onChange={handleChange} />
                             </div>
 
-                            {/* <div className='col-md-4 py-1' style={{ display: "none" }}>
+                            {/* <div className='col-md-4 py-2' style={{ display: "none" }}>
                                 <label className='text-sm font-w-500 p-2'> Country</label>
                                 <CountrySelect
                                     onChange={(e) => {
@@ -301,7 +308,7 @@ const Edit_Firm_Master = () => {
                                 />
                             </div> */}
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'> State</label>
                                 <StateSelect
                                    countryid={countryid}
@@ -320,7 +327,7 @@ const Edit_Firm_Master = () => {
 
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'> district</label>
                                 <CitySelect
                                   countryid={countryid}
@@ -339,7 +346,7 @@ const Edit_Firm_Master = () => {
 
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Taluka</label>
                                 <input type='text' className='form-control' value={valueData.taluk} name='taluk' placeholder='Please enter Taluka' onChange={handleChange} />
                             </div>

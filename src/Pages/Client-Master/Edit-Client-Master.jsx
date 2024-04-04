@@ -236,116 +236,115 @@ const Edit_Client_Master = () => {
                     <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
-                            <div className='col-md-4 pt-1 pb-4 main-field '>
+                            <div className='col-md-4 pt-1 pb-4  '>
                                 <label className='text-sm font-w-500 p-2'>Client Profile Picture</label>
-                                <div className='img-format'>
+                                <div className='img-format main-field'>
                                     <img id="client_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.client_photo}`} alt='' />
+                                    <label for='client_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
                                 </div>
 
-                                <label for='client_photo' className='actionbutton'><AiFillPicture className='icon'/> Edit Picture</label>
-<p className='px-2 pt-1'>Client Full Name </p>
+                                <p className='px-2 pt-1'>Client Full Name </p>
                                 <input type='file' className='form-control mt-1 d-none' id='client_photo' name='client_photo' onChange={handleChange} />
                             </div>
                             <div className='col-md-4 pt-1 pb-4' />
                             <div className='col-md-4 pt-1 pb-4' />
 
-                            <div className='col-md-4 py-1 main-field'>
+                            <div className='col-md-4 py-3 '>
                                 <label className='text-sm font-w-500 p-2'>Aadhar Card</label>
-                                <div className='img-format'>
+                                <div className='img-format main-field'>
                                     <img id="adhaar_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.adhaar_photo}`} alt='' />
+                                    <label for='adhaar_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
                                 </div>
 
-                                <label for='adhaar_photo' className='actionbutton'><AiFillPicture className='icon'/> Edit Picture</label>
-                                <input type='file' className='form-control d-none' id='adhaar_photo' name='adhaar_photo' onChange={handleChange}  />
+                                <input type='file' className='form-control d-none' id='adhaar_photo' name='adhaar_photo' onChange={handleChange} />
 
                                 <input type='text' className='form-control mt-1' value={valueData.adhaar} name='adhaar' placeholder='Please enter aadhar card number' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1 main-field'>
+                            <div className='col-md-4 py-3 '>
                                 <label className='text-sm font-w-500 p-2'>Pan Card</label>
-                                <div className='img-format'>
+                                <div className='img-format main-field'>
                                     <img id="pan_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.pan_photo}`} alt='' />
+                                    <label for='pan_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
                                 </div>
-                                <label for='pan_photo' className='actionbutton'><AiFillPicture className='icon'/> Edit Picture</label>
 
                                 <input type='file' className='form-control d-none' id='pan_photo' name='pan_photo' onChange={handleChange} />
                                 <input type='text' className='form-control mt-1' value={valueData.pan} name='pan' placeholder='Please enter PAN card number' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1 main-field'>
+                            <div className='col-md-4 py-3 '>
                                 <label className='text-sm font-w-500 p-2'>Voter-id</label>
-                                <div className='img-format'>
+                                <div className='img-format main-field'>
                                     <img id="voter_id_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.voter_id_photo}`} alt='' />
                                 </div>
-                                <label for='voter_id_photo' className='actionbutton'><AiFillPicture className='icon'/> Edit Picture</label>
+                                <label for='voter_id_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
                                 <input type='file' className='form-control d-none' id='voter_id_photo' name='voter_id_photo' onChange={handleChange} />
 
                                 <input type='text' className='form-control mt-1' value={valueData.voter_id} name='voter_id' placeholder='Please enter voter-id' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1 main-field'>
+                            <div className='col-md-4 py-3 '>
                                 <label className='text-sm font-w-500 p-2'>License</label>
-                                <div className='img-format'>
+                                <div className='img-format main-field'>
                                     <img id="license_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.license_photo}`} alt='' />
+                                    <label for='license_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
                                 </div>
-                                <label for='license_photo' className='actionbutton'><AiFillPicture className='icon'/> Edit Picture</label>
 
                                 <input type='file' className='form-control d-none' id='license_photo' name='license_photo' onChange={handleChange} />
                                 <input type='text' className='form-control mt-1' value={valueData.license} name='license' placeholder='Please enter license number' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1 main-field'>
+                            <div className='col-md-4 py-3 '>
                                 <label className='text-sm font-w-500 p-2'>Ration Card </label>
-                                <div className='img-format'>
+                                <div className='img-format main-field'>
                                     <img id="ration_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.ration_photo}`} alt='' />
+                                    <label for='ration_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
                                 </div>
-                                <label for='ration_photo' className='actionbutton'><AiFillPicture className='icon'/> Edit Picture</label>
-                                <input type='file' className='form-control d-none' id='ration_photo' name='ration_photo' onChange={handleChange} />
 
+                                <input type='file' className='form-control d-none' id='ration_photo' name='ration_photo' onChange={handleChange} />
                                 <input type='text' className='form-control mt-1' value={valueData.ration} name='ration' placeholder='Please enter ration card number' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1 main-field'>
+                            <div className='col-md-4 py-3 '>
                                 <label className='text-sm font-w-500 p-2'>Other Document</label>
-                                <div className='img-format'>
+                                <div className='img-format main-field'>
                                     <img id="other_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.other_photo}`} alt='' />
+                                    <label for='other_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
                                 </div>
-                                <label for='other_photo' className='actionbutton'><AiFillPicture className='icon'/> Edit Picture</label>
                                 <input type='file' className='form-control d-none' id='other_photo' name='other_photo' onChange={handleChange} />
-
-
                                 <input type='text' className='form-control mt-1' value={valueData.other} name='other' placeholder='Please enter other document' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Client Name</label>
                                 <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Please enter name' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertname}</p> */}
                             </div>
 
-                            <div className='col-md-4 py-1'>
+
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.phone} name='phone' placeholder='Please enter mobile no.' onChange={handleChange} />
                             </div>
 
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'> Alternate mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.alt_phone} name='alt_phone' placeholder='Please enter alternate mobile no. (Optional)' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Email ID</label>
                                 <input type='email' className='form-control' value={valueData.email} name='email' placeholder='Please enter email-id' onChange={handleChange} />
                             </div>
 
-                            {/* <div className='col-md-4 py-1'>
+                            {/* <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Client Category</label>
                                 <input type='text' className='form-control' value={valueData.category} name='category'  placeholder='Please enter email-id' onChange={handleChange} />
                             </div> */}
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Client Category</label>
                                 <select className='form-control' value={valueData.category} name='category' onChange={handleChange}>
                                     <option value="">Select client category </option>
@@ -355,32 +354,32 @@ const Edit_Client_Master = () => {
                                 </select>
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>D O B</label>
                                 <input type='date' className='form-control' value={valueData.dob} name='dob' placeholder='Please enter Date of birth' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'> Client Address</label>
                                 <input type='text' className='form-control' value={valueData.address} name='address' placeholder='Please enter client address' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'> Client Profession</label>
                                 <input type='text' className='form-control' value={valueData.profession} name='profession' placeholder='Please enter client profession' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'> Pin Code</label>
                                 <input type='text' className='form-control' value={valueData.pin} name='pin' placeholder='Please enter pin code' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>reference</label>
+                            <div className='col-md-4 py-3'>
+                                <label className='text-sm font-w-500 p-2'>Reference</label>
                                 <input type='text' className='form-control' value={valueData.reference} name='reference' placeholder='Please enter reference' onChange={handleChange} />
                             </div>
 
-                            {/* <div className='col-md-4 py-1' style={{ display: "none" }}>
+                            {/* <div className='col-md-4 py-3' style={{ display: "none" }}>
                                 <label className='text-sm font-w-500 p-2'> Country</label>
                                 <CountrySelect
                                     onChange={(e) => {
@@ -391,7 +390,7 @@ const Edit_Client_Master = () => {
                                 />
                             </div> */}
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'> State</label>
                                 <StateSelect
                                     countryid={countryid}
@@ -410,7 +409,7 @@ const Edit_Client_Master = () => {
 
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'> district</label>
                                 <CitySelect
                                     countryid={countryid}
@@ -429,7 +428,7 @@ const Edit_Client_Master = () => {
 
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'> Taluka</label>
                                 <input type='text' className='form-control' value={valueData.taluk} name='taluk' placeholder='Please enter Taluka' onChange={handleChange} />
                             </div>

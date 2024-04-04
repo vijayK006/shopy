@@ -9,14 +9,24 @@ import {
 } from "react-country-state-city/dist/cjs/index.js";
 import "react-country-state-city/dist/react-country-state-city.css";
 import axios from 'axios';
+import { AiFillPicture } from "react-icons/ai";
+
 
 const Add_Client_Master = () => {
 
     const [countryid, setCountryid] = useState(0);
     const [stateid, setstateid] = useState(0);
     const [loading, setLoading] = useState(false);
-const [getfirmnames, setGetfirmnames] = useState([])
+    const [getfirmnames, setGetfirmnames] = useState([])
     const navigate = useNavigate();
+
+    const [client_photoImg, setClient_photoimg] = useState(null);
+    const [adhaar_photoImg, setAdhaar_photoimg] = useState(null);
+    const [pan_photoImg, setPan_photoimg] = useState(null);
+    const [voter_id_photoImg, setVoter_id_photoimg] = useState(null);
+    const [license_photoImg, setLicense_photoimg] = useState(null);
+    const [ration_photoImg, setRation_photoimg] = useState(null);
+    const [other_photoImg, setOther_photoimg] = useState(null);
 
     const [alertname, setAlertname] = useState();
     const [alertprofession, setAlertprofession] = useState();
@@ -51,8 +61,8 @@ const [getfirmnames, setGetfirmnames] = useState([])
         reference: '',
         voter_id: '',
         profession: '',
-        other:'',
-        dob:'',
+        other: '',
+        dob: '',
 
 
         client_photo: null,
@@ -201,26 +211,89 @@ const [getfirmnames, setGetfirmnames] = useState([])
     };
 
 
- 
+
     useEffect(() => {
         axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
-          .then(res => {
-            const migratefirmname = res.data.map(firm=> firm.firm_name)
-            setGetfirmnames(migratefirmname)
-          })
-          .catch(err => {
-            console.error('Error fetching data:', err);
-          });
-      }, []);
-
-      const handleChange = (e) => {
-        const { name, value } = e.target;
-        setValueData({ ...valueData, [name]: value });
-        if (name === 'client_photo' || name === 'adhaar_photo'  || name === 'pan_photo'  || name === 'voter_id_photo'  || name === 'license_photo' || name === 'ration_photo' || name === 'other_photo' ) {
-            setValueData({
-                ...valueData,
-                [name]: e.target.files[0]
+            .then(res => {
+                const migratefirmname = res.data.map(firm => firm.firm_name)
+                setGetfirmnames(migratefirmname)
+            })
+            .catch(err => {
+                console.error('Error fetching data:', err);
             });
+    }, []);
+
+
+    //   const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setValueData({ ...valueData, [name]: value });
+    //     if (name === 'client_photo' || name === 'adhaar_photo'  || name === 'pan_photo'  || name === 'voter_id_photo'  || name === 'license_photo' || name === 'ration_photo' || name === 'other_photo' ) {
+    //         setValueData({
+    //             ...valueData,
+    //             [name]: e.target.files[0]
+    //         });
+    //     } else {
+    //         setValueData({
+    //             ...valueData,
+    //             [name]: value
+    //         });
+    //     }
+    // };
+
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        if (name === 'client_photo' || name === 'adhaar_photo' || name === 'pan_photo' || name === 'voter_id_photo' || name === 'license_photo' || name === 'ration_photo' || name === 'other_photo') {
+            const file = e.target.files && e.target.files[0]; // Check if e.target.files exists
+            if (file) {
+                setValueData({
+                    ...valueData,
+                    [name]: file
+                });
+
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    // Update the corresponding state variable based on the uploaded file name
+                    if (name === 'client_photo') {
+                        setClient_photoimg(reader.result);
+                    } else if (name === 'adhaar_photo') {
+                        setAdhaar_photoimg(reader.result);
+                    } else if (name === 'pan_photo') {
+                        setPan_photoimg(reader.result);
+                    } else if (name === 'voter_id_photo') {
+                        setVoter_id_photoimg(reader.result);
+                    } else if (name === 'license_photo') {
+                        setLicense_photoimg(reader.result);
+                    } else if (name === 'ration_photo') {
+                        setRation_photoimg(reader.result);
+                    } else if (name === 'other_photo') {
+                        setOther_photoimg(reader.result);
+                    }
+                };
+                reader.readAsDataURL(file);
+            } else {
+                setValueData({
+                    ...valueData,
+                    [name]: null
+                });
+
+                // Reset the corresponding image state variable to null
+                if (name === 'client_photo') {
+                    setClient_photoimg(null);
+                } else if (name === 'adhaar_photo') {
+                    setAdhaar_photoimg(null);
+                } else if (name === 'pan_photo') {
+                    setPan_photoimg(null);
+                } else if (name === 'voter_id_photo') {
+                    setVoter_id_photoimg(null);
+                } else if (name === 'license_photo') {
+                    setLicense_photoimg(null);
+                } else if (name === 'ration_photo') {
+                    setRation_photoimg(null);
+                } else if (name === 'other_photo') {
+                    setOther_photoimg(null);
+                }
+            }
         } else {
             setValueData({
                 ...valueData,
@@ -228,7 +301,6 @@ const [getfirmnames, setGetfirmnames] = useState([])
             });
         }
     };
-
 
     return (
         <>
@@ -246,72 +318,102 @@ const [getfirmnames, setGetfirmnames] = useState([])
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
                             <div className='col-md-12 pt-1 pb-4'>
-                            <div className='col-md-4'>
-                                 <label className='text-sm font-w-500 p-2'>Add Client Profile Picture</label>
-                                <input type='file' className='form-control' name='client_photo' onChange={handleChange} />
-                            </div>
-                               
+                                <div className='col-md-4'>
+                                    <label className='text-sm font-w-500 p-2'>Add Client Profile Picture</label>
+                                    <div className='img-format mb-1 main-field'>
+                                        <img src={client_photoImg} alt='' />
+                                <label for='client_photo' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
+                                    </div>
+                                    
+                                    <input type='file' className='form-control d-none' id='client_photo' name='client_photo' onChange={handleChange} />
+                                </div>
+
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Add Aadhar Card</label>
-                                <input type='file' className='form-control' name='adhaar_photo' onChange={handleChange} />
+                                <div className='img-format mb-1 main-field'>
+                                    <img src={adhaar_photoImg} alt='' />
+                                <label for='adhaar_photo' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
+                                </div>
+                                <input type='file' className='form-control d-none' id='adhaar_photo' name='adhaar_photo' onChange={handleChange} />
 
                                 <input type='text' className='form-control' value={valueData.adhaar} name='adhaar' placeholder='Please enter aadhar card number' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Add Pan Card</label>
-                                <input type='file' className='form-control' name='pan_photo' onChange={handleChange} />
+                                <div className='img-format mb-1 main-field'>
+                                    <img src={pan_photoImg} alt='' />
+                                <label for='pan_photo' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
+                                </div>
+                                <input type='file' className='form-control d-none' id='pan_photo' name='pan_photo' onChange={handleChange} />
 
                                 <input type='text' className='form-control' value={valueData.pan} name='pan' placeholder='Please enter PAN card number' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Add Voter-id</label>
-                                <input type='file' className='form-control' name='voter_id_photo' onChange={handleChange} />
+                                <div className='img-format mb-1 main-field'>
+                                    <img src={voter_id_photoImg} alt='' />
+                                <label for='voter_id_photo' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
+                                </div>
+                                <input type='file' className='form-control d-none' id='voter_id_photo' name='voter_id_photo' onChange={handleChange} />
 
                                 <input type='text' className='form-control' value={valueData.voter_id} name='voter_id' placeholder='Please enter voter-id' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500    p-2'>Add License</label>
-                                <input type='file' className='form-control' name='license_photo' onChange={handleChange} />
+                                <div className='img-format mb-1 main-field'>
+                                    <img src={license_photoImg} alt='' />
+                                <label for='license_photo' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
+                                </div>
+                                <input type='file' className='form-control d-none' id='license_photo' name='license_photo' onChange={handleChange} />
 
                                 <input type='text' className='form-control' value={valueData.license} name='license' placeholder='Please enter license number' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Add Ration Card </label>
-                                <input type='file' className='form-control' name='ration_photo' onChange={handleChange} />
+                                <div className='img-format mb-1 main-field'>
+                                    <img src={ration_photoImg} alt='' />
+                                <label for='ration_photo' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
+                                </div>
+                                <input type='file' className='form-control d-none' id='ration_photo' name='ration_photo' onChange={handleChange} />
 
                                 <input type='text' className='form-control' value={valueData.ration} name='ration' placeholder='Please enter ration card number' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Add Other Document</label>
-                                <input type='file' className='form-control' name='other_photo' onChange={handleChange} />
+                                <div className='img-format mb-1 main-field'>
+                                    <img src={other_photoImg} alt='' />
+                                <label for='other_photo' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
+                                </div>
+                                <input type='file' className='form-control d-none' id='other_photo' name='other_photo' onChange={handleChange} />
 
-                                         
+
                                 <input type='text' className='form-control' value={valueData.other} name='other' placeholder='Please enter other document' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Enter Client Name</label>
+                                
                                 <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Please enter name' onChange={handleChange} />
 
                                 <p className='warning'>{alertname}</p>
                             </div>
 
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Enter Profession</label>
                                 <input type='text' className='form-control' value={valueData.profession} name='profession' placeholder='Please enter client profession' onChange={handleChange} />
 
                                 <p className='warning'>{alertprofession}</p>
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Enter Mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.phone} name='phone' placeholder='Please enter mobile no.' onChange={handleChange} />
 
@@ -319,7 +421,7 @@ const [getfirmnames, setGetfirmnames] = useState([])
                             </div>
 
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Enter Alternate mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.alt_phone} name='alt_phone' placeholder='Please enter alternate mobile no. (Optional)' onChange={handleChange} />
                                 {/* <p className='warning'>{alertaltphone}</p> */}
@@ -327,39 +429,39 @@ const [getfirmnames, setGetfirmnames] = useState([])
 
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Enter Email ID</label>
                                 <input type='text' className='form-control' value={valueData.email} name='email' placeholder='Please enter email-id' onChange={handleChange} />
 
                                 <p className='warning'>{alertemail}</p>
                             </div>
 
-                            {/* <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Category</label>
-                                <input type='text' className='form-control' value={valueData.category} name='category' placeholder='Please enter category' onChange={handleChange} />
-                            </div> */}
-
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Select Category</label>
                                 <select className='form-control' value={valueData.category} name='category' onChange={handleChange}>
-                                <option value="">Select client category </option>
+                                    <option value="">Select client category </option>
                                     {getfirmnames.map((name, index) => (
                                         <option key={index} value={name}>{name}</option>
                                     ))}
                                 </select>
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Enter D O B</label>
                                 <input type='text' className='form-control' value={valueData.dob} name='dob' placeholder='Please enter date of birth' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
+                                <label className='text-sm font-w-500 p-2'>Enter Addreass</label>
+                                <input type='text' className='form-control' value={valueData.address} name='address' placeholder='Please enter address' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Enter Reference</label>
                                 <input type='text' className='form-control' value={valueData.reference} name='reference' placeholder='Please enter reference' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-3'>
                                 <label className='text-sm font-w-500 p-2'>Enter Pin Code</label>
                                 <input type='text' className='form-control' value={valueData.pin} name='pin' placeholder='Please enter pin code' onChange={handleChange} />
                             </div>
@@ -393,8 +495,6 @@ const [getfirmnames, setGetfirmnames] = useState([])
 
                                 />
                                 <p className='warning'>{alertstate}</p>
-
-
 
 
                                 {/* <input type='text' className='form-control' value={valueData.state} name='state' placeholder='Please enter state' onChange={handleChange} /> */}
