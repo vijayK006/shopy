@@ -39,7 +39,6 @@ const [getfirmnames, setGetfirmnames] = useState([])
         phone: '',
         alt_phone: '',
         email: '',
-        date: '',
         category: '',
         state: '',
         district: '',
@@ -76,7 +75,6 @@ const [getfirmnames, setGetfirmnames] = useState([])
         formData.append('phone', valueData.phone);
         formData.append('alt_phone', valueData.alt_phone);
         formData.append('email', valueData.email);
-        formData.append('date', valueData.date);
         formData.append('category', valueData.category);
         formData.append('state', valueData.state);
         formData.append('district', valueData.district);
@@ -353,7 +351,7 @@ const [getfirmnames, setGetfirmnames] = useState([])
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter D O B</label>
-                                <input type='date' className='form-control' value={valueData.dob} name='dob' placeholder='Please enter date of birth' onChange={handleChange} />
+                                <input type='text' className='form-control' value={valueData.dob} name='dob' placeholder='Please enter date of birth' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>

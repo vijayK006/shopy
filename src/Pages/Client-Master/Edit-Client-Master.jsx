@@ -9,6 +9,8 @@ import {
 } from "react-country-state-city/dist/cjs/index.js";
 import "react-country-state-city/dist/react-country-state-city.css";
 import axios from 'axios';
+import { AiFillPicture } from "react-icons/ai";
+
 
 const Edit_Client_Master = () => {
     const { id } = useParams();
@@ -33,7 +35,6 @@ const Edit_Client_Master = () => {
         phone: '',
         alt_phone: '',
         email: '',
-        date: '',
         category: '',
         state: '',
         district: '',
@@ -71,7 +72,6 @@ const Edit_Client_Master = () => {
                     phone: firmData.phone,
                     alt_phone: firmData.alt_phone,
                     email: firmData.email,
-                    dob: firmData.dob,
                     category: firmData.category,
                     state: firmData.state,
                     district: firmData.district,
@@ -112,7 +112,6 @@ const Edit_Client_Master = () => {
         formData.append('phone', valueData.phone);
         formData.append('alt_phone', valueData.alt_phone);
         formData.append('email', valueData.email);
-        formData.append('date', valueData.date);
         formData.append('category', valueData.category);
         formData.append('state', valueData.state);
         formData.append('district', valueData.district);
@@ -237,84 +236,85 @@ const Edit_Client_Master = () => {
                     <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 pt-1 pb-4 main-field '>
                                 <label className='text-sm font-w-500 p-2'>Client Profile Picture</label>
                                 <div className='img-format'>
                                     <img id="client_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.client_photo}`} alt='' />
                                 </div>
-                                <input type='file' className='form-control' name='client_photo' onChange={handleChange} />
-                            </div>
-                            <div className='col-md-4 py-1' />
-                            <div className='col-md-4 py-1' />
 
-                            <div className='col-md-4 py-1'>
+                                <label for='client_photo' className='actionbutton'><AiFillPicture className='icon'/> Edit Picture</label>
+<p className='px-2 pt-1'>Client Full Name </p>
+                                <input type='file' className='form-control mt-1 d-none' id='client_photo' name='client_photo' onChange={handleChange} />
+                            </div>
+                            <div className='col-md-4 pt-1 pb-4' />
+                            <div className='col-md-4 pt-1 pb-4' />
+
+                            <div className='col-md-4 py-1 main-field'>
                                 <label className='text-sm font-w-500 p-2'>Aadhar Card</label>
                                 <div className='img-format'>
                                     <img id="adhaar_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.adhaar_photo}`} alt='' />
                                 </div>
 
-                                <div className='row'>
-                                    <div className="col-md-3">
-                                        <label for='adhaar_photo'>Edit</label>
-                                        <input type='file' className='form-control' id='adhaar_photo' name='adhaar_photo' onChange={handleChange} style={{display:"none"}} />
-                                    </div>
+                                <label for='adhaar_photo' className='actionbutton'><AiFillPicture className='icon'/> Edit Picture</label>
+                                <input type='file' className='form-control d-none' id='adhaar_photo' name='adhaar_photo' onChange={handleChange}  />
 
-                                    <div className="col-md-9">
-                                        <input type='text' className='form-control' value={valueData.adhaar} name='adhaar' placeholder='Please enter aadhar card number' onChange={handleChange} />
-                                    </div>
-                                </div>
-
+                                <input type='text' className='form-control mt-1' value={valueData.adhaar} name='adhaar' placeholder='Please enter aadhar card number' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-1 main-field'>
                                 <label className='text-sm font-w-500 p-2'>Pan Card</label>
                                 <div className='img-format'>
                                     <img id="pan_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.pan_photo}`} alt='' />
                                 </div>
-                                <input type='file' className='form-control' name='pan_photo' onChange={handleChange} />
+                                <label for='pan_photo' className='actionbutton'><AiFillPicture className='icon'/> Edit Picture</label>
 
-                                <input type='text' className='form-control' value={valueData.pan} name='pan' placeholder='Please enter PAN card number' onChange={handleChange} />
+                                <input type='file' className='form-control d-none' id='pan_photo' name='pan_photo' onChange={handleChange} />
+                                <input type='text' className='form-control mt-1' value={valueData.pan} name='pan' placeholder='Please enter PAN card number' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-1 main-field'>
                                 <label className='text-sm font-w-500 p-2'>Voter-id</label>
                                 <div className='img-format'>
                                     <img id="voter_id_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.voter_id_photo}`} alt='' />
                                 </div>
-                                <input type='file' className='form-control' name='voter_id_photo' onChange={handleChange} />
+                                <label for='voter_id_photo' className='actionbutton'><AiFillPicture className='icon'/> Edit Picture</label>
+                                <input type='file' className='form-control d-none' id='voter_id_photo' name='voter_id_photo' onChange={handleChange} />
 
-                                <input type='text' className='form-control' value={valueData.voter_id} name='voter_id' placeholder='Please enter voter-id' onChange={handleChange} />
+                                <input type='text' className='form-control mt-1' value={valueData.voter_id} name='voter_id' placeholder='Please enter voter-id' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500    p-2'>License</label>
+                            <div className='col-md-4 py-1 main-field'>
+                                <label className='text-sm font-w-500 p-2'>License</label>
                                 <div className='img-format'>
                                     <img id="license_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.license_photo}`} alt='' />
                                 </div>
-                                <input type='file' className='form-control' name='license_photo' onChange={handleChange} />
+                                <label for='license_photo' className='actionbutton'><AiFillPicture className='icon'/> Edit Picture</label>
 
-                                <input type='text' className='form-control' value={valueData.license} name='license' placeholder='Please enter license number' onChange={handleChange} />
+                                <input type='file' className='form-control d-none' id='license_photo' name='license_photo' onChange={handleChange} />
+                                <input type='text' className='form-control mt-1' value={valueData.license} name='license' placeholder='Please enter license number' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-1 main-field'>
                                 <label className='text-sm font-w-500 p-2'>Ration Card </label>
                                 <div className='img-format'>
                                     <img id="ration_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.ration_photo}`} alt='' />
                                 </div>
-                                <input type='file' className='form-control' name='ration_photo' onChange={handleChange} />
+                                <label for='ration_photo' className='actionbutton'><AiFillPicture className='icon'/> Edit Picture</label>
+                                <input type='file' className='form-control d-none' id='ration_photo' name='ration_photo' onChange={handleChange} />
 
-                                <input type='text' className='form-control' value={valueData.ration} name='ration' placeholder='Please enter ration card number' onChange={handleChange} />
+                                <input type='text' className='form-control mt-1' value={valueData.ration} name='ration' placeholder='Please enter ration card number' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-1 main-field'>
                                 <label className='text-sm font-w-500 p-2'>Other Document</label>
                                 <div className='img-format'>
                                     <img id="other_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.other_photo}`} alt='' />
                                 </div>
-                                <input type='file' className='form-control' name='other_photo' onChange={handleChange} />
+                                <label for='other_photo' className='actionbutton'><AiFillPicture className='icon'/> Edit Picture</label>
+                                <input type='file' className='form-control d-none' id='other_photo' name='other_photo' onChange={handleChange} />
 
 
-                                <input type='text' className='form-control' value={valueData.other} name='other' placeholder='Please enter other document' onChange={handleChange} />
+                                <input type='text' className='form-control mt-1' value={valueData.other} name='other' placeholder='Please enter other document' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-4 py-1'>
