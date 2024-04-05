@@ -23,7 +23,7 @@ const AddCreadentials = ({ cardtitle, icon: Icon, iconColor, borderRcolor, cardb
 
     return (
         <>
-            <div className='col-md-4 pt-md-1 pb-md-1 pt-2 pb-2'>
+            <div className='col-md-3 pt-md-1 pb-md-1 pt-2 pb-2'>
             <Link to={pageLink}>
                 <div className='admin-card' style={{ admincardbordercolor }}>
                     <div className='details'>

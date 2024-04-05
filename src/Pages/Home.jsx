@@ -92,7 +92,7 @@ const Home = () => {
        >
        </Admincards>
         
-       <Admincards cardtitle="Expenses Master" 
+       <Admincards cardtitle="Expenses" 
        icon={MdOutlineSettingsInputComponent} 
        iconColor='#ff4c00' 
        cardbg='#ff4c00' 
