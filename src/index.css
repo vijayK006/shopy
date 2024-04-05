@@ -542,3 +542,12 @@ transform: scale(1);
     .submenu li{
         font-size:13px;
     }
+
+    .border-r-10{
+        border-radius: 10px !important;
+    }
+
+    
+    .border-r-5{
+        border-radius: 5px !important;
+    }

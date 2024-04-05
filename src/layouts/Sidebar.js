@@ -1,8 +1,7 @@
 import React from 'react';
 import {BiHomeAlt2, BiCategory} from 'react-icons/bi';
-import {BsDatabaseAdd} from 'react-icons/bs';
 import { NavLink } from 'react-router-dom';
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { GrUserManager } from "react-icons/gr";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineSettingsInputComponent } from "react-icons/md";
@@ -64,9 +63,8 @@ const Sidebar = () => {
         <li className='items dropmenu' onClick={()=> toggleDropdown('dropitems1')} id='dropitems1'>
         <MdOutlineSettingsInputComponent  className="icons"/> <span className='resp'>Expense Master <IoIosArrowDown/></span> 
         <ul className='submenu'>
-        <li>Add Expenses</li>
-        <li>Expenses Manager</li>
-        <li>Employee Manager</li>
+        <NavLink className="disble-decoration" to="/add-expenses-master"><li><IoIosArrowForward/>  &nbsp;&nbsp; Add Expenses</li></NavLink> 
+        <NavLink className="disble-decoration" to="/expenses-master"><li><IoIosArrowForward/> &nbsp;&nbsp;  Expenses Manager</li></NavLink>
         </ul>
         </li>
         </NavLink>

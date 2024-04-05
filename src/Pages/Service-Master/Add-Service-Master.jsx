@@ -86,15 +86,13 @@ const Add_Service_Master = () => {
             <div className='main-content' id='mainbody'>
 
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/firm-master'>Firm Master</Link> / <Link className='t-theme-color'>Add Firm Master Details</Link></p>
+                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/service-master'>Service Master</Link> / <Link className='t-theme-color'>Add Service Master Details</Link></p>
 
                 </div>
 
                 <div className='container-fluid mb-5'>
                     <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
-
-
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Enter Service Code</label>
