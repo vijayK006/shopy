@@ -65,14 +65,14 @@ p{
   }
 
   .css-qvtrhg-MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb , .css-1pzb349::-webkit-scrollbar{
-    background: #cfe9ff ; /* Color of the scrollbar handle */
+    background: #ff5f1a44 ; /* Color of the scrollbar handle */
     border-radius: 6px; /* Rounded corners */
   }
 
 
 
   .css-qvtrhg-MuiDataGrid-virtualScroller::-webkit-scrollbar-thumb:hover , .css-1pzb349::-webkit-scrollbar{
-    background:#028dff  !important; /* Darker color on hover */
+    background:#ff5e1a  !important; /* Darker color on hover */
   }
 /* -------------- */
 
@@ -213,11 +213,9 @@ p{
   }
   
   .opensubmenu{
-      height: 150px;
+      height: 100px;
   
   }
-  
-  
   
   .logo Img{
       height: auto;

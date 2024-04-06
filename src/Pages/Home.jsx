@@ -15,7 +15,8 @@ const Home = () => {
   const [firmmastercount, setFirmmasterCount] = useState([]);
   const [clientmastercount, setClientmastercount] = useState([]);
   const [servicemastercount, setServicemastercount] = useState([]);
-
+  const [expensemastercount, setExpensemastercount] = useState([]);
+  
   
 
   useEffect(() => {
@@ -42,6 +43,16 @@ const Home = () => {
     axios.get('https://shopee-firm.000webhostapp.com/api/service/get-service.php')
       .then(res => {
         setServicemastercount(res.data.length)
+      })
+      .catch(err => {
+        console.error('Error fetching data:', err);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios.get('https://shopee-firm.000webhostapp.com/api/expense/get-expense.php')
+      .then(res => {
+        setExpensemastercount(res.data.length)
       })
       .catch(err => {
         console.error('Error fetching data:', err);
@@ -98,8 +109,8 @@ const Home = () => {
        cardbg='#ff4c00' 
        borderRcolor='3px solid #ff3e57'
        circlebg='white'
-       datacount='0'
-
+       datacount={expensemastercount}
+       pageLink = '/expenses-master'
        >
        </Admincards>
 

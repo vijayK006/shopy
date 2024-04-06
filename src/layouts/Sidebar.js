@@ -69,6 +69,9 @@ const Sidebar = () => {
         </li>
         </NavLink>
 
+        <NavLink className="disble-decoration " to=""><li className='items'><IoSettingsOutline  className="icons"/> <span className='resp'>Employee Manager</span></li></NavLink>
+
+
     </ul>
 </div>
         </div>

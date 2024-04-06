@@ -55,7 +55,7 @@ const Add_Expenses_Master = () => {
             <div className='main-content' id='mainbody'>
 
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/service-master'>Service Master</Link> / <Link className='t-theme-color'>Add Service Master Details</Link></p>
+                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/expenses-master'>Expense Master</Link> / <Link className='t-theme-color'>Add Expense Master Details</Link></p>
 
                 </div>
 
@@ -64,15 +64,15 @@ const Add_Expenses_Master = () => {
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
                         <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Expencses Name</label>
-                                <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Enter expencses name' onChange={handleChange} />
+                                <label className='text-sm font-w-500 p-2'>Enter Expenses Name</label>
+                                <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Enter expenses name' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertname}</p> */}
                             </div>
 
                             <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Expencses Description</label>
-                                <input type='text' className='form-control' value={valueData.description} name='description' placeholder='Enter expencses description' onChange={handleChange} />
+                                <label className='text-sm font-w-500 p-2'>Enter Expenses Description</label>
+                                <input type='text' className='form-control' value={valueData.description} name='description' placeholder='Enter expenses description' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertemail}</p> */}
                             </div>
