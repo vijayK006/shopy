@@ -26,6 +26,8 @@ const Expense_Master = () => {
       <div className='main-content' id='mainbody'>
         <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
           <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='' className='t-theme-color'>Expense Master</Link> </p>
+
+          <Link to='/add-expenses-master' className='btn btn-bg-orange btn-sm b-radius-50'>Add Expense Master</Link>
         </div>
 
         <div className='container-fluid pt-5'>

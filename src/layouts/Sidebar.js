@@ -80,16 +80,8 @@ const Sidebar = () => {
         <NavLink className="disble-decoration" to="/client-master"><li className={`items ${currentPage === '/client-master' && 'active'}`}><GrUserManager className="icons"/> <span className='resp'>Client Master</span></li></NavLink>
 
         <NavLink className="disble-decoration " to="/service-master"><li className={`items ${currentPage === '/service-master' && 'active'}`}><IoSettingsOutline  className="icons"/> <span className='resp'>Service Master</span></li></NavLink>
-    
-        <NavLink className="disble-decoration" to="" >
-        <li className='items dropmenu' onClick={()=> toggleDropdown('dropitems1')} id='dropitems1'>
-        <MdOutlineSettingsInputComponent  className="icons"/> <span className='resp'>Expense Master <IoIosArrowDown/></span> 
-        <ul className='submenu'>
-        <NavLink className="disble-decoration" to="/add-expenses-master"><li><IoIosArrowForward/>  &nbsp;&nbsp; Add Expenses</li></NavLink> 
-        <NavLink className="disble-decoration" to="/expenses-master"><li><IoIosArrowForward/> &nbsp;&nbsp;  Expenses Manager</li></NavLink>
-        </ul>
-        </li>
-        </NavLink>
+
+        <NavLink className="disble-decoration " to="/expenses-master"><li className={`items ${currentPage === '/expenses-master' && 'active'}`}><IoSettingsOutline  className="icons"/> <span className='resp'>Expenses Master</span></li></NavLink>
 
         <NavLink className="disble-decoration " to="/employe-manager"><li className={`items ${currentPage === '/employe-manager' && 'active'}`}><MdOutlineWorkHistory  className="icons"/> <span className='resp'>Employee Manager</span></li></NavLink>
 
