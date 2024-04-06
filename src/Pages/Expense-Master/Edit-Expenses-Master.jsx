@@ -66,6 +66,7 @@ console.log(`delete id is ${deleteid}`)
         if (confirmDelete) {
             axios.post(`https://shopee-firm.000webhostapp.com/api/expense/delete-by-id-expense.php?id=${deleteid}`)
                 .then(res => {
+                    navigate('/expenses-master')
                    console.log('deleted successfully')
                 })
                 .catch(err => {

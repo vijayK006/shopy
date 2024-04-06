@@ -166,7 +166,7 @@ p{
       margin: 5px 5px;
   }
   
-  .items.active {
+.active {
       background-color: white;
       color: #000000;
     }
