@@ -69,7 +69,7 @@ const Sidebar = () => {
         </li>
         </NavLink>
 
-        <NavLink className="disble-decoration " to=""><li className='items'><IoSettingsOutline  className="icons"/> <span className='resp'>Employee Manager</span></li></NavLink>
+        <NavLink className="disble-decoration " to="/employe-manager"><li className='items'><IoSettingsOutline  className="icons"/> <span className='resp'>Employee Manager</span></li></NavLink>
 
 
     </ul>

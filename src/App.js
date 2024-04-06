@@ -22,6 +22,12 @@ import Expense_Master from './Pages/Expense-Master/Expense-Master';
 import Edit_Expenese_Master from './Pages/Expense-Master/Edit-Expenses-Master';
 import Add_Expenses_Master from './Pages/Expense-Master/Add-Expenses-Master';
 
+// Employee Manager
+import EmployeManager from './Pages/Employee-Manager/Employe-manager';
+import Add_Employe from './Pages/Employee-Manager/Add-Employee';
+import Edit_employe from './Pages/Employee-Manager/Edit-Employee';
+
+
 const App = () => {
   return (
     <>
@@ -48,6 +54,13 @@ const App = () => {
           <Route path="/expenses-master" element={<Expense_Master />} />
           <Route path="/add-expenses-master" element={<Add_Expenses_Master />} />
           <Route path="/edit-expenses-master/:id" element={<Edit_Expenese_Master />} />
+
+
+          {/* Employee Manager */}
+          <Route path="/employe-manager" element={<EmployeManager />} />
+          <Route path="/add-employee" element={<Add_Employe />} />
+          <Route path="/edit-employee/:id" element={<Edit_employe />} />
+
 
         </Routes>
       </BrowserRouter>
