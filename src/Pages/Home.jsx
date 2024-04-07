@@ -16,8 +16,8 @@ const Home = () => {
   const [clientmastercount, setClientmastercount] = useState([]);
   const [servicemastercount, setServicemastercount] = useState([]);
   const [expensemastercount, setExpensemastercount] = useState([]);
-  
-  
+
+
 
   useEffect(() => {
     axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
@@ -58,67 +58,67 @@ const Home = () => {
         console.error('Error fetching data:', err);
       });
   }, []);
-  
+
   return (
     <>
 
-<Topbar/>
-    <Sidebar/>
+      <Topbar />
+      <Sidebar />
 
-<div className='main-content' id='mainbody'>
-<div className="container-fluid mt-3">
+      <div className='main-content' id='mainbody'>
+        <div className="container-fluid mt-3">
 
-<div className='row'>
+          <div className='row'>
 
-<Admincards cardtitle="Firm Master" 
-       icon={PiCreditCard} 
-       iconColor='#ff3e57' 
-       cardbg='#ff3e57' 
-       borderRcolor='3px solid #ff3e57'
-       circlebg='white'
-       datacount={firmmastercount}
-       pageLink = '/firm-master'
-       >
-       </Admincards>
-        
-       <Admincards cardtitle="Client Master" 
-       icon={GoPerson} 
-       iconColor='#00cebe' 
-       cardbg='#00cebe' 
-       borderRcolor='3px solid #00cebe'
-       circlebg='white'
-       datacount={clientmastercount}
-       pageLink = '/client-master'
-       >
-       </Admincards>
-       
-       <Admincards cardtitle="Service Master" 
-       icon={IoSettingsOutline} 
-       iconColor='#f927a8' 
-       cardbg='#f927a8' 
-       borderRcolor='3px solid #ff3e57'
-       circlebg='white'
-       datacount={servicemastercount}
-       pageLink = '/service-master'
-       >
-       </Admincards>
-        
-       <Admincards cardtitle="Expenses" 
-       icon={MdOutlineSettingsInputComponent} 
-       iconColor='#ff4c00' 
-       cardbg='#ff4c00' 
-       borderRcolor='3px solid #ff3e57'
-       circlebg='white'
-       datacount={expensemastercount}
-       pageLink = '/expenses-master'
-       >
-       </Admincards>
+            <Admincards cardtitle="Firm Master"
+              icon={PiCreditCard}
+              iconColor='#ff3e57'
+              cardbg='#ff3e57'
+              borderRcolor='3px solid #ff3e57'
+              circlebg='white'
+              datacount={firmmastercount}
+              pageLink='/firm-master'
+            >
+            </Admincards>
 
-</div>
+            <Admincards cardtitle="Client Master"
+              icon={GoPerson}
+              iconColor='#00cebe'
+              cardbg='#00cebe'
+              borderRcolor='3px solid #00cebe'
+              circlebg='white'
+              datacount={clientmastercount}
+              pageLink='/client-master'
+            >
+            </Admincards>
 
-</div>
+            <Admincards cardtitle="Service Master"
+              icon={IoSettingsOutline}
+              iconColor='#f927a8'
+              cardbg='#f927a8'
+              borderRcolor='3px solid #ff3e57'
+              circlebg='white'
+              datacount={servicemastercount}
+              pageLink='/service-master'
+            >
+            </Admincards>
+
+            <Admincards cardtitle="Expenses"
+              icon={MdOutlineSettingsInputComponent}
+              iconColor='#ff4c00'
+              cardbg='#ff4c00'
+              borderRcolor='3px solid #ff3e57'
+              circlebg='white'
+              datacount={expensemastercount}
+              pageLink='/expenses-master'
+            >
+            </Admincards>
+
+          </div>
 
         </div>
+
+      </div>
 
 
     </>
