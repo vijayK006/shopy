@@ -58,7 +58,7 @@ const EmployeManager = () => {
       { field: 'phone', headerName: 'Mobile No.', width: 200 },
       { field: 'email', headerName: 'Email', width: 150 },
       { field: 'address', headerName: 'Address', width: 200 },
-      { field: 'dob', headerName: 'Date of Birth', width: 200 },
+      // { field: 'dob', headerName: 'Date of Birth', width: 200 },
     //   {   field: 'age', headerName: 'Age', type: 'number', width: 90,},
       {
         field: 'actions', // Adding a new field for actions

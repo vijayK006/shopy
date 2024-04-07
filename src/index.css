@@ -6,7 +6,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     /* background-color: #eef2f6ef; */
-    background-color: #ff4c000f;
+    background-color: #ff5f1a05;
 }
 
 code {
@@ -122,7 +122,7 @@ input:focus {
     padding: 10px 80px;
     z-index: 111;
     background-color: white;
-    box-shadow: 0px 2px 20px 0px #00000036;
+    border-bottom: 1px solid #dee2e6;
 }
 
 
@@ -134,6 +134,7 @@ input:focus {
     bottom: 0px;
     background-color: white;
     transition: all 0.2s ease-in-out;
+    box-shadow: 3px -2px 14px 0px #2125291a;
 }
 
 .sidetoggle {
@@ -170,7 +171,7 @@ input:focus {
 .items {
     color: black;
     background-color: #fff;
-    margin: 5px 5px;
+    margin: 8px 0px 8px 8px;
     transition: all 0.3s ease-in-out;
     font-size: 14px;
 }
@@ -181,15 +182,14 @@ color: black;
 
 .items:hover {
     color: #ff5e1a;
-    background-color: #ff5f1a48;
-    margin: 5px 5px;
-    border-radius: 1px 50px 50px 1px;
+    background-color: #ff5f1a11;
+    border-radius: 50px 1px 1px 50px;
 }
 
 .active {
-    background-color: #ff5f1a48;
-    color: #ff5e1a !important;
-    border-radius: 1px 50px 50px 1px;
+    background-color: #ff5f1a48 !important;
+    color: #ff5e1a ;
+    border-radius: 50px 1px 1px 50px;
     box-shadow: 0px 0px 20px 0px #21252914;
 }
 
@@ -241,7 +241,6 @@ color: #ff5e1a;
 
 .opensubmenu {
     height: 100px;
-
 }
 
 .logo Img {
@@ -367,8 +366,11 @@ a {
     margin: 0px;
     font-family: 'Rubik', sans-serif;
     z-index: 1;
-    color: black;
+    color: #7a7a7a;
+    letter-spacing: 1px;
     transition: all 0.3s ease-in-out;
+    font-size: 16px;
+    padding-bottom: 10px;
 }
 
 .admin-card:hover h5 {
@@ -377,7 +379,7 @@ a {
 }
 
 .admin-card .icons {
-    font-size: 40px;
+    font-size: 60px;
     /* color: #ff3e57; */
     z-index: 1;
     transition: all 0.3s ease-in-out;
@@ -489,9 +491,6 @@ a {
 }
 
 
-.admin-headline {}
-
-.admin-headline h5 {}
 
 .admin-inputfield input {
     border-radius: 10px;
@@ -575,5 +574,30 @@ a {
     border-radius: 5px !important;
 }
 
+.details h2{
+    font-size: 35px;
+}
 
+.file-data{
+    font-size: 10px;
+    
+    background-color: rgb(36, 36, 36);
+    color: white;
+    line-height: 3.5;
+    padding: 0px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
 
+.file-data-outline{
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border:1px solid  rgb(36, 36, 36);
+    color: black;
+    line-height: 3.5;
+    padding: 0px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}

@@ -60,7 +60,7 @@ const Servicemaster = () => {
         { field: 'code', headerName: 'Service Code', width: 200 },
         { field: 'name', headerName: 'Service Name', width: 200 },
         { field: 'amount', headerName: 'Amount', width: 150 },
-        // { field: 'expencse', headerName: 'Service Expencses', width: 200 },
+        { field: 'expencse', headerName: 'Service Expencses', width: 200 },
         // { field: 'document', headerName: 'Required Documents', width: 200 },
         //   {   field: 'age', headerName: 'Age', type: 'number', width: 90,},
           {

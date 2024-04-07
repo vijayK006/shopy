@@ -58,7 +58,7 @@ const Clientmaster = () => {
     const columns = [
       { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
       { field: 'clientname', headerName: 'Client Name', width: 150 },
-      { field: 'profession', headerName: 'Profession', width: 150 },
+      // { field: 'profession', headerName: 'Profession', width: 150 },
       { field: 'category', headerName: 'Category', width: 150 },
       { field: 'phone', headerName: 'Phone Number', width: 150 },
       { field: 'email', headerName: 'Email id', width: 200 },

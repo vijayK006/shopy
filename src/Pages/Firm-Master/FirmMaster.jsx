@@ -71,7 +71,7 @@ const FirmMaster = () => {
       { field: 'ownername', headerName: 'Owner Name', width: 200 },
       { field: 'mobileno', headerName: 'Mobile No.', width: 150 },
       { field: 'businesstype', headerName: 'Business Type', width: 200 },
-      { field: 'businesscategory', headerName: 'Business Category', width: 200 },
+      // { field: 'businesscategory', headerName: 'Business Category', width: 200 },
     //   {   field: 'age', headerName: 'Age', type: 'number', width: 90,},
       {
         field: 'actions', // Adding a new field for actions
