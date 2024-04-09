@@ -27,6 +27,10 @@ import EmployeManager from './Pages/Employee-Manager/Employe-manager';
 import Add_Employe from './Pages/Employee-Manager/Add-Employee';
 import Edit_employe from './Pages/Employee-Manager/Edit-Employee';
 
+// Target Master
+import TargetMaster from './Pages/Target-Master/TargetMaster';
+import Add_Target_Master from './Pages/Target-Master/Add-Target-Master';
+import Edit_Target_Master from './Pages/Target-Master/Edit-Target-Master';
 
 const App = () => {
   return (
@@ -60,6 +64,11 @@ const App = () => {
           <Route path="/employe-manager" element={<EmployeManager />} />
           <Route path="/add-employee" element={<Add_Employe />} />
           <Route path="/edit-employee/:id" element={<Edit_employe />} />
+
+          {/* Target Master */}
+          <Route path="/target-master" element={<TargetMaster />} />
+          <Route path="/add-target-master" element={<Add_Target_Master />} />
+          <Route path="/edit-target-master/:id" element={<Edit_Target_Master />} />
 
 
         </Routes>

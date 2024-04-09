@@ -44,6 +44,8 @@ const Sidebar = () => {
 
             <NavLink className="disble-decoration" to="/employe-manager"><li className={`items ${currentPage === '/employe-manager' || currentPage === '/add-employee' || currentPage.startsWith('/edit-employee') ? 'active' : ''}`}><MdOutlineWorkHistory className="icons" /> <span className='resp'>Employee Manager</span></li></NavLink>
 
+            <NavLink className="disble-decoration" to="/target-master"><li className={`items ${currentPage === '/target-master' ? 'active' : ''}`}><MdOutlineWorkHistory className="icons" /> <span className='resp'>Target Master</span></li></NavLink>
+
           </ul>
         </div>
       </div>

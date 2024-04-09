@@ -319,8 +319,6 @@ const Edit_employe = () => {
 
                         </div>
 
-
-
                     </form>
 
                 </div>
