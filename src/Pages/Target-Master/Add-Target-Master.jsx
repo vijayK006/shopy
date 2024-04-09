@@ -1,258 +1,154 @@
-import React, { useEffect, useState } from 'react'
-import Topbar from '../../layouts/Topbar'
-import Sidebar from '../../layouts/Sidebar'
-import { Link, useNavigate } from 'react-router-dom'
-
+import React, { useEffect, useState } from 'react';
+import Topbar from '../../layouts/Topbar';
+import Sidebar from '../../layouts/Sidebar';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Add_Target_Master = () => {
-
     const navigate = useNavigate();
 
-    const [getempoloyenames, setGetempoloyenames] = useState([])
-    const [getservicenames, setGetservicenames] = useState([])
-    const [getserviceamount, setGetserviceamount] = useState([])
-    
+    const [getempoloyenames, setGetempoloyenames] = useState([]);
+    const [getservicenames, setGetservicenames] = useState([]);
+    const [serviceAmount, setServiceAmount] = useState();
+ 
+    useEffect(() => {
+                axios.get('https://shopee-firm.000webhostapp.com/api/employee/get-employee.php')
+                    .then(res => {
+                        const migrateemploye = res.data.map(employee => employee.name)
+                        setGetempoloyenames(migrateemploye)
+                    })
+                    .catch(err => {
+                        console.error('Error fetching data:', err);
+                    });
+            }, []);
+
+
     useEffect(() => {
         axios.get('https://shopee-firm.000webhostapp.com/api/service/get-service.php')
             .then(res => {
-                const migrateservice = res.data.map(service => service.name)
-                setGetservicenames(migrateservice)
+                const migrateservice = res.data.map(service => ({
+                    id: service.id,
+                    name: service.name,
+                    amount: service.amount
+                }));
+                setGetservicenames(migrateservice);
             })
             .catch(err => {
                 console.error('Error fetching data:', err);
             });
     }, []);
 
-    const [formData, setFormData] = useState({
-        employee_id: [''],
-        service_id: [''],
-        no_of_orders: [''],
-        total_amount: [''],
-        date: [''],
-        service_amount: []
+    const [valueData, setValueData] = useState({
+        employee_id: '',
+        service_id: '',
+        no_of_orders: '',
+        total_amount: '',
+        date: '',
     });
 
 
-    // const handleAddFields = () => {
-    //     setFormData({
-    //         ...formData,
-    //         employee_id: [...formData.employee_id, ''],
-    //         service_id: [...formData.service_id, ''],
-    //         no_of_orders: [...formData.no_of_orders, ''],
-    //         total_amount: [...formData.total_amount, ''],
-    //         date: [...formData.date, '']
-    //     });
-    // };
-    
-    //1
-    const handleAddFields = async () => {
-        try {
-            const response = await axios.get('https://shopee-firm.000webhostapp.com/api/service/get-service.php');
-            const migrateservice = response.data;
-            
-            // Extract service names and amounts
-            const serviceNames = migrateservice.map(service => service.name);
-            const serviceAmounts = migrateservice.map(service => service.amount);
-            
-            // Check if the service names fetched from the API already exist in the state
-            const newServiceNames = serviceNames.filter(name => !getservicenames.includes(name));
-            
-            // Add new fields with initial values
-            setFormData(prevState => ({
-                ...prevState,
-                employee_id: [...prevState.employee_id, ''],
-                service_id: [...prevState.service_id, ''],
-                no_of_orders: [...prevState.no_of_orders, ''], // Initialize no_of_orders with an empty string
-                total_amount: [...prevState.total_amount, ''],
-                date: [...prevState.date, '']
-            }));
-            
-            // Store unique service names and amounts in state
-            setGetservicenames(prevState => [...prevState, ...newServiceNames]);
-            setGetserviceamount(prevState => [...prevState, ...serviceAmounts]);
-        } catch (error) {
-            console.error('Error fetching service data:', error);
-        }
-    };
-    
-
-    // const handleChange = (index, e) => {
-    //     const { name, value } = e.target;
-    //     const newFormData = { ...formData };
-    //     newFormData[name][index] = value;
-    //     setFormData(newFormData);
-    // };
-    
-    //1
-    const handleChange = async (index, e) => {
-        const { name, value } = e.target;
-        const newFormData = { ...formData };
-        newFormData[name][index] = value;
-        setFormData(newFormData);
-    
-        // Fetch service amount when service name is selected
-        if (name === 'service_id') {
-            try {
-                const response = await axios.get(`https://shopee-firm.000webhostapp.com/api/service/get-service.php?name=${value}`);
-                if (response.data && response.data.length > 0) {
-                    const serviceAmount = response.data[0].amount;
-                    newFormData.total_amount[index] = Number(serviceAmount) * Number(newFormData.no_of_orders[index]);
-                    newFormData.service_amount[index] = serviceAmount; // Store service amount with the respective service
-                    setFormData(newFormData);
-                } else {
-                    console.error('Error: No data returned from the service API');
-                }
-            } catch (error) {
-                console.error('Error fetching service amount:', error);
-            }
-        }
-    
-        // Calculate total amount when number of orders is changed
-        if (name === 'no_of_orders') {
-            const serviceAmount = newFormData.service_amount[index]; // Retrieve service amount associated with the service
-            if (serviceAmount !== undefined) {
-                newFormData.total_amount[index] = Number(value) * Number(serviceAmount);
-                setFormData(newFormData);
-            } else {
-                console.error('Error: Service amount is undefined');
-            }
-        }
-    };
-    
-    
-
-    const handleRemoveFields = (index) => {
-        const newFormData = { ...formData };
-        Object.keys(newFormData).forEach((key) => {
-            newFormData[key].splice(index, 1);
-        });
-        setFormData(newFormData);
-    };
-
-
+  
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // setLoading(true);
 
-        const formDatas = new FormData();
-        formData.employee_id.forEach(id => formDatas.append('employee_id[]', id));
-        formData.service_id.forEach(id => formDatas.append('service_id[]', id));
-        formData.no_of_orders.forEach(order => formDatas.append('no_of_orders[]', order));
-        formData.total_amount.forEach(amount => formDatas.append('total_amount[]', amount));
-        formData.date.forEach(date => formDatas.append('date[]', date));
+        const formData = new FormData();
+        const totalcal = valueData.no_of_orders * serviceAmount;
 
-        axios.post('https://shopee-firm.000webhostapp.com/api/target/add-target.php', formDatas, {
+        formData.append('employee_id', valueData.employee_id);
+        formData.append('service_id', valueData.service_id);
+        formData.append('no_of_orders', valueData.no_of_orders);
+        formData.append('total_amount', totalcal);
+        formData.append('date', valueData.date);
+
+
+        axios.post('https://shopee-firm.000webhostapp.com/api/target/add-target.php', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
             .then(res => {
-                console.log('Target master uploaded Successfully')
-                // navigate('/expenses-master')
+                navigate('/target-master')
+                console.log('Target Submitted Successfully')
             })
             .catch(err => console.log(err));
     };
 
-    useEffect(() => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/employee/get-employee.php')
-            .then(res => {
-                const migrateemploye = res.data.map(employee => employee.name)
-                setGetempoloyenames(migrateemploye)
-            })
-            .catch(err => {
-                console.error('Error fetching data:', err);
-            });
-    }, []);
 
-   
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setValueData({ ...valueData, [name]: value });
+
+        if (name === 'service_id') {
+            const selectedService = getservicenames.find(service => service.name === value);
+            if (selectedService) {
+                setServiceAmount(selectedService.amount);
+            }
+        }
+    };
+
 
     return (
         <>
             <Topbar />
             <Sidebar />
             <div className='main-content' id='mainbody'>
-
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/target-master' >Target Master</Link> / <Link to='' className='t-theme-color'>Add Target Master</Link></p>
-
+                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/target-master'>Target Master</Link> / <Link className='t-theme-color'>Add Target Master Details</Link></p>
                 </div>
 
                 <div className='container-fluid mb-5'>
-                    {formData.employee_id.map((_, index) => (
-                        <div key={index}>
+                    <form onSubmit={handleSubmit}>
+                        <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
-                            <input
-                                type="date"
-                                name="date"
-                                value={formData.date[index]}
-                                onChange={(e) => handleChange(index, e)}
-                            />
+                        <div className='col-md-4 py-1'>
+                                 <label className='text-sm font-w-500 p-2'>Add Employee</label>
+                                 <select className='form-control' value={valueData.employee_id} name='employee_id' onChange={handleChange}>
+                                     <option value="">Select Employee</option>
+                                     {getempoloyenames.map((name, index) => (
+                                         <option key={index} value={name}>{name}</option>
+                                     ))}
+                                 </select>
+                                 {/* <p className='warning'>{alertowner}</p> */}
+                             </div>
 
-                            {/* <input
-                        type="text"
-                        name="employee_id"
-                        value={formData.employee_id[index]}
-                        onChange={(e) => handleChange(index, e)}
-                        placeholder='Enter employee-id'
-                    /> */}
+                             <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Target Date</label>
+                                <input type='date' className='form-control' value={valueData.date} name='date' placeholder='' onChange={handleChange} />
+                            </div>
+                            <div className='col-md-12 py-1 border-bottom'/>
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Add Service</label>
+                                <select className='form-control' value={valueData.service_id} name='service_id' onChange={handleChange}>
+                                    <option value="">Select Service</option>
+                                    {getservicenames.map(service => (
+                                        <option key={service.id} value={service.name}>{service.name}</option>
+                                    ))}
+                                </select>
+                            </div>
 
-                            <select className='' value={formData.employee_id[index]} name='employee_id' onChange={(e) => handleChange(index, e)}>
-                                <option value="">Select employee name </option>
-                                {getempoloyenames.map((name, index) => (
-                                    <option key={index} value={name}>{name}</option>
-                                ))}
-                            </select>
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>No. of Orders</label>
+                                <input type='number' className='form-control' value={valueData.no_of_orders} name='no_of_orders' placeholder='Please enter no. of orders' onChange={handleChange} />
+                            </div>
 
-                            {/* <input
-                                type="text"
-                                name="service_id"
-                                value={formData.service_id[index]}
-                                onChange={(e) => handleChange(index, e)}
-                                placeholder='Enter service-id'
-                            /> */}
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Total Amount</label>
+                                <input type='number' className='form-control' 
+                                value={valueData.total_amount}
+                                 name='total_amount' onChange={handleChange} placeholder={valueData.no_of_orders * serviceAmount} readOnly/>
+                            </div>
 
-<select className='' value={formData.service_id[index]} name='service_id' onChange={(e) => handleChange(index, e)}>
-                                <option value="">Select service name </option>
-                                {getservicenames.map((name, index) => (
-                                    <option key={index} value={name}>{name}</option>
-                                ))}
-                            </select>
-
-                            <input
-                                type="number"
-                                name="no_of_orders"
-                                value={formData.no_of_orders[index]}
-                                onChange={(e) => handleChange(index, e)}
-                                placeholder='Enter no of orders'
-                            />
-
-                            <input
-                                type="text"
-                                name="total_amount"
-                                value={formData.total_amount[index]}
-                                onChange={(e) => handleChange(index, e)}
-                                placeholder='Enter total amount'
-                            />
-
-
-                            <button type="button" onClick={() => handleRemoveFields(index)}>
-                                Remove
-                            </button>
+                            <div className='d-flex justify-content-end pt-4'>
+                                <button type='submit' className='btn btn-bg-orange' style={{ width: "200px" }}>Submit</button>
+                            </div>
                         </div>
-                    ))}
-                    <button type="button" onClick={handleAddFields}>
-                        Add
-                    </button>
-                    <button type="button" onClick={handleSubmit}>
-                        Submit
-                    </button>
+                    </form>
                 </div>
-
             </div>
         </>
-    )
-}
+    );
+};
 
-export default Add_Target_Master
+export default Add_Target_Master;
+
