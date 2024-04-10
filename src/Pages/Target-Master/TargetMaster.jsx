@@ -12,7 +12,7 @@ const TargetMaster = () => {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [totalAmount, setTotalAmount] = useState(0);
-
+    const [selectedService, setSelectedService] = useState('');
 
     useEffect(() => {
         fetchData();
@@ -22,6 +22,7 @@ const TargetMaster = () => {
         axios.get('https://shopee-firm.000webhostapp.com/api/target/get-target.php')
             .then(res => {
                 setApiDatas(res.data);
+                calculateTotalAmount(res.data);
             })
             .catch(err => {
                 console.error('Error fetching data:', err);
@@ -72,14 +73,45 @@ const TargetMaster = () => {
     // }
     
 
+    // const handleFilter = () => {
+    //     // Filter the data based on the selected date range
+    //     const filteredData = apiDatas.filter(item => {
+    //         const itemDate = new Date(item.date);
+    //         const startDateObj = startDate ? new Date(startDate) : null;
+    //         const endDateObj = endDate ? new Date(endDate) : null;
+
+    //         // Check if the item's date falls within the selected range
+    //         if (startDateObj && endDateObj) {
+    //             return itemDate >= startDateObj && itemDate <= endDateObj;
+    //         } else if (startDateObj) {
+    //             return itemDate >= startDateObj;
+    //         } else if (endDateObj) {
+    //             return itemDate <= endDateObj;
+    //         }
+    //         return true; // Return true to include all data if no date range selected
+    //     });
+
+    //     // Calculate total amount for filtered data
+    //     calculateTotalAmount(filteredData);
+
+    //     // Set the filtered data to state
+    //     setApiDatas(filteredData);
+    // }
+    
+    // const calculateTotalAmount = (data) => {
+    //     const total = data.reduce((acc, item) => acc + parseFloat(item.total_amount), 0);
+    //     setTotalAmount(total);
+    // }
+    
     const handleFilter = () => {
-        // Filter the data based on the selected date range
-        const filteredData = apiDatas.filter(item => {
+        let filteredData = apiDatas;
+
+        // Filter by date range
+        filteredData = filteredData.filter(item => {
             const itemDate = new Date(item.date);
             const startDateObj = startDate ? new Date(startDate) : null;
             const endDateObj = endDate ? new Date(endDate) : null;
 
-            // Check if the item's date falls within the selected range
             if (startDateObj && endDateObj) {
                 return itemDate >= startDateObj && itemDate <= endDateObj;
             } else if (startDateObj) {
@@ -87,21 +119,27 @@ const TargetMaster = () => {
             } else if (endDateObj) {
                 return itemDate <= endDateObj;
             }
-            return true; // Return true to include all data if no date range selected
+            return true;
         });
+
+        // Filter by selected service
+        if (selectedService) {
+            filteredData = filteredData.filter(item => item.service_id === selectedService);
+        }
 
         // Calculate total amount for filtered data
         calculateTotalAmount(filteredData);
 
-        // Set the filtered data to state
         setApiDatas(filteredData);
     }
-    
+
     const calculateTotalAmount = (data) => {
         const total = data.reduce((acc, item) => acc + parseFloat(item.total_amount), 0);
         setTotalAmount(total);
     }
-    
+
+    // Extract unique service names
+    const serviceNames = Array.from(new Set(apiDatas.map(item => item.service_id)));
 
     
 
@@ -152,6 +190,14 @@ const TargetMaster = () => {
                     <div>
                         <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                         <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                        
+                        <select value={selectedService} onChange={(e) => setSelectedService(e.target.value)}>
+                            <option value="">All Services</option>
+                            {serviceNames.map(service => (
+                                <option key={service} value={service}>{service}</option>
+                            ))}
+                        </select>
+
                         <button onClick={handleFilter}>Filter</button>
                         <button onClick={loadall}>reset</button>
                     </div>
