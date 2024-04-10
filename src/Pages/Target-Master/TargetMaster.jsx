@@ -3,9 +3,14 @@ import { DataGrid } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 import Topbar from '../../layouts/Topbar';
 import Sidebar from '../../layouts/Sidebar';
-import { FaRegEdit } from "react-icons/fa";
+import { FaFilter, FaRegEdit } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import axios from 'axios';
+import { MdNoteAdd } from 'react-icons/md';
+import { BsArrowLeftRight } from 'react-icons/bs';
+import { LuIndianRupee } from 'react-icons/lu';
+import { BiReset } from 'react-icons/bi';
+import { TbFilterCog } from 'react-icons/tb';
 
 const TargetMaster = () => {
     const [apiDatas, setApiDatas] = useState([]);
@@ -30,13 +35,13 @@ const TargetMaster = () => {
     }
 
 
-    const loadall =()=>{
+    const loadall = () => {
         fetchData();
         setStartDate('00-00-0000')
         setEndDate('00-00-0000')
         setTotalAmount(0)
     }
-    
+
     const handleDelete = (id) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this Service Master?");
         if (confirmDelete) {
@@ -50,59 +55,8 @@ const TargetMaster = () => {
         }
     }
 
-    // const handleFilter = () => {
-    //     // Filter the data based on the selected date range
-    //     const filteredData = apiDatas.filter(item => {
-    //         const itemDate = new Date(item.date);
-    //         const startDateObj = startDate ? new Date(startDate) : null;
-    //         const endDateObj = endDate ? new Date(endDate) : null;
-    
-    //         // Check if the item's date falls within the selected range
-    //         if (startDateObj && endDateObj) {
-    //             return itemDate >= startDateObj && itemDate <= endDateObj;
-    //         } else if (startDateObj) {
-    //             return itemDate >= startDateObj;
-    //         } else if (endDateObj) {
-    //             return itemDate <= endDateObj;
-    //         }
-    //         return true; // Return true to include all data if no date range selected
-    //     });
-    
-    //     // Set the filtered data to state
-    //     setApiDatas(filteredData);
-    // }
-    
 
-    // const handleFilter = () => {
-    //     // Filter the data based on the selected date range
-    //     const filteredData = apiDatas.filter(item => {
-    //         const itemDate = new Date(item.date);
-    //         const startDateObj = startDate ? new Date(startDate) : null;
-    //         const endDateObj = endDate ? new Date(endDate) : null;
 
-    //         // Check if the item's date falls within the selected range
-    //         if (startDateObj && endDateObj) {
-    //             return itemDate >= startDateObj && itemDate <= endDateObj;
-    //         } else if (startDateObj) {
-    //             return itemDate >= startDateObj;
-    //         } else if (endDateObj) {
-    //             return itemDate <= endDateObj;
-    //         }
-    //         return true; // Return true to include all data if no date range selected
-    //     });
-
-    //     // Calculate total amount for filtered data
-    //     calculateTotalAmount(filteredData);
-
-    //     // Set the filtered data to state
-    //     setApiDatas(filteredData);
-    // }
-    
-    // const calculateTotalAmount = (data) => {
-    //     const total = data.reduce((acc, item) => acc + parseFloat(item.total_amount), 0);
-    //     setTotalAmount(total);
-    // }
-    
     const handleFilter = () => {
         let filteredData = apiDatas;
 
@@ -141,37 +95,36 @@ const TargetMaster = () => {
     // Extract unique service names
     const serviceNames = Array.from(new Set(apiDatas.map(item => item.service_id)));
 
-    
 
     const columns = [
-        { field: 'displayOrder', headerName: 'Sl.No', width: 70 },  
+        { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
         { field: 'employee_id', headerName: 'Employe Name', width: 150 },
         { field: 'service_id', headerName: 'Service Name', width: 150 },
         { field: 'no_of_orders', headerName: 'Order Qty.', width: 150 },
         { field: 'total_amount', headerName: 'Total Amount', width: 150 },
-        { field: 'date', headerName: 'Date', type:'Date', width: 150 },
+        { field: 'date', headerName: 'Date', type: 'Date', width: 150 },
         {
-            field: 'actions', 
-            headerName: 'Actions', 
+            field: 'actions',
+            headerName: 'Actions',
             sortable: false,
             width: 230,
             renderCell: (params) => (
                 <>
                     <Link to={`/edit-target-master/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
-                        <FaRegEdit  style={{fontSize:'15px', marginBottom:'4px'}}/>  View / Edit 
+                        <FaRegEdit style={{ fontSize: '15px', marginBottom: '4px' }} />  View / Edit
                     </Link>
                     &nbsp;
                     &nbsp;
-                    <Link  className='btn btn-outline-danger btn-sm' onClick={() => handleDelete(params.row.id)}>
-                        <AiOutlineDelete style={{fontSize:'15px', marginBottom:'4px'}}/> Delete
+                    <Link className='btn btn-outline-danger btn-sm' onClick={() => handleDelete(params.row.id)}>
+                        <AiOutlineDelete style={{ fontSize: '15px', marginBottom: '4px' }} /> Delete
                     </Link>
                 </>
-            ), 
+            ),
         },
     ];
 
     const rows = apiDatas.length > 0 ? apiDatas.map((item, index) => ({
-        id: item.id || index,   
+        id: item.id || index,
         displayOrder: index + 1,
         employee_id: item.employee_id,
         service_id: item.service_id,
@@ -180,15 +133,20 @@ const TargetMaster = () => {
         date: item.date,
     })) : [];
 
+
+    const filterbtn = () => {
+        const filtermenu = document.getElementById('filtermenu');
+        filtermenu.classList.toggle('openfilter')
+    }
     return (
         <>
             <Topbar />
             <Sidebar />
             <div className='main-content' id='mainbody'>
-                <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50'>
+                <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50 bread-parent'>
                     <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/target-master' className='t-theme-color'>Target Master</Link></p>
                     <div>
-                        <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                        {/* <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                         <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
                         
                         <select value={selectedService} onChange={(e) => setSelectedService(e.target.value)}>
@@ -197,11 +155,55 @@ const TargetMaster = () => {
                                 <option key={service} value={service}>{service}</option>
                             ))}
                         </select>
-
                         <button onClick={handleFilter}>Filter</button>
                         <button onClick={loadall}>reset</button>
+                        */}
+
+
+
+
                     </div>
-                    <Link to='/add-target-master' className='btn btn-bg-orange btn-sm b-radius-50'>Add Target Master</Link>
+                    <div className='actions'>
+                        <Link to='/add-target-master' className='btn btn-bg-orange btn-sm b-radius-50 '><MdNoteAdd style={{ fontSize: "18px", marginBottom: '2px' }} /> Add Target Master</Link>
+                        &nbsp;
+                        &nbsp;
+
+                        <button type='button' className='btn btn-bg-orange btn-sm b-radius-50 ' onClick={filterbtn}><FaFilter style={{ marginBottom: '2px' }} /> Filter</button>
+
+                    </div>
+
+                    <div className='filter-card shadow p-2 b-radius-10' id='filtermenu'>
+
+                        <div className='d-flex gap-3 align-items-center'>
+                            <div className='form-head'>
+                                <input type='date' className='filter-fields' value={startDate} onChange={(e) => setStartDate(e.target.value)}/>
+                            </div>
+                            <span> <BsArrowLeftRight /> </span>
+                            <div className='form-head'>
+                                <input type='date' className='filter-fields' value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                            </div>
+                        </div>
+
+
+                        <div className='form-head'>
+                            <select value={selectedService} onChange={(e) => setSelectedService(e.target.value)} className='filter-fields'>
+                                <option value="">All Services</option>
+                                {serviceNames.map(service => (
+                                    <option key={service} value={service}>{service}</option>
+                                ))}
+                            </select>
+                        </div>
+
+<div className='d-flex gap-2 justify-content-end pb-3'>
+    <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={handleFilter}><TbFilterCog /> Check</button>
+
+    <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={loadall}><BiReset /> Reset</button>
+</div>
+
+                        <p>Total Amount: {totalAmount} <LuIndianRupee /></p>
+
+
+                    </div>
                 </div>
 
                 <div style={{ height: '75vh', width: '100%' }} className="bg-white">
@@ -214,7 +216,6 @@ const TargetMaster = () => {
 
                 </div>
 
-                <p>Total Amount: {totalAmount}</p>
             </div>
         </>
     );

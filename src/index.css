@@ -601,3 +601,56 @@ a {
     border-radius: 4px;
     cursor: pointer;
 }
+
+.bread-parent{
+    position: relative;
+}
+
+.filter-card{
+    position: absolute;
+    right: 0px;
+    top:105% ;
+    opacity: 0;
+    background-color: white;
+    z-index: 1111;
+    transition: all 0.3s ease-in-out;
+    transform-origin: top;
+    transform: scaleY(0);
+    visibility: hidden;
+}
+
+.openfilter{
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+}
+
+input.filter-fields, select.filter-fields{
+border: none;
+border-bottom: 1px solid #000000;
+outline: none;
+width:170px;
+margin: 10px 0px;
+color: #000000;
+box-shadow: 0px 0px 0px 0px white !important;
+padding: 5px;
+}
+
+select.filter-fields{
+    width: 100% !important;
+}
+
+.filter-card p{
+    margin-top: 10px;
+    line-height: 2.5;
+    padding: 2px;
+    border-radius: 8px;
+    background-color: #ff5e1a;
+    color: white;
+    text-align: center;
+}
+
+.letter-spacing-1{
+    letter-spacing: 1px !important;
+}
+
