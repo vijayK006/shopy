@@ -61,7 +61,7 @@ const TargetMaster = () => {
         { field: 'service_id', headerName: 'Service Name', width: 150 },
         { field: 'no_of_orders', headerName: 'Order Qty.', width: 150 },
         { field: 'total_amount', headerName: 'Total Amount', width: 150 },
-        { field: 'date', headerName: 'Date', width: 150 },
+        { field: 'date', headerName: 'Date', type:'Date', width: 150 },
         //   {   field: 'age', headerName: 'Age', type: 'number', width: 90,},
           {
             field: 'actions', 

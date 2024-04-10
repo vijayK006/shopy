@@ -17,8 +17,6 @@ const Home = () => {
   const [servicemastercount, setServicemastercount] = useState([]);
   const [expensemastercount, setExpensemastercount] = useState([]);
 
-
-
   useEffect(() => {
     axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
       .then(res => {
