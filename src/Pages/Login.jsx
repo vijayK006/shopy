@@ -14,7 +14,8 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
 
   const navigate = useNavigate()
-  // const [loginStatus, setLoginStatus] = useState("");
+
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const [valueData, setValueData] = useState({
@@ -43,7 +44,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // setLoading(true);
+    setLoading(true);
 
     const formData = new FormData();
     formData.append('username', valueData.username);
@@ -63,6 +64,9 @@ const Login = () => {
       })
       .catch(err => {
         console.log("Login Failed con")
+        const warning = document.getElementById('warning');
+        warning.classList.add('warning-add');
+        setLoading(false);
         console.log(err)
       });
   };
@@ -135,7 +139,19 @@ const Login = () => {
                 </div>
                 {/* <Link to='/' className='login-text-pass subheader-font' onClick={classforpass}>Forgot Password ?</Link> */}
 
-                <input type='submit' className='login-btn mt-4' value="Sign in" />
+                {loading ? ( // Conditional rendering for loading popup
+                                        <>
+                                        
+                                        <button type='submit' className='login-btn mt-4' >Sign In &nbsp; &nbsp;
+                                        <div className="spinner-border text-light spinner-border-sm scaleonload"></div>
+                                        </button>
+                                            
+                                        </>
+                                    ) : (
+                                      <button type='submit' className='login-btn mt-4' >Sign In</button>
+                                    )}
+
+               
               </form>
             </div>
 
