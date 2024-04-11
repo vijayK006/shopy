@@ -32,6 +32,7 @@ import Edit_employe from './Pages/Employee-Manager/Edit-Employee';
 import TargetMaster from './Pages/Target-Master/TargetMaster';
 import Add_Target_Master from './Pages/Target-Master/Add-Target-Master';
 import Edit_Target_Master from './Pages/Target-Master/Edit-Target-Master';
+import ProtectRoute from './Auth/ProtectRoute';
 
 
 const App = () => {
@@ -39,7 +40,8 @@ const App = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<ProtectRoute Component={Home} />} />
+          {/* <Route path="/" element={<Home/>} /> */}
           <Route path="/login" element={<Login />} />
 
           {/* Firm Master */}
@@ -81,3 +83,5 @@ const App = () => {
 }
 
 export default App
+
+

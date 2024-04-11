@@ -2,12 +2,21 @@ import React from 'react'
 import { TfiMenu } from 'react-icons/tfi';
 import adminImg from '../img/man.png';
 import { IoIosArrowDown, IoMdNotificationsOutline } from 'react-icons/io';
+import { RiLogoutCircleRLine } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Topbar = () => {
+  const navigate = useNavigate();
   const opentoggler = () => {
     document.getElementById('mainbody').classList.toggle('maintoggle');
     document.getElementById('sidemenu').classList.toggle('sidetoggle');
 
+  }
+
+  const logout =()=>{
+    navigate('/login');
+    localStorage.clear()
   }
   return (
     <>
@@ -22,17 +31,26 @@ const Topbar = () => {
           </div>
         </div>
 
-        <div className='top-menu-bar gap-3'>
+        <div className='top-menu-bar d-flex gap-2'>
 
-<div className='notify'>
-<IoMdNotificationsOutline className='icon'/>
-</div>
+        <div className='d-flex gap-2 px-4'>
+            <img src={adminImg} alt='admin-img' className='topbar-thumb' />
+            <div className='more'>
+              <span>Admin</span>
+              <div className='status d-flex gap-1'>
+                <div className='tag' />
+                <p>Online</p>
+              </div>
+            </div>
+          </div>
 
-        <div className='d-flex gap-2 align-items-center'>
-<img src={adminImg} alt='admin-img' className='topbar-thumb'/>
-<span>Admin</span>
-<IoIosArrowDown />
-        </div>
+          <div className='notify'>
+            <IoMdNotificationsOutline className='icon' />
+          </div>
+
+          <div onClick={logout} className='notify'>
+            <RiLogoutCircleRLine className='icon' />
+          </div>
 
         </div>
       </div>
