@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './Pages/Home';
+import Login from './Pages/Login';
 
 // Firm Master
 import FirmMaster from './Pages/Firm-Master/FirmMaster';
@@ -32,12 +33,14 @@ import TargetMaster from './Pages/Target-Master/TargetMaster';
 import Add_Target_Master from './Pages/Target-Master/Add-Target-Master';
 import Edit_Target_Master from './Pages/Target-Master/Edit-Target-Master';
 
+
 const App = () => {
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
 
           {/* Firm Master */}
           <Route path="/firm-master" element={<FirmMaster />} />
