@@ -150,8 +150,6 @@ const Login = () => {
                                     ) : (
                                       <button type='submit' className='login-btn mt-4' >Sign In</button>
                                     )}
-
-               
               </form>
             </div>
 
