@@ -12,7 +12,7 @@ import { LuIndianRupee } from 'react-icons/lu';
 import { BiReset } from 'react-icons/bi';
 import { TbFilterCog } from 'react-icons/tb';
 
-const TargetMaster = () => {
+const Expense_Payment = () => {
     const [apiDatas, setApiDatas] = useState([]);
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
@@ -24,7 +24,7 @@ const TargetMaster = () => {
     }, []);
 
     const fetchData = () => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/target/get-target.php')
+        axios.get('https://shopee-firm.000webhostapp.com/api/expense-payment/get-payment.php')
             .then(res => {
                 setApiDatas(res.data);
                 calculateTotalAmount(res.data);
@@ -43,9 +43,9 @@ const TargetMaster = () => {
     }
 
     const handleDelete = (id) => {
-        const confirmDelete = window.confirm("Are you sure you want to delete this Service Master?");
+        const confirmDelete = window.confirm("Are you sure you want to delete this Expense Payment?");
         if (confirmDelete) {
-            axios.post(`https://shopee-firm.000webhostapp.com/api/target/delete-by-id-target.php?id=${id}`)
+            axios.post(`https://shopee-firm.000webhostapp.com/api/expense-payment/delete-payment.php?id=${id}`)
                 .then(res => {
                     fetchData();
                 })
@@ -78,7 +78,7 @@ const TargetMaster = () => {
 
         // Filter by selected service
         if (selectedService) {
-            filteredData = filteredData.filter(item => item.service_id === selectedService);
+            filteredData = filteredData.filter(item => item.expense_id === selectedService);
         }
 
         // Calculate total amount for filtered data
@@ -88,21 +88,21 @@ const TargetMaster = () => {
     }
 
     const calculateTotalAmount = (data) => {
-        const total = data.reduce((acc, item) => acc + parseFloat(item.total_amount), 0);
+        const total = data.reduce((acc, item) => acc + parseFloat(item.amount), 0);
         setTotalAmount(total);
     }
 
     // Extract unique service names
-    const serviceNames = Array.from(new Set(apiDatas.map(item => item.service_id)));
+    const serviceNames = Array.from(new Set(apiDatas.map(item => item.expense_id)));
 
 
     const columns = [
         { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
-        { field: 'employee_id', headerName: 'Employe Name', width: 150 },
-        { field: 'service_id', headerName: 'Service Name', width: 150 },
-        { field: 'no_of_orders', headerName: 'Order Qty.', width: 150 },
-        { field: 'total_amount', headerName: 'Total Amount', width: 150 },
-        { field: 'date', headerName: 'Date', type: 'Date', width: 150 },
+        { field: 'expense_id', headerName: 'Expense Name', width: 200 },
+        // { field: 'employee_id', headerName: 'Employe Name', width: 150 },
+        { field: 'amount', headerName: 'Expense Amount', width: 200 },
+        { field: 'date', headerName: 'Date', width: 200 },
+        { field: 'remark', headerName: 'Remark', width: 150 },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -110,7 +110,7 @@ const TargetMaster = () => {
             width: 230,
             renderCell: (params) => (
                 <>
-                    <Link to={`/edit-target-master/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
+                    <Link to={`/edit-expenses-payment/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
                         <FaRegEdit style={{ fontSize: '15px', marginBottom: '4px' }} />  View / Edit
                     </Link>
                     &nbsp;
@@ -127,10 +127,10 @@ const TargetMaster = () => {
         id: item.id || index,
         displayOrder: index + 1,
         employee_id: item.employee_id,
-        service_id: item.service_id,
-        no_of_orders: item.no_of_orders,
-        total_amount: item.total_amount,
+        expense_id: item.expense_id,
+        amount: item.amount,
         date: item.date,
+        remark: item.remark,
     })) : [];
 
 
@@ -144,7 +144,7 @@ const TargetMaster = () => {
             <Sidebar />
             <div className='main-content' id='mainbody'>
                 <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50 bread-parent'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/target-master' className='t-theme-color'>Target Master</Link></p>
+                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/target-master' className='t-theme-color'>Expense Payment</Link></p>
                     <div>
                         {/* <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                         <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
@@ -161,7 +161,7 @@ const TargetMaster = () => {
 
                     </div>
                     <div className='actions'>
-                        <Link to='/add-target-master' className='btn btn-bg-orange btn-sm b-radius-50 '><MdNoteAdd style={{ fontSize: "18px", marginBottom: '2px' }} /> Add Target Master</Link>
+                        <Link to='/add-expenses-payment' className='btn btn-bg-orange btn-sm b-radius-50 '><MdNoteAdd style={{ fontSize: "18px", marginBottom: '2px' }} /> Add Expense Payment</Link>
                         &nbsp;
                         &nbsp;
 
@@ -218,4 +218,4 @@ const TargetMaster = () => {
     );
 };
 
-export default TargetMaster;
+export default Expense_Payment;

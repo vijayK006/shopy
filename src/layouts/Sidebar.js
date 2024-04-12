@@ -5,6 +5,7 @@ import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { GrUserManager } from "react-icons/gr";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineSettingsInputComponent, MdOutlineWorkHistory } from "react-icons/md";
+import { BsDatabaseAdd } from 'react-icons/bs';
 
 
 const Sidebar = () => {
@@ -15,16 +16,42 @@ const Sidebar = () => {
   }, [location.pathname]);
 
 
-// const resper = document.querySelector('.resp')
-// if(currentPage.classList.contains('active')){
-// resper.forEach((referlink)=>{
-//   referlink.style.color='orange';
-// })
-// }else{
-//   resper.forEach((referlink)=>{
-//     referlink.style.color='';
-//   })
-// }
+  const toggleDropdown = (dropdownId) => {
+    const dropbutton = document.getElementById(dropdownId);
+    dropbutton.classList.toggle('opensubmenu');
+
+    // Check the classList to determine the state
+    if (dropbutton.classList.contains('opensubmenu')) {
+      dropbutton.style.backgroundColor = 'white';
+      dropbutton.style.color = 'black';
+      document.addEventListener('click', (event) => closeDropdown(event, dropdownId));
+    } else {
+      dropbutton.style.backgroundColor = ''; // Reset to default
+      dropbutton.style.color = ''; // Reset to default
+      document.removeEventListener('click', (e) => closeDropdown(e, dropdownId));
+    }
+
+    document.addEventListener('click', closeDropdown);
+  };
+
+  const closeDropdown = (event, dropdownId) => {
+    const dropdown = document.getElementById(dropdownId);
+
+    if (dropdown && dropdown.contains(event.target)) {
+      // Click occurred inside the dropdown, do nothing
+      return;
+    }
+
+    if (dropdown) {
+      // Click occurred outside the dropdown, close it
+      dropdown.classList.remove('opensubmenu');
+      dropdown.style.backgroundColor = ''; // Reset to default
+      dropdown.style.color = ''; // Reset to default
+
+      // Remove the event listener after closing the dropdown
+      document.removeEventListener('click', (event) => closeDropdown(event, dropdownId));
+    }
+  };
 
   return (
     <>
@@ -40,11 +67,19 @@ const Sidebar = () => {
 
             <NavLink className="disble-decoration " to="/service-master"><li className={`items ${currentPage === '/service-master' || currentPage === '/add-service-master' || currentPage.startsWith('/edit-service-master') ? 'active' : ''}`}><IoSettingsOutline className="icons" /> <span className='resp'>Service Master</span></li></NavLink>
 
-            <NavLink className="disble-decoration " to="/expenses-master"><li className={`items ${currentPage === '/expenses-master' || currentPage === '/add-expenses-master' || currentPage.startsWith('/edit-expenses-master') ? 'active' : ''}`}><MdOutlineSettingsInputComponent className="icons" /> <span className='resp'>Expenses Master</span></li></NavLink>
-
             <NavLink className="disble-decoration" to="/employe-manager"><li className={`items ${currentPage === '/employe-manager' || currentPage === '/add-employee' || currentPage.startsWith('/edit-employee') ? 'active' : ''}`}><MdOutlineWorkHistory className="icons" /> <span className='resp'>Employee Manager</span></li></NavLink>
 
             <NavLink className="disble-decoration" to="/target-master"><li className={`items ${currentPage === '/target-master' ? 'active' : ''}`}><MdOutlineWorkHistory className="icons" /> <span className='resp'>Target Master</span></li></NavLink>
+
+            <NavLink className="disble-decoration" to="" >
+              <li className='items dropmenu' onClick={() => toggleDropdown('dropitems1')} id='dropitems1'>
+                <BsDatabaseAdd className="icons" /> <span className='resp'>Expenses Master</span>
+                <ul className='submenu' >
+                  <NavLink to='/add-expenses-master'><li>Add Expenses</li></NavLink>
+                  <NavLink to='/expenses-payment'><li>Expenses Payment</li></NavLink>
+                </ul>
+              </li>
+            </NavLink>
 
           </ul>
         </div>

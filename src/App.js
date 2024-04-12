@@ -33,6 +33,9 @@ import TargetMaster from './Pages/Target-Master/TargetMaster';
 import Add_Target_Master from './Pages/Target-Master/Add-Target-Master';
 import Edit_Target_Master from './Pages/Target-Master/Edit-Target-Master';
 import ProtectRoute from './Auth/ProtectRoute';
+import Add_Expenses_Payment from './Pages/Expense-Master/Add-Expenses-Payment';
+import Expense_Payment from './Pages/Expense-Master/Expense-Payment';
+import Edit_Expense_Payment from './Pages/Expense-Master/Edit-Expense-Payment';
 
 
 const App = () => {
@@ -63,8 +66,12 @@ const App = () => {
           <Route path="/expenses-master" element={<Expense_Master />} />
           <Route path="/add-expenses-master" element={<Add_Expenses_Master />} />
           <Route path="/edit-expenses-master/:id" element={<Edit_Expenese_Master />} />
+          {/* -------- */}
+          <Route path="/add-expenses-payment" element={<Add_Expenses_Payment />} />
+          <Route path="/expenses-payment" element={<Expense_Payment />} />
+          <Route path="/edit-expenses-payment/:id" element={<Edit_Expense_Payment />} />
 
-
+          
           {/* Employee Manager */}
           <Route path="/employe-manager" element={<EmployeManager />} />
           <Route path="/add-employee" element={<Add_Employe />} />
