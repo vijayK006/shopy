@@ -22,7 +22,7 @@ const Sidebar = () => {
 
     // Check the classList to determine the state
     if (dropbutton.classList.contains('opensubmenu')) {
-      dropbutton.style.backgroundColor = 'white';
+      dropbutton.style.backgroundColor = '#ff5f1a11';
       dropbutton.style.color = 'black';
       document.addEventListener('click', (event) => closeDropdown(event, dropdownId));
     } else {
@@ -69,14 +69,17 @@ const Sidebar = () => {
 
             <NavLink className="disble-decoration" to="/employe-manager"><li className={`items ${currentPage === '/employe-manager' || currentPage === '/add-employee' || currentPage.startsWith('/edit-employee') ? 'active' : ''}`}><MdOutlineWorkHistory className="icons" /> <span className='resp'>Employee Manager</span></li></NavLink>
 
-            <NavLink className="disble-decoration" to="/target-master"><li className={`items ${currentPage === '/target-master' ? 'active' : ''}`}><MdOutlineWorkHistory className="icons" /> <span className='resp'>Target Master</span></li></NavLink>
+            <NavLink className="disble-decoration" to="/target-master"><li className={`items ${currentPage === '/target-master' || currentPage === '/add-target-master' || currentPage.startsWith('/edit-target-master') ? 'active' : ''}`}><MdOutlineWorkHistory className="icons" /> <span className='resp'>Target Master</span></li></NavLink>
+
 
             <NavLink className="disble-decoration" to="" >
-              <li className='items dropmenu' onClick={() => toggleDropdown('dropitems1')} id='dropitems1'>
-                <BsDatabaseAdd className="icons" /> <span className='resp'>Expenses Master</span>
+              <li className={`dropmenu items-drop  ${currentPage === '/expenses-master' || currentPage === '/add-expenses-master' || currentPage.startsWith('/edit-expenses-master') || currentPage.startsWith('/add-expenses-payment') || currentPage.startsWith('/expenses-payment') || currentPage.startsWith('/edit-expenses-payment')  ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems1')} id='dropitems1'>
+                <BsDatabaseAdd className="icons" /> <span className='resp'>Expenses Master <IoIosArrowDown /></span>
+
                 <ul className='submenu' >
-                  <NavLink to='/add-expenses-master'><li>Add Expenses</li></NavLink>
-                  <NavLink to='/expenses-payment'><li>Expenses Payment</li></NavLink>
+                  <NavLink to='/add-expenses-master'><li  className={`droplink-text ${currentPage === '/add-expenses-master' || currentPage === '/expenses-master' || currentPage.startsWith('/edit-expenses-master') ? 'link-active' : ''}`}><IoIosArrowForward /> Add Expenses</li></NavLink>
+
+                  <NavLink to='/expenses-payment'><li className={`droplink-text ${currentPage.startsWith('/add-expenses-payment') || currentPage.startsWith('/expenses-payment') || currentPage.startsWith('/edit-expenses-payment') ? 'link-active' : ''}`}><IoIosArrowForward /> Expenses Payment</li></NavLink>
                 </ul>
               </li>
             </NavLink>
