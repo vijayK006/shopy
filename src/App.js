@@ -36,6 +36,9 @@ import ProtectRoute from './Auth/ProtectRoute';
 import Add_Expenses_Payment from './Pages/Expense-Master/Add-Expenses-Payment';
 import Expense_Payment from './Pages/Expense-Master/Expense-Payment';
 import Edit_Expense_Payment from './Pages/Expense-Master/Edit-Expense-Payment';
+import Add_Target_Out from './Pages/Target-Master/Add-Target-out';
+import TargetOut from './Pages/Target-Master/Target-Out';
+import Edit_Target_Out from './Pages/Target-Master/Edit-Target-Out';
 
 
 const App = () => {
@@ -71,7 +74,7 @@ const App = () => {
           <Route path="/expenses-payment" element={<Expense_Payment />} />
           <Route path="/edit-expenses-payment/:id" element={<Edit_Expense_Payment />} />
 
-          
+
           {/* Employee Manager */}
           <Route path="/employe-manager" element={<EmployeManager />} />
           <Route path="/add-employee" element={<Add_Employe />} />
@@ -81,6 +84,10 @@ const App = () => {
           <Route path="/target-master" element={<TargetMaster />} />
           <Route path="/add-target-master" element={<Add_Target_Master />} />
           <Route path="/edit-target-master/:id" element={<Edit_Target_Master />} />
+          {/* --------------- */}
+          <Route path="/target-out" element={<TargetOut />} />
+          <Route path="/add-target-out" element={<Add_Target_Out />} />
+          <Route path="/edit-target-out/:id" element={<Edit_Target_Out />} />
 
 
         </Routes>
