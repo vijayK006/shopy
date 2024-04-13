@@ -19,22 +19,28 @@ const TargetOut = () => {
     const [totalAmount, setTotalAmount] = useState(0);
     const [selectedService, setSelectedService] = useState('');
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+   
 
     const fetchData = () => {
         axios.get('https://shopee-firm.000webhostapp.com/api/target-out/get-target.php')
             .then(res => {
-                setApiDatas(res.data);
-                calculateTotalAmount(res.data);
+                const responseData = res.data || [];
+                if (Array.isArray(responseData)) {
+                    setApiDatas(responseData);
+                    calculateTotalAmount(responseData);
+                } else {
+                    console.error('Invalid data format:', responseData);
+                }
             })
             .catch(err => {
                 console.error('Error fetching data:', err);
             });
     }
 
-
+    useEffect(() => {
+        fetchData();
+    }, []);
+    
     const loadall = () => {
         fetchData();
         setStartDate('00-00-0000')

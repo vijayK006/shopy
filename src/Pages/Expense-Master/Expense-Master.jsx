@@ -9,14 +9,14 @@ const Expense_Master = () => {
 
   useEffect(() => {
     axios.get('https://shopee-firm.000webhostapp.com/api/expense/get-expense.php')
-        .then(res => {
-            console.log(res.data)
-            setApiDatas(res.data)
-        })
-        .catch(err => {
-            console.error('Error fetching data:', err);
-        });
-}, []);
+      .then(res => {
+        console.log(res.data)
+        setApiDatas(res.data)
+      })
+      .catch(err => {
+        console.error('Error fetching data:', err);
+      });
+  }, []);
 
   return (
     <>
@@ -31,25 +31,42 @@ const Expense_Master = () => {
         </div>
 
         <div className='container-fluid pt-5'>
-<div className='row'>
-{apiDatas.map((item, index) =>(
-  <>
-<div className='col-md-3 py-2' key={index}>
-<Link to={`/edit-expenses-master/${item.id}`}>
-  <div className='shadow py-3 bg-white border-r-5'>
-  <p className='text-center margin-0 t-theme-color'>{item.name}</p>
-</div>
-</Link>
+          {/* <div className='row'>
+            {apiDatas.map((item, index) => (
+              <>
+                <div className='col-md-3 py-2' key={index}>
+                  <Link to={`/edit-expenses-master/${item.id}`}>
+                    <div className='shadow py-3 bg-white border-r-5'>
+                      <p className='text-center margin-0 t-theme-color'>{item.name}</p>
+                    </div>
+                  </Link>
 
-</div>
-  </>
-))}
+                </div>
+              </>
+            ))}
 
-</div>
+          </div> */}
+
+          <div className='row'>
+            {apiDatas.length > 0 ? (
+              apiDatas.map((item, index) => (
+                <div className='col-md-3 py-2' key={index}>
+                  <Link to={`/edit-expenses-master/${item.id}`}>
+                    <div className='shadow py-3 bg-white border-r-5'>
+                      <p className='text-center margin-0 t-theme-color'>{item.name}</p>
+                    </div>
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <p>No data available</p>
+            )}
+          </div>
+          
         </div>
       </div>
     </>
   )
-} 
+}
 
 export default Expense_Master;
