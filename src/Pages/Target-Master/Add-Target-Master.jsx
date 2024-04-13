@@ -39,17 +39,17 @@ const Add_Target_Master = () => {
     }, []);
 
     const [valueData, setValueData] = useState({
-        // employee_id: '',
-        // service_id: '',
-        // no_of_orders: '',
-        // total_amount: '',
-        // date: '',
-
-           employee_id: [],
-        service_id: [],
-        no_of_orders: [],
+        employee_id: '',
+        service_id: '',
+        no_of_orders: '',
         total_amount: '',
-        date: [],
+        date: '',
+
+        //    employee_id: [],
+        // service_id: [],
+        // no_of_orders: [],
+        // total_amount: '',
+        // date: [],
     });
 
 
@@ -61,19 +61,19 @@ const Add_Target_Master = () => {
         const formData = new FormData();
         const totalcal = valueData.no_of_orders * serviceAmount;
 
-        // formData.append('employee_id', valueData.employee_id);
-        // formData.append('service_id', valueData.service_id);
-        // formData.append('no_of_orders', valueData.no_of_orders);
-        // formData.append('total_amount', totalcal);
-        // formData.append('date', valueData.date);
+        formData.append('employee_id', valueData.employee_id);
+        formData.append('service_id', valueData.service_id);
+        formData.append('no_of_orders', valueData.no_of_orders);
+        formData.append('total_amount', totalcal);
+        formData.append('date', valueData.date);
 
         // formData.append('date[]', valueData.date);
-    valueData.date.forEach((date) => formData.append('date[]', date));
-    valueData.employee_id.forEach((id) => formData.append('employee_id[]', id));
-    valueData.service_id.forEach((id) => formData.append('service_id[]', id));
-    valueData.no_of_orders.forEach((order) => formData.append('no_of_orders[]', order));
-    // valueData.total_amount.forEach((total_amount) => formData.append('total_amount[]', total_amount));
-    formData.append('total_amount[]', totalcal);
+    // valueData.date.forEach((date) => formData.append('date[]', date));
+    // valueData.employee_id.forEach((id) => formData.append('employee_id[]', id));
+    // valueData.service_id.forEach((id) => formData.append('service_id[]', id));
+    // valueData.no_of_orders.forEach((order) => formData.append('no_of_orders[]', order));
+    // // valueData.total_amount.forEach((total_amount) => formData.append('total_amount[]', total_amount));
+    // formData.append('total_amount[]', totalcal);
 
 
 
@@ -90,26 +90,10 @@ const Add_Target_Master = () => {
     };
 
 
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setValueData({ ...valueData, [name]: value });
-
-    //     if (name === 'service_id') {
-    //         const selectedService = getservicenames.find(service => service.name === value);
-    //         if (selectedService) {
-    //             setServiceAmount(selectedService.amount);
-    //         }
-    //     }
-    // };
-
     const handleChange = (e) => {
         const { name, value } = e.target;
-        if (name === 'employee_id' || name === 'service_id' || name === 'no_of_orders' || name==='total_amount' || name==='date') {
-            setValueData({ ...valueData, [name]: [value] }); // Convert to array
-        } else {
-            setValueData({ ...valueData, [name]: value });
-        }
-    
+        setValueData({ ...valueData, [name]: value });
+
         if (name === 'service_id') {
             const selectedService = getservicenames.find(service => service.name === value);
             if (selectedService) {
@@ -117,6 +101,22 @@ const Add_Target_Master = () => {
             }
         }
     };
+
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     if (name === 'employee_id' || name === 'service_id' || name === 'no_of_orders' || name==='total_amount' || name==='date') {
+    //         setValueData({ ...valueData, [name]: [value] }); // Convert to array
+    //     } else {
+    //         setValueData({ ...valueData, [name]: value });
+    //     }
+    
+    //     if (name === 'service_id') {
+    //         const selectedService = getservicenames.find(service => service.name === value);
+    //         if (selectedService) {
+    //             setServiceAmount(selectedService.amount);
+    //         }
+    //     }
+    // };
 
     
 

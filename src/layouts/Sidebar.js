@@ -67,17 +67,17 @@ const Sidebar = () => {
 
             <NavLink className="disble-decoration " to="/service-master"><li className={`items ${currentPage === '/service-master' || currentPage === '/add-service-master' || currentPage.startsWith('/edit-service-master') ? 'active' : ''}`}><IoSettingsOutline className="icons" /> <span className='resp'>Service Master</span></li></NavLink>
 
-            <NavLink className="disble-decoration" to="/employe-manager"><li className={`items ${currentPage === '/employe-manager' || currentPage === '/add-employee' || currentPage.startsWith('/edit-employee') ? 'active' : ''}`}><MdOutlineWorkHistory className="icons" /> <span className='resp'>Employee Manager</span></li></NavLink>
+            <NavLink className="disble-decoration" to="/employe-manager"><li className={`items ${currentPage === '/employe-manager' || currentPage === '/add-employee' || currentPage.startsWith('/edit-employee') ? 'active' : ''}`}><MdOutlineWorkHistory className="icons" /> <span className='resp'>Employee Master</span></li></NavLink>
 
             {/* <NavLink className="disble-decoration" to="/target-master"><li className={`items ${currentPage === '/target-master' || currentPage === '/add-target-master' || currentPage.startsWith('/edit-target-master') ? 'active' : ''}`}><MdOutlineWorkHistory className="icons" /> <span className='resp'>Target Master</span></li></NavLink> */}
 
 
             <NavLink className="disble-decoration" to="" >
-              <li className={`dropmenu items-drop  ${currentPage === '/expenses-master' || currentPage === '/add-expenses-master' || currentPage.startsWith('/edit-expenses-master') || currentPage.startsWith('/add-expenses-payment') || currentPage.startsWith('/expenses-payment') || currentPage.startsWith('/edit-expenses-payment')  ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems1')} id='dropitems1'>
+              <li className={`dropmenu items-drop  ${currentPage === '/expenses-master' || currentPage === '/add-expenses-master' || currentPage.startsWith('/edit-expenses-master') || currentPage.startsWith('/add-expenses-payment') || currentPage.startsWith('/expenses-payment') || currentPage.startsWith('/edit-expenses-payment') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems1')} id='dropitems1'>
                 <BsDatabaseAdd className="icons" /> <span className='resp'>Expenses Master <IoIosArrowDown /></span>
 
                 <ul className='submenu' >
-                  <NavLink to='/add-expenses-master'><li  className={`droplink-text ${currentPage === '/add-expenses-master' || currentPage === '/expenses-master' || currentPage.startsWith('/edit-expenses-master') ? 'link-active' : ''}`}><IoIosArrowForward /> Add Expenses</li></NavLink>
+                  <NavLink to='/add-expenses-master'><li className={`droplink-text ${currentPage === '/add-expenses-master' || currentPage === '/expenses-master' || currentPage.startsWith('/edit-expenses-master') ? 'link-active' : ''}`}><IoIosArrowForward /> Add Expenses</li></NavLink>
 
                   <NavLink to='/expenses-payment'><li className={`droplink-text ${currentPage.startsWith('/add-expenses-payment') || currentPage.startsWith('/expenses-payment') || currentPage.startsWith('/edit-expenses-payment') ? 'link-active' : ''}`}><IoIosArrowForward /> Expenses Payment</li></NavLink>
                 </ul>
@@ -85,15 +85,25 @@ const Sidebar = () => {
             </NavLink>
 
             <NavLink className="disble-decoration" to="" >
-              <li className={`dropmenu items-drop  ${currentPage === '/target-master' || currentPage === '/add-target-master' || currentPage.startsWith('/edit-target-master') || currentPage.startsWith('/target-out') || currentPage.startsWith('/add-target-out') || currentPage.startsWith('/edit-target-out')  ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems2')} id='dropitems2'>
+              <li className={`dropmenu items-drop  ${currentPage === '/target-master' || currentPage === '/add-target-master' || currentPage.startsWith('/edit-target-master') || currentPage.startsWith('/target-out') || currentPage.startsWith('/add-target-out') || currentPage.startsWith('/edit-target-out') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems2')} id='dropitems2'>
                 <BsDatabaseAdd className="icons" /> <span className='resp'>Target Master <IoIosArrowDown /></span>
 
                 <ul className='submenu' >
-                  <NavLink to='/target-master'><li  className={`droplink-text ${currentPage === '/target-master' || currentPage === '/add-target-master' || currentPage.startsWith('/edit-target-master') ? 'link-active' : ''}`}><IoIosArrowForward /> View Target Master</li></NavLink>
-
-                  <NavLink><li className={`droplink-text ${currentPage.startsWith('/target-out') || currentPage.startsWith('/add-target-out') || currentPage.startsWith('/edit-target-out') ? 'link-active' : ''}`}><IoIosArrowForward /> Target Master In </li></NavLink>
+                  <NavLink to='/target-master'><li className={`droplink-text ${currentPage === '/target-master' || currentPage === '/add-target-master' || currentPage.startsWith('/edit-target-master') ? 'link-active' : ''}`}><IoIosArrowForward /> View Target Master</li></NavLink>
 
                   <NavLink to='/target-out'><li className={`droplink-text ${currentPage.startsWith('/target-out') || currentPage.startsWith('/add-target-out') || currentPage.startsWith('/edit-target-out') ? 'link-active' : ''}`}><IoIosArrowForward /> Target Master Out</li></NavLink>
+                </ul>
+              </li>
+            </NavLink>
+
+            <NavLink className="disble-decoration" to="" >
+              <li className={`dropmenu items-drop  ${currentPage === '/target-report' || currentPage === '/expense-master-report' ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems3')} id='dropitems3'>
+                <BsDatabaseAdd className="icons" /> <span className='resp'>Reports <IoIosArrowDown /></span>
+
+                <ul className='submenu' >
+                  <NavLink to='/target-report'><li className={`droplink-text ${currentPage === '/target-report' ? 'link-active' : ''}`}><IoIosArrowForward /> Target Master Report</li></NavLink>
+
+                  <NavLink to='/expense-master-report'><li className={`droplink-text ${currentPage.startsWith('/expense-master-report') ? 'link-active' : ''}`}><IoIosArrowForward /> Expense Master Report</li></NavLink>
                 </ul>
               </li>
             </NavLink>

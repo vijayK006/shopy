@@ -39,6 +39,7 @@ import Edit_Expense_Payment from './Pages/Expense-Master/Edit-Expense-Payment';
 import Add_Target_Out from './Pages/Target-Master/Add-Target-out';
 import TargetOut from './Pages/Target-Master/Target-Out';
 import Edit_Target_Out from './Pages/Target-Master/Edit-Target-Out';
+import TargetReport from './Pages/Reports/Target-Report';
 
 
 const App = () => {
@@ -89,6 +90,8 @@ const App = () => {
           <Route path="/add-target-out" element={<Add_Target_Out />} />
           <Route path="/edit-target-out/:id" element={<Edit_Target_Out />} />
 
+{/* Reports */}
+<Route path="/target-report" element={<TargetReport />} />
 
         </Routes>
       </BrowserRouter>

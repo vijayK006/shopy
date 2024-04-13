@@ -94,7 +94,7 @@ const TargetOut = () => {
     }
 
     const calculateTotalAmount = (data) => {
-        const total = data.reduce((acc, item) => acc + parseFloat(item.amount), 0);
+        const total = data.reduce((acc, item) => acc + parseFloat(item.total_amount), 0);
         setTotalAmount(total);
     }
 
@@ -107,7 +107,7 @@ const TargetOut = () => {
         { field: 'employee_id', headerName: 'Employe Name', width: 150 },
         { field: 'service_id', headerName: 'Service Name', width: 150 },
         { field: 'no_of_orders', headerName: 'Order Qty.', width: 150 },
-        { field: 'amount', headerName: 'Total Amount', width: 150 },
+        { field: 'total_amount', headerName: 'Total Amount', width: 150 },
         { field: 'date', headerName: 'Date', type: 'Date', width: 150 },
         {
             field: 'actions',
@@ -135,7 +135,7 @@ const TargetOut = () => {
         employee_id: item.employee_id,
         service_id: item.service_id,
         no_of_orders: item.no_of_orders,
-        amount: item.amount,
+        total_amount: item.total_amount,
         date: item.date,
     })) : [];
 
