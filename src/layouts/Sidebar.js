@@ -103,7 +103,7 @@ const Sidebar = () => {
                 <ul className='submenu' >
                   <NavLink to='/target-report'><li className={`droplink-text ${currentPage === '/target-report' ? 'link-active' : ''}`}><IoIosArrowForward /> Target Master Report</li></NavLink>
 
-                  <NavLink to='/expense-master-report'><li className={`droplink-text ${currentPage.startsWith('/expense-master-report') ? 'link-active' : ''}`}><IoIosArrowForward /> Expense Master Report</li></NavLink>
+                  <NavLink to='/expense-report'><li className={`droplink-text ${currentPage.startsWith('/expense-report') ? 'link-active' : ''}`}><IoIosArrowForward /> Expense Master Report</li></NavLink>
                 </ul>
               </li>
             </NavLink>

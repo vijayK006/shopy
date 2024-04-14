@@ -40,6 +40,7 @@ import Add_Target_Out from './Pages/Target-Master/Add-Target-out';
 import TargetOut from './Pages/Target-Master/Target-Out';
 import Edit_Target_Out from './Pages/Target-Master/Edit-Target-Out';
 import TargetReport from './Pages/Reports/Target-Report';
+import ExpenseReport from './Pages/Reports/Expense-Report';
 
 
 const App = () => {
@@ -92,6 +93,7 @@ const App = () => {
 
 {/* Reports */}
 <Route path="/target-report" element={<TargetReport />} />
+<Route path="/expense-report" element={<ExpenseReport />} />
 
         </Routes>
       </BrowserRouter>

@@ -18,8 +18,8 @@ const Expense_Payment = () => {
     const [endDate, setEndDate] = useState(null);
     const [totalAmount, setTotalAmount] = useState(0);
     const [selectedService, setSelectedService] = useState('');
+    const [selectedEmployee, setSelectedEmployee] = useState('');
 
-    
 
     // const fetchData = () => {
     //     axios.get('https://shopee-firm.000webhostapp.com/api/expense-payment/get-payment.php')
@@ -43,11 +43,11 @@ const Expense_Payment = () => {
                     console.error('Invalid data format:', responseData);
                 }
             })
-            .catch(err => { 
+            .catch(err => {
                 console.error('Error fetching data:', err);
             });
     }
-    
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -98,6 +98,10 @@ const Expense_Payment = () => {
             filteredData = filteredData.filter(item => item.expense_id === selectedService);
         }
 
+        if (selectedEmployee) {
+            filteredData = filteredData.filter(item => item.employee_id === selectedEmployee);
+        }
+
         // Calculate total amount for filtered data
         calculateTotalAmount(filteredData);
 
@@ -111,6 +115,7 @@ const Expense_Payment = () => {
 
     // Extract unique service names
     const serviceNames = Array.from(new Set(apiDatas.map(item => item.expense_id)));
+    const employeeNames = Array.from(new Set(apiDatas.map(item => item.employee_id)));
 
 
     const columns = [
@@ -190,7 +195,7 @@ const Expense_Payment = () => {
 
                         <div className='d-flex gap-3 align-items-center'>
                             <div className='form-head'>
-                                <input type='date' className='filter-fields' value={startDate} onChange={(e) => setStartDate(e.target.value)}/>
+                                <input type='date' className='filter-fields' value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                             </div>
                             <span> <BsArrowLeftRight /> </span>
                             <div className='form-head'>
@@ -208,11 +213,20 @@ const Expense_Payment = () => {
                             </select>
                         </div>
 
-<div className='d-flex gap-2 justify-content-end pb-3'>
-    <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={handleFilter}><TbFilterCog /> Check</button>
+                        <div className='form-head'>
+                            <select value={selectedEmployee} onChange={(e) => setSelectedEmployee(e.target.value)} className='filter-fields'>
+                                <option value="">All Employees</option>
+                                {employeeNames.filter(Boolean).map(employee => (
+                                    <option key={employee} value={employee}>{employee}</option>
+                                ))}
+                            </select>
+                        </div>
 
-    <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={loadall}><BiReset /> Reset</button>
-</div>
+                        <div className='d-flex gap-2 justify-content-end pb-3'>
+                            <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={handleFilter}><TbFilterCog /> Check</button>
+
+                            <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={loadall}><BiReset /> Reset</button>
+                        </div>
 
                         <p>Total Amount: {totalAmount} <LuIndianRupee /></p>
 

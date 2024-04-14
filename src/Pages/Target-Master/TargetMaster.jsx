@@ -18,6 +18,7 @@ const TargetMaster = () => {
     const [endDate, setEndDate] = useState(null);
     const [totalAmount, setTotalAmount] = useState(0);
     const [selectedService, setSelectedService] = useState('');
+    const [selectedEmployee, setSelectedEmployee] = useState('');
 
    
 
@@ -87,6 +88,10 @@ const TargetMaster = () => {
             filteredData = filteredData.filter(item => item.service_id === selectedService);
         }
 
+        if (selectedEmployee) {
+            filteredData = filteredData.filter(item => item.employee_id === selectedEmployee);
+        }
+
         // Calculate total amount for filtered data
         calculateTotalAmount(filteredData);
 
@@ -100,6 +105,7 @@ const TargetMaster = () => {
 
     // Extract unique service names
     const serviceNames = Array.from(new Set(apiDatas.map(item => item.service_id)));
+    const employeeNames = Array.from(new Set(apiDatas.map(item => item.employee_id)));
 
 
     const columns = [
@@ -193,6 +199,15 @@ const TargetMaster = () => {
                                 <option value="">All Services</option>
                                 {serviceNames.map(service => (
                                     <option key={service} value={service}>{service}</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className='form-head'>
+                            <select value={selectedEmployee} onChange={(e) => setSelectedEmployee(e.target.value)} className='filter-fields'>
+                                <option value="">All Employees</option>
+                                {employeeNames.filter(Boolean).map(employee => (
+                                    <option key={employee} value={employee}>{employee}</option>
                                 ))}
                             </select>
                         </div>
