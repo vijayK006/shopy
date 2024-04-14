@@ -184,10 +184,9 @@ const Expense_Payment = () => {
                     </div>
                     <div className='actions'>
                         <Link to='/add-expenses-payment' className='btn btn-bg-orange btn-sm b-radius-50 '><MdNoteAdd style={{ fontSize: "18px", marginBottom: '2px' }} /> Add Expense Payment</Link>
-                        &nbsp;
-                        &nbsp;
+                      
 
-                        <button type='button' className='btn btn-bg-orange btn-sm b-radius-50 ' onClick={filterbtn}><FaFilter style={{ marginBottom: '2px' }} /> Filter</button>
+                        {/* <button type='button' className='btn btn-bg-orange btn-sm b-radius-50 ' onClick={filterbtn}><FaFilter style={{ marginBottom: '2px' }} /> Filter</button> */}
 
                     </div>
 

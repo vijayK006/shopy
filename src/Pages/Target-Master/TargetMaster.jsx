@@ -47,6 +47,8 @@ const TargetMaster = () => {
         setStartDate('00-00-0000')
         setEndDate('00-00-0000')
         setTotalAmount(0)
+        const refer = document.getElementById('refer');
+        refer.style.display="block"
     }
 
     const handleDelete = (id) => {
@@ -96,6 +98,9 @@ const TargetMaster = () => {
         calculateTotalAmount(filteredData);
 
         setApiDatas(filteredData);
+
+        const refer = document.getElementById('refer');
+        refer.style.display="none"
     }
 
     const calculateTotalAmount = (data) => {
@@ -213,7 +218,7 @@ const TargetMaster = () => {
                         </div>
 
 <div className='d-flex gap-2 justify-content-end pb-3'>
-    <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={handleFilter}><TbFilterCog /> Check</button>
+    <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1'  id="refer" onClick={handleFilter}><TbFilterCog /> Check</button>
 
     <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={loadall}><BiReset /> Reset</button>
 </div>

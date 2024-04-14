@@ -55,6 +55,9 @@ const TargetReport = () => {
     setTotalOrdersTin(0);
     setTotalAmountTout(0);
     setTotalOrdersTout(0);
+
+    const refer = document.getElementById('refer');
+    refer.style.display="block"
   };
 
   const handleFilter = () => {
@@ -94,6 +97,9 @@ const TargetReport = () => {
     calculateTotalOrdersTout(filteredData);
 
     setApiDatas(filteredData);
+
+    const refer = document.getElementById('refer');
+    refer.style.display="none"
   };
 
   const calculateTotalAmountTin = (data) => {
@@ -269,6 +275,7 @@ const TargetReport = () => {
                 type="button"
                 className="btn btn-bg-orange btn-sm letter-spacing-1"
                 onClick={handleFilter}
+                id="refer"
               >
                 <TbFilterCog /> Check
               </button>

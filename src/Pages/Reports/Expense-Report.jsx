@@ -53,12 +53,7 @@ const ExpenseReport = () => {
     fetchData();
   }, []);
 
-  const loadall = () => {
-    fetchData();
-    setStartDate("00-00-0000");
-    setEndDate("00-00-0000");
-    setTotalAmount(0);
-  };
+ 
 
   const handleDelete = (id) => {
     const confirmDelete = window.confirm(
@@ -108,7 +103,21 @@ const ExpenseReport = () => {
     calculateTotalAmount(filteredData);
 
     setApiDatas(filteredData);
+
+    const refer = document.getElementById('refer');
+    refer.style.display="none"
   };
+
+  const loadall = () => {
+    fetchData();
+    setStartDate("00-00-0000");
+    setEndDate("00-00-0000");
+    setTotalAmount(0);
+    
+    const refer = document.getElementById('refer');
+    refer.style.display="block"
+  };
+
 
   const calculateTotalAmount = (data) => {
     const total = data.reduce((acc, item) => acc + parseFloat(item.amount), 0);
@@ -261,6 +270,7 @@ const ExpenseReport = () => {
                 type="button"
                 className="btn btn-bg-orange btn-sm letter-spacing-1"
                 onClick={handleFilter}
+                id="refer"
               >
                 <TbFilterCog /> Check
               </button>

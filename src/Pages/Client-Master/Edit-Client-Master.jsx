@@ -276,8 +276,8 @@ const Edit_Client_Master = () => {
                                 <label className='text-sm font-w-500 p-2'>Voter-id</label>
                                 <div className='img-format main-field'>
                                     <img id="voter_id_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.voter_id_photo}`} alt='' />
-                                </div>
                                 <label for='voter_id_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
+                                </div>
                                 <input type='file' className='form-control d-none' id='voter_id_photo' name='voter_id_photo' onChange={handleChange} />
 
                                 <input type='text' className='form-control mt-1' value={valueData.voter_id} name='voter_id' placeholder='Please enter voter-id' onChange={handleChange} />
