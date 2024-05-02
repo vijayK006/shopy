@@ -608,7 +608,25 @@ color: gray;
     border: 1px solid #e0e0e0;
 }
 
-.img-format img {
+.img-format-ownerphoto{
+    height: 200px;
+    width: 160px;
+    background-color: rgb(245, 245, 245);
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+.img-format-ownersign{
+    height: 64px;
+    width: 256px;
+    background-color: rgb(245, 245, 245);
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+.img-format img, .img-format-ownerphoto img, .img-format-ownersign img{
     height: 100%;
     width: 100%;
     border-radius: 10px;
@@ -967,3 +985,7 @@ font-size: 20px;
     border-radius: 10px;
 }
 
+.form-check-input:checked {
+    background-color: #ff5e1a ;
+    border-color: #ff5e1a ;
+}

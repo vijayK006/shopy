@@ -217,7 +217,7 @@ const Edit_Firm_Master = () => {
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Business Owner Photo</label>
-                                <div className='img-format mb-1 main-field'>
+                                <div className='img-format-ownerphoto mb-1 main-field'>
                                     <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.owner_image}`} alt='' id="owner_image-preview"/>
                                     <label for='owner_image' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
                                 
@@ -227,14 +227,14 @@ const Edit_Firm_Master = () => {
 
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Business Owner Sign</label>
-                                <div className='img-format mb-1 main-field'>
+                                <div className='img-format-ownersign mb-1 main-field'>
                                     <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.sign}`} alt='' id="sign-preview" />
                                     <label for='sign' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
                                 </div>
                                 <input type='file' className='form-control d-none' id='sign' name='sign' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Firm Name</label>
                                 <input type='text' className='form-control' value={valueData.firm_name} name='firm_name' placeholder='Please enter name' onChange={handleChange} />
 

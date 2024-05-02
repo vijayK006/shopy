@@ -17,10 +17,13 @@ const TargetMaster = () => {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [totalAmount, setTotalAmount] = useState(0);
+    const [totalQty, setTotalQty] = useState(0);
     const [selectedService, setSelectedService] = useState('');
     const [selectedEmployee, setSelectedEmployee] = useState('');
 
-   
+
+
+
 
     const fetchData = () => {
         axios.get('https://shopee-firm.000webhostapp.com/api/target/get-target.php')
@@ -48,7 +51,7 @@ const TargetMaster = () => {
         setEndDate('00-00-0000')
         setTotalAmount(0)
         const refer = document.getElementById('refer');
-        refer.style.display="block"
+        refer.style.display = "block"
     }
 
     const handleDelete = (id) => {
@@ -100,12 +103,14 @@ const TargetMaster = () => {
         setApiDatas(filteredData);
 
         const refer = document.getElementById('refer');
-        refer.style.display="none"
+        refer.style.display = "none"
     }
 
     const calculateTotalAmount = (data) => {
         const total = data.reduce((acc, item) => acc + parseFloat(item.total_amount), 0);
+        const totalqty = data.reduce((acc, item) => acc + parseFloat(item.no_of_orders), 0);
         setTotalAmount(total);
+        setTotalQty(totalqty);
     }
 
     // Extract unique service names
@@ -190,7 +195,7 @@ const TargetMaster = () => {
 
                         <div className='d-flex gap-3 align-items-center'>
                             <div className='form-head'>
-                                <input type='date' className='filter-fields' value={startDate} onChange={(e) => setStartDate(e.target.value)}/>
+                                <input type='date' className='filter-fields' value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                             </div>
                             <span> <BsArrowLeftRight /> </span>
                             <div className='form-head'>
@@ -217,13 +222,19 @@ const TargetMaster = () => {
                             </select>
                         </div>
 
-<div className='d-flex gap-2 justify-content-end pb-3'>
-    <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1'  id="refer" onClick={handleFilter}><TbFilterCog /> Check</button>
+                        <div className='d-flex gap-2 justify-content-end pb-3'>
+                            <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' id="refer" onClick={handleFilter}><TbFilterCog /> Check</button>
 
-    <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={loadall}><BiReset /> Reset</button>
-</div>
+                            <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={loadall}><BiReset /> Reset</button>
+                        </div>
 
-                        <p>Total Amount: {totalAmount} <LuIndianRupee /></p>
+
+                        <div className='d-flex justify-content-between'>
+                            <p className='px-2'>Total Amount:<LuIndianRupee /> {totalAmount} </p>
+                            <p className='px-2'>Total Quality:{totalQty} </p>
+                        </div>
+
+
 
 
                     </div>

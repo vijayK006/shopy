@@ -8,33 +8,8 @@ import axios from 'axios';
 const Edit_Service_Master = () => {
     const { id } = useParams();
 
-    const [countryid, setCountryid] = useState(0);
-    const [stateid, setstateid] = useState(0);
-
-    const [getservicesode, setGetServiceCode] = useState([])
-    const [alertphone, setAlertphone] = useState();
-
-    const [alertname, setAlertname] = useState();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        // Set default country to India after the component mounts
-        const defaultCountry = { id: 101, name: "India" };
-        setCountryid(defaultCountry.id);
-    }, []);
-
-    
-    // useEffect(() => {
-    //     axios.get('https://shopee-firm.000webhostapp.com/api/service/get-service.php')
-    //         .then(res => {
-    //             const migrateservicecode = res.data.map(firm => firm.code)
-    //             setGetServiceCode(migrateservicecode)
-    //             console.log(migrateservicecode)
-    //         })
-    //         .catch(err => {
-    //             console.error('Error fetching data:', err);
-    //         });
-    // }, []);
 
     const [valueData, setValueData] = useState({
         code: '',
@@ -132,7 +107,7 @@ const Edit_Service_Master = () => {
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
                         <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Service Code</label>
+                                <label className='text-sm font-w-500 p-2'> Service Code</label>
                                 <input type='text' className='form-control' value={valueData.code} name='code' placeholder='Please service code' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertname}</p> */}
@@ -140,30 +115,27 @@ const Edit_Service_Master = () => {
 
 
                             <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Service Name</label>
+                                <label className='text-sm font-w-500 p-2'> Service Name</label>
                                 <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Please enter Service name' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertowner}</p> */}
                             </div>
 
                             <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Service Expense</label>
+                                <label className='text-sm font-w-500 p-2'> Service Amount</label>
+                                <input type='number' className='form-control' value={valueData.amount} name='amount' placeholder='Please enter service amount' onChange={handleChange} />
+                                {/* <p className='warning'>{alertaltphone}</p> */}
+                            </div>
+
+                            <div className='col-md-4 py-1'>
+                                <label className='text-sm font-w-500 p-2'> Service Expense</label>
                                 <input type='number' className='form-control' value={valueData.expense} name='expense' placeholder='Please enter expense' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertphone}</p> */}
                             </div>
 
-
                             <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Service Amount</label>
-                                <input type='number' className='form-control' value={valueData.amount} name='amount' placeholder='Please enter service amount' onChange={handleChange} />
-                                {/* <p className='warning'>{alertaltphone}</p> */}
-
-
-                            </div>
-
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Required Documents</label>
+                                <label className='text-sm font-w-500 p-2'> Required Documents</label>
                                 <input type='text' className='form-control' value={valueData.documents} name='documents' placeholder='Please enter documents' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertemail}</p> */}

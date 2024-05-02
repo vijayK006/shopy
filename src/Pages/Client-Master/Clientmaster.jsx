@@ -39,8 +39,6 @@ const Clientmaster = () => {
         });
     }, []);
 
-
-
     const handleDelete = (id) => {
       const confirmDelete = window.confirm("Are you sure you want to delete this Firm Master");
       if (confirmDelete) {

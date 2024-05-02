@@ -10,17 +10,17 @@ const Add_Target_Master = () => {
     const [getempoloyenames, setGetempoloyenames] = useState([]);
     const [getservicenames, setGetservicenames] = useState([]);
     const [serviceAmount, setServiceAmount] = useState();
- 
+
     useEffect(() => {
-                axios.get('https://shopee-firm.000webhostapp.com/api/employee/get-employee.php')
-                    .then(res => {
-                        const migrateemploye = res.data.map(employee => employee.name)
-                        setGetempoloyenames(migrateemploye)
-                    })
-                    .catch(err => {
-                        console.error('Error fetching data:', err);
-                    });
-            }, []);
+        axios.get('https://shopee-firm.000webhostapp.com/api/employee/get-employee.php')
+            .then(res => {
+                const migrateemploye = res.data.map(employee => employee.name)
+                setGetempoloyenames(migrateemploye)
+            })
+            .catch(err => {
+                console.error('Error fetching data:', err);
+            });
+    }, []);
 
 
     useEffect(() => {
@@ -53,27 +53,27 @@ const Add_Target_Master = () => {
     });
 
 
-  
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const formData = new FormData();
-        const totalcal = valueData.no_of_orders * serviceAmount;
+        // const totalcal = valueData.no_of_orders * serviceAmount;
 
         formData.append('employee_id', valueData.employee_id);
         formData.append('service_id', valueData.service_id);
         formData.append('no_of_orders', valueData.no_of_orders);
-        formData.append('total_amount', totalcal);
+        formData.append('total_amount', valueData.total_amount);
         formData.append('date', valueData.date);
 
         // formData.append('date[]', valueData.date);
-    // valueData.date.forEach((date) => formData.append('date[]', date));
-    // valueData.employee_id.forEach((id) => formData.append('employee_id[]', id));
-    // valueData.service_id.forEach((id) => formData.append('service_id[]', id));
-    // valueData.no_of_orders.forEach((order) => formData.append('no_of_orders[]', order));
-    // // valueData.total_amount.forEach((total_amount) => formData.append('total_amount[]', total_amount));
-    // formData.append('total_amount[]', totalcal);
+        // valueData.date.forEach((date) => formData.append('date[]', date));
+        // valueData.employee_id.forEach((id) => formData.append('employee_id[]', id));
+        // valueData.service_id.forEach((id) => formData.append('service_id[]', id));
+        // valueData.no_of_orders.forEach((order) => formData.append('no_of_orders[]', order));
+        // // valueData.total_amount.forEach((total_amount) => formData.append('total_amount[]', total_amount));
+        // formData.append('total_amount[]', totalcal);
 
 
 
@@ -109,7 +109,7 @@ const Add_Target_Master = () => {
     //     } else {
     //         setValueData({ ...valueData, [name]: value });
     //     }
-    
+
     //     if (name === 'service_id') {
     //         const selectedService = getservicenames.find(service => service.name === value);
     //         if (selectedService) {
@@ -118,7 +118,7 @@ const Add_Target_Master = () => {
     //     }
     // };
 
-    
+
 
     return (
         <>
@@ -134,23 +134,27 @@ const Add_Target_Master = () => {
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
                         <div className='col-md-4 py-1'>
-                                 <label className='text-sm font-w-500 p-2'>Add Employee</label>
-                                 <select className='form-control' value={valueData.employee_id} name='employee_id' onChange={handleChange}>
-                                     <option value="">Select Employee</option>
-                                     {getempoloyenames.map((name, index) => (
-                                         <option key={index} value={name}>{name}</option>
-                                     ))}
-                                 </select>
-                                 {/* <p className='warning'>{alertowner}</p> */}
-                             </div>
-
-                             <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Target Date</label>
+                                <label className='text-sm font-w-500 p-2'>Target From Date</label>
                                 <input type='date' className='form-control' value={valueData.date} name='date' placeholder='' onChange={handleChange} />
                             </div>
-                            <div className='col-md-12 py-1 border-bottom'/>
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Add Service</label>
+
+                            <div className='col-md-4 py-1'>{/* not Connected */}
+                                <label className='text-sm font-w-500 p-2'>Target To Date</label>
+                                <input type='date' className='form-control' 
+                                // value={valueData.date}
+                                 name='date' placeholder='' 
+                                // onChange={handleChange}
+                                 />
+                            </div>
+
+                          
+
+                           
+
+                            <div className='col-md-12 py-1 border-bottom' />
+
+                            <div className='col-md-3 py-2'>
+                                <label className='text-sm font-w-500 p-2'>Select Service</label>
                                 <select className='form-control' value={valueData.service_id} name='service_id' onChange={handleChange}>
                                     <option value="">Select Service</option>
                                     {getservicenames.map(service => (
@@ -159,16 +163,41 @@ const Add_Target_Master = () => {
                                 </select>
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-3 py-2'>
+                                <label className='text-sm font-w-500 p-2'>Select Employee</label>
+                                <select className='form-control' value={valueData.employee_id} name='employee_id' onChange={handleChange}>
+                                    <option value="">Select Employee</option>
+                                    {getempoloyenames.map((name, index) => (
+                                        <option key={index} value={name}>{name}</option>
+                                    ))}
+                                </select>
+                                {/* <p className='warning'>{alertowner}</p> */}
+                            </div>
+
+
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>No. of Orders</label>
                                 <input type='number' className='form-control' value={valueData.no_of_orders} name='no_of_orders' placeholder='Please enter no. of orders' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            {/* <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Total Amount</label>
-                                <input type='number' className='form-control' 
-                                value={valueData.total_amount}
-                                 name='total_amount' onChange={handleChange} placeholder={valueData.no_of_orders * serviceAmount} readOnly/>
+                                <input type='number' className='form-control'
+                                    value={valueData.total_amount}
+                                    name='total_amount' onChange={handleChange} placeholder={valueData.no_of_orders * serviceAmount} readOnly />
+                            </div> */}
+
+                            <div className='col-md-3 py-2'>
+                                <label className='text-sm font-w-500 p-2'>Total Amount</label>
+                                <input type='number' className='form-control'
+                                    value={valueData.total_amount}
+                                    name='total_amount' onChange={handleChange} placeholder="0" />
+                            </div>
+
+
+                            <div className='col-md-6 py-2'>{/* not Connected */}
+                                <label className='text-sm font-w-500 p-2'>Target Description</label>
+                                <textarea type='text' rows={2} cols={2} className='form-control' value="not connected" name='target-description' placeholder='Target Description not connected' onChange={handleChange} ></textarea>
                             </div>
 
                             <div className='d-flex justify-content-end pt-4'>

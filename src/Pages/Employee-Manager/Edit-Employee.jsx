@@ -166,82 +166,83 @@ const Edit_employe = () => {
                             <div className='col-md-4 py-1' />
 
                             <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500 p-2'>Enter Employee Name</label>
+                                <label className='text-sm font-w-500 p-2'> Employee Name</label>
                                 <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Please enter name' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertname}</p> */}
                             </div>
 
-
                             <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500 p-2'>Enter Employee Email-id</label>
-                                <input type='text' className='form-control' value={valueData.email} name='email' placeholder='Please enter email-id' onChange={handleChange} />
-
-                                {/* <p className='warning'>{alertowner}</p> */}
-                            </div>
-
-
-                            <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500 p-2'>Enter Mobile No.</label>
-                                <input type='number' className='form-control' value={valueData.phone} name='phone' placeholder='Please enter mobile no.' onChange={handleChange} />
-
-                                {/* <p className='warning'>{alertphone}</p> */}
-                            </div>
-
-                            <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500 p-2'>Enter Alternate Mobile No.</label>
-                                <input type='number' className='form-control' value={valueData.alt_phone} name='alt_phone' placeholder='Please enter alternate mobile no.' onChange={handleChange} />
-
-                                {/* <p className='warning'>{alertphone}</p> */}
-                            </div>
-
-                            <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500 p-2'>Enter Employee Address</label>
-                                <input type='text' className='form-control' value={valueData.address} name='address' placeholder='Please enter address' onChange={handleChange} />
-
-                                {/* <p className='warning'>{alertname}</p> */}
-                            </div>
-
-                            <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500 p-2'>Enter Employee Post</label>
-                                <input type='text' className='form-control' value={valueData.post} name='post' placeholder='Please enter post' onChange={handleChange} />
-
-                                {/* <p className='warning'>{alertname}</p> */}
-                            </div>
-
-                            <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500 p-2'>Enter Employee Salary</label>
-                                <input type='number' className='form-control' value={valueData.salary} name='salary' placeholder='Please enter salary' onChange={handleChange} />
-
-                                {/* <p className='warning'>{alertname}</p> */}
-                            </div>
-                            <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500 p-2'>Enter Empoloyee DOB</label>
+                                <label className='text-sm font-w-500 p-2'> Empoloyee DOB</label>
                                 <input type='date' className='form-control' value={valueData.dob} name='dob' placeholder='' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertemail}</p> */}
                             </div>
 
                             <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500 p-2'>Enter Empoloyee DOJ</label>
+                                <label className='text-sm font-w-500 p-2'> Mobile No.</label>
+                                <input type='number' className='form-control' value={valueData.phone} name='phone' placeholder='Please enter mobile no.' onChange={handleChange} />
+
+                                {/* <p className='warning'>{alertphone}</p> */}
+                            </div>
+
+
+                            <div className='col-md-4 py-2'>
+                                <label className='text-sm font-w-500 p-2'> Alternate Mobile No.</label>
+                                <input type='number' className='form-control' value={valueData.alt_phone} name='alt_phone' placeholder='Please enter alternate mobile no.' onChange={handleChange} />
+
+                                {/* <p className='warning'>{alertphone}</p> */}
+                            </div>
+
+                            <div className='col-md-4 py-2'>
+                                <label className='text-sm font-w-500 p-2'> Employee Email-id</label>
+                                <input type='text' className='form-control' value={valueData.email} name='email' placeholder='Please enter email-id' onChange={handleChange} />
+
+                                {/* <p className='warning'>{alertowner}</p> */}
+                            </div>
+
+                            <div className='col-md-4 py-2'>
+                                <label className='text-sm font-w-500 p-2'> Employee Address</label>
+                                <input type='text' className='form-control' value={valueData.address} name='address' placeholder='Please enter address' onChange={handleChange} />
+
+                                {/* <p className='warning'>{alertname}</p> */}
+                            </div>
+
+                            <div className='col-md-4 py-2'>
+                                <label className='text-sm font-w-500 p-2'> Employee Post</label>
+                                <input type='text' className='form-control' value={valueData.post} name='post' placeholder='Please enter post' onChange={handleChange} />
+
+                                {/* <p className='warning'>{alertname}</p> */}
+                            </div>
+
+                            <div className='col-md-4 py-2'>
+                                <label className='text-sm font-w-500 p-2'> Employee Salary</label>
+                                <input type='number' className='form-control' value={valueData.salary} name='salary' placeholder='Please enter salary' onChange={handleChange} />
+
+                                {/* <p className='warning'>{alertname}</p> */}
+                            </div>
+
+                            <div className='col-md-4 py-2'>
+                                <label className='text-sm font-w-500 p-2'> Empoloyee DOJ</label>
                                 <input type='date' className='form-control' value={valueData.doj} name='doj' placeholder='' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertemail}</p> */}
                             </div>
 
                             <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500 p-2'>Enter Empoloyee DOR</label>
+                                <label className='text-sm font-w-500 p-2'> Empoloyee DOR</label>
                                 <input type='date' className='form-control' value={valueData.dor} name='dor' placeholder='' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertemail}</p> */}
                             </div>
 
                             <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500 p-2'>Enter Empoloyee Password</label>
+                                <label className='text-sm font-w-500 p-2'> Empoloyee Password</label>
                                 <input type='text' className='form-control' value={valueData.password} name='password' placeholder='Enter new password' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertemail}</p> */}
                             </div>
+                            
                             <div className='col-12 py-3 border-top' />
                             <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Resume / CV </label>
@@ -287,7 +288,6 @@ const Edit_employe = () => {
 
                             <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Pan Card</label>
-
 
                                 <input type='file' className='form-control' id='pan_photo' name='pan_photo' onChange={handleChange} />
 

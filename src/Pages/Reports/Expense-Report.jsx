@@ -55,23 +55,7 @@ const ExpenseReport = () => {
 
  
 
-  const handleDelete = (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this Expense Payment?"
-    );
-    if (confirmDelete) {
-      axios
-        .post(
-          `https://shopee-firm.000webhostapp.com/api/expense-payment/delete-payment.php?id=${id}`
-        )
-        .then((res) => {
-          fetchData();
-        })
-        .catch((err) => {
-          console.error("Error deleting data:", err);
-        });
-    }
-  };
+
 
   const handleFilter = () => {
     let filteredData = apiDatas;
@@ -131,38 +115,12 @@ const ExpenseReport = () => {
 
   const columns = [
     { field: "displayOrder", headerName: "Sl.No", width: 70 },
+    { field: "date", headerName: "Date", width: 200 },
     { field: "expense_id", headerName: "Expense Name", width: 200 },
+    { field: "remark", headerName: "Description", width: 150 },
     // { field: 'employee_id', headerName: 'Employe Name', width: 150 },
     { field: "amount", headerName: "Expense Amount", width: 200 },
-    { field: "date", headerName: "Date", width: 200 },
-    { field: "remark", headerName: "Remark", width: 150 },
-    {
-      field: "actions",
-      headerName: "Actions",
-      sortable: false,
-      width: 230,
-      renderCell: (params) => (
-        <>
-          <Link
-            to={`/edit-expenses-payment/${params.row.id}`}
-            className="btn btn-outline-warning btn-sm"
-          >
-            <FaRegEdit style={{ fontSize: "15px", marginBottom: "4px" }} /> View
-            / Edit
-          </Link>
-          &nbsp; &nbsp;
-          <Link
-            className="btn btn-outline-danger btn-sm"
-            onClick={() => handleDelete(params.row.id)}
-          >
-            <AiOutlineDelete
-              style={{ fontSize: "15px", marginBottom: "4px" }}
-            />{" "}
-            Delete
-          </Link>
-        </>
-      ),
-    },
+   
   ];
 
   const rows =

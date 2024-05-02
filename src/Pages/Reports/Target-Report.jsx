@@ -30,10 +30,19 @@ const TargetReport = () => {
         const responseData = res.data || [];
         if (Array.isArray(responseData)) {
           setApiDatas(responseData);
+          console.log(responseData)
           calculateTotalAmountTin(responseData);
           calculateTotalOrdersTin(responseData);
           calculateTotalAmountTout(responseData);
           calculateTotalOrdersTout(responseData);
+
+          // const resulttype = responseData.map(migratetype => migratetype.target_type);
+          // if (resulttype.indexOf("tin") !== -1) {
+          //   console.log('In');
+          // } else if (resulttype.indexOf("tout") !== -1) {
+          //   console.log('Out');
+          // }
+
         } else {
           console.error("Invalid data format:", responseData);
         }
@@ -42,6 +51,9 @@ const TargetReport = () => {
         console.error("Error fetching data:", err);
       });
   };
+
+
+ 
 
   useEffect(() => {
     fetchData();
@@ -152,12 +164,12 @@ const TargetReport = () => {
 
   const columns = [
     { field: "displayOrder", headerName: "Sl.No", width: 70 },
-    { field: "target_type", headerName: "Target Type", width: 150 },
-    { field: "employee_id", headerName: "Employe Name", width: 150 },
+    { field: "date", headerName: "Date", type: "Date", width: 150 },
     { field: "service_id", headerName: "Service Name", width: 150 },
+    { field: "employee_id", headerName: "Employe Name", width: 150 },
     { field: "no_of_orders", headerName: "Order Qty.", width: 150 },
     { field: "total_amount", headerName: "Total Amount", width: 150 },
-    { field: "date", headerName: "Date", type: "Date", width: 150 },
+    { field: "target_type", headerName: "Target Type", width: 150 },
   ];
 
   const rows =
@@ -165,7 +177,8 @@ const TargetReport = () => {
       ? apiDatas.map((item, index) => ({
           id: item.id || index,
           displayOrder: index + 1,
-          target_type: item.target_type,
+          // target_type: item.target_type,
+          target_type: item.target_type === 'tin' ? 'In' : item.target_type === 'tout' ? 'Out' : 'Unknown',
           employee_id: item.employee_id,
           service_id: item.service_id,
           no_of_orders: item.no_of_orders,
@@ -290,15 +303,15 @@ const TargetReport = () => {
             </div>
 
             <p>
-              Total Orders: {totalOrdersTin} | Total Amt: {totalAmountTin}{" "}
+              Total Orders: {totalOrdersTin} | Total Amount: {totalAmountTin}{" "}
               <LuIndianRupee />
             </p>
             <p>
-              Comp Orders: {totalOrdersTout} | Comp Amt: {totalAmountTout}{" "}
+              Comp Orders: {totalOrdersTout} | Comp Amount: {totalAmountTout}{" "}
               <LuIndianRupee />
             </p>
             <p>
-              Bal Orders: {totalOrdersTin - totalOrdersTout} | Bal Amt:
+              Bal Orders: {totalOrdersTin - totalOrdersTout} | Bal Amount:
               {totalAmountTin - totalAmountTout} <LuIndianRupee />
             </p>
           </div>

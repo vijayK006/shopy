@@ -9,7 +9,7 @@ const Add_Expenses_Payment = () => {
     const [loading, setLoading] = useState(false);
     const [getexpensenames, setGetexpensenames] = useState([])
     const [getemployenames, setGetemployenames] = useState([])
-    
+
     const navigate = useNavigate();
 
 
@@ -17,8 +17,8 @@ const Add_Expenses_Payment = () => {
         employee_id: '',
         expense_id: '',
         amount: '',
-        date:'',
-        remark:''
+        date: '',
+        remark: ''
     })
 
     const handleSubmit = (e) => {
@@ -91,7 +91,12 @@ const Add_Expenses_Payment = () => {
                     <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
-                        <div className='col-md-4 py-2'>
+                            <div className='col-md-4 py-2'>
+                                <label className='text-sm font-w-500 p-2'>Select Expense Date</label>
+                                <input type='date' className='form-control' value={valueData.date} name='date' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Select Expense</label>
                                 <select className='form-control' value={valueData.expense_id} name='expense_id' onChange={handleChange}>
                                     <option value="">Select Expense Category </option>
@@ -101,7 +106,7 @@ const Add_Expenses_Payment = () => {
                                 </select>
                             </div>
 
-                               <div className='col-md-4 py-2'>
+                            {/* <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Select Employe</label>
                                 <select className='form-control' value={valueData.employee_id} name='employee_id' onChange={handleChange}>
                                     <option value="">Select Employe Name</option>
@@ -109,29 +114,24 @@ const Add_Expenses_Payment = () => {
                                         <option key={index} value={name}>{name}</option>
                                     ))}
                                 </select>
-                            </div>
-
+                            </div> */}
 
                             <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500 p-2'>Enter Expense Amount</label>
+                                <label className='text-sm font-w-500 p-2'> Expense Description</label>
+                                <input type='text' className='form-control' value={valueData.remark} name='remark' placeholder='Please enter expense description' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-4 py-2'>
+                                <label className='text-sm font-w-500 p-2'> Expense Amount</label>
                                 <input type='number' className='form-control' value={valueData.amount} name='amount' placeholder='Please enter expense amount' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500 p-2'>Select Expense Date</label>
-                                <input type='date' className='form-control' value={valueData.date} name='date' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500 p-2'>Enter Expense Remark</label>
-                                <input type='text' className='form-control' value={valueData.remark} name='remark' placeholder='Please enter expense remark' onChange={handleChange} />
-                            </div>
 
                             <div className='d-flex justify-content-end pt-4'>
                                 {/* <button type='submit' className='btn btn-bg-orange' style={{ width: "200px" }} >Submit</button> */}
 
                                 <button type='submit' className='btn btn-bg-orange' style={{ width: "200px" }} disabled={loading}>
-                                    {loading ? ( // Conditional rendering for loading popup
+                                    {loading ? ( // ConTditional rendering for loading popup
                                         <>
                                             Submit &nbsp; &nbsp;
                                             <div className="spinner-border text-warning spinner-border-sm scaleonload"></div>
