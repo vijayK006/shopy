@@ -224,7 +224,7 @@ const Edit_Firm_Master = () => {
                                 </div>
                                 <input type='file' className='form-control d-none' id='owner_image' name='owner_image' onChange={handleChange} />
                             </div>
-
+{/* ----------------------------- */}
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Business Owner Sign</label>
                                 <div className='img-format-ownersign mb-1 main-field'>
@@ -271,17 +271,6 @@ const Edit_Firm_Master = () => {
                                 <input type='text' className='form-control' value={valueData.business_type} name='business_type'  placeholder='Please enter email-id' onChange={handleChange} />
                             </div>
 
-                            {/* <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500 p-2'>Select Business Type</label>
-                                <select className='form-control' value={valueData.business_type} name='business_type' onChange={handleChange}>
-                                    <option value="">Please select business type</option>
-                                    <option value="type1">Type 1</option>
-                                    <option value="type2">Type 2</option>
-                                    <option value="type3">Type 3</option>
-
-                                </select>
-                            </div> */}
-
                             <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Business Category</label>
                                 <input type='text' className='form-control' value={valueData.business_category} name='business_category' placeholder='Please enter business category' onChange={handleChange} />
@@ -297,16 +286,7 @@ const Edit_Firm_Master = () => {
                                 <input type='text' className='form-control' value={valueData.pin} name='pin' placeholder='Please enter pin code' onChange={handleChange} />
                             </div>
 
-                            {/* <div className='col-md-4 py-2' style={{ display: "none" }}>
-                                <label className='text-sm font-w-500 p-2'> Country</label>
-                                <CountrySelect
-                                    onChange={(e) => {
-                                        setCountryid(e.id);
-                                    }}
-                                    placeHolder="Select Country"
-                                    value={countryid}
-                                />
-                            </div> */}
+                       
 
                             <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'> State</label>
@@ -349,6 +329,22 @@ const Edit_Firm_Master = () => {
                             <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Taluka</label>
                                 <input type='text' className='form-control' value={valueData.taluk} name='taluk' placeholder='Please enter Taluka' onChange={handleChange} />
+                            </div>
+
+<hr/>
+
+<div className='col-md-4 py-2'>
+                                <label className='text-sm font-w-500 p-2'>Business Owner Photo</label>
+
+
+                                <input type='file' className='form-control' id='owner_image' name='owner_image' onChange={handleChange} />
+
+                                <div className='d-flex align-items-center justify-content-between pt-1'>
+                                    <label for='owner_image' className='file-data' style={{width:"100px"}}>Upload</label>
+
+                                    <a href={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.owner_image}`} style={{width:"100px"}} className='file-data-outline' target='_blank' rel="noreferrer">View </a>
+                                </div>
+
                             </div>
 
                             <div className='d-flex justify-content-end pt-4'>

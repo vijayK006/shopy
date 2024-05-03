@@ -80,6 +80,7 @@ const FirmMaster = () => {
         width: 230,
         renderCell: (params) => (
           <>
+          
           <Link to={`/edit-firm-master/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
           <FaRegEdit  style={{fontSize:'15px', marginBottom:'4px'}}/>  View / Edit 
           </Link>
