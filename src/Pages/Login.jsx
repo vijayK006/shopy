@@ -108,7 +108,7 @@ const Login = () => {
             <div className=' mt-5 mb-2 mx-3 p-3' style={{ borderRadius: "15px" }}>
               <p className='warning-message' id='warning'><IoIosCloseCircleOutline className='icon' /> Wrong Creadentials</p>
 
-              <h5 className='font-w-600'>Welcome to Digitel Shopee Login Page</h5>
+              <h5 className='font-w-600'>Welcome to Digital Shopee Login Page</h5>
               <p className='card-text t-color-gray' >Enter your account  details to sign in</p>
 
               <form onSubmit={handleSubmit} className='pt-5'>
