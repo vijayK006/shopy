@@ -456,7 +456,7 @@ const Add_Client_Master = () => {
 <hr/>
                             <div className='col-md-12 pt-1 pb-4'>
                                 <div className='col-md-4'>
-                                    <label className='text-sm font-w-500 p-2'>Add Client Profile Picture</label>
+                                    <label className='text-sm font-w-500 p-2'>Client Profile Picture</label>
                                     {/* <div className='img-format mb-1 main-field'>
                                         <img src={client_photoImg} alt='' />
                                         <label for='client_photo' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
@@ -501,7 +501,7 @@ const Add_Client_Master = () => {
                             </div>
 
                             <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500  p-2'> License</label>
+                                <label className='text-sm font-w-500  p-2'> Passport</label>
                                 {/* <div className='img-format mb-1 main-field'>
                                     <img src={license_photoImg} alt='' />
                                     <label for='license_photo' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>

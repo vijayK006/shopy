@@ -236,6 +236,18 @@ const Edit_Client_Master = () => {
                     <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
+                            <div className='col-md-4 pt-1 pb-4  '>
+                                <label className='text-sm font-w-500 p-2'>Client Profile Picture</label>
+                                <div className='img-format main-field'>
+                                    <img id="client_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.client_photo}`} alt='' />
+                                    <label for='client_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
+                                </div>
+
+                                {/* <p className='px-2 pt-1'>Client Full Name </p> */}
+                                <input type='file' className='form-control mt-1 d-none' id='client_photo' name='client_photo' onChange={handleChange} />
+                            </div>
+                            <div className='col-md-4 pt-1 pb-4' />
+                            <div className='col-md-4 pt-1 pb-4' />
 
 
                             <div className='col-md-4 py-2'>
@@ -369,29 +381,22 @@ const Edit_Client_Master = () => {
 
                             <hr />
 
-                            <div className='col-md-4 pt-1 pb-4  '>
-                                <label className='text-sm font-w-500 p-2'>Client Profile Picture</label>
-                                <div className='img-format main-field'>
-                                    <img id="client_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.client_photo}`} alt='' />
-                                    <label for='client_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
-                                </div>
 
-                                {/* <p className='px-2 pt-1'>Client Full Name </p> */}
-                                <input type='file' className='form-control mt-1 d-none' id='client_photo' name='client_photo' onChange={handleChange} />
-                            </div>
-                            <div className='col-md-4 pt-1 pb-4' />
-                            <div className='col-md-4 pt-1 pb-4' />
 
                             <div className='col-md-4 py-2 '>
-                                <label className='text-sm font-w-500 p-2'>Aadhar Card</label>
-                                <div className='img-format main-field'>
-                                    <img id="adhaar_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.adhaar_photo}`} alt='' />
-                                    <label for='adhaar_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
-                                </div>
 
-                                <input type='file' className='form-control d-none' id='adhaar_photo' name='adhaar_photo' onChange={handleChange} />
+                                <label className='text-sm font-w-500 p-2'>Aadhar Card</label>
+
+                                <input type='file' className='form-control' id='adhaar_photo' name='adhaar_photo' onChange={handleChange} />
 
                                 <input type='text' className='form-control mt-1' value={valueData.adhaar} name='adhaar' placeholder='Please enter aadhar card number' onChange={handleChange} />
+
+                                <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
+                                    <label for='adhaar_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
+
+                                    <a href={`https://shopee-firm.000webhostapp.com/api/client/${valueData.adhaar_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                </div>
+
                             </div>
 
                             <div className='col-md-4 py-2 '>
@@ -417,7 +422,7 @@ const Edit_Client_Master = () => {
                             </div>
 
                             <div className='col-md-4 py-2 '>
-                                <label className='text-sm font-w-500 p-2'>License</label>
+                                <label className='text-sm font-w-500 p-2'>Passport</label>
                                 <div className='img-format main-field'>
                                     <img id="license_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.license_photo}`} alt='' />
                                     <label for='license_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
