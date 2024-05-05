@@ -37,8 +37,8 @@ const TargetStatus = () => {
     const columns = [
       { field: "displayOrder", headerName: "Sl.No", width: 70 },
       { field: "date", headerName: "Date", type: "Date", width: 150 },
-      { field: "service_id", headerName: "Service Name", width: 150 },
-      { field: "employee_id", headerName: "Employe Name", width: 150 },
+      { field: "service_id", headerName: "Service Name", width: 200 },
+      { field: "employee_id", headerName: "Employe Name", width: 200 },
       { field: "no_of_orders", headerName: "Order Qty.", width: 150 },
       { field: "total_amount", headerName: "Total Amount", width: 150 },
       { field: "target_type", headerName: "Target Type", width: 150 },
