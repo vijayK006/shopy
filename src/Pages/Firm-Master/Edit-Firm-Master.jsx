@@ -220,7 +220,7 @@ const Edit_Firm_Master = () => {
                             
                           
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Firm Name</label>
                                 <input type='text' className='form-control' value={valueData.firm_name} name='firm_name' placeholder='Please enter name' onChange={handleChange} />
 
@@ -228,12 +228,12 @@ const Edit_Firm_Master = () => {
                             </div>
 
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Owner Name</label>
                                 <input type='text' className='form-control' value={valueData.owner_name} name='owner_name' placeholder='Please enter owner name' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.phone} name='phone' placeholder='Please enter mobile no.' onChange={handleChange} />
 
@@ -242,39 +242,39 @@ const Edit_Firm_Master = () => {
                             </div>
 
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Alternate mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.alt_phone} name='alt_phone' placeholder='Please enter alternate mobile no. (Optional)' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Email ID</label>
                                 <input type='email' className='form-control' value={valueData.email} name='email' placeholder='Please enter email-id' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Business Type</label>
                                 <input type='text' className='form-control' value={valueData.business_type} name='business_type' placeholder='Please enter email-id' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Business Category</label>
                                 <input type='text' className='form-control' value={valueData.business_category} name='business_category' placeholder='Please enter business category' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Office Address</label>
                                 <input type='text' className='form-control' value={valueData.address} name='address' placeholder='Please enter office address' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Pin Code</label>
                                 <input type='text' className='form-control' value={valueData.pin} name='pin' placeholder='Please enter pin code' onChange={handleChange} />
                             </div>
 
 
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> State</label>
                                 <StateSelect
                                     countryid={countryid}
@@ -293,7 +293,7 @@ const Edit_Firm_Master = () => {
 
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> district</label>
                                 <CitySelect
                                     countryid={countryid}
@@ -312,14 +312,14 @@ const Edit_Firm_Master = () => {
 
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Taluka</label>
                                 <input type='text' className='form-control' value={valueData.taluk} name='taluk' placeholder='Please enter Taluka' onChange={handleChange} />
                             </div>
 
                             <hr />
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Business Owner Photo</label>
 
 
@@ -333,7 +333,7 @@ const Edit_Firm_Master = () => {
 
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                             <label className='text-sm font-w-500 p-2'> Business Owner Sign</label>
 
                             <input type='file' className='form-control' id='sign' name='sign' onChange={handleChange} />

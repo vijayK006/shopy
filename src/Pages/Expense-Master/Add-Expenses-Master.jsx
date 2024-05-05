@@ -67,14 +67,14 @@ const Add_Expenses_Master = () => {
                     <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
-                        <div className='col-md-4 py-1'>
+                        <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Expenses Name</label>
                                 <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Enter expenses name' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertname}</p> */}
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Expenses Description</label>
                                 <input type='text' className='form-control' value={valueData.description} name='description' placeholder='Enter expenses description' onChange={handleChange} />
 

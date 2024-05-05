@@ -106,7 +106,7 @@ const Edit_Service_Master = () => {
                     <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
-                        <div className='col-md-4 py-1'>
+                        <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Service Code</label>
                                 <input type='text' className='form-control' value={valueData.code} name='code' placeholder='Please service code' onChange={handleChange} />
 
@@ -114,27 +114,27 @@ const Edit_Service_Master = () => {
                             </div>
 
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Service Name</label>
                                 <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Please enter Service name' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertowner}</p> */}
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Service Amount</label>
                                 <input type='number' className='form-control' value={valueData.amount} name='amount' placeholder='Please enter service amount' onChange={handleChange} />
                                 {/* <p className='warning'>{alertaltphone}</p> */}
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Service Expense</label>
                                 <input type='number' className='form-control' value={valueData.expense} name='expense' placeholder='Please enter expense' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertphone}</p> */}
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Required Documents</label>
                                 <input type='text' className='form-control' value={valueData.documents} name='documents' placeholder='Please enter documents' onChange={handleChange} />
 

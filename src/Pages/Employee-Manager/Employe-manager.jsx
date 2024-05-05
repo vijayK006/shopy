@@ -55,9 +55,10 @@ const EmployeManager = () => {
     const columns = [
       { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
       { field: 'name', headerName: 'Employee Name', width: 200 },
-      { field: 'phone', headerName: 'Mobile No.', width: 200 },
-      { field: 'email', headerName: 'Email', width: 150 },
-      { field: 'address', headerName: 'Address', width: 200 },
+      { field: 'dob', headerName: 'DOB', width: 200 },
+      { field: 'phone', headerName: 'Mobile No.', width: 150 },
+      { field: 'post', headerName: 'Post', width: 200 },
+      { field: 'salary', headerName: 'Salary', width: 200 },
       // { field: 'dob', headerName: 'Date of Birth', width: 200 },
     //   {   field: 'age', headerName: 'Age', type: 'number', width: 90,},
       {
@@ -87,10 +88,10 @@ const EmployeManager = () => {
         id: item.id || index,
     displayOrder: index + 1,
     name: item.name,
-    phone: item.phone,
-    email: item.email,
-    address: item.address,
     dob: item.dob,
+    salary: item.salary,
+    phone: item.phone,
+    post: item.post,
   })) : [];
       
 

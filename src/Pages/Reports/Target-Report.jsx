@@ -53,7 +53,7 @@ const TargetReport = () => {
   };
 
 
- 
+
 
   useEffect(() => {
     fetchData();
@@ -69,7 +69,7 @@ const TargetReport = () => {
     setTotalOrdersTout(0);
 
     const refer = document.getElementById('refer');
-    refer.style.display="block"
+    refer.style.display = "block"
   };
 
   const handleFilter = () => {
@@ -100,7 +100,7 @@ const TargetReport = () => {
 
     if (selectedEmployee) {
       filteredData = filteredData.filter(item => item.employee_id === selectedEmployee);
-  }
+    }
 
     // Calculate total amount for filtered data
     calculateTotalAmountTin(filteredData);
@@ -111,7 +111,7 @@ const TargetReport = () => {
     setApiDatas(filteredData);
 
     const refer = document.getElementById('refer');
-    refer.style.display="none"
+    refer.style.display = "none"
   };
 
   const calculateTotalAmountTin = (data) => {
@@ -175,16 +175,16 @@ const TargetReport = () => {
   const rows =
     apiDatas.length > 0
       ? apiDatas.map((item, index) => ({
-          id: item.id || index,
-          displayOrder: index + 1,
-          // target_type: item.target_type,
-          target_type: item.target_type === 'tin' ? 'In' : item.target_type === 'tout' ? 'Out' : 'Unknown',
-          employee_id: item.employee_id,
-          service_id: item.service_id,
-          no_of_orders: item.no_of_orders,
-          total_amount: item.total_amount,
-          date: item.date,
-        }))
+        id: item.id || index,
+        displayOrder: index + 1,
+        // target_type: item.target_type,
+        target_type: item.target_type === 'tin' ? 'In' : item.target_type === 'tout' ? 'Out' : 'Unknown',
+        employee_id: item.employee_id,
+        service_id: item.service_id,
+        no_of_orders: item.no_of_orders,
+        total_amount: item.total_amount,
+        date: item.date,
+      }))
       : [];
 
   const filterbtn = () => {
@@ -275,13 +275,13 @@ const TargetReport = () => {
             </div>
 
             <div className='form-head'>
-                            <select value={selectedEmployee} onChange={(e) => setSelectedEmployee(e.target.value)} className='filter-fields'>
-                                <option value="">All Employees</option>
-                                {employeeNames.filter(Boolean).map(employee => (
-                                    <option key={employee} value={employee}>{employee}</option>
-                                ))}
-                            </select>
-                        </div>
+              <select value={selectedEmployee} onChange={(e) => setSelectedEmployee(e.target.value)} className='filter-fields'>
+                <option value="">All Employees</option>
+                {employeeNames.filter(Boolean).map(employee => (
+                  <option key={employee} value={employee}>{employee}</option>
+                ))}
+              </select>
+            </div>
 
             <div className="d-flex gap-2 justify-content-end pb-3">
               <button

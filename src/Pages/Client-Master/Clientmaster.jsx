@@ -55,12 +55,12 @@ const Clientmaster = () => {
 
     const columns = [
       { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
-      { field: 'clientname', headerName: 'Client Name', width: 150 },
-      // { field: 'profession', headerName: 'Profession', width: 150 },
-      { field: 'category', headerName: 'Category', width: 150 },
-      { field: 'phone', headerName: 'Phone Number', width: 150 },
-      { field: 'email', headerName: 'Email id', width: 200 },
-      { field: 'district', headerName: 'District', width: 150 },    
+      { field: 'clientname', headerName: 'Client Name', width: 200 },
+      { field: 'dob', headerName: 'DOB', width: 150 },
+      { field: 'phone', headerName: 'Mobile No.', width: 150 },
+      { field: 'profession', headerName: 'Profession', width: 150 },
+      { field: 'reference', headerName: 'Reference', width: 150 },
+       
      
       {
         field: 'actions', // Adding a new field for actions
@@ -90,14 +90,11 @@ const Clientmaster = () => {
     displayOrder: index + 1,
     clientname: item.name,
     profession: item.profession,
-    category: item.category,
     phone: item.phone,
-    email: item.email,
-    district: item.district,
+    dob: item.dob,
+    reference: item.reference,
   })) : [];
       
-
-
   return (
     <>
        <Topbar/>

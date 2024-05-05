@@ -120,11 +120,10 @@ const Expense_Payment = () => {
 
     const columns = [
         { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
-        { field: 'expense_id', headerName: 'Expense Name', width: 200 },
-        // { field: 'employee_id', headerName: 'Employe Name', width: 150 },
-        { field: 'amount', headerName: 'Expense Amount', width: 200 },
         { field: 'date', headerName: 'Date', width: 200 },
-        { field: 'remark', headerName: 'Remark', width: 150 },
+        { field: 'expense_id', headerName: 'Expense Name', width: 200 },
+        { field: 'amount', headerName: 'Expense Amount', width: 200 },
+        { field: 'remark', headerName: 'Description', width: 150 },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -148,10 +147,9 @@ const Expense_Payment = () => {
     const rows = apiDatas.length > 0 ? apiDatas.map((item, index) => ({
         id: item.id || index,
         displayOrder: index + 1,
-        employee_id: item.employee_id,
+        date: item.date,
         expense_id: item.expense_id,
         amount: item.amount,
-        date: item.date,
         remark: item.remark,
     })) : [];
 
@@ -166,7 +164,7 @@ const Expense_Payment = () => {
             <Sidebar />
             <div className='main-content' id='mainbody'>
                 <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50 bread-parent'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/target-master' className='t-theme-color'>Expense Payment</Link></p>
+                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='' className='t-theme-color'>Expense Payment</Link></p>
                     <div>
                         {/* <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                         <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />

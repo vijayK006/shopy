@@ -319,7 +319,7 @@ const Add_Client_Master = () => {
 
                             
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Client Name</label>
 
                                 <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Please enter name' onChange={handleChange} />
@@ -327,12 +327,12 @@ const Add_Client_Master = () => {
                                 <p className='warning'>{alertname}</p>
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> D O B</label>
                                 <input type='date' className='form-control' value={valueData.dob} name='dob' placeholder='Please enter date of birth' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.phone} name='phone' placeholder='Please enter mobile no.' onChange={handleChange} />
 
@@ -340,13 +340,13 @@ const Add_Client_Master = () => {
                             </div>
 
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Alternate mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.alt_phone} name='alt_phone' placeholder='Please enter alternate mobile no. (Optional)' onChange={handleChange} />
                                 {/* <p className='warning'>{alertaltphone}</p> */}
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Profession</label>
                                 <input type='text' className='form-control' value={valueData.profession} name='profession' placeholder='Please enter client profession' onChange={handleChange} />
 
@@ -355,14 +355,14 @@ const Add_Client_Master = () => {
 
                            
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Email ID</label>
                                 <input type='text' className='form-control' value={valueData.email} name='email' placeholder='Please enter email-id' onChange={handleChange} />
 
                                 <p className='warning'>{alertemail}</p>
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Select Category</label>
                                 <select className='form-control' value={valueData.category} name='category' onChange={handleChange}>
                                     <option value="">Select client category </option>
@@ -373,24 +373,24 @@ const Add_Client_Master = () => {
                             </div>
 
                            
-<div className='col-md-4 py-2'>
+<div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Reference</label>
                                 <input type='text' className='form-control' value={valueData.reference} name='reference' placeholder='Please enter reference' onChange={handleChange} />
                             </div>
                             
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Addreass</label>
                                 <input type='text' className='form-control' value={valueData.address} name='address' placeholder='Please enter address' onChange={handleChange} />
                             </div>
 
                             
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Pin Code</label>
                                 <input type='text' className='form-control' value={valueData.pin} name='pin' placeholder='Please enter pin code' onChange={handleChange} />
                             </div>
 
-                            {/* <div className='col-md-4 py-1' style={{display:"none"}}>
+                            {/* <div className='col-md-3 py-1' style={{display:"none"}}>
                                 <label className='text-sm font-w-500 p-2'> Country</label>
                                 <CountrySelect
                                     onChange={(e) => {
@@ -401,7 +401,7 @@ const Add_Client_Master = () => {
                                 />
                             </div> */}
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Select State</label>
 
                                 <StateSelect
@@ -425,7 +425,7 @@ const Add_Client_Master = () => {
 
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Select District</label>
 
                                 <CitySelect
@@ -449,13 +449,13 @@ const Add_Client_Master = () => {
 
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Taluka</label>
                                 <input type='text' className='form-control' value={valueData.taluk} name='taluk' placeholder='Please enter Taluka' onChange={handleChange} />
                             </div>
 <hr/>
                             <div className='col-md-12 pt-1 pb-4'>
-                                <div className='col-md-4'>
+                                <div className='col-md-3'>
                                     <label className='text-sm font-w-500 p-2'>Client Profile Picture</label>
                                     {/* <div className='img-format mb-1 main-field'>
                                         <img src={client_photoImg} alt='' />
@@ -467,7 +467,7 @@ const Add_Client_Master = () => {
 
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Aadhar Card</label>
                                 {/* <div className='img-format mb-1 main-field'>
                                     <img src={adhaar_photoImg} alt='' />
@@ -478,7 +478,7 @@ const Add_Client_Master = () => {
                                 <input type='text' className='form-control' value={valueData.adhaar} name='adhaar' placeholder='Please enter aadhar card number' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Pan Card</label>
                                 {/* <div className='img-format mb-1 main-field'>
                                     <img src={pan_photoImg} alt='' />
@@ -489,7 +489,7 @@ const Add_Client_Master = () => {
                                 <input type='text' className='form-control' value={valueData.pan} name='pan' placeholder='Please enter PAN card number' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Voter-id</label>
                                 {/* <div className='img-format mb-1 main-field'>
                                     <img src={voter_id_photoImg} alt='' />
@@ -500,7 +500,7 @@ const Add_Client_Master = () => {
                                 <input type='text' className='form-control' value={valueData.voter_id} name='voter_id' placeholder='Please enter voter-id' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500  p-2'> Passport</label>
                                 {/* <div className='img-format mb-1 main-field'>
                                     <img src={license_photoImg} alt='' />
@@ -511,7 +511,7 @@ const Add_Client_Master = () => {
                                 <input type='text' className='form-control' value={valueData.license} name='license' placeholder='Please enter license number' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Ration Card </label>
                                 {/* <div className='img-format mb-1 main-field'>
                                     <img src={ration_photoImg} alt='' />
@@ -522,7 +522,7 @@ const Add_Client_Master = () => {
                                 <input type='text' className='form-control' value={valueData.ration} name='ration' placeholder='Please enter ration card number' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Other Document</label>
                                 {/* <div className='img-format mb-1 main-field'>
                                     <img src={other_photoImg} alt='' />
@@ -536,8 +536,8 @@ const Add_Client_Master = () => {
                                 onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500 p-2'> Other Document</label>
+                            <div className='col-md-3 py-2'>
+                                <label className='text-sm font-w-500 p-2'> Other Document(beta)</label>
                                 {/* <div className='img-format mb-1 main-field'>
                                     <img src={other_photoImg} alt='' />
                                     <label for='other_photo' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
@@ -552,8 +552,8 @@ const Add_Client_Master = () => {
                                 />
                             </div>
 
-                            <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500 p-2'> Other Document</label>
+                            <div className='col-md-3 py-2'>
+                                <label className='text-sm font-w-500 p-2'> Other Document(beta)</label>
                                 {/* <div className='img-format mb-1 main-field'>
                                     <img src={other_photoImg} alt='' />
                                     <label for='other_photo' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>

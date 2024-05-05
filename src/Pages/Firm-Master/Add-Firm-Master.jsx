@@ -297,7 +297,7 @@ const [signimg, setSignimg] = useState(null)
                     <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Business Logo</label>
                                 {/* <div className='img-format mb-1 main-field'>
                                     <img src={logoimg} alt='' />
@@ -306,7 +306,7 @@ const [signimg, setSignimg] = useState(null)
                                 <input type='file' className='form-control' id='logo' name='logo' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Business Owner Photo</label>
                                 {/* <div className='img-format mb-1 main-field'>
                                     <img src={ownerimg} alt='' />
@@ -316,7 +316,7 @@ const [signimg, setSignimg] = useState(null)
                                 <input type='file' className='form-control' id='owner_image' name='owner_image' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Business Owner Sign</label>
                                 {/* <div className='img-format mb-1 main-field'>
                                     <img src={signimg} alt='' />
@@ -325,7 +325,7 @@ const [signimg, setSignimg] = useState(null)
                                 <input type='file' className='form-control' id='sign' name='sign' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Firm Name</label>
                                 <input type='text' className='form-control' value={valueData.firm_name} name='firm_name' placeholder='Please enter name' onChange={handleChange} />
 
@@ -333,14 +333,14 @@ const [signimg, setSignimg] = useState(null)
                             </div>
 
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Owner Name</label>
                                 <input type='text' className='form-control' value={valueData.owner_name} name='owner_name' placeholder='Please enter owner name' onChange={handleChange} />
 
                                 <p className='warning'>{alertowner}</p>
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.phone} name='phone' placeholder='Please enter mobile no.' onChange={handleChange} />
 
@@ -348,7 +348,7 @@ const [signimg, setSignimg] = useState(null)
                             </div>
 
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Alternate mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.alt_phone} name='alt_phone' placeholder='Please enter alternate mobile no. (Optional)' onChange={handleChange} />
                                 {/* <p className='warning'>{alertaltphone}</p> */}
@@ -356,19 +356,19 @@ const [signimg, setSignimg] = useState(null)
 
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Email ID</label>
                                 <input type='text' className='form-control' value={valueData.email} name='email' placeholder='Please enter email-id' onChange={handleChange} />
 
                                 <p className='warning'>{alertemail}</p>
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Business Type</label>
                                 <input type='text' className='form-control' value={valueData.business_type} name='business_type' placeholder='Please enter business type' onChange={handleChange} />
                             </div>
 
-                            {/* <div className='col-md-4 py-2'>
+                            {/* <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Select Business Type</label>
                                 <select className='form-control' value={valueData.business_type} name='business_type' onChange={handleChange}>
                                     <option value="">Please select business type</option>
@@ -379,22 +379,22 @@ const [signimg, setSignimg] = useState(null)
                                 </select>
                             </div> */}
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Business Category</label>
                                 <input type='text' className='form-control' value={valueData.business_category} name='business_category' placeholder='Please enter business category' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Office Address</label>
                                 <input type='text' className='form-control' value={valueData.address} name='address' placeholder='Please enter office address' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Pin Code</label>
                                 <input type='text' className='form-control' value={valueData.pin} name='pin' placeholder='Please enter pin code' onChange={handleChange} />
                             </div>
 
-                            {/* <div className='col-md-4 py-2' style={{display:"none"}}>
+                            {/* <div className='col-md-3 py-2' style={{display:"none"}}>
                                 <label className='text-sm font-w-500 p-2'> Country</label>
                                 <CountrySelect
                                     onChange={(e) => {
@@ -405,7 +405,7 @@ const [signimg, setSignimg] = useState(null)
                                 />
                             </div> */}
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Select State</label>
 
                                 <StateSelect
@@ -431,7 +431,7 @@ const [signimg, setSignimg] = useState(null)
 
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Select District</label>
 
                                 <CitySelect
@@ -455,7 +455,7 @@ const [signimg, setSignimg] = useState(null)
 
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Taluka</label>
                                 <input type='text' className='form-control' value={valueData.taluk} name='taluk' placeholder='Please enter Taluka' onChange={handleChange} />
                             </div>
