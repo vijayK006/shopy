@@ -153,7 +153,7 @@ const TargetMaster = () => {
         service_id: item.service_id,
         no_of_orders: item.no_of_orders,
         total_amount: item.total_amount,
-        date: item.date,
+        date: item.from_date,
     })) : [];
 
 
