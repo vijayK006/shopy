@@ -18,8 +18,8 @@ const Expense_Payment = () => {
     const [endDate, setEndDate] = useState(null);
     const [totalAmount, setTotalAmount] = useState(0);
     const [selectedService, setSelectedService] = useState('');
+    const [selectedEmployee, setSelectedEmployee] = useState('');
 
-    
 
     // const fetchData = () => {
     //     axios.get('https://shopee-firm.000webhostapp.com/api/expense-payment/get-payment.php')
@@ -43,11 +43,11 @@ const Expense_Payment = () => {
                     console.error('Invalid data format:', responseData);
                 }
             })
-            .catch(err => { 
+            .catch(err => {
                 console.error('Error fetching data:', err);
             });
     }
-    
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -98,6 +98,10 @@ const Expense_Payment = () => {
             filteredData = filteredData.filter(item => item.expense_id === selectedService);
         }
 
+        if (selectedEmployee) {
+            filteredData = filteredData.filter(item => item.employee_id === selectedEmployee);
+        }
+
         // Calculate total amount for filtered data
         calculateTotalAmount(filteredData);
 
@@ -111,15 +115,15 @@ const Expense_Payment = () => {
 
     // Extract unique service names
     const serviceNames = Array.from(new Set(apiDatas.map(item => item.expense_id)));
+    const employeeNames = Array.from(new Set(apiDatas.map(item => item.employee_id)));
 
 
     const columns = [
         { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
-        { field: 'expense_id', headerName: 'Expense Name', width: 200 },
-        // { field: 'employee_id', headerName: 'Employe Name', width: 150 },
-        { field: 'amount', headerName: 'Expense Amount', width: 200 },
         { field: 'date', headerName: 'Date', width: 200 },
-        { field: 'remark', headerName: 'Remark', width: 150 },
+        { field: 'expense_id', headerName: 'Expense Name', width: 200 },
+        { field: 'amount', headerName: 'Expense Amount', width: 200 },
+        { field: 'remark', headerName: 'Description', width: 150 },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -143,10 +147,9 @@ const Expense_Payment = () => {
     const rows = apiDatas.length > 0 ? apiDatas.map((item, index) => ({
         id: item.id || index,
         displayOrder: index + 1,
-        employee_id: item.employee_id,
+        date: item.date,
         expense_id: item.expense_id,
         amount: item.amount,
-        date: item.date,
         remark: item.remark,
     })) : [];
 
@@ -161,7 +164,7 @@ const Expense_Payment = () => {
             <Sidebar />
             <div className='main-content' id='mainbody'>
                 <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50 bread-parent'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/target-master' className='t-theme-color'>Expense Payment</Link></p>
+                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='' className='t-theme-color'>Expense Payment</Link></p>
                     <div>
                         {/* <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                         <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
@@ -179,10 +182,9 @@ const Expense_Payment = () => {
                     </div>
                     <div className='actions'>
                         <Link to='/add-expenses-payment' className='btn btn-bg-orange btn-sm b-radius-50 '><MdNoteAdd style={{ fontSize: "18px", marginBottom: '2px' }} /> Add Expense Payment</Link>
-                        &nbsp;
-                        &nbsp;
+                      
 
-                        <button type='button' className='btn btn-bg-orange btn-sm b-radius-50 ' onClick={filterbtn}><FaFilter style={{ marginBottom: '2px' }} /> Filter</button>
+                        {/* <button type='button' className='btn btn-bg-orange btn-sm b-radius-50 ' onClick={filterbtn}><FaFilter style={{ marginBottom: '2px' }} /> Filter</button> */}
 
                     </div>
 
@@ -190,7 +192,7 @@ const Expense_Payment = () => {
 
                         <div className='d-flex gap-3 align-items-center'>
                             <div className='form-head'>
-                                <input type='date' className='filter-fields' value={startDate} onChange={(e) => setStartDate(e.target.value)}/>
+                                <input type='date' className='filter-fields' value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                             </div>
                             <span> <BsArrowLeftRight /> </span>
                             <div className='form-head'>
@@ -208,11 +210,20 @@ const Expense_Payment = () => {
                             </select>
                         </div>
 
-<div className='d-flex gap-2 justify-content-end pb-3'>
-    <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={handleFilter}><TbFilterCog /> Check</button>
+                        <div className='form-head'>
+                            <select value={selectedEmployee} onChange={(e) => setSelectedEmployee(e.target.value)} className='filter-fields'>
+                                <option value="">All Employees</option>
+                                {employeeNames.filter(Boolean).map(employee => (
+                                    <option key={employee} value={employee}>{employee}</option>
+                                ))}
+                            </select>
+                        </div>
 
-    <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={loadall}><BiReset /> Reset</button>
-</div>
+                        <div className='d-flex gap-2 justify-content-end pb-3'>
+                            <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={handleFilter}><TbFilterCog /> Check</button>
+
+                            <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={loadall}><BiReset /> Reset</button>
+                        </div>
 
                         <p>Total Amount: {totalAmount} <LuIndianRupee /></p>
 

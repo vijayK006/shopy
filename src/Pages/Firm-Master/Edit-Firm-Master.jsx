@@ -23,7 +23,7 @@ const Edit_Firm_Master = () => {
 
     const [alertname, setAlertname] = useState();
     const navigate = useNavigate();
-    
+
 
     useEffect(() => {
         // Set default country to India after the component mounts
@@ -31,18 +31,18 @@ const Edit_Firm_Master = () => {
         setCountryid(defaultCountry.id);
     }, []);
 
-    
+
     useEffect(() => {
         axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
-          .then(res => {
-            const migratephone = res.data.map(firm=> firm.phone)
-            setGetFirmMobilenumber(migratephone)
-            console.log(migratephone)
-          })
-          .catch(err => {
-            console.error('Error fetching data:', err);
-          });
-      }, []);
+            .then(res => {
+                const migratephone = res.data.map(firm => firm.phone)
+                setGetFirmMobilenumber(migratephone)
+                console.log(migratephone)
+            })
+            .catch(err => {
+                console.error('Error fetching data:', err);
+            });
+    }, []);
 
     const [valueData, setValueData] = useState({
         firm_name: '',
@@ -127,7 +127,7 @@ const Edit_Firm_Master = () => {
             return;
         }
 
-       
+
 
         const confirmDelete = window.confirm("Are you sure you want to update this Firm Master");
         if (confirmDelete) {
@@ -147,7 +147,7 @@ const Edit_Firm_Master = () => {
     };
 
 
-    
+
     // const handleChange = (e) => {
     //     const { name, value } = e.target;
     //     if (name === 'logo' || name === 'owner_image' || name === 'sign') {
@@ -172,7 +172,7 @@ const Edit_Firm_Master = () => {
                 ...valueData,
                 [name]: e.target.files[0]
             });
-    
+
             // Create URL for selected file and set it as src attribute of the img tag
             const reader = new FileReader();
             reader.onload = function (event) {
@@ -190,7 +190,7 @@ const Edit_Firm_Master = () => {
             });
         }
     };
-    
+
 
     return (
         <>
@@ -209,32 +209,18 @@ const Edit_Firm_Master = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Business Logo</label>
                                 <div className='img-format mb-1 main-field'>
-                                    <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.logo}`} alt='' id="logo-preview"/>
+                                    <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.logo}`} alt='' id="logo-preview" />
                                     <label for='logo' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
                                 </div>
                                 <input type='file' className='form-control d-none' id='logo' name='logo' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'> Business Owner Photo</label>
-                                <div className='img-format mb-1 main-field'>
-                                    <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.owner_image}`} alt='' id="owner_image-preview"/>
-                                    <label for='owner_image' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
-                                
-                                </div>
-                                <input type='file' className='form-control d-none' id='owner_image' name='owner_image' onChange={handleChange} />
-                            </div>
+                            <div className='col-md-4 py-1'/>
+                            <div className='col-md-4 py-1'/>
+                            
+                          
 
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'> Business Owner Sign</label>
-                                <div className='img-format mb-1 main-field'>
-                                    <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.sign}`} alt='' id="sign-preview" />
-                                    <label for='sign' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
-                                </div>
-                                <input type='file' className='form-control d-none' id='sign' name='sign' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Firm Name</label>
                                 <input type='text' className='form-control' value={valueData.firm_name} name='firm_name' placeholder='Please enter name' onChange={handleChange} />
 
@@ -242,12 +228,12 @@ const Edit_Firm_Master = () => {
                             </div>
 
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Owner Name</label>
                                 <input type='text' className='form-control' value={valueData.owner_name} name='owner_name' placeholder='Please enter owner name' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.phone} name='phone' placeholder='Please enter mobile no.' onChange={handleChange} />
 
@@ -256,103 +242,113 @@ const Edit_Firm_Master = () => {
                             </div>
 
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Alternate mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.alt_phone} name='alt_phone' placeholder='Please enter alternate mobile no. (Optional)' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Email ID</label>
                                 <input type='email' className='form-control' value={valueData.email} name='email' placeholder='Please enter email-id' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Business Type</label>
-                                <input type='text' className='form-control' value={valueData.business_type} name='business_type'  placeholder='Please enter email-id' onChange={handleChange} />
+                                <input type='text' className='form-control' value={valueData.business_type} name='business_type' placeholder='Please enter email-id' onChange={handleChange} />
                             </div>
 
-                            {/* <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500 p-2'>Select Business Type</label>
-                                <select className='form-control' value={valueData.business_type} name='business_type' onChange={handleChange}>
-                                    <option value="">Please select business type</option>
-                                    <option value="type1">Type 1</option>
-                                    <option value="type2">Type 2</option>
-                                    <option value="type3">Type 3</option>
-
-                                </select>
-                            </div> */}
-
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Business Category</label>
                                 <input type='text' className='form-control' value={valueData.business_category} name='business_category' placeholder='Please enter business category' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Office Address</label>
                                 <input type='text' className='form-control' value={valueData.address} name='address' placeholder='Please enter office address' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Pin Code</label>
                                 <input type='text' className='form-control' value={valueData.pin} name='pin' placeholder='Please enter pin code' onChange={handleChange} />
                             </div>
 
-                            {/* <div className='col-md-4 py-2' style={{ display: "none" }}>
-                                <label className='text-sm font-w-500 p-2'> Country</label>
-                                <CountrySelect
-                                    onChange={(e) => {
-                                        setCountryid(e.id);
-                                    }}
-                                    placeHolder="Select Country"
-                                    value={countryid}
-                                />
-                            </div> */}
 
-                            <div className='col-md-4 py-2'>
+
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> State</label>
                                 <StateSelect
-                                   countryid={countryid}
-                                   onChange={(e) => {
-                                       setstateid(e.id);
-                                       console.log("Selected state:", e);
-                                       setValueData({
-                                           ...valueData,
-                                           state: e.name // Assuming e.id contains the state value
-                                       });
-                                   }}
-                                   placeHolder={valueData.state}
-                                   value={valueData.state}
+                                    countryid={countryid}
+                                    onChange={(e) => {
+                                        setstateid(e.id);
+                                        console.log("Selected state:", e);
+                                        setValueData({
+                                            ...valueData,
+                                            state: e.name // Assuming e.id contains the state value
+                                        });
+                                    }}
+                                    placeHolder={valueData.state}
+                                    value={valueData.state}
                                 />
                                 {/* <input type='text' className='form-control' value={valueData.state} name='state' placeholder='Please enter state' onChange={handleChange} /> */}
 
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> district</label>
                                 <CitySelect
-                                  countryid={countryid}
-                                  stateid={stateid}
-                                  onChange={(e) => {
-                                      console.log("Selected city:", e);
-                                      setValueData({
-                                          ...valueData,
-                                          district: e.name // Assuming e.id contains the city value
-                                      });
-                                  }}
-                                  placeHolder={valueData.district}
-                                  value={valueData.district}
+                                    countryid={countryid}
+                                    stateid={stateid}
+                                    onChange={(e) => {
+                                        console.log("Selected city:", e);
+                                        setValueData({
+                                            ...valueData,
+                                            district: e.name // Assuming e.id contains the city value
+                                        });
+                                    }}
+                                    placeHolder={valueData.district}
+                                    value={valueData.district}
                                 />
                                 {/* <input type='text' className='form-control' value={valueData.district} name='district' placeholder='Please enter City' onChange={handleChange} /> */}
 
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Taluka</label>
                                 <input type='text' className='form-control' value={valueData.taluk} name='taluk' placeholder='Please enter Taluka' onChange={handleChange} />
                             </div>
 
+                            <hr />
+
+                            <div className='col-md-3 py-2'>
+                                <label className='text-sm font-w-500 p-2'>Business Owner Photo</label>
+
+
+                                <input type='file' className='form-control' id='owner_image' name='owner_image' onChange={handleChange} />
+
+                                <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
+                                    <label for='owner_image' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
+
+                                    <a href={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.owner_image}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                </div>
+
+                            </div>
+
+                            <div className='col-md-3 py-2'>
+                            <label className='text-sm font-w-500 p-2'> Business Owner Sign</label>
+
+                            <input type='file' className='form-control' id='sign' name='sign' onChange={handleChange} />
+
+                                <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
+                                    <label for='sign' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
+
+                                    <a href={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.sign}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                </div>
+
+                            </div>
+
+
                             <div className='d-flex justify-content-end pt-4'>
-                                <button type='submit' className='btn btn-bg-orange' style={{ width: "200px" }} >Update</button>
+                                <button type='submit' className='btn btn-bg-orange ' style={{ width: "200px" }} >Update</button>
                             </div>
 
                         </div>

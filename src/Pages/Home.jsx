@@ -9,6 +9,7 @@ import { PiCreditCard } from "react-icons/pi";
 import { GoPerson } from "react-icons/go";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineSettingsInputComponent } from "react-icons/md";
+import TargetStatus from '../Components/TargetStatus'
 
 
 const Home = () => {
@@ -113,6 +114,8 @@ const Home = () => {
             </Admincards>
 
           </div>
+
+          <TargetStatus/>
 
         </div>
 

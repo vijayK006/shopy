@@ -17,9 +17,11 @@ const TargetOut = () => {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [totalAmount, setTotalAmount] = useState(0);
+    const [totalQty, setTotalQty] = useState(0);
     const [selectedService, setSelectedService] = useState('');
+    const [selectedEmployee, setSelectedEmployee] = useState('');
 
-   
+
 
     const fetchData = () => {
         axios.get('https://shopee-firm.000webhostapp.com/api/target-out/get-target.php')
@@ -40,12 +42,14 @@ const TargetOut = () => {
     useEffect(() => {
         fetchData();
     }, []);
-    
+
     const loadall = () => {
         fetchData();
         setStartDate('00-00-0000')
         setEndDate('00-00-0000')
         setTotalAmount(0)
+        const refer = document.getElementById('refer');
+        refer.style.display = "block"
     }
 
     const handleDelete = (id) => {
@@ -87,28 +91,38 @@ const TargetOut = () => {
             filteredData = filteredData.filter(item => item.service_id === selectedService);
         }
 
+        if (selectedEmployee) {
+            filteredData = filteredData.filter(item => item.employee_id === selectedEmployee);
+        }
+
+
         // Calculate total amount for filtered data
         calculateTotalAmount(filteredData);
 
         setApiDatas(filteredData);
+        const refer = document.getElementById('refer');
+        refer.style.display = "none"
     }
 
     const calculateTotalAmount = (data) => {
         const total = data.reduce((acc, item) => acc + parseFloat(item.total_amount), 0);
+        const totalqty = data.reduce((acc, item) => acc + parseFloat(item.no_of_orders), 0);
         setTotalAmount(total);
+        setTotalQty(totalqty);
     }
 
     // Extract unique service names
     const serviceNames = Array.from(new Set(apiDatas.map(item => item.service_id)));
+    const employeeNames = Array.from(new Set(apiDatas.map(item => item.employee_id)));
 
 
     const columns = [
         { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
-        { field: 'employee_id', headerName: 'Employe Name', width: 150 },
+        { field: 'date', headerName: 'Date', type: 'Date', width: 100 },
+        { field: 'employee_id', headerName: 'Employe Name', width: 200 },
         { field: 'service_id', headerName: 'Service Name', width: 150 },
-        { field: 'no_of_orders', headerName: 'Order Qty.', width: 150 },
-        { field: 'total_amount', headerName: 'Total Amount', width: 150 },
-        { field: 'date', headerName: 'Date', type: 'Date', width: 150 },
+        { field: 'no_of_orders', headerName: 'Order Qty.', width: 100 },
+        { field: 'total_amount', headerName: 'Total Amount', width: 100 },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -179,7 +193,7 @@ const TargetOut = () => {
 
                         <div className='d-flex gap-3 align-items-center'>
                             <div className='form-head'>
-                                <input type='date' className='filter-fields' value={startDate} onChange={(e) => setStartDate(e.target.value)}/>
+                                <input type='date' className='filter-fields' value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                             </div>
                             <span> <BsArrowLeftRight /> </span>
                             <div className='form-head'>
@@ -197,14 +211,25 @@ const TargetOut = () => {
                             </select>
                         </div>
 
-<div className='d-flex gap-2 justify-content-end pb-3'>
-    <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={handleFilter}><TbFilterCog /> Check</button>
+                        <div className='form-head'>
+                            <select value={selectedEmployee} onChange={(e) => setSelectedEmployee(e.target.value)} className='filter-fields'>
+                                <option value="">All Employees</option>
+                                {employeeNames.filter(Boolean).map(employee => (
+                                    <option key={employee} value={employee}>{employee}</option>
+                                ))}
+                            </select>
+                        </div>
 
-    <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={loadall}><BiReset /> Reset</button>
-</div>
+                        <div className='d-flex gap-2 justify-content-end pb-3'>
+                            <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' id='refer' onClick={handleFilter}><TbFilterCog /> Check</button>
 
-                        <p>Total Amount: {totalAmount} <LuIndianRupee /></p>
+                            <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={loadall}><BiReset /> Reset</button>
+                        </div>
 
+                        <div className='d-flex justify-content-between'>
+                            <p className='px-2'>Total Amount:<LuIndianRupee /> {totalAmount} </p>
+                            <p className='px-2'>Total Quality:{totalQty} </p>
+                        </div>
 
                     </div>
                 </div>

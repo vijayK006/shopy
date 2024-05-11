@@ -13,16 +13,16 @@ const Edit_Target_Out = () => {
     const [serviceAmount, setServiceAmount] = useState();
 
     useEffect(() => {
-                axios.get('https://shopee-firm.000webhostapp.com/api/employee/get-employee.php')
-                    .then(res => {
-                        const migrateemploye = res.data.map(employee => employee.name)
-                        setGetempoloyenames(migrateemploye)
-                    })
-                    .catch(err => {
-                        console.error('Error fetching data:', err);
-                    });
-            }, []);
-        
+        axios.get('https://shopee-firm.000webhostapp.com/api/employee/get-employee.php')
+            .then(res => {
+                const migrateemploye = res.data.map(employee => employee.name)
+                setGetempoloyenames(migrateemploye)
+            })
+            .catch(err => {
+                console.error('Error fetching data:', err);
+            });
+    }, []);
+
 
     useEffect(() => {
         axios.get('https://shopee-firm.000webhostapp.com/api/service/get-service.php')
@@ -43,7 +43,7 @@ const Edit_Target_Out = () => {
         employee_id: '',
         service_id: '',
         no_of_orders: '',
-        amount: '',
+        total_amount: '',
         date: '',
     });
 
@@ -55,7 +55,7 @@ const Edit_Target_Out = () => {
                     employee_id: firmData.employee_id,
                     service_id: firmData.service_id,
                     no_of_orders: firmData.no_of_orders,
-                    amount: firmData.amount,
+                    total_amount: firmData.total_amount,
                     date: firmData.date,
                 });
             })
@@ -67,13 +67,13 @@ const Edit_Target_Out = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // Calculate total amount here if needed
-        const totalAmount = valueData.no_of_orders * serviceAmount;
+        // const totalAmount = valueData.no_of_orders * serviceAmount;
 
         const formData = new FormData();
         formData.append('employee_id', valueData.employee_id);
         formData.append('service_id', valueData.service_id);
         formData.append('no_of_orders', valueData.no_of_orders);
-        formData.append('amount', totalAmount); // Use the calculated total amount
+        formData.append('total_amount', valueData.total_amount); // Use the calculated total amount
         formData.append('date', valueData.date);
 
         const confirmDelete = window.confirm("Are you sure you want to update this Service Master");
@@ -91,7 +91,7 @@ const Edit_Target_Out = () => {
         }
     };
 
-    
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setValueData({ ...valueData, [name]: value });
@@ -117,23 +117,25 @@ const Edit_Target_Out = () => {
                     <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
-                        <div className='col-md-4 py-1'>
-                                 <label className='text-sm font-w-500 p-2'>Update Employee</label>
-                                 <select className='form-control' value={valueData.employee_id} name='employee_id' onChange={handleChange}>
-                                     <option value="">Select Employee</option>
-                                     {getempoloyenames.map((name, index) => (
-                                         <option key={index} value={name}>{name}</option>
-                                     ))}
-                                 </select>
-                                 {/* <p className='warning'>{alertowner}</p> */}
-                             </div>
+                           
 
-                             <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Target Date</label>
+                            <div className='col-md-4 py-2'>
+                                <label className='text-sm font-w-500 p-2'>Target From Date</label>
                                 <input type='date' className='form-control' value={valueData.date} name='date' placeholder='' onChange={handleChange} />
                             </div>
-                            <div className='col-md-12 py-1 border-bottom'/>
-                            <div className='col-md-4 py-1'>
+
+                            <div className='col-md-4 py-2'>{/* not Connected */}
+                                <label className='text-sm font-w-500 p-2'>Target To Date</label>
+                                <input type='date' className='form-control'
+                                    // value={valueData.date}
+                                    name='date' placeholder=''
+                                // onChange={handleChange}
+                                />
+                            </div>
+
+
+                            <div className='col-md-12 py-1 border-bottom' />
+                            <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Update Service</label>
                                 <select className='form-control' value={valueData.service_id} name='service_id' onChange={handleChange}>
                                     <option value="">Select Service</option>
@@ -143,14 +145,30 @@ const Edit_Target_Out = () => {
                                 </select>
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-2'>
+                                <label className='text-sm font-w-500 p-2'>Update Employee</label>
+                                <select className='form-control' value={valueData.employee_id} name='employee_id' onChange={handleChange}>
+                                    <option value="">Select Employee</option>
+                                    {getempoloyenames.map((name, index) => (
+                                        <option key={index} value={name}>{name}</option>
+                                    ))}
+                                </select>
+                                {/* <p className='warning'>{alertowner}</p> */}
+                            </div>
+
+                            <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'>No. of Orders</label>
                                 <input type='number' className='form-control' value={valueData.no_of_orders} name='no_of_orders' placeholder='Please enter no. of orders' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'>
+                            <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Total Amount</label>
-                                <input type='number' className='form-control' value={valueData.no_of_orders * serviceAmount} placeholder={valueData.amount} readOnly/>
+                                <input type='number' className='form-control' value={valueData.total_amount} name='total_amount' placeholder="0" />
+                            </div>
+
+                            <div className='col-md-6 py-2'>{/* not Connected */}
+                                <label className='text-sm font-w-500 p-2'>Target Description</label>
+                                <textarea type='text' rows={2} cols={2} className='form-control' value="not connected" name='target-description' placeholder='Target Description not connected' onChange={handleChange} ></textarea>
                             </div>
 
                             <div className='d-flex justify-content-end pt-4'>

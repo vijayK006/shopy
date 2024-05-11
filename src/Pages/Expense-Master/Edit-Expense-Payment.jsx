@@ -116,7 +116,7 @@ const Edit_Expense_Payment = () => {
                     <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
-                         <div className='col-md-4 py-2'>
+                         <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Update Expense</label>
                                 <select className='form-control' value={valueData.expense_id} name='expense_id' onChange={handleChange}>
                                     <option value="">Select Expense Category </option>
@@ -126,28 +126,17 @@ const Edit_Expense_Payment = () => {
                                 </select>
                             </div>
 
-                               <div className='col-md-4 py-2'>
-                                <label className='text-sm font-w-500 p-2'>Update Employe</label>
-                                <select className='form-control' value={valueData.employee_id} name='employee_id' onChange={handleChange}>
-                                    <option value="">Select Employe Name</option>
-                                    {getemployenames.map((name, index) => (
-                                        <option key={index} value={name}>{name}</option>
-                                    ))}
-                                </select>
-                            </div>
-
-
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Edit Expense Amount</label>
                                 <input type='number' className='form-control' value={valueData.amount} name='amount' placeholder='Please enter expense amount' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Update Expense Date</label>
                                 <input type='date' className='form-control' value={valueData.date} name='date' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-2'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Edit Expense Remark</label>
                                 <input type='text' className='form-control' value={valueData.remark} name='remark' placeholder='Please enter expense remark' onChange={handleChange} />
                             </div>

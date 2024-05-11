@@ -9,116 +9,116 @@ const Add_Target_Master = () => {
 
     const [getempoloyenames, setGetempoloyenames] = useState([]);
     const [getservicenames, setGetservicenames] = useState([]);
-    const [serviceAmount, setServiceAmount] = useState();
- 
-    useEffect(() => {
-                axios.get('https://shopee-firm.000webhostapp.com/api/employee/get-employee.php')
-                    .then(res => {
-                        const migrateemploye = res.data.map(employee => employee.name)
-                        setGetempoloyenames(migrateemploye)
-                    })
-                    .catch(err => {
-                        console.error('Error fetching data:', err);
-                    });
-            }, []);
+    const [targets, setTargets] = useState([
+        {
+            employee_id: '',
+            service_id: '',
+            no_of_orders: '',
+            total_amount: '',
+            from_date: '2024-10-20',
+            to_date: '2024-10-20',
+            description: ''
+        }
+    ]);
 
 
+    const addTarget = () => {
+        setTargets([...targets, {
+            employee_id: '',
+            service_id: '',
+            no_of_orders: '',
+            total_amount: '',
+            from_date: '2024-10-20',
+            to_date: '2024-10-20',
+            description: ''
+        }]);
+    };
+
+    const removeTarget = (index) => {
+        const newTargets = [...targets];
+        newTargets.splice(index, 1);
+        setTargets(newTargets);
+    };
+
+    const handleChange = (index, e) => {
+        const { name, value } = e.target;
+        const newTargets = [...targets];
+        newTargets[index][name] = value;
+        setTargets(newTargets);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Here you can iterate over formDataArray and submit each item in formData format
+        targets.forEach(formData => {
+            axios.post('https://shopee-firm.000webhostapp.com/api/target/add-target.php', formData,
+            {
+                http2: false, // Disable HTTP/2
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+            )
+                .then(res => {
+                    console.log('Target Submitted Successfully');
+                })
+                .catch(err => console.log(err));
+        });
+        // navigate('/target-master');
+    };
+
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+      
+    //     const formattedTargets = targets.map(target => ({
+    //       employee_id: target.employee_id,
+    //       service_id: target.service_id,
+    //       no_of_orders: target.no_of_orders,
+    //       total_amount: target.total_amount,
+    //       from_date: target.from_date,
+    //       to_date: target.to_date,
+    //       description: target.description
+    //     }));
+      
+    //     axios.post('https://shopee-firm.000webhostapp.com/api/target/add-target.php', formattedTargets,
+    //     {
+    //         headers: {
+    //             'Content-Type': 'multipart/form-data'
+    //         }
+    //     }
+    //     )
+    //       .then(response => {
+    //         console.log('Data submitted successfully');
+    //       })
+    //       .catch(error => {
+    //         console.error('Error submitting data:', error);
+    //       });
+    //   };
+
     useEffect(() => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/service/get-service.php')
+        axios.get('https://shopee-firm.000webhostapp.com/api/employee/get-employee.php')
             .then(res => {
-                const migrateservice = res.data.map(service => ({
-                    id: service.id,
-                    name: service.name,
-                    amount: service.amount
-                }));
-                setGetservicenames(migrateservice);
+                const migrateemploye = res.data.map(employee => employee.name)
+                setGetempoloyenames(migrateemploye)
             })
             .catch(err => {
                 console.error('Error fetching data:', err);
             });
     }, []);
 
-    const [valueData, setValueData] = useState({
-        employee_id: '',
-        service_id: '',
-        no_of_orders: '',
-        total_amount: '',
-        date: '',
 
-        //    employee_id: [],
-        // service_id: [],
-        // no_of_orders: [],
-        // total_amount: '',
-        // date: [],
-    });
-
-
-  
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        const formData = new FormData();
-        const totalcal = valueData.no_of_orders * serviceAmount;
-
-        formData.append('employee_id', valueData.employee_id);
-        formData.append('service_id', valueData.service_id);
-        formData.append('no_of_orders', valueData.no_of_orders);
-        formData.append('total_amount', totalcal);
-        formData.append('date', valueData.date);
-
-        // formData.append('date[]', valueData.date);
-    // valueData.date.forEach((date) => formData.append('date[]', date));
-    // valueData.employee_id.forEach((id) => formData.append('employee_id[]', id));
-    // valueData.service_id.forEach((id) => formData.append('service_id[]', id));
-    // valueData.no_of_orders.forEach((order) => formData.append('no_of_orders[]', order));
-    // // valueData.total_amount.forEach((total_amount) => formData.append('total_amount[]', total_amount));
-    // formData.append('total_amount[]', totalcal);
-
-
-
-        axios.post('https://shopee-firm.000webhostapp.com/api/target/add-target.php', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        })
+    useEffect(() => {
+        axios.get('https://shopee-firm.000webhostapp.com/api/service/get-service.php')
             .then(res => {
-                navigate('/target-master')
-                console.log('Target Submitted Successfully')
+                const migrateservice = res.data.map(service => service.name)
+                setGetservicenames(migrateservice)
             })
-            .catch(err => console.log(err));
-    };
+            .catch(err => {
+                console.error('Error fetching data:', err);
+            });
+    }, []);
 
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setValueData({ ...valueData, [name]: value });
-
-        if (name === 'service_id') {
-            const selectedService = getservicenames.find(service => service.name === value);
-            if (selectedService) {
-                setServiceAmount(selectedService.amount);
-            }
-        }
-    };
-
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     if (name === 'employee_id' || name === 'service_id' || name === 'no_of_orders' || name==='total_amount' || name==='date') {
-    //         setValueData({ ...valueData, [name]: [value] }); // Convert to array
-    //     } else {
-    //         setValueData({ ...valueData, [name]: value });
-    //     }
-    
-    //     if (name === 'service_id') {
-    //         const selectedService = getservicenames.find(service => service.name === value);
-    //         if (selectedService) {
-    //             setServiceAmount(selectedService.amount);
-    //         }
-    //     }
-    // };
-
-    
 
     return (
         <>
@@ -133,45 +133,68 @@ const Add_Target_Master = () => {
                     <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
-                        <div className='col-md-4 py-1'>
-                                 <label className='text-sm font-w-500 p-2'>Add Employee</label>
-                                 <select className='form-control' value={valueData.employee_id} name='employee_id' onChange={handleChange}>
-                                     <option value="">Select Employee</option>
-                                     {getempoloyenames.map((name, index) => (
-                                         <option key={index} value={name}>{name}</option>
-                                     ))}
-                                 </select>
-                                 {/* <p className='warning'>{alertowner}</p> */}
-                             </div>
+                            <div className='col-md-12 py-1 border-bottom' />
+                            {targets.map((target, index) => (
+                                <div key={index} className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
-                             <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Target Date</label>
-                                <input type='date' className='form-control' value={valueData.date} name='date' placeholder='' onChange={handleChange} />
-                            </div>
-                            <div className='col-md-12 py-1 border-bottom'/>
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Add Service</label>
-                                <select className='form-control' value={valueData.service_id} name='service_id' onChange={handleChange}>
-                                    <option value="">Select Service</option>
-                                    {getservicenames.map(service => (
-                                        <option key={service.id} value={service.name}>{service.name}</option>
-                                    ))}
-                                </select>
-                            </div>
 
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>No. of Orders</label>
-                                <input type='number' className='form-control' value={valueData.no_of_orders} name='no_of_orders' placeholder='Please enter no. of orders' onChange={handleChange} />
-                            </div>
+                                    <div className='col-md-3 py-1'>
+                                        <label className='text-sm font-w-500 p-2'>Target From Date</label>
+                                        <input type='date' className='form-control' value={target.from_date} name='from_date' placeholder='' onChange={(e) => handleChange(index, e)} />
+                                    </div>
 
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Total Amount</label>
-                                <input type='number' className='form-control' 
-                                value={valueData.total_amount}
-                                 name='total_amount' onChange={handleChange} placeholder={valueData.no_of_orders * serviceAmount} readOnly/>
-                            </div>
+                                    <div className='col-md-3 py-1'>
+                                        <label className='text-sm font-w-500 p-2'>Target To Date</label>
+                                        <input type='date' className='form-control' value={target.to_date} name='to_date' placeholder='' onChange={(e) => handleChange(index, e)} />
+                                    </div>
+
+                                    <div className='col-md-3 py-2'>
+                                        <label className='text-sm font-w-500 p-2'>Select Service</label>
+                                        <select className='form-control' value={target.service_id} name='service_id' onChange={(e) => handleChange(index, e)}>
+                                            <option value="">Select Service</option>
+                                            {getservicenames.map((name, index) => (
+                                                <option key={index} value={name}>{name}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+
+
+                                    <div className='col-md-3 py-2'>
+                                        <label className='text-sm font-w-500 p-2'>Select Employee</label>
+                                        <select className='form-control' value={target.employee_id} name='employee_id' onChange={(e) => handleChange(index, e)}>
+                                            <option value="">Select Employee</option>
+                                            {getempoloyenames.map((name, index) => (
+                                                <option key={index} value={name}>{name}</option>
+                                            ))}
+                                        </select>
+                                        {/* <p className='warning'>{alertowner}</p> */}
+                                    </div>
+
+                                    <div className='col-md-3 py-1'>
+                                        <label className='text-sm font-w-500 p-2'>no_of_orders</label>
+                                        <input type='number' className='form-control' value={target.no_of_orders} name='no_of_orders' placeholder='' onChange={(e) => handleChange(index, e)} />
+                                    </div>
+
+                                    <div className='col-md-3 py-1'>
+                                        <label className='text-sm font-w-500 p-2'>total amount</label>
+                                        <input type='number' className='form-control' value={target.total_amount} name='total_amount' placeholder='' onChange={(e) => handleChange(index, e)} />
+                                    </div>
+
+                                    <div className='col-md-3 py-1'>
+                                        <label className='text-sm font-w-500 p-2'>description</label>
+                                        <input type='text' className='form-control' value={target.description} name='description' placeholder='' onChange={(e) => handleChange(index, e)} />
+                                    </div>
+                                    <div className='d-flex justify-content-between pt-4'>
+                                        <button type='button' className='btn btn-bg-orange' onClick={() => removeTarget(index)}>Remove</button>
+                                    </div>
+                                </div>
+
+                            ))}
+
 
                             <div className='d-flex justify-content-end pt-4'>
+                                <button type='button' className='btn btn-bg-orange mr-2' onClick={addTarget}>Add</button>
+
                                 <button type='submit' className='btn btn-bg-orange' style={{ width: "200px" }}>Submit</button>
                             </div>
                         </div>

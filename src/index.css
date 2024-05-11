@@ -608,7 +608,25 @@ color: gray;
     border: 1px solid #e0e0e0;
 }
 
-.img-format img {
+.img-format-ownerphoto{
+    height: 200px;
+    width: 160px;
+    background-color: rgb(245, 245, 245);
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+.img-format-ownersign{
+    height: 64px;
+    width: 256px;
+    background-color: rgb(245, 245, 245);
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+.img-format img, .img-format-ownerphoto img, .img-format-ownersign img{
     height: 100%;
     width: 100%;
     border-radius: 10px;
@@ -855,11 +873,12 @@ color: gray;
 }
 
 .file-data{
-    font-size: 10px;
+    font-size: 12px;
     
-    background-color: rgb(36, 36, 36);
+    /* background-color: rgb(36, 36, 36); */
+    background-color: #ff6423;
     color: white;
-    line-height: 3.5;
+    line-height: 2;
     padding: 0px 5px;
     border-radius: 4px;
     cursor: pointer;
@@ -867,15 +886,21 @@ color: gray;
 }
 
 .file-data-outline{
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 500;
     letter-spacing: 1px;
-    border:1px solid  rgb(36, 36, 36);
-    color: black;
-    line-height: 3.5;
+    border:1px solid  #ff6423;
+    color: #ff6423;
+    line-height: 2;
     padding: 0px 5px;
     border-radius: 4px;
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.file-data-outline:hover{
+    background-color: #ff6423;
+    color: white;
 }
 
 .bread-parent{
@@ -965,4 +990,9 @@ font-size: 20px;
     width: 10px;
     background-color: green;
     border-radius: 10px;
+}
+
+.form-check-input:checked {
+    background-color: #ff5e1a ;
+    border-color: #ff5e1a ;
 }

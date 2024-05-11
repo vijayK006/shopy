@@ -28,19 +28,24 @@ import EmployeManager from "./Pages/Employee-Manager/Employe-manager";
 import Add_Employe from "./Pages/Employee-Manager/Add-Employee";
 import Edit_employe from "./Pages/Employee-Manager/Edit-Employee";
 
+// Employee Access
+import Access from './Pages/Access';
+
+
 // Target Master
-import TargetMaster from "./Pages/Target-Master/TargetMaster";
-import Add_Target_Master from "./Pages/Target-Master/Add-Target-Master";
-import Edit_Target_Master from "./Pages/Target-Master/Edit-Target-Master";
-import ProtectRoute from "./Auth/ProtectRoute";
-import Add_Expenses_Payment from "./Pages/Expense-Master/Add-Expenses-Payment";
-import Expense_Payment from "./Pages/Expense-Master/Expense-Payment";
-import Edit_Expense_Payment from "./Pages/Expense-Master/Edit-Expense-Payment";
-import Add_Target_Out from "./Pages/Target-Master/Add-Target-out";
-import TargetOut from "./Pages/Target-Master/Target-Out";
-import Edit_Target_Out from "./Pages/Target-Master/Edit-Target-Out";
-import TargetReport from "./Pages/Reports/Target-Report";
-import ExpenseReport from "./Pages/Reports/Expense-Report";
+import TargetMaster from './Pages/Target-Master/TargetMaster';
+import Add_Target_Master from './Pages/Target-Master/Add-Target-Master';
+import Edit_Target_Master from './Pages/Target-Master/Edit-Target-Master';
+import ProtectRoute from './Auth/ProtectRoute';
+import Add_Expenses_Payment from './Pages/Expense-Master/Add-Expenses-Payment';
+import Expense_Payment from './Pages/Expense-Master/Expense-Payment';
+import Edit_Expense_Payment from './Pages/Expense-Master/Edit-Expense-Payment';
+import Add_Target_Out from './Pages/Target-Master/Add-Target-out';
+import TargetOut from './Pages/Target-Master/Target-Out';
+import Edit_Target_Out from './Pages/Target-Master/Edit-Target-Out';
+import TargetReport from './Pages/Reports/Target-Report';
+import ExpenseReport from './Pages/Reports/Expense-Report';
+
 
 const App = () => {
   return (
@@ -97,6 +102,9 @@ const App = () => {
           <Route path="/employe-manager" element={<EmployeManager />} />
           <Route path="/add-employee" element={<Add_Employe />} />
           <Route path="/edit-employee/:id" element={<Edit_employe />} />
+          {/* --------- */}
+          <Route path="/access" element={<Access />} />
+
 
           {/* Target Master */}
           <Route path="/target-master" element={<TargetMaster />} />
@@ -110,9 +118,10 @@ const App = () => {
           <Route path="/add-target-out" element={<Add_Target_Out />} />
           <Route path="/edit-target-out/:id" element={<Edit_Target_Out />} />
 
-          {/* Reports */}
-          <Route path="/target-report" element={<TargetReport />} />
-          <Route path="/expense-report" element={<ExpenseReport />} />
+{/* Reports */}
+<Route path="/target-report" element={<TargetReport />} />
+<Route path="/expense-report" element={<ExpenseReport />} />
+
         </Routes>
       </BrowserRouter>
     </>

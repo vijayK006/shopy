@@ -12,7 +12,7 @@ import { LuIndianRupee } from "react-icons/lu";
 import { BiReset } from "react-icons/bi";
 import { TbFilterCog } from "react-icons/tb";
 
-const TargetMaster = () => {
+const TargetReport = () => {
   const [apiDatas, setApiDatas] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -21,6 +21,7 @@ const TargetMaster = () => {
   const [totalAmountTout, setTotalAmountTout] = useState(0);
   const [totalOrdersTout, setTotalOrdersTout] = useState(0);
   const [selectedService, setSelectedService] = useState("");
+  const [selectedEmployee, setSelectedEmployee] = useState('');
 
   const fetchData = () => {
     axios
@@ -29,10 +30,19 @@ const TargetMaster = () => {
         const responseData = res.data || [];
         if (Array.isArray(responseData)) {
           setApiDatas(responseData);
+          console.log(responseData)
           calculateTotalAmountTin(responseData);
           calculateTotalOrdersTin(responseData);
           calculateTotalAmountTout(responseData);
           calculateTotalOrdersTout(responseData);
+
+          // const resulttype = responseData.map(migratetype => migratetype.target_type);
+          // if (resulttype.indexOf("tin") !== -1) {
+          //   console.log('In');
+          // } else if (resulttype.indexOf("tout") !== -1) {
+          //   console.log('Out');
+          // }
+
         } else {
           console.error("Invalid data format:", responseData);
         }
@@ -41,6 +51,9 @@ const TargetMaster = () => {
         console.error("Error fetching data:", err);
       });
   };
+
+
+
 
   useEffect(() => {
     fetchData();
@@ -54,6 +67,9 @@ const TargetMaster = () => {
     setTotalOrdersTin(0);
     setTotalAmountTout(0);
     setTotalOrdersTout(0);
+
+    const refer = document.getElementById('refer');
+    refer.style.display = "block"
   };
 
   const handleFilter = () => {
@@ -82,6 +98,10 @@ const TargetMaster = () => {
       );
     }
 
+    if (selectedEmployee) {
+      filteredData = filteredData.filter(item => item.employee_id === selectedEmployee);
+    }
+
     // Calculate total amount for filtered data
     calculateTotalAmountTin(filteredData);
     calculateTotalOrdersTin(filteredData);
@@ -89,6 +109,9 @@ const TargetMaster = () => {
     calculateTotalOrdersTout(filteredData);
 
     setApiDatas(filteredData);
+
+    const refer = document.getElementById('refer');
+    refer.style.display = "none"
   };
 
   const calculateTotalAmountTin = (data) => {
@@ -136,28 +159,32 @@ const TargetMaster = () => {
     new Set(apiDatas.map((item) => item.service_id))
   );
 
+  const employeeNames = Array.from(new Set(apiDatas.map(item => item.employee_id)));
+
+
   const columns = [
     { field: "displayOrder", headerName: "Sl.No", width: 70 },
-    { field: "target_type", headerName: "Target Type", width: 150 },
-    { field: "employee_id", headerName: "Employe Name", width: 150 },
+    { field: "date", headerName: "Date", type: "Date", width: 150 },
     { field: "service_id", headerName: "Service Name", width: 150 },
+    { field: "employee_id", headerName: "Employe Name", width: 150 },
     { field: "no_of_orders", headerName: "Order Qty.", width: 150 },
     { field: "total_amount", headerName: "Total Amount", width: 150 },
-    { field: "date", headerName: "Date", type: "Date", width: 150 },
+    { field: "target_type", headerName: "Target Type", width: 150 },
   ];
 
   const rows =
     apiDatas.length > 0
       ? apiDatas.map((item, index) => ({
-          id: item.id || index,
-          displayOrder: index + 1,
-          target_type: item.target_type,
-          employee_id: item.employee_id,
-          service_id: item.service_id,
-          no_of_orders: item.no_of_orders,
-          total_amount: item.total_amount,
-          date: item.date,
-        }))
+        id: item.id || index,
+        displayOrder: index + 1,
+        // target_type: item.target_type,
+        target_type: item.target_type === 'tin' ? 'In' : item.target_type === 'tout' ? 'Out' : 'Unknown',
+        employee_id: item.employee_id,
+        service_id: item.service_id,
+        no_of_orders: item.no_of_orders,
+        total_amount: item.total_amount,
+        date: item.date,
+      }))
       : [];
 
   const filterbtn = () => {
@@ -247,11 +274,21 @@ const TargetMaster = () => {
               </select>
             </div>
 
+            <div className='form-head'>
+              <select value={selectedEmployee} onChange={(e) => setSelectedEmployee(e.target.value)} className='filter-fields'>
+                <option value="">All Employees</option>
+                {employeeNames.filter(Boolean).map(employee => (
+                  <option key={employee} value={employee}>{employee}</option>
+                ))}
+              </select>
+            </div>
+
             <div className="d-flex gap-2 justify-content-end pb-3">
               <button
                 type="button"
                 className="btn btn-bg-orange btn-sm letter-spacing-1"
                 onClick={handleFilter}
+                id="refer"
               >
                 <TbFilterCog /> Check
               </button>
@@ -266,15 +303,15 @@ const TargetMaster = () => {
             </div>
 
             <p>
-              Total Orders: {totalOrdersTin} | Total Amt: {totalAmountTin}{" "}
+              Total Orders: {totalOrdersTin} | Total Amount: {totalAmountTin}{" "}
               <LuIndianRupee />
             </p>
             <p>
-              Comp Orders: {totalOrdersTout} | Comp Amt: {totalAmountTout}{" "}
+              Comp Orders: {totalOrdersTout} | Comp Amount: {totalAmountTout}{" "}
               <LuIndianRupee />
             </p>
             <p>
-              Bal Orders: {totalOrdersTin - totalOrdersTout} | Bal Amt:
+              Bal Orders: {totalOrdersTin - totalOrdersTout} | Bal Amount:
               {totalAmountTin - totalAmountTout} <LuIndianRupee />
             </p>
           </div>
@@ -292,4 +329,4 @@ const TargetMaster = () => {
   );
 };
 
-export default TargetMaster;
+export default TargetReport;
