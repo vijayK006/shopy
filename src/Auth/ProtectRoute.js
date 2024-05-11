@@ -12,7 +12,6 @@ const ProtectRoute = (propes) => {
     })
   return (
     <>
-    
       <Component/>
     </>
   )
