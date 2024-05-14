@@ -70,8 +70,17 @@ const Sidebar = () => {
 
             <NavLink className="disble-decoration" to="/employe-manager"><li className={`items ${currentPage === '/employe-manager' || currentPage === '/add-employee' || currentPage.startsWith('/edit-employee') ? 'active' : ''}`}><FaRegAddressCard    className="icons" /> <span className='resp'>Employee Master</span></li></NavLink>
 
-           
-            <NavLink className="disble-decoration" to="/access"><li className={`items ${currentPage === '/access'? 'active' : ''}`}><FaRegAddressCard    className="icons" /> <span className='resp'>Employee Access</span></li></NavLink>
+            <NavLink className="disble-decoration" to="" >
+              <li className={`dropmenu items-drop  ${currentPage.startsWith('/access') || currentPage.startsWith('/update-access')  ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems1')} id='dropitems1'>
+                <IoPricetagsOutline className="icons" /> <span className='resp'>Employee Access <IoIosArrowDown /></span>
+
+                <ul className='submenu' >
+                  <NavLink to='/access'><li className={`droplink-text ${currentPage === '/access'  ? 'link-active' : ''}`}><IoIosArrowForward />Add Access</li></NavLink>
+
+                  <NavLink to='/update-access'><li className={`droplink-text ${currentPage.startsWith('/update-access')  ? 'link-active' : ''}`}><IoIosArrowForward />Update Access</li></NavLink>
+                </ul>
+              </li>
+            </NavLink>
 
             <NavLink className="disble-decoration" to="" >
               <li className={`dropmenu items-drop  ${currentPage === '/expenses-master' || currentPage === '/add-expenses-master' || currentPage.startsWith('/edit-expenses-master') || currentPage.startsWith('/add-expenses-payment') || currentPage.startsWith('/expenses-payment') || currentPage.startsWith('/edit-expenses-payment') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems1')} id='dropitems1'>

@@ -64,7 +64,7 @@ const Add_Target_Out = () => {
 
 
 
-        axios.post('https://shopee-firm.000webhostapp.com/api/target-out/add-target.php', formData, {
+        axios.post('https://digitalshopee.online/api/target-out/add-target.php', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

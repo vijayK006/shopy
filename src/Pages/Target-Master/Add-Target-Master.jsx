@@ -51,7 +51,7 @@ const Add_Target_Master = () => {
         e.preventDefault();
         // Here you can iterate over formDataArray and submit each item in formData format
         targets.forEach(formData => {
-            axios.post('https://shopee-firm.000webhostapp.com/api/target/add-target.php', formData,
+            axios.post('https://digitalshopee.online/api/target/add-target.php', formData,
             {
                 http2: false, // Disable HTTP/2
                 headers: {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Topbar from '../layouts/Topbar';
-import Sidebar from '../layouts/Sidebar';
+import Topbar from '../../layouts/Topbar';
+import Sidebar from '../../layouts/Sidebar';
 import axios from 'axios';
 
 const Access = () => {
@@ -58,7 +58,7 @@ const Access = () => {
         formData.append('delete_expense', valueData.delete_expense);
 
 
-        axios.post('https://shopee-firm.000webhostapp.com/api/employee-permission/add-permission.php', formData, {
+        axios.post('https://digitalshopee.online/api/employee-permission/add-permission.php', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -88,9 +88,8 @@ const Access = () => {
         }
     };
     
-    
     useEffect(() => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/employee/get-employee.php')
+        axios.get('https://digitalshopee.online/api/employee/get-employee.php')
             .then(res => {
                 const migrateemployename = res.data.map(employee => ({
                     id: employee.id,
@@ -111,6 +110,7 @@ const Access = () => {
             <div className='main-content' id='mainbody'>
                 <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50'>
                     <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='' className='t-theme-color'>Employee Access</Link></p>
+
                 </div>
                 <div className='shadow p-5 b-radius-10 bg-white'>
                 <form onSubmit={handleSubmit}>

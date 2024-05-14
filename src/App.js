@@ -29,7 +29,7 @@ import Add_Employe from "./Pages/Employee-Manager/Add-Employee";
 import Edit_employe from "./Pages/Employee-Manager/Edit-Employee";
 
 // Employee Access
-import Access from './Pages/Access';
+import Access from './Pages/Employee-Access/Access';
 
 
 // Target Master
@@ -45,6 +45,7 @@ import TargetOut from './Pages/Target-Master/Target-Out';
 import Edit_Target_Out from './Pages/Target-Master/Edit-Target-Out';
 import TargetReport from './Pages/Reports/Target-Report';
 import ExpenseReport from './Pages/Reports/Expense-Report';
+import Update_Access from "./Pages/Employee-Access/Update-Access";
 
 
 const App = () => {
@@ -87,6 +88,7 @@ const App = () => {
             path="/edit-expenses-master/:id"
             element={<Edit_Expenese_Master />}
           />
+
           {/* -------- */}
           <Route
             path="/add-expenses-payment"
@@ -104,6 +106,7 @@ const App = () => {
           <Route path="/edit-employee/:id" element={<Edit_employe />} />
           {/* --------- */}
           <Route path="/access" element={<Access />} />
+          <Route path="/update-access" element={<Update_Access />} />
 
 
           {/* Target Master */}

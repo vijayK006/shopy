@@ -66,8 +66,8 @@ const Edit_Service_Master = () => {
 
        
 
-        const confirmDelete = window.confirm("Are you sure you want to update this Service Master");
-        if (confirmDelete) {
+        const confirmUpdate = window.confirm("Are you sure you want to update this Service Master");
+        if (confirmUpdate) {
             axios.post(`https://shopee-firm.000webhostapp.com/api/service/update-by-id-service.php?id=${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
