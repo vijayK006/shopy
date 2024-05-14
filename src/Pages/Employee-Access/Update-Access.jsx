@@ -36,7 +36,8 @@ const Update_Access = () => {
             axios.get(`https://digitalshopee.online/api/employee-permission/get-permission.php?id=${selectedEmployeeId}`)
             .then(response => {
                 console.log(response.data);
-                    const firmData = response.data[0]; // Assuming response.data contains the firm data
+                    const firmData = response.data[0];// Assuming response.data contains the firm data
+                    console.log(firmData.view_service)
                     setValueData({
                         employee_id: firmData.employee_id,
     
@@ -67,6 +68,52 @@ const Update_Access = () => {
                 });
         }
     }, [selectedEmployeeId]);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+
+        formData.append('employee_id', valueData.employee_id);
+
+        formData.append('add_firm', valueData.add_firm);
+        formData.append('view_firm', valueData.view_firm);
+        formData.append('edit_firm', valueData.edit_firm);
+        formData.append('delete_firm', valueData.delete_firm);
+
+        formData.append('add_client', valueData.add_client);
+        formData.append('view_client', valueData.view_client);
+        formData.append('edit_client', valueData.edit_client);
+        formData.append('delete_client', valueData.delete_client);
+
+        formData.append('add_service', valueData.add_service);
+        formData.append('view_service', valueData.view_service);
+        formData.append('edit_service', valueData.edit_service);
+        formData.append('delete_service', valueData.delete_service);
+
+        formData.append('add_expense', valueData.add_expense);
+        formData.append('view_expense', valueData.view_expense);
+        formData.append('edit_expense', valueData.edit_expense);
+        formData.append('delete_expense', valueData.delete_expense);
+
+       
+
+        const confirmUpdate = window.confirm("Are you sure you want to update this Service Master");
+        if (confirmUpdate) {
+            axios.post(`https://shopee-firm.000webhostapp.com/api/employee-permission/update-permission.php?id=${selectedEmployeeId}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then(res => {
+                    console.log('Employee Access Updated Successfully')
+                    // navigate('/service-master')
+                })
+                .catch(err => console.log(err));
+
+        }
+
+    };
 
 const handleChange = (e) => {
     const { name, value, checked } = e.target;
@@ -115,8 +162,8 @@ const handleChange = (e) => {
 
                 </div>
                 <div className='shadow p-5 b-radius-10 bg-white'>
-                {/* <form onSubmit={handleSubmit}> */}
-                <form>
+                <form onSubmit={handleSubmit}>
+                {/* <form> */}
                     <div className='col-md-4 py-2'>
                         <label className='text-sm font-w-500 p-2'>Select Employe</label>
                         <select className='form-control' value={selectedEmployeeId} name='employee_id' onChange={handleChange}>
@@ -134,28 +181,28 @@ const handleChange = (e) => {
 
                         <div className='col-md-2'>
                                 <div className="form-check form-switch">
-                                    <input className="form-check-input" type="checkbox" id="add_firm" name="add_firm" value={valueData.add_firm} onChange={handleChange} />
+                                    <input className="form-check-input" type="checkbox" id="add_firm" name="add_firm" value={valueData.add_firm} onChange={handleChange} checked={valueData.add_firm === 'yes'}/>
                                     <label className="form-check-label" htmlFor="firmview">Add</label>
                                 </div>
                             </div>                           
 
                             <div className='col-md-2'>
                                 <div className="form-check form-switch">
-                                    <input className="form-check-input" type="checkbox" id="view_firm" name="view_firm" value={valueData.view_firm} onChange={handleChange} />
+                                    <input className="form-check-input" type="checkbox" id="view_firm" name="view_firm" value={valueData.view_firm} onChange={handleChange} checked={valueData.view_firm === 'yes'} />
                                     <label className="form-check-label" htmlFor="firmview">View</label>
                                 </div>
                             </div>
 
                             <div className='col-md-2'>
                                 <div className="form-check form-switch">
-                                    <input className="form-check-input" type="checkbox" id="edit_firm" name="edit_firm" value={valueData.edit_firm} onChange={handleChange} />
+                                    <input className="form-check-input" type="checkbox" id="edit_firm" name="edit_firm" value={valueData.edit_firm} onChange={handleChange} checked={valueData.edit_firm === 'yes'}/>
                                     <label className="form-check-label" htmlFor="firmedit">Edit</label>
                                 </div>
                             </div>
 
                             <div className='col-md-2'>
                                 <div className="form-check form-switch">
-                                    <input className="form-check-input" type="checkbox" id="delete_firm" name="delete_firm" value={valueData.delete_firm} onChange={handleChange} />
+                                    <input className="form-check-input" type="checkbox" id="delete_firm" name="delete_firm" value={valueData.delete_firm} onChange={handleChange} checked={valueData.delete_firm === 'yes'}/>
                                     <label className="form-check-label" htmlFor="firmdelete">Delete</label>
                                 </div>
                             </div>
@@ -169,7 +216,7 @@ const handleChange = (e) => {
                             <div className='col-md-2'>
                             <div className="form-check form-switch">
                                     <input className="form-check-input" type="checkbox" id="add_client" name="add_client" value={valueData.add_client
-                                    } onChange={handleChange} />
+                                    } onChange={handleChange} checked={valueData.add_client === 'yes'}/>
                                     <label className="form-check-label" htmlFor="firmview">Add</label>
                                 </div>
                             </div>
@@ -177,7 +224,7 @@ const handleChange = (e) => {
                             <div className='col-md-2'>
                             <div className="form-check form-switch">
                                     <input className="form-check-input" type="checkbox" id="view_client" name="view_client" value={valueData.view_client
-                                    } onChange={handleChange} />
+                                    } onChange={handleChange} checked={valueData.view_client === 'yes'}/>
                                     <label className="form-check-label" htmlFor="firmview">View</label>
                                 </div>
                             </div>
@@ -185,7 +232,7 @@ const handleChange = (e) => {
                             <div className='col-md-2'>
                             <div className="form-check form-switch">
                                     <input className="form-check-input" type="checkbox" id="edit_client" name="edit_client" value={valueData.edit_client
-                                    } onChange={handleChange} />
+                                    } onChange={handleChange} checked={valueData.edit_client === 'yes'}/>
                                     <label className="form-check-label" htmlFor="firmview">Edit</label>
                                 </div>
                             </div>
@@ -193,7 +240,7 @@ const handleChange = (e) => {
                             <div className='col-md-2'>
                             <div className="form-check form-switch">
                                     <input className="form-check-input" type="checkbox" id="delete_client" name="delete_client" value={valueData.delete_client
-                                    } onChange={handleChange} />
+                                    } onChange={handleChange} checked={valueData.delete_client === 'yes'}/>
                                     <label className="form-check-label" htmlFor="firmview">Delete</label>
                                 </div>
                             </div>
@@ -207,28 +254,28 @@ const handleChange = (e) => {
 
                             <div className='col-md-2'>
                             <div className="form-check form-switch">
-                                    <input className="form-check-input" type="checkbox" id="add_service" name="add_service" value={valueData.add_service} onChange={handleChange} />
+                                    <input className="form-check-input" type="checkbox" id="add_service" name="add_service" value={valueData.add_service} onChange={handleChange} checked={valueData.add_service === 'yes'}/>
                                     <label className="form-check-label" htmlFor="firmview">Add</label>
                                 </div>
                             </div>
 
                             <div className='col-md-2'>
                             <div className="form-check form-switch">
-                                    <input className="form-check-input" type="checkbox" id="view_service" name="view_service" value={valueData.view_service} onChange={handleChange} />
+                                    <input className="form-check-input" type="checkbox" id="view_service" name="view_service" value={valueData.view_service} onChange={handleChange} checked={valueData.view_service === 'yes'}/>
                                     <label className="form-check-label" htmlFor="firmview">View</label>
                                 </div>
                             </div>
 
                             <div className='col-md-2'>
                             <div className="form-check form-switch">
-                                    <input className="form-check-input" type="checkbox" id="edit_service" name="edit_service" value={valueData.edit_service } onChange={handleChange} />
+                                    <input className="form-check-input" type="checkbox" id="edit_service" name="edit_service" value={valueData.edit_service } onChange={handleChange} checked={valueData.edit_service === 'yes'}/>
                                     <label className="form-check-label" htmlFor="firmview">Edit</label>
                                 </div>
                             </div>
 
                             <div className='col-md-2'>
                             <div className="form-check form-switch">
-                                    <input className="form-check-input" type="checkbox" id="delete_service" name="delete_service" value={valueData.delete_service} onChange={handleChange} />
+                                    <input className="form-check-input" type="checkbox" id="delete_service" name="delete_service" value={valueData.delete_service} onChange={handleChange} checked={valueData.delete_service === 'yes'}/>
                                     <label className="form-check-label" htmlFor="firmview">Delete</label>
                                 </div>
                             </div>
@@ -242,28 +289,28 @@ const handleChange = (e) => {
 
                             <div className='col-md-2'>
                             <div className="form-check form-switch">
-                                    <input className="form-check-input" type="checkbox" id="add_expense" name="add_expense" value={valueData.add_expense} onChange={handleChange} />
+                                    <input className="form-check-input" type="checkbox" id="add_expense" name="add_expense" value={valueData.add_expense} onChange={handleChange} checked={valueData.add_expense === 'yes'}/>
                                     <label className="form-check-label" htmlFor="firmview">Add</label>
                                 </div>
                             </div>
 
                             <div className='col-md-2'>
                             <div className="form-check form-switch">
-                                    <input className="form-check-input" type="checkbox" id="view_expense" name="view_expense" value={valueData.view_expense} onChange={handleChange} />
+                                    <input className="form-check-input" type="checkbox" id="view_expense" name="view_expense" value={valueData.view_expense} onChange={handleChange} checked={valueData.view_expense === 'yes'}/>
                                     <label className="form-check-label" htmlFor="firmview">View</label>
                                 </div>
                             </div>
 
                             <div className='col-md-2'>
                             <div className="form-check form-switch">
-                                    <input className="form-check-input" type="checkbox" id="edit_expense" name="edit_expense" value={valueData.edit_expense } onChange={handleChange} />
+                                    <input className="form-check-input" type="checkbox" id="edit_expense" name="edit_expense" value={valueData.edit_expense } onChange={handleChange} checked={valueData.edit_expense === 'yes'}/>
                                     <label className="form-check-label" htmlFor="firmview">Edit</label>
                                 </div>
                             </div>
 
                             <div className='col-md-2'>
                             <div className="form-check form-switch">
-                                    <input className="form-check-input" type="checkbox" id="delete_expense" name="delete_expense" value={valueData.delete_expense} onChange={handleChange} />
+                                    <input className="form-check-input" type="checkbox" id="delete_expense" name="delete_expense" value={valueData.delete_expense} onChange={handleChange} checked={valueData.delete_expense === 'yes'}/>
                                     <label className="form-check-label" htmlFor="firmview">Delete</label>
                                 </div>
                             </div>
