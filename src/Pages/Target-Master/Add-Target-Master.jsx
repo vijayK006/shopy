@@ -47,54 +47,53 @@ const Add_Target_Master = () => {
         setTargets(newTargets);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Here you can iterate over formDataArray and submit each item in formData format
-        targets.forEach(formData => {
-            axios.post('https://digitalshopee.online/api/target/add-target.php', formData,
-            {
-                http2: false, // Disable HTTP/2
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }
-            )
-                .then(res => {
-                    console.log('Target Submitted Successfully');
-                })
-                .catch(err => console.log(err));
-        });
-        // navigate('/target-master');
-    };
-
-
     // const handleSubmit = (e) => {
     //     e.preventDefault();
-      
-    //     const formattedTargets = targets.map(target => ({
-    //       employee_id: target.employee_id,
-    //       service_id: target.service_id,
-    //       no_of_orders: target.no_of_orders,
-    //       total_amount: target.total_amount,
-    //       from_date: target.from_date,
-    //       to_date: target.to_date,
-    //       description: target.description
-    //     }));
-      
-    //     axios.post('https://shopee-firm.000webhostapp.com/api/target/add-target.php', formattedTargets,
-    //     {
-    //         headers: {
-    //             'Content-Type': 'multipart/form-data'
+    //     // Here you can iterate over formDataArray and submit each item in formData format
+    //     targets.forEach(formData => {
+    //         axios.post('https://digitalshopee.online/api/target/add-target.php', formData,
+    //         {
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             }
     //         }
-    //     }
-    //     )
-    //       .then(response => {
-    //         console.log('Data submitted successfully');
-    //       })
-    //       .catch(error => {
-    //         console.error('Error submitting data:', error);
-    //       });
-    //   };
+    //         )
+    //             .then(res => {
+    //                 console.log('Target Submitted Successfully');
+    //             })
+    //             .catch(err => console.log(err));
+    //     });
+    //     // navigate('/target-master');
+    // };
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+      
+        const formattedTargets = targets.map(target => ({
+          employee_id: target.employee_id,
+          service_id: target.service_id,
+          no_of_orders: target.no_of_orders,
+          total_amount: target.total_amount,
+          from_date: target.from_date,
+          to_date: target.to_date,
+          description: target.description
+        }));
+      
+        axios.post('https://digitalshopee.online/api/target/add-target.php', formattedTargets,
+        {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        )
+          .then(response => {
+            console.log('Data submitted successfully');
+          })
+          .catch(error => {
+            console.error('Error submitting data:', error);
+          });
+      };
 
     useEffect(() => {
         axios.get('https://shopee-firm.000webhostapp.com/api/employee/get-employee.php')

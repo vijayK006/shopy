@@ -100,7 +100,7 @@ const Update_Access = () => {
 
         const confirmUpdate = window.confirm("Are you sure you want to update this Service Master");
         if (confirmUpdate) {
-            axios.post(`https://shopee-firm.000webhostapp.com/api/employee-permission/update-permission.php?id=${selectedEmployeeId}`, formData, {
+            axios.post(`https://digitalshopee.online/api/employee-permission/update-permission.php?id=${selectedEmployeeId}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
