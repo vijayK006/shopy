@@ -13,7 +13,7 @@ const Edit_Target_Master = () => {
     const [serviceAmount, setServiceAmount] = useState();
 
     useEffect(() => {
-                axios.get('https://shopee-firm.000webhostapp.com/api/employee/get-employee.php')
+                axios.get('https://digitalshopee.online/api/employee/get-employee.php')
                     .then(res => {
                         const migrateemploye = res.data.map(employee => employee.name)
                         setGetempoloyenames(migrateemploye)
@@ -25,7 +25,7 @@ const Edit_Target_Master = () => {
         
 
     useEffect(() => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/service/get-service.php')
+        axios.get('https://digitalshopee.online/api/service/get-service.php')
             .then(res => {
                 const migrateservice = res.data.map(service => ({
                     id: service.id,
@@ -47,7 +47,7 @@ const Edit_Target_Master = () => {
     });
 
     useEffect(() => {
-        axios.get(`https://shopee-firm.000webhostapp.com/api/target/get-by-id-target.php?id=${id}`)
+        axios.get(`https://digitalshopee.online/api/target/get-by-id-target.php?id=${id}`)
             .then(response => {
                 const firmData = response.data[0];
                 setValueData({
@@ -77,7 +77,7 @@ const Edit_Target_Master = () => {
 
         const confirmDelete = window.confirm("Are you sure you want to update this Service Master");
         if (confirmDelete) {
-            axios.post(`https://shopee-firm.000webhostapp.com/api/target/update-by-id-target.php?id=${id}`, formData, {
+            axios.post(`https://digitalshopee.online/api/target/update-by-id-target.php?id=${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

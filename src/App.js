@@ -46,6 +46,7 @@ import Edit_Target_Out from './Pages/Target-Master/Edit-Target-Out';
 import TargetReport from './Pages/Reports/Target-Report';
 import ExpenseReport from './Pages/Reports/Expense-Report';
 import Update_Access from "./Pages/Employee-Access/Update-Access";
+import EmployeeLogin from "./Pages/EmployeeLogin";
 
 
 const App = () => {
@@ -56,6 +57,7 @@ const App = () => {
           <Route path="/" element={<ProtectRoute Component={Home} />} />
           {/* <Route path="/" element={<Home/>} /> */}
           <Route path="/login" element={<Login />} />
+          <Route path="/employee-login" element={<EmployeeLogin />} />
 
           {/* Firm Master */}
           <Route path="/firm-master" element={<FirmMaster />} />

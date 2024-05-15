@@ -26,7 +26,7 @@ const TargetMaster = () => {
 
 
     const fetchData = () => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/target/get-target.php')
+        axios.get('https://digitalshopee.online/api/target/get-target.php')
             .then(res => {
                 const responseData = res.data || [];
                 if (Array.isArray(responseData)) {
@@ -57,7 +57,7 @@ const TargetMaster = () => {
     const handleDelete = (id) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this Service Master?");
         if (confirmDelete) {
-            axios.post(`https://shopee-firm.000webhostapp.com/api/target/delete-by-id-target.php?id=${id}`)
+            axios.post(`https://digitalshopee.online/target/delete-by-id-target.php?id=${id}`)
                 .then(res => {
                     fetchData();
                 })
