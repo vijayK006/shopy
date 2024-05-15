@@ -35,7 +35,7 @@ const Edit_employe = () => {
 
 
     useEffect(() => {
-        axios.get(`https://shopee-firm.000webhostapp.com/api/employee/get-employee-by-id.php?id=${id}`)
+        axios.get(`https://digitalshopee.online/api/employee/get-employee-by-id.php?id=${id}`)
             .then(response => {
 
                 const firmData = response.data[0]; // Assuming response.data contains the firm data
@@ -94,7 +94,7 @@ const Edit_employe = () => {
 
         const confirmDelete = window.confirm("Are you sure you want to update this Firm Master");
         if (confirmDelete) {
-            axios.post(`https://shopee-firm.000webhostapp.com/api/employee/edit-employee.php?id=${id}`, formData, {
+            axios.post(`https://digitalshopee.online/api/employee/edit-employee.php?id=${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

@@ -63,7 +63,7 @@ const Add_Employe = () => {
         formData.append('education', valueData.education);
 
 
-        axios.post('https://shopee-firm.000webhostapp.com/api/employee/add-employee.php', formData, {
+        axios.post('https://digitalshopee.online/api/employee/add-employee.php', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

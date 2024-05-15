@@ -19,27 +19,13 @@ const EmployeeLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const [valueData, setValueData] = useState({
-    username: '',
+    phone: '',
     password: '',
 
   })
 
 
-  // const loginHandler = (e) => {
-  //   e.preventDefault();
-  //   Axios.post("http://localhost:3002/stafflogin", {
-  //     username: username,
-  //     password: password,
-  //   }).then((response) => {
-  //     if (response.data.message === "Success") {
-  //       window.location.href = "/";
-  //     } else {
-  //       // alert('wrong creadentials');
-  //       const warning = document.getElementById('warning');
-  //       warning.classList.add('warning-add');
-  //     }
-  //   })
-  // }
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,7 +33,7 @@ const EmployeeLogin = () => {
     setLoading(true);
 
     const formData = new FormData();
-    formData.append('username', valueData.username);
+    formData.append('phone', valueData.phone);
     formData.append('password', valueData.password);
 
     axios.post('https://digitalshopee.online/api/login/employee-login.php', formData, {
@@ -57,9 +43,11 @@ const EmployeeLogin = () => {
     })
       .then((res) => {
         if (res.data.message === "Login successful") {
+          const employeeId = res.data.id;
           console.log('Login Success')
           navigate('/');
           localStorage.setItem('login', true)
+          localStorage.setItem('employeeId', employeeId);
         }
       })
       .catch(err => {
@@ -114,7 +102,7 @@ const EmployeeLogin = () => {
               <form onSubmit={handleSubmit} className='pt-5'>
 
                 <div className='from-container'>
-                  <input type='text' placeholder='Enter Username' className='login-form my-1' name='username' value={valueData.username}
+                  <input type='text' placeholder='Enter Username' className='login-form my-1' name='phone' value={valueData.phone}
                     onChange={handleChange} />
                   <LuUserCog className="icon" />
                 </div>
