@@ -24,7 +24,7 @@ const Add_Service_Master = () => {
  
 
     // useEffect(() => {
-    //     axios.get('https://shopee-firm.000webhostapp.com/api/service/get-service.php')
+    //     axios.get('https://digitalshopee.online/api/service/get-service.php')
     //         .then(res => {
     //             const migrateservicecode = res.data.map(firm => firm.code)
     //             setGetServiceCode(migrateservicecode)
@@ -56,7 +56,7 @@ const Add_Service_Master = () => {
         formData.append('documents', valueData.documents);
 
 
-        axios.post('https://shopee-firm.000webhostapp.com/api/service/add-service.php', formData, {
+        axios.post('https://digitalshopee.online/api/service/add-service.php', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

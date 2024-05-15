@@ -25,7 +25,7 @@ const Add_Expenses_Master = () => {
         formData.append('description', valueData.description);
 
 
-        axios.post('https://shopee-firm.000webhostapp.com/api/expense/add-expense.php', formData, {
+        axios.post('https://digitalshopee.online/api/expense/add-expense.php', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

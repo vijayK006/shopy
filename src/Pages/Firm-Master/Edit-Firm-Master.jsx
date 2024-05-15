@@ -14,6 +14,7 @@ import { AiFillPicture } from "react-icons/ai";
 
 const Edit_Firm_Master = () => {
     const { id } = useParams();
+    const { employeeId } = useParams();
 
     const [countryid, setCountryid] = useState(0);
     const [stateid, setstateid] = useState(0);
@@ -33,7 +34,7 @@ const Edit_Firm_Master = () => {
 
 
     useEffect(() => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
+        axios.get('https://digitalshopee.online/api/firm/get-firm.php')
             .then(res => {
                 const migratephone = res.data.map(firm => firm.phone)
                 setGetFirmMobilenumber(migratephone)
@@ -64,7 +65,7 @@ const Edit_Firm_Master = () => {
 
 
     useEffect(() => {
-        axios.get(`https://shopee-firm.000webhostapp.com/api/firm/get-by-id-firm.php?id=${id}`)
+        axios.get(`https://digitalshopee.online/api/firm/get-by-id-firm.php?id=${id}`)
             .then(response => {
 
                 const firmData = response.data[0]; // Assuming response.data contains the firm data
@@ -131,7 +132,7 @@ const Edit_Firm_Master = () => {
 
         const confirmDelete = window.confirm("Are you sure you want to update this Firm Master");
         if (confirmDelete) {
-            axios.post(`https://shopee-firm.000webhostapp.com/api/firm/edit-by-id-firm.php?id=${id}`, formData, {
+            axios.post(`https://digitalshopee.online/api/firm/edit-by-id-firm.php?id=${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -198,7 +199,7 @@ const Edit_Firm_Master = () => {
             <Sidebar />
             <div className='main-content' id='mainbody'>
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/firm-master'>Firm Master</Link> / <Link className='t-theme-color'>Edit Firm Master Details</Link></p>
+                    <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to={`/firm-master/${employeeId}`}>Firm Master</Link> / <Link className='t-theme-color'>Edit Firm Master Details</Link></p>
 
                 </div>
 
@@ -209,7 +210,7 @@ const Edit_Firm_Master = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Business Logo</label>
                                 <div className='img-format mb-1 main-field'>
-                                    <img src={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.logo}`} alt='' id="logo-preview" />
+                                    <img src={`https://digitalshopee.online/api/firm/${valueData.logo}`} alt='' id="logo-preview" />
                                     <label for='logo' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
                                 </div>
                                 <input type='file' className='form-control d-none' id='logo' name='logo' onChange={handleChange} />
@@ -328,7 +329,7 @@ const Edit_Firm_Master = () => {
                                 <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
                                     <label for='owner_image' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
 
-                                    <a href={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.owner_image}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                    <a href={`https://digitalshopee.online/api/firm/${valueData.owner_image}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
                                 </div>
 
                             </div>
@@ -341,7 +342,7 @@ const Edit_Firm_Master = () => {
                                 <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
                                     <label for='sign' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
 
-                                    <a href={`https://shopee-firm.000webhostapp.com/api/firm/${valueData.sign}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                    <a href={`https://digitalshopee.online/api/firm/${valueData.sign}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
                                 </div>
 
                             </div>

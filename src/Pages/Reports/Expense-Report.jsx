@@ -20,7 +20,7 @@ const ExpenseReport = () => {
   const [selectedService, setSelectedService] = useState("");
 
   // const fetchData = () => {
-  //     axios.get('https://shopee-firm.000webhostapp.com/api/expense-payment/get-payment.php')
+  //     axios.get('https://digitalshopee.online/api/expense-payment/get-payment.php')
   //         .then(res => {
   //             setApiDatas(res.data);
   //             calculateTotalAmount(res.data);
@@ -33,7 +33,7 @@ const ExpenseReport = () => {
   const fetchData = () => {
     axios
       .get(
-        "https://shopee-firm.000webhostapp.com/api/expense-payment/get-payment.php"
+        "https://digitalshopee.online/api/expense-payment/get-payment.php"
       )
       .then((res) => {
         const responseData = res.data || [];

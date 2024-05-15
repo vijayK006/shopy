@@ -62,7 +62,7 @@ const Edit_Client_Master = () => {
 
 
     useEffect(() => {
-        axios.get(`https://shopee-firm.000webhostapp.com/api/client/get-client-by-id.php?id=${id}`)
+        axios.get(`https://digitalshopee.online/api/client/get-client-by-id.php?id=${id}`)
             .then(response => {
 
                 const firmData = response.data[0]; // Assuming response.data contains the firm data
@@ -152,7 +152,7 @@ const Edit_Client_Master = () => {
 
         const confirmDelete = window.confirm("Are you sure you want to update this Client Master");
         if (confirmDelete) {
-            axios.post(`https://shopee-firm.000webhostapp.com/api/client/edit-by-id-client.php?id=${id}`, formData, {
+            axios.post(`https://digitalshopee.online/api/client/edit-by-id-client.php?id=${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -168,7 +168,7 @@ const Edit_Client_Master = () => {
     };
 
     useEffect(() => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
+        axios.get('https://digitalshopee.online/api/firm/get-firm.php')
             .then(res => {
                 const migratefirmname = res.data.map(firm => firm.firm_name)
                 setGetfirmnames(migratefirmname)
@@ -239,7 +239,7 @@ const Edit_Client_Master = () => {
                             <div className='col-md-4 pt-1 pb-4  '>
                                 <label className='text-sm font-w-500 p-2'>Client Profile Picture</label>
                                 <div className='img-format main-field'>
-                                    <img id="client_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.client_photo}`} alt='' />
+                                    <img id="client_photo-preview" src={`https://digitalshopee.online/api/client/${valueData.client_photo}`} alt='' />
                                     <label for='client_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
                                 </div>
 
@@ -391,7 +391,7 @@ const Edit_Client_Master = () => {
 
                                 <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
                                     <label for='adhaar_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
-                                    <a href={`https://shopee-firm.000webhostapp.com/api/client/${valueData.adhaar_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                    <a href={`https://digitalshopee.online/api/client/${valueData.adhaar_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
                                 </div>
 
                             </div>
@@ -404,7 +404,7 @@ const Edit_Client_Master = () => {
 
                                 <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
                                     <label for='pan_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
-                                    <a href={`https://shopee-firm.000webhostapp.com/api/client/${valueData.pan_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                    <a href={`https://digitalshopee.online/api/client/${valueData.pan_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
                                 </div>
                             </div>
 
@@ -416,7 +416,7 @@ const Edit_Client_Master = () => {
 
                                 <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
                                     <label for='voter_id_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
-                                    <a href={`https://shopee-firm.000webhostapp.com/api/client/${valueData.voter_id_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                    <a href={`https://digitalshopee.online/api/client/${valueData.voter_id_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
                                 </div>
                             </div>
 
@@ -428,7 +428,7 @@ const Edit_Client_Master = () => {
 
                                 <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
                                     <label for='voter_id_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
-                                    <a href={`https://shopee-firm.000webhostapp.com/api/client/${valueData.license_photo}`}  style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                    <a href={`https://digitalshopee.online/api/client/${valueData.license_photo}`}  style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
                                 </div>
                             </div>
 
@@ -440,7 +440,7 @@ const Edit_Client_Master = () => {
 
                                 <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
                                     <label for='voter_id_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
-                                    <a href={`https://shopee-firm.000webhostapp.com/api/client/${valueData.ration_photo}`}  style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                    <a href={`https://digitalshopee.online/api/client/${valueData.ration_photo}`}  style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
                                 </div>
                             </div>
 
@@ -452,7 +452,7 @@ const Edit_Client_Master = () => {
 
                                 <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
                                     <label for='voter_id_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
-                                    <a href={`https://shopee-firm.000webhostapp.com/api/client/${valueData.other_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                    <a href={`https://digitalshopee.online/api/client/${valueData.other_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
                                 </div>
                             </div>
 
@@ -464,7 +464,7 @@ const Edit_Client_Master = () => {
 
                                 <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
                                     <label for='voter_id_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
-                                    <a href={`https://shopee-firm.000webhostapp.com/api/client/${valueData.other_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                    <a href={`https://digitalshopee.online/api/client/${valueData.other_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
                                 </div>
                             </div>
 
@@ -476,7 +476,7 @@ const Edit_Client_Master = () => {
 
                                 <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
                                     <label for='voter_id_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
-                                    <a href={`https://shopee-firm.000webhostapp.com/api/client/${valueData.other_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                    <a href={`https://digitalshopee.online/api/client/${valueData.other_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
                                 </div>
                             </div>
 

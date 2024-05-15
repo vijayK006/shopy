@@ -17,7 +17,7 @@ const Clientmaster = () => {
     }, []);
 
     const fetchData = () => {
-      axios.get('https://shopee-firm.000webhostapp.com/api/client/get-client.php')
+      axios.get('https://digitalshopee.online/api/client/get-client.php')
         .then(res => {
           console.log(res.data)
           setApiDatas(res.data)
@@ -29,7 +29,7 @@ const Clientmaster = () => {
     }
 
     useEffect(() => {
-      axios.get('https://shopee-firm.000webhostapp.com/api/client/get-client.php')
+      axios.get('https://digitalshopee.online/api/client/get-client.php')
         .then(res => {
           console.log(res.data)
           setApiDatas(res.data)
@@ -42,7 +42,7 @@ const Clientmaster = () => {
     const handleDelete = (id) => {
       const confirmDelete = window.confirm("Are you sure you want to delete this Firm Master");
       if (confirmDelete) {
-          axios.post(`https://shopee-firm.000webhostapp.com/api/client/delete-by-id-client.php?id=${id}`)
+          axios.post(`https://digitalshopee.online/api/client/delete-by-id-client.php?id=${id}`)
               .then(res => {
                   fetchData();
               })

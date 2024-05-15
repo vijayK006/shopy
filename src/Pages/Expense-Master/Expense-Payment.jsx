@@ -22,7 +22,7 @@ const Expense_Payment = () => {
 
 
     // const fetchData = () => {
-    //     axios.get('https://shopee-firm.000webhostapp.com/api/expense-payment/get-payment.php')
+    //     axios.get('https://digitalshopee.online/api/expense-payment/get-payment.php')
     //         .then(res => {
     //             setApiDatas(res.data);
     //             calculateTotalAmount(res.data);
@@ -33,7 +33,7 @@ const Expense_Payment = () => {
     // }
 
     const fetchData = () => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/expense-payment/get-payment.php')
+        axios.get('https://digitalshopee.online/api/expense-payment/get-payment.php')
             .then(res => {
                 const responseData = res.data || [];
                 if (Array.isArray(responseData)) {
@@ -62,7 +62,7 @@ const Expense_Payment = () => {
     const handleDelete = (id) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this Expense Payment?");
         if (confirmDelete) {
-            axios.post(`https://shopee-firm.000webhostapp.com/api/expense-payment/delete-payment.php?id=${id}`)
+            axios.post(`https://digitalshopee.online/api/expense-payment/delete-payment.php?id=${id}`)
                 .then(res => {
                     fetchData();
                 })

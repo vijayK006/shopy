@@ -54,14 +54,14 @@ const App = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<ProtectRoute Component={Home} />} />
+          <Route path="/:employeeId" element={<ProtectRoute Component={Home} />} />
           {/* <Route path="/" element={<Home/>} /> */}
           <Route path="/login" element={<Login />} />
           <Route path="/employee-login" element={<EmployeeLogin />} />
 
           {/* Firm Master */}
-          <Route path="/firm-master" element={<FirmMaster />} />
-          <Route path="/edit-firm-master/:id" element={<Edit_Firm_Master />} />
+          <Route path="/firm-master/:employeeId" element={<FirmMaster />} />
+          <Route path="/edit-firm-master/:employeeId/:id" element={<Edit_Firm_Master />} />
           <Route path="/add-firm-master" element={<Add_Firm_Master />} />
 
           {/* Client Master */}

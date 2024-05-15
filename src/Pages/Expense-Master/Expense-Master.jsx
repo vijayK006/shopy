@@ -8,7 +8,7 @@ const Expense_Master = () => {
   const [apiDatas, setApiDatas] = useState([]);
 
   useEffect(() => {
-    axios.get('https://shopee-firm.000webhostapp.com/api/expense/get-expense.php')
+    axios.get('https://digitalshopee.online/api/expense/get-expense.php')
       .then(res => {
         console.log(res.data)
         setApiDatas(res.data)

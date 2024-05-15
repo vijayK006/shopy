@@ -23,7 +23,7 @@ const Edit_Expense_Payment = () => {
 
 
     useEffect(() => {
-        axios.get(`https://shopee-firm.000webhostapp.com/api/expense-payment/get-by-id-payment.php?id=${id}`)
+        axios.get(`https://digitalshopee.online/api/expense-payment/get-by-id-payment.php?id=${id}`)
             .then(response => {
 
                 const firmData = response.data[0]; // Assuming response.data contains the firm data
@@ -56,7 +56,7 @@ const Edit_Expense_Payment = () => {
 
         const confirmDelete = window.confirm("Are you sure you want to update this Expense Master");
         if (confirmDelete) {
-            axios.post(`https://shopee-firm.000webhostapp.com/api/expense-payment/update-payment.php?id=${id}`, formData, {
+            axios.post(`https://digitalshopee.online/api/expense-payment/update-payment.php?id=${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -80,7 +80,7 @@ const Edit_Expense_Payment = () => {
 
 
     useEffect(() => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/expense/get-expense.php')
+        axios.get('https://digitalshopee.online/api/expense/get-expense.php')
             .then(res => {
                 const migrateexpensename = res.data.map(expenses => expenses.name)
                 setGetexpensenames(migrateexpensename)
@@ -91,7 +91,7 @@ const Edit_Expense_Payment = () => {
     }, []);
 
     useEffect(() => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/employee/get-employee.php')
+        axios.get('https://digitalshopee.online/api/employee/get-employee.php')
             .then(res => {
                 const migrateemployename = res.data.map(employe => employe.name)
                 setGetemployenames(migrateemployename)

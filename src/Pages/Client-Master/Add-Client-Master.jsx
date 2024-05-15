@@ -198,7 +198,7 @@ const Add_Client_Master = () => {
             return;
         }
 
-        axios.post('https://shopee-firm.000webhostapp.com/api/client/add-client.php', formData, {
+        axios.post('https://digitalshopee.online/api/client/add-client.php', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -213,7 +213,7 @@ const Add_Client_Master = () => {
 
 
     useEffect(() => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
+        axios.get('https://digitalshopee.online/api/firm/get-firm.php')
             .then(res => {
                 const migratefirmname = res.data.map(firm => firm.firm_name)
                 setGetfirmnames(migratefirmname)

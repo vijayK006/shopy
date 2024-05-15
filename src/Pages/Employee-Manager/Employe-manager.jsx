@@ -17,7 +17,7 @@ const EmployeManager = () => {
     }, []);
 
     const fetchData = () => {
-      axios.get('https://shopee-firm.000webhostapp.com/api/employee/get-employee.php')
+      axios.get('https://digitalshopee.online/api/employee/get-employee.php')
         .then(res => {
           setApiDatas(res.data)
 
@@ -28,7 +28,7 @@ const EmployeManager = () => {
     }
 
     useEffect(() => {
-      axios.get('https://shopee-firm.000webhostapp.com/api/employee/get-employee.php')
+      axios.get('https://digitalshopee.online/api/employee/get-employee.php')
         .then(res => {
           console.log(res.data)
           setApiDatas(res.data)
@@ -41,7 +41,7 @@ const EmployeManager = () => {
     const handleDelete = (id) => {
       const confirmDelete = window.confirm("Are you sure you want to delete this Employee");
       if (confirmDelete) {
-          axios.post(`https://shopee-firm.000webhostapp.com/api/employee/delete-employee.php?id=${id}`)
+          axios.post(`https://digitalshopee.online/api/employee/delete-employee.php?id=${id}`)
               .then(res => {
                   fetchData();
               })

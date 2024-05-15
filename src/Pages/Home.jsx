@@ -19,7 +19,7 @@ const Home = () => {
   const [expensemastercount, setExpensemastercount] = useState([]);
 
   useEffect(() => {
-    axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
+    axios.get('https://digitalshopee.online/api/firm/get-firm.php')
       .then(res => {
         setFirmmasterCount(res.data.length)
       })
@@ -29,7 +29,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    axios.get('https://shopee-firm.000webhostapp.com/api/client/get-client.php')
+    axios.get('https://digitalshopee.online/api/client/get-client.php')
       .then(res => {
         setClientmastercount(res.data.length)
       })
@@ -39,7 +39,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    axios.get('https://shopee-firm.000webhostapp.com/api/service/get-service.php')
+    axios.get('https://digitalshopee.online/api/service/get-service.php')
       .then(res => {
         setServicemastercount(res.data.length)
       })
@@ -49,7 +49,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    axios.get('https://shopee-firm.000webhostapp.com/api/expense/get-expense.php')
+    axios.get('https://digitalshopee.online/api/expense/get-expense.php')
       .then(res => {
         setExpensemastercount(res.data.length)
       })

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BiHomeAlt2 } from 'react-icons/bi';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useParams } from 'react-router-dom';
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { IoPricetagsOutline, IoSettingsOutline } from "react-icons/io5";
 import { BsPersonGear, BsShopWindow } from 'react-icons/bs';
@@ -11,6 +11,7 @@ import { FaRegAddressCard } from 'react-icons/fa';
 
 const Sidebar = () => {
   const location = useLocation();
+  const { employeeId } = useParams();
   const [currentPage, setCurrentPage] = useState(location.pathname);
   useEffect(() => {
     setCurrentPage(location.pathname);
@@ -60,9 +61,9 @@ const Sidebar = () => {
 
         <div className='side-navbar'>
           <ul className='menu mt-4'>
-            <NavLink className="disble-decoration" to="/"><li className={`items ${currentPage === '/' && 'active'}`}><BiHomeAlt2 className="icons" /> <span className='resp'>Home</span></li></NavLink>
+            <NavLink className="disble-decoration" to={`/${employeeId}`}><li className={`items ${currentPage === '/' && 'active'}`}><BiHomeAlt2 className="icons" /> <span className='resp'>Home</span></li></NavLink>
 
-            <NavLink className="disble-decoration" to="/firm-master"><li className={`items ${currentPage === '/firm-master' || currentPage === '/add-firm-master' || currentPage.startsWith('/edit-firm-master') ? 'active' : ''}`}><BsShopWindow   className="icons" /> <span className='resp'>Firm Master</span></li></NavLink>
+            <NavLink className="disble-decoration" to={`/firm-master/${employeeId}`}><li className={`items ${currentPage === '/firm-master' || currentPage === '/add-firm-master' || currentPage.startsWith('/edit-firm-master') ? 'active' : ''}`}><BsShopWindow   className="icons" /> <span className='resp'>Firm Master</span></li></NavLink>
 
             <NavLink className="disble-decoration" to="/client-master"><li className={`items ${currentPage === '/client-master' || currentPage === '/add-client-master' || currentPage.startsWith('/edit-client-master') ? 'active' : ''}`}><BsPersonGear  className="icons" /> <span className='resp'>Client Master</span></li></NavLink>
 

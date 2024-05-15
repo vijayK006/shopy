@@ -17,7 +17,7 @@ const Servicemaster = () => {
     }, []);
 
     const fetchData = () => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/service/get-service.php')
+        axios.get('https://digitalshopee.online/api/service/get-service.php')
             .then(res => {
                 console.log(res.data)
                 setApiDatas(res.data)
@@ -29,7 +29,7 @@ const Servicemaster = () => {
     }
 
     useEffect(() => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/service/get-service.php')
+        axios.get('https://digitalshopee.online/api/service/get-service.php')
             .then(res => {
                 console.log(res.data)
                 setApiDatas(res.data)
@@ -44,7 +44,7 @@ const Servicemaster = () => {
         const handleDelete = (id) => {
           const confirmDelete = window.confirm("Are you sure you want to delete this Service Master");
           if (confirmDelete) {
-              axios.post(`https://shopee-firm.000webhostapp.com/api/service/delete-by-id-service.php?id=${id}`)
+              axios.post(`https://digitalshopee.online/api/service/delete-by-id-service.php?id=${id}`)
                   .then(res => {
                       fetchData();
                   })

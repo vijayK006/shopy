@@ -50,16 +50,18 @@ const Login = () => {
     formData.append('username', valueData.username);
     formData.append('password', valueData.password);
 
-    axios.post('https://shopee-firm.000webhostapp.com/api/login/login.php', formData, {
+    axios.post('https://digitalshopee.online/api/login/login.php', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     })
       .then((res) => {
         if (res.data.message === "Login successful") {
+          const admin = "amdin";
           console.log('Login Success')
           navigate('/');
           localStorage.setItem('login', true)
+          localStorage.setItem('admin', admin)
         }
       })
       .catch(err => {
@@ -137,7 +139,7 @@ const Login = () => {
 
 
                 </div>
-                {/* <Link to='/' className='login-text-pass subheader-font' onClick={classforpass}>Forgot Password ?</Link> */}
+                 <Link to='/employee-login' className='login-text-pass subheader-font'>Want to go Employee Login ?</Link> 
 
                 {loading ? ( // Conditional rendering for loading popup
                                         <>

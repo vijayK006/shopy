@@ -20,7 +20,7 @@ console.log(`delete id is ${deleteid}`)
 
 
     useEffect(() => {
-        axios.get(`https://shopee-firm.000webhostapp.com/api/expense/get-by-id-expense.php?id=${id}`)
+        axios.get(`https://digitalshopee.online/api/expense/get-by-id-expense.php?id=${id}`)
             .then(response => {
 
                 const firmData = response.data[0]; // Assuming response.data contains the firm data
@@ -45,7 +45,7 @@ console.log(`delete id is ${deleteid}`)
 
         const confirmUpdate = window.confirm("Are you sure you want to update this Expense Master");
         if (confirmUpdate) {
-            axios.post(`https://shopee-firm.000webhostapp.com/api/expense/update-by-id-expense.php?id=${id}`, formData, {
+            axios.post(`https://digitalshopee.online/api/expense/update-by-id-expense.php?id=${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -64,7 +64,7 @@ console.log(`delete id is ${deleteid}`)
     const handleDelete = () => {
         const confirmDelete = window.confirm("Are you sure you want to delete this Expense Master");
         if (confirmDelete) {
-            axios.post(`https://shopee-firm.000webhostapp.com/api/expense/delete-by-id-expense.php?id=${deleteid}`)
+            axios.post(`https://digitalshopee.online/api/expense/delete-by-id-expense.php?id=${deleteid}`)
                 .then(res => {
                     navigate('/expenses-master')
                    console.log('deleted successfully')

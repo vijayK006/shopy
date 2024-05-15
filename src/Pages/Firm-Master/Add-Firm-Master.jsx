@@ -39,7 +39,7 @@ const [signimg, setSignimg] = useState(null)
     }, []);
 
     useEffect(() => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
+        axios.get('https://digitalshopee.online/api/firm/get-firm.php')
           .then(res => {
             const migratephone = res.data.map(firm=> firm.phone)
             setGetFirmMobilenumber(migratephone)
@@ -185,7 +185,7 @@ const [signimg, setSignimg] = useState(null)
             return;
         }
 
-        axios.post('https://shopee-firm.000webhostapp.com/api/firm/add-firm.php', formData, {
+        axios.post('https://digitalshopee.online/api/firm/add-firm.php', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

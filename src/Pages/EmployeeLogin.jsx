@@ -45,7 +45,7 @@ const EmployeeLogin = () => {
         if (res.data.message === "Login successful") {
           const employeeId = res.data.id;
           console.log('Login Success')
-          navigate('/');
+          navigate(`/${employeeId}`);
           localStorage.setItem('login', true)
           localStorage.setItem('employeeId', employeeId);
         }

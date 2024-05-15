@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Topbar from '../../layouts/Topbar';
 import Sidebar from '../../layouts/Sidebar';
 import { FaRegEdit } from "react-icons/fa";
@@ -11,7 +11,10 @@ import axios from 'axios';
 
 const FirmMaster = () => {
     const [apiDatas, setApiDatas] = useState([]);
- 
+    const { employeeId } = useParams();
+    const [permissions, setPermissions] = useState({ add_firm: null, delete_firm: null });
+
+
     useEffect(() => {
       fetchData();
     }, []);
@@ -39,8 +42,19 @@ const FirmMaster = () => {
         });
     }, []);
 
+    useEffect(() => {
+      axios.get(`https://digitalshopee.online/api/employee-permission/get-permission.php?id=${employeeId}`)
+        .then(response => {
+          setPermissions(response.data[0]);
+          console.log(response.data[0]);
+        })
+        .catch(error => {
+          console.error("Error fetching permissions:", error);
+        });
+    }, [employeeId]);
+
     // const handleDelete = (id) => {
-    //   axios.post(`https://shopee-firm.000webhostapp.com/api/firm/delete-by-id-firm.php?id=${id}`)
+    //   axios.post(`https://digitalshopee.online/api/firm/delete-by-id-firm.php?id=${id}`)
     //     .then(res => {
     //       console.log(res.data);
     //       // After successful deletion, refetch the data to update the UI
@@ -81,14 +95,27 @@ const FirmMaster = () => {
         renderCell: (params) => (
           <>
           
-          <Link to={`/edit-firm-master/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
+        { /* <Link to={`/edit-firm-master/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
           <FaRegEdit  style={{fontSize:'15px', marginBottom:'4px'}}/>  View / Edit 
           </Link>
           &nbsp;
           &nbsp;
           <Link  className='btn btn-outline-danger btn-sm' onClick={() => handleDelete(params.row.id)}>
            <AiOutlineDelete style={{fontSize:'15px', marginBottom:'4px'}}/> Delete
-          </Link>
+          </Link>*/}
+
+          {permissions.add_firm === "yes" && (
+            <Link to={`/edit-firm-master/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
+              <FaRegEdit style={{ fontSize: '15px', marginBottom: '4px' }} /> View / Edit
+            </Link>
+          )}
+          &nbsp;
+          &nbsp;
+          {permissions.delete_firm === "yes" && (
+            <button className='btn btn-outline-danger btn-sm' onClick={() => handleDelete(params.row.id)}>
+              <AiOutlineDelete style={{ fontSize: '15px', marginBottom: '4px' }} /> Delete
+            </button>
+          )}
           </>
           
         ), 
@@ -116,7 +143,7 @@ const FirmMaster = () => {
 <div className='main-content' id='mainbody'>
 
 <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-<p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/firm-master' className='t-theme-color'>Firm Master</Link></p>
+<p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to='/firm-master' className='t-theme-color'>Firm Master</Link></p>
 <Link to='/add-firm-master' className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
 </div>
 

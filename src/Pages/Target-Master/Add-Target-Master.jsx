@@ -96,7 +96,7 @@ const Add_Target_Master = () => {
       };
 
     useEffect(() => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/employee/get-employee.php')
+        axios.get('https://digitalshopee.online/api/employee/get-employee.php')
             .then(res => {
                 const migrateemploye = res.data.map(employee => employee.name)
                 setGetempoloyenames(migrateemploye)
@@ -108,7 +108,7 @@ const Add_Target_Master = () => {
 
 
     useEffect(() => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/service/get-service.php')
+        axios.get('https://digitalshopee.online/api/service/get-service.php')
             .then(res => {
                 const migrateservice = res.data.map(service => service.name)
                 setGetservicenames(migrateservice)

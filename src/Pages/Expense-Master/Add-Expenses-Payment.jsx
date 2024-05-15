@@ -33,7 +33,7 @@ const Add_Expenses_Payment = () => {
         formData.append('remark', valueData.remark);
 
 
-        axios.post('https://shopee-firm.000webhostapp.com/api/expense-payment/add-payment.php', formData, {
+        axios.post('https://digitalshopee.online/api/expense-payment/add-payment.php', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -55,7 +55,7 @@ const Add_Expenses_Payment = () => {
 
 
     useEffect(() => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/expense/get-expense.php')
+        axios.get('https://digitalshopee.online/api/expense/get-expense.php')
             .then(res => {
                 const migrateexpensename = res.data.map(expenses => expenses.name)
                 setGetexpensenames(migrateexpensename)
@@ -66,7 +66,7 @@ const Add_Expenses_Payment = () => {
     }, []);
 
     useEffect(() => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/employee/get-employee.php')
+        axios.get('https://digitalshopee.online/api/employee/get-employee.php')
             .then(res => {
                 const migrateemployename = res.data.map(employe => employe.name)
                 setGetemployenames(migrateemployename)

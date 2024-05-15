@@ -156,7 +156,7 @@ const Edit_employe = () => {
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Employe Profile Photo</label>
                                 <div className='img-format mb-1 main-field'>
-                                    <img src={`https://shopee-firm.000webhostapp.com/api/employee/${valueData.profile_photo}`} alt='' id="profile_photo-preview" />
+                                    <img src={`https://digitalshopee.online/api/employee/${valueData.profile_photo}`} alt='' id="profile_photo-preview" />
                                     <label for='profile_photo' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
                                 </div>
                                 <input type='file' className='form-control d-none' id='profile_photo' name='profile_photo' onChange={handleChange} />
@@ -254,7 +254,7 @@ const Edit_employe = () => {
                                 <div className='d-flex align-items-center gap-2 pt-1'>
                                     <label for='adhaar_photo' className='file-data'>Update </label>
 
-                                    <a href={`https://shopee-firm.000webhostapp.com/api/employee/${valueData.adhaar_photo}`} className='file-data-outline' target='_blank' rel="noreferrer">View </a>
+                                    <a href={`https://digitalshopee.online/api/employee/${valueData.adhaar_photo}`} className='file-data-outline' target='_blank' rel="noreferrer">View </a>
                                 </div>
 
                             </div>
@@ -267,7 +267,7 @@ const Edit_employe = () => {
                                 <div className='d-flex align-items-center gap-2 pt-1'>
                                     <label for='pan_photo' className='file-data'>Update</label>
 
-                                    <a href={`https://shopee-firm.000webhostapp.com/api/employee/${valueData.pan_photo}`} className='file-data-outline' target='_blank' rel="noreferrer">View</a>
+                                    <a href={`https://digitalshopee.online/api/employee/${valueData.pan_photo}`} className='file-data-outline' target='_blank' rel="noreferrer">View</a>
                                 </div>
 
                             </div>
@@ -281,7 +281,7 @@ const Edit_employe = () => {
                                 <div className='d-flex align-items-center gap-2 pt-1'>
                                     <label for='resume' className='file-data'>Update</label>
 
-                                    <a href={`https://shopee-firm.000webhostapp.com/api/employee/${valueData.resume}`} className='file-data-outline' target='_blank' rel="noreferrer">View </a>
+                                    <a href={`https://digitalshopee.online/api/employee/${valueData.resume}`} className='file-data-outline' target='_blank' rel="noreferrer">View </a>
                                 </div>
 
                             </div>
@@ -296,7 +296,7 @@ const Edit_employe = () => {
                                 <div className='d-flex align-items-center gap-2 pt-1'>
                                     <label for='education' className='file-data'>Update</label>
 
-                                    <a href={`https://shopee-firm.000webhostapp.com/api/employee/${valueData.education}`} className='file-data-outline' target='_blank' rel="noreferrer">View</a>
+                                    <a href={`https://digitalshopee.online/api/employee/${valueData.education}`} className='file-data-outline' target='_blank' rel="noreferrer">View</a>
                                 </div>
 
                             </div>
@@ -311,7 +311,7 @@ const Edit_employe = () => {
                                 <div className='d-flex align-items-center gap-2 pt-1'>
                                     <label for='passport' className='file-data'>Update</label>
 
-                                    <a href={`https://shopee-firm.000webhostapp.com/api/employee/${valueData.passport}`} className='file-data-outline' target='_blank' rel="noreferrer">View</a>
+                                    <a href={`https://digitalshopee.online/api/employee/${valueData.passport}`} className='file-data-outline' target='_blank' rel="noreferrer">View</a>
                                 </div>
 
                             </div>

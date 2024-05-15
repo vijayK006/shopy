@@ -21,7 +21,7 @@ const Edit_Service_Master = () => {
 
 
     useEffect(() => {
-        axios.get(`https://shopee-firm.000webhostapp.com/api/service/get-by-id-service.php?id=${id}`)
+        axios.get(`https://digitalshopee.online/api/service/get-by-id-service.php?id=${id}`)
             .then(response => {
 
                 const firmData = response.data[0]; // Assuming response.data contains the firm data
@@ -68,7 +68,7 @@ const Edit_Service_Master = () => {
 
         const confirmUpdate = window.confirm("Are you sure you want to update this Service Master");
         if (confirmUpdate) {
-            axios.post(`https://shopee-firm.000webhostapp.com/api/service/update-by-id-service.php?id=${id}`, formData, {
+            axios.post(`https://digitalshopee.online/api/service/update-by-id-service.php?id=${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
