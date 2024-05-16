@@ -12,7 +12,7 @@ import axios from 'axios';
 const FirmMaster = () => {
     const [apiDatas, setApiDatas] = useState([]);
     const { employeeId } = useParams();
-    const [permissions, setPermissions] = useState({ add_firm: null, delete_firm: null });
+    const [permissions, setPermissions] = useState({ add_firm: null, edit_firm: null, delete_firm: null });
 
 
     useEffect(() => {
@@ -104,7 +104,7 @@ const FirmMaster = () => {
            <AiOutlineDelete style={{fontSize:'15px', marginBottom:'4px'}}/> Delete
           </Link>*/}
 
-          {permissions.add_firm === "yes" && (
+          {permissions.edit_firm === "yes" && (
             <Link to={`/edit-firm-master/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
               <FaRegEdit style={{ fontSize: '15px', marginBottom: '4px' }} /> View / Edit
             </Link>
@@ -143,8 +143,11 @@ const FirmMaster = () => {
 <div className='main-content' id='mainbody'>
 
 <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-<p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to='/firm-master' className='t-theme-color'>Firm Master</Link></p>
-<Link to='/add-firm-master' className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
+<p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to='' className='t-theme-color'>Firm Master</Link></p>
+{permissions.add_firm === "yes" && (
+<Link to={`/add-firm-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
+)}
+
 </div>
 
 

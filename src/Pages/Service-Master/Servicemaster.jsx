@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Topbar from '../../layouts/Topbar';
 import Sidebar from '../../layouts/Sidebar';
 import { FaRegEdit } from "react-icons/fa";
@@ -11,6 +11,8 @@ import axios from 'axios';
 
 const Servicemaster = () => {
     const [apiDatas, setApiDatas] = useState([]);
+    const { employeeId } = useParams();
+    const [permissions, setPermissions] = useState({ add_service: null, edit_service: null, delete_service: null });
 
     useEffect(() => {
         fetchData();
@@ -54,6 +56,16 @@ const Servicemaster = () => {
           }
       }
 
+      useEffect(() => {
+        axios.get(`https://digitalshopee.online/api/employee-permission/get-permission.php?id=${employeeId}`)
+          .then(response => {
+            setPermissions(response.data[0]);
+            console.log(response.data[0]);
+          })
+          .catch(error => {
+            console.error("Error fetching permissions:", error);
+          });
+      }, [employeeId]);
 
     const columns = [
         { field: 'displayOrder', headerName: 'Sl.No', width: 70 },  
@@ -70,14 +82,19 @@ const Servicemaster = () => {
             width: 230,
             renderCell: (params) => (
               <>
-              <Link to={`/edit-service-master/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
+          {permissions.edit_service === "yes" && (
+            <Link to={`/edit-service-master/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
               <FaRegEdit  style={{fontSize:'15px', marginBottom:'4px'}}/>  View / Edit 
               </Link>
+          )}
+              
               &nbsp;
               &nbsp;
+          {permissions.delete_service === "yes" && (
               <Link  className='btn btn-outline-danger btn-sm' onClick={() => handleDelete(params.row.id)}>
                <AiOutlineDelete style={{fontSize:'15px', marginBottom:'4px'}}/> Delete
               </Link>
+          )}
               </>
 
             ), 
@@ -106,7 +123,10 @@ const Servicemaster = () => {
 
                 <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50'>
                     <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/service-master' className='t-theme-color'>Service Master</Link></p>
-                    <Link to='/add-service-master' className='btn btn-bg-orange btn-sm b-radius-50'>Add Service Master</Link>
+                  
+{permissions.add_service === "yes" && (
+    <Link to={`/add-service-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Service Master</Link>
+)}
                 </div>
 
 

@@ -61,28 +61,35 @@ const Sidebar = () => {
 
         <div className='side-navbar'>
           <ul className='menu mt-4'>
-            <NavLink className="disble-decoration" to={`/${employeeId}`}><li className={`items ${currentPage === '/' && 'active'}`}><BiHomeAlt2 className="icons" /> <span className='resp'>Home</span></li></NavLink>
+            {/* Home page */}
+            <NavLink className="disble-decoration" to={`/${employeeId}`}><li className={`items ${currentPage.startsWith(`/${employeeId}`) ? 'active' : ''}`}><BiHomeAlt2 className="icons" /> <span className='resp'>Home</span></li></NavLink>
 
-            <NavLink className="disble-decoration" to={`/firm-master/${employeeId}`}><li className={`items ${currentPage === '/firm-master' || currentPage === '/add-firm-master' || currentPage.startsWith('/edit-firm-master') ? 'active' : ''}`}><BsShopWindow   className="icons" /> <span className='resp'>Firm Master</span></li></NavLink>
+            {/* Firm Master */}
+            <NavLink className="disble-decoration" to={`/firm-master/${employeeId}`}><li className={`items ${currentPage.startsWith('/firm-master') || currentPage.startsWith('/add-firm-master') || currentPage.startsWith('/edit-firm-master') ? 'active' : ''}`}><BsShopWindow className="icons" /> <span className='resp'>Firm Master</span></li></NavLink>
 
-            <NavLink className="disble-decoration" to="/client-master"><li className={`items ${currentPage === '/client-master' || currentPage === '/add-client-master' || currentPage.startsWith('/edit-client-master') ? 'active' : ''}`}><BsPersonGear  className="icons" /> <span className='resp'>Client Master</span></li></NavLink>
+            {/* Client Master */}
+            <NavLink className="disble-decoration" to={`/client-master/${employeeId}`}><li className={`items ${currentPage.startsWith('/client-master') || currentPage.startsWith('/add-client-master') || currentPage.startsWith('/edit-client-master') ? 'active' : ''}`}><BsPersonGear className="icons" /> <span className='resp'>Client Master</span></li></NavLink>
 
-            <NavLink className="disble-decoration " to="/service-master"><li className={`items ${currentPage === '/service-master' || currentPage === '/add-service-master' || currentPage.startsWith('/edit-service-master') ? 'active' : ''}`}><IoSettingsOutline className="icons" /> <span className='resp'>Service Master</span></li></NavLink>
+            {/* Service Master */}
+            <NavLink className="disble-decoration" to={`/service-master/${employeeId}`}><li className={`items ${currentPage.startsWith('/service-master') || currentPage.startsWith('/add-service-master') || currentPage.startsWith('/edit-service-master') ? 'active' : ''}`}><IoSettingsOutline className="icons" /> <span className='resp'>Service Master</span></li></NavLink>
 
-            <NavLink className="disble-decoration" to="/employe-manager"><li className={`items ${currentPage === '/employe-manager' || currentPage === '/add-employee' || currentPage.startsWith('/edit-employee') ? 'active' : ''}`}><FaRegAddressCard    className="icons" /> <span className='resp'>Employee Master</span></li></NavLink>
+            {/* Employee Master */}
+            <NavLink className="disble-decoration" to="/employe-manager"><li className={`items ${currentPage === '/employe-manager' || currentPage === '/add-employee' || currentPage.startsWith('/edit-employee') ? 'active' : ''}`}><FaRegAddressCard className="icons" /> <span className='resp'>Employee Master</span></li></NavLink>
 
+            {/* Employee Access */}
             <NavLink className="disble-decoration" to="" >
-              <li className={`dropmenu items-drop  ${currentPage.startsWith('/access') || currentPage.startsWith('/update-access')  ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems1')} id='dropitems1'>
+              <li className={`dropmenu items-drop  ${currentPage.startsWith('/access') || currentPage.startsWith('/update-access') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems1')} id='dropitems1'>
                 <IoPricetagsOutline className="icons" /> <span className='resp'>Employee Access <IoIosArrowDown /></span>
 
                 <ul className='submenu' >
-                  <NavLink to='/access'><li className={`droplink-text ${currentPage === '/access'  ? 'link-active' : ''}`}><IoIosArrowForward />Add Access</li></NavLink>
+                  <NavLink to='/access'><li className={`droplink-text ${currentPage === '/access' ? 'link-active' : ''}`}><IoIosArrowForward />Add Access</li></NavLink>
 
-                  <NavLink to='/update-access'><li className={`droplink-text ${currentPage.startsWith('/update-access')  ? 'link-active' : ''}`}><IoIosArrowForward />Update Access</li></NavLink>
+                  <NavLink to='/update-access'><li className={`droplink-text ${currentPage.startsWith('/update-access') ? 'link-active' : ''}`}><IoIosArrowForward />Update Access</li></NavLink>
                 </ul>
               </li>
             </NavLink>
 
+            {/* Expenses Master */}
             <NavLink className="disble-decoration" to="" >
               <li className={`dropmenu items-drop  ${currentPage === '/expenses-master' || currentPage === '/add-expenses-master' || currentPage.startsWith('/edit-expenses-master') || currentPage.startsWith('/add-expenses-payment') || currentPage.startsWith('/expenses-payment') || currentPage.startsWith('/edit-expenses-payment') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems2')} id='dropitems2'>
                 <IoPricetagsOutline className="icons" /> <span className='resp'>Expenses Master <IoIosArrowDown /></span>
@@ -95,6 +102,7 @@ const Sidebar = () => {
               </li>
             </NavLink>
 
+            {/* Target Master */}
             <NavLink className="disble-decoration" to="" >
               <li className={`dropmenu items-drop  ${currentPage === '/target-master' || currentPage === '/add-target-master' || currentPage.startsWith('/edit-target-master') || currentPage.startsWith('/target-out') || currentPage.startsWith('/add-target-out') || currentPage.startsWith('/edit-target-out') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems3')} id='dropitems3'>
                 <RxTarget className="icons" /> <span className='resp'>Target Master <IoIosArrowDown /></span>
@@ -107,6 +115,7 @@ const Sidebar = () => {
               </li>
             </NavLink>
 
+            {/* Reports */}
             <NavLink className="disble-decoration" to="" >
               <li className={`dropmenu items-drop  ${currentPage === '/target-report' || currentPage === '/expense-report' ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems4')} id='dropitems4'>
                 <TbReport className="icons" /> <span className='resp'>Reports <IoIosArrowDown /></span>

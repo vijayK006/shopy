@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Topbar from '../../layouts/Topbar'
 import Sidebar from '../../layouts/Sidebar'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import axios from 'axios';
 
 const Add_Service_Master = () => {
+    const { employeeId } = useParams();
 
 
     const [stateid, setstateid] = useState(0);
@@ -86,7 +87,7 @@ const Add_Service_Master = () => {
             <div className='main-content' id='mainbody'>
 
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/service-master'>Service Master</Link> / <Link className='t-theme-color'>Add Service Master Details</Link></p>
+                    <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to={`/service-master/${employeeId}`}>Service Master</Link> / <Link className='t-theme-color'>Add Service Master Details</Link></p>
 
                 </div>
 
