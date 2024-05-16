@@ -118,7 +118,7 @@ const TargetOut = () => {
 
     const columns = [
         { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
-        { field: 'date', headerName: 'Date', type: 'Date', width: 100 },
+        { field: 'from_date', headerName: 'Date', type: 'Date', width: 100 },
         { field: 'employee_id', headerName: 'Employe Name', width: 200 },
         { field: 'service_id', headerName: 'Service Name', width: 150 },
         { field: 'no_of_orders', headerName: 'Order Qty.', width: 100 },
@@ -150,7 +150,7 @@ const TargetOut = () => {
         service_id: item.service_id,
         no_of_orders: item.no_of_orders,
         total_amount: item.total_amount,
-        date: item.date,
+        from_date: item.from_date,
     })) : [];
 
 

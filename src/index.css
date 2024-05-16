@@ -996,3 +996,7 @@ font-size: 20px;
     background-color: #ff5e1a ;
     border-color: #ff5e1a ;
 }
+
+.border-1px{
+    border: 1px solid  rgb(201, 201, 201);
+}

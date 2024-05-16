@@ -15,8 +15,8 @@ const Add_Target_Master = () => {
             service_id: '',
             no_of_orders: '',
             total_amount: '',
-            from_date: '2024-10-20',
-            to_date: '2024-10-20',
+            from_date: '',
+            to_date: '',
             description: ''
         }
     ]);
@@ -28,8 +28,8 @@ const Add_Target_Master = () => {
             service_id: '',
             no_of_orders: '',
             total_amount: '',
-            from_date: '2024-10-20',
-            to_date: '2024-10-20',
+            from_date: '',
+            to_date: '',
             description: ''
         }]);
     };
@@ -134,7 +134,7 @@ const Add_Target_Master = () => {
 
                             <div className='col-md-12 py-1 border-bottom' />
                             {targets.map((target, index) => (
-                                <div key={index} className='row shadow p-3 mt-2 bg-white b-radius-10'>
+                                <div key={index} className='row  border-1px p-3 mt-2 bg-white b-radius-10'>
 
 
                                     <div className='col-md-3 py-1'>
@@ -191,7 +191,7 @@ const Add_Target_Master = () => {
                             ))}
 
 
-                            <div className='d-flex justify-content-end pt-4'>
+                            <div className='d-flex justify-content-end pt-4 gap-4'>
                                 <button type='button' className='btn btn-bg-orange mr-2' onClick={addTarget}>Add</button>
 
                                 <button type='submit' className='btn btn-bg-orange' style={{ width: "200px" }}>Submit</button>

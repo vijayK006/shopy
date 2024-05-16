@@ -84,7 +84,7 @@ const Sidebar = () => {
             </NavLink>
 
             <NavLink className="disble-decoration" to="" >
-              <li className={`dropmenu items-drop  ${currentPage === '/expenses-master' || currentPage === '/add-expenses-master' || currentPage.startsWith('/edit-expenses-master') || currentPage.startsWith('/add-expenses-payment') || currentPage.startsWith('/expenses-payment') || currentPage.startsWith('/edit-expenses-payment') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems1')} id='dropitems1'>
+              <li className={`dropmenu items-drop  ${currentPage === '/expenses-master' || currentPage === '/add-expenses-master' || currentPage.startsWith('/edit-expenses-master') || currentPage.startsWith('/add-expenses-payment') || currentPage.startsWith('/expenses-payment') || currentPage.startsWith('/edit-expenses-payment') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems2')} id='dropitems2'>
                 <IoPricetagsOutline className="icons" /> <span className='resp'>Expenses Master <IoIosArrowDown /></span>
 
                 <ul className='submenu' >
@@ -96,7 +96,7 @@ const Sidebar = () => {
             </NavLink>
 
             <NavLink className="disble-decoration" to="" >
-              <li className={`dropmenu items-drop  ${currentPage === '/target-master' || currentPage === '/add-target-master' || currentPage.startsWith('/edit-target-master') || currentPage.startsWith('/target-out') || currentPage.startsWith('/add-target-out') || currentPage.startsWith('/edit-target-out') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems2')} id='dropitems2'>
+              <li className={`dropmenu items-drop  ${currentPage === '/target-master' || currentPage === '/add-target-master' || currentPage.startsWith('/edit-target-master') || currentPage.startsWith('/target-out') || currentPage.startsWith('/add-target-out') || currentPage.startsWith('/edit-target-out') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems3')} id='dropitems3'>
                 <RxTarget className="icons" /> <span className='resp'>Target Master <IoIosArrowDown /></span>
 
                 <ul className='submenu' >
@@ -108,7 +108,7 @@ const Sidebar = () => {
             </NavLink>
 
             <NavLink className="disble-decoration" to="" >
-              <li className={`dropmenu items-drop  ${currentPage === '/target-report' || currentPage === '/expense-report' ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems3')} id='dropitems3'>
+              <li className={`dropmenu items-drop  ${currentPage === '/target-report' || currentPage === '/expense-report' ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems4')} id='dropitems4'>
                 <TbReport className="icons" /> <span className='resp'>Reports <IoIosArrowDown /></span>
 
                 <ul className='submenu' >

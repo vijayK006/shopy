@@ -55,9 +55,9 @@ const TargetMaster = () => {
     }
 
     const handleDelete = (id) => {
-        const confirmDelete = window.confirm("Are you sure you want to delete this Service Master?");
+        const confirmDelete = window.confirm("Are you sure you want to delete this Target Master?");
         if (confirmDelete) {
-            axios.post(`https://digitalshopee.online/target/delete-by-id-target.php?id=${id}`)
+            axios.post(`https://digitalshopee.online/api/target/delete-by-id-target.php?id=${id}`)
                 .then(res => {
                     fetchData();
                 })

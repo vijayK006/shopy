@@ -43,7 +43,9 @@ const Edit_Target_Master = () => {
         service_id: '',
         no_of_orders: '',
         total_amount: '',
-        date: '',
+        description: '',
+        from_date: '',
+        to_date: '',
     });
 
     useEffect(() => {
@@ -55,7 +57,9 @@ const Edit_Target_Master = () => {
                     service_id: firmData.service_id,
                     no_of_orders: firmData.no_of_orders,
                     total_amount: firmData.total_amount,
-                    date: firmData.date,
+                    from_date: firmData.from_date,
+                    to_date: firmData.to_date,
+                    description: firmData.description
                 });
             })
             .catch(error => {
@@ -73,7 +77,9 @@ const Edit_Target_Master = () => {
         formData.append('service_id', valueData.service_id);
         formData.append('no_of_orders', valueData.no_of_orders);
         formData.append('total_amount', valueData.total_amount); // Use the calculated total amount
-        formData.append('date', valueData.date);
+        formData.append('description', valueData.description); // Use the calculated total amount
+        formData.append('from_date', valueData.from_date);
+        formData.append('to_date', valueData.to_date);
 
         const confirmDelete = window.confirm("Are you sure you want to update this Service Master");
         if (confirmDelete) {
@@ -120,17 +126,13 @@ const Edit_Target_Master = () => {
 
                         <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Target From Date</label>
-                                <input type='date' className='form-control' value={valueData.date} name='date' placeholder='' onChange={handleChange} />
+                                <input type='date' className='form-control' value={valueData.from_date} name='from_date' placeholder='' onChange={handleChange} />
                             </div>
 
                             
-                            <div className='col-md-4 py-1'>{/* not Connected */}
+                            <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Target To Date</label>
-                                <input type='date' className='form-control' 
-                                // value={valueData.date}
-                                 name='date' placeholder='' 
-                                // onChange={handleChange}
-                                 />
+                                <input type='date' className='form-control'    value={valueData.to_date} name='to_date' placeholder=''   onChange={handleChange}/>
                             </div>
 
                             <div className='col-md-12 py-1 border-bottom'/>
@@ -167,9 +169,9 @@ const Edit_Target_Master = () => {
                                     name='total_amount' onChange={handleChange} placeholder="0" />
                             </div>
 
-                            <div className='col-md-6 py-2'>{/* not Connected */}
+                            <div className='col-md-6 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Target Description</label>
-                                <textarea type='text' rows={2} cols={2} className='form-control' value="not connected" name='target-description' placeholder='Target Description not connected' onChange={handleChange} ></textarea>
+                                <textarea type='text' rows={2} cols={2} className='form-control' value={valueData.description} name='description' placeholder='' onChange={handleChange} ></textarea>
                             </div>
 
                             <div className='d-flex justify-content-end pt-4'>
