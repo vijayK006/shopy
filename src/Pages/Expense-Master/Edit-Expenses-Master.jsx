@@ -8,6 +8,8 @@ import axios from 'axios';
 const Edit_Expenese_Master = () => {
     const { id } = useParams();
 const deleteid = id;
+const { employeeId } = useParams();
+
 console.log(`delete id is ${deleteid}`)
 
     const navigate = useNavigate();
@@ -89,7 +91,7 @@ console.log(`delete id is ${deleteid}`)
             <Sidebar />
             <div className='main-content' id='mainbody'>
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/expenses-master'>Expenses Master</Link> / <Link className='t-theme-color'>Edit Expenses Master Details</Link></p>
+                    <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to={`/expenses-master/${employeeId}`}>Expenses Master</Link> / <Link className='t-theme-color'>Edit Expenses Master Details</Link></p>
 
                 </div>
 

@@ -10,6 +10,8 @@ import axios from 'axios';
 
 
 const FirmMaster = () => {
+  const role = localStorage.getItem('role');
+  console.log(role);
     const [apiDatas, setApiDatas] = useState([]);
     const { employeeId } = useParams();
     const [permissions, setPermissions] = useState({ add_firm: null, edit_firm: null, delete_firm: null });
@@ -144,8 +146,18 @@ const FirmMaster = () => {
 
 <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50'>
 <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to='' className='t-theme-color'>Firm Master</Link></p>
-{permissions.add_firm === "yes" && (
+{/* {permissions.add_firm === "yes" && (
 <Link to={`/add-firm-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
+)} */}
+
+{ role === 'admin' ?(
+<Link to={`/add-firm-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
+
+):(
+ permissions.add_firm === "yes" && (
+<Link to={`/add-firm-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
+)
+
 )}
 
 </div>

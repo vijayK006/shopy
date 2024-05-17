@@ -11,6 +11,8 @@ import { FaRegAddressCard } from 'react-icons/fa';
 
 const Sidebar = () => {
   const location = useLocation();
+  const role = localStorage.getItem('role')
+  console.log(role);
   const { employeeId } = useParams();
   const [currentPage, setCurrentPage] = useState(location.pathname);
   useEffect(() => {
@@ -74,10 +76,16 @@ const Sidebar = () => {
             <NavLink className="disble-decoration" to={`/service-master/${employeeId}`}><li className={`items ${currentPage.startsWith('/service-master') || currentPage.startsWith('/add-service-master') || currentPage.startsWith('/edit-service-master') ? 'active' : ''}`}><IoSettingsOutline className="icons" /> <span className='resp'>Service Master</span></li></NavLink>
 
             {/* Employee Master */}
-            <NavLink className="disble-decoration" to="/employe-manager"><li className={`items ${currentPage === '/employe-manager' || currentPage === '/add-employee' || currentPage.startsWith('/edit-employee') ? 'active' : ''}`}><FaRegAddressCard className="icons" /> <span className='resp'>Employee Master</span></li></NavLink>
+            {role === 'admin' ? (
+              <NavLink className="disble-decoration" to={`/employe-manager/${employeeId}`}><li className={`items ${currentPage === '/employe-manager' || currentPage === '/add-employee' || currentPage.startsWith('/edit-employee') ? 'active' : ''}`}><FaRegAddressCard className="icons" /> <span className='resp'>Employee Master</span></li></NavLink>
+            ) : (
+<p className='d-none'>NO PERMISSION FOR EMPLOYEE</p>
+            )}
+            {/* <NavLink className="disble-decoration" to="/employe-manager"><li className={`items ${currentPage === '/employe-manager' || currentPage === '/add-employee' || currentPage.startsWith('/edit-employee') ? 'active' : ''}`}><FaRegAddressCard className="icons" /> <span className='resp'>Employee Master</span></li></NavLink> */}
 
             {/* Employee Access */}
-            <NavLink className="disble-decoration" to="" >
+            {role === 'admin' ? (
+ <NavLink className="disble-decoration" to="" >
               <li className={`dropmenu items-drop  ${currentPage.startsWith('/access') || currentPage.startsWith('/update-access') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems1')} id='dropitems1'>
                 <IoPricetagsOutline className="icons" /> <span className='resp'>Employee Access <IoIosArrowDown /></span>
 
@@ -88,22 +96,32 @@ const Sidebar = () => {
                 </ul>
               </li>
             </NavLink>
+            ):(
+              <p className='d-none'>NO PERMISSION FOR EMPLOYEE</p>
+            )}
+           
 
             {/* Expenses Master */}
-            <NavLink className="disble-decoration" to="" >
+            {role === 'admin' ? (
+               <NavLink className="disble-decoration" to="" >
               <li className={`dropmenu items-drop  ${currentPage === '/expenses-master' || currentPage === '/add-expenses-master' || currentPage.startsWith('/edit-expenses-master') || currentPage.startsWith('/add-expenses-payment') || currentPage.startsWith('/expenses-payment') || currentPage.startsWith('/edit-expenses-payment') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems2')} id='dropitems2'>
                 <IoPricetagsOutline className="icons" /> <span className='resp'>Expenses Master <IoIosArrowDown /></span>
 
                 <ul className='submenu' >
-                  <NavLink to='/add-expenses-master'><li className={`droplink-text ${currentPage === '/add-expenses-master' || currentPage === '/expenses-master' || currentPage.startsWith('/edit-expenses-master') ? 'link-active' : ''}`}><IoIosArrowForward /> Add Expense Category</li></NavLink>
+                  <NavLink to={`/add-expenses-master/${employeeId}`}><li className={`droplink-text ${currentPage === '/add-expenses-master' || currentPage === '/expenses-master' || currentPage.startsWith('/edit-expenses-master') ? 'link-active' : ''}`}><IoIosArrowForward /> Add Expense Category</li></NavLink>
 
-                  <NavLink to='/expenses-payment'><li className={`droplink-text ${currentPage.startsWith('/add-expenses-payment') || currentPage.startsWith('/expenses-payment') || currentPage.startsWith('/edit-expenses-payment') ? 'link-active' : ''}`}><IoIosArrowForward /> Expenses Payment</li></NavLink>
+                  <NavLink to={`/expenses-payment/${employeeId}`}><li className={`droplink-text ${currentPage.startsWith('/add-expenses-payment') || currentPage.startsWith('/expenses-payment') || currentPage.startsWith('/edit-expenses-payment') ? 'link-active' : ''}`}><IoIosArrowForward /> Expenses Payment</li></NavLink>
                 </ul>
               </li>
             </NavLink>
+            ):(
+              <p className='d-none'>NO PERMISSION FOR EMPLOYEE</p>
+            )}
+           
 
             {/* Target Master */}
-            <NavLink className="disble-decoration" to="" >
+            {role === 'admin' ? (
+  <NavLink className="disble-decoration" to="" >
               <li className={`dropmenu items-drop  ${currentPage === '/target-master' || currentPage === '/add-target-master' || currentPage.startsWith('/edit-target-master') || currentPage.startsWith('/target-out') || currentPage.startsWith('/add-target-out') || currentPage.startsWith('/edit-target-out') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems3')} id='dropitems3'>
                 <RxTarget className="icons" /> <span className='resp'>Target Master <IoIosArrowDown /></span>
 
@@ -114,9 +132,14 @@ const Sidebar = () => {
                 </ul>
               </li>
             </NavLink>
+            ):(
+              <p className='d-none'>NO PERMISSION FOR EMPLOYEE</p>
+            )}
+          
 
             {/* Reports */}
-            <NavLink className="disble-decoration" to="" >
+            {role === 'admin' ? (
+  <NavLink className="disble-decoration" to="" >
               <li className={`dropmenu items-drop  ${currentPage === '/target-report' || currentPage === '/expense-report' ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems4')} id='dropitems4'>
                 <TbReport className="icons" /> <span className='resp'>Reports <IoIosArrowDown /></span>
 
@@ -127,6 +150,10 @@ const Sidebar = () => {
                 </ul>
               </li>
             </NavLink>
+            ):(
+              <p className='d-none'>NO PERMISSION FOR EMPLOYEE</p>
+            )}
+          
 
           </ul>
         </div>
