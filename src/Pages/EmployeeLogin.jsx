@@ -48,6 +48,7 @@ const EmployeeLogin = () => {
           navigate(`/${employeeId}`);
           localStorage.setItem('login', true)
           localStorage.setItem('employeeId', employeeId);
+          localStorage.setItem('role', 'employee');
         }
       })
       .catch(err => {

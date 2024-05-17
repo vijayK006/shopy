@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
@@ -50,30 +50,40 @@ import EmployeeLogin from "./Pages/EmployeeLogin";
 
 
 const App = () => {
+
+
+
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/:employeeId" element={<ProtectRoute Component={Home} />} />
-          <Route path="/" element={<ProtectRoute Component={Home} />} />
-          {/* <Route path="/" element={<Home/>} /> */}
+
+       
           <Route path="/login" element={<Login />} />
           <Route path="/employee-login" element={<EmployeeLogin />} />
+
+          <Route path="/" element={<ProtectRoute Component={Home} />} />
+          <Route path="/:employeeId" element={<ProtectRoute Component={Home} />} />
+ 
+
 
           {/* Firm Master */}
           <Route path="/firm-master/:employeeId" element={<FirmMaster />} />
           <Route path="/edit-firm-master/:employeeId/:id" element={<Edit_Firm_Master />} />
-          <Route path="/add-firm-master/:employeeId" element={<Add_Firm_Master />} />
+          <Route path="/add-firm-master" element={<Add_Firm_Master />} />
 
           {/* Client Master */}
-          <Route path="/client-master/:employeeId" element={<Clientmaster />} />
-          <Route path="/edit-client-master/:employeeId/:id" element={<Edit_Client_Master />}/>
-          <Route path="/add-client-master/:employeeId" element={<Add_Client_Master />} />
+          <Route path="/client-master" element={<Clientmaster />} />
+          <Route path="/edit-client-master/:id" element={<Edit_Client_Master />}/>
+          <Route path="/add-client-master" element={<Add_Client_Master />} />
 
           {/* Service Master */}
-          <Route path="/service-master/:employeeId" element={<Servicemaster />} />
-          <Route path="/add-service-master/:employeeId" element={<Add_Service_Master />} />
-          <Route path="/edit-service-master/:employeeId/:id" element={<Edit_Service_Master />}/>
+          <Route path="/service-master" element={<Servicemaster />} />
+          <Route path="/add-service-master" element={<Add_Service_Master />} />
+          <Route
+            path="/edit-service-master/:id"
+            element={<Edit_Service_Master />}
+          />
 
           {/* Expenses Master */}
           <Route path="/expenses-master" element={<Expense_Master />} />

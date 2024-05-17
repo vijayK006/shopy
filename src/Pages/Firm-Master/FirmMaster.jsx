@@ -12,6 +12,7 @@ import axios from 'axios';
 const FirmMaster = () => {
     const [apiDatas, setApiDatas] = useState([]);
     const { employeeId } = useParams();
+    const { admin } = useParams();
     const [permissions, setPermissions] = useState({ add_firm: null, edit_firm: null, delete_firm: null });
 
 

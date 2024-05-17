@@ -57,11 +57,12 @@ const Login = () => {
     })
       .then((res) => {
         if (res.data.message === "Login successful") {
-          const admin = "amdin";
+          const admin = "admin";
           console.log('Login Success')
-          navigate('/');
+          navigate(`/${admin}`);
           localStorage.setItem('login', true)
           localStorage.setItem('admin', admin)
+          localStorage.setItem('role', 'useradmin')
         }
       })
       .catch(err => {
