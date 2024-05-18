@@ -7,6 +7,8 @@ import axios from 'axios';
 const Edit_Target_Out = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { employeeId } = useParams();
+
 
     const [getempoloyenames, setGetempoloyenames] = useState([]);
     const [getservicenames, setGetservicenames] = useState([]);
@@ -116,7 +118,7 @@ const Edit_Target_Out = () => {
             <Sidebar />
             <div className='main-content' id='mainbody'>
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/target-out'>Target Master Out</Link> / <Link className='t-theme-color'>Edit Target Master Out</Link></p>
+                    <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to={`/target-out/${employeeId}`}>Target Master Out</Link> / <Link className='t-theme-color'>Edit Target Master Out</Link></p>
                 </div>
 
                 <div className='container-fluid mb-5'>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Topbar from '../../layouts/Topbar';
 import Sidebar from '../../layouts/Sidebar';
 import { FaFilter, FaRegEdit } from "react-icons/fa";
@@ -20,7 +20,7 @@ const TargetOut = () => {
     const [totalQty, setTotalQty] = useState(0);
     const [selectedService, setSelectedService] = useState('');
     const [selectedEmployee, setSelectedEmployee] = useState('');
-
+    const { employeeId } = useParams();
 
 
     const fetchData = () => {
@@ -130,7 +130,7 @@ const TargetOut = () => {
             width: 230,
             renderCell: (params) => (
                 <>
-                    <Link to={`/edit-target-out/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
+                    <Link to={`/edit-target-out/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
                         <FaRegEdit style={{ fontSize: '15px', marginBottom: '4px' }} />  View / Edit
                     </Link>
                     &nbsp;
@@ -164,7 +164,7 @@ const TargetOut = () => {
             <Sidebar />
             <div className='main-content' id='mainbody'>
                 <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50 bread-parent'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/target-out' className='t-theme-color'>Target Master Out</Link></p>
+                    <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to={`/target-out/${employeeId}`} className='t-theme-color'>Target Master Out</Link></p>
                     <div>
                         {/* <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                         <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
@@ -181,7 +181,7 @@ const TargetOut = () => {
 
                     </div>
                     <div className='actions'>
-                        <Link to='/add-target-out' className='btn btn-bg-orange btn-sm b-radius-50 '><MdNoteAdd style={{ fontSize: "18px", marginBottom: '2px' }} /> Add Target Out</Link>
+                        <Link to={`/add-target-out/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50 '><MdNoteAdd style={{ fontSize: "18px", marginBottom: '2px' }} /> Add Target Out</Link>
                         &nbsp;
                         &nbsp;
 

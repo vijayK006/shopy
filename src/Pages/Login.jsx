@@ -62,7 +62,7 @@ const Login = () => {
           navigate(`/${admin}`);
           localStorage.setItem('login', true)
           localStorage.setItem('admin', admin)
-          localStorage.setItem('role', 'useradmin')
+          localStorage.setItem('role', 'admin')
         }
       })
       .catch(err => {

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Topbar from '../../layouts/Topbar'
 import Sidebar from '../../layouts/Sidebar'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import axios from 'axios';
 
 const Add_Expenses_Payment = () => {
+  const { employeeId } = useParams();
+
     const [loading, setLoading] = useState(false);
     const [getexpensenames, setGetexpensenames] = useState([])
     const [getemployenames, setGetemployenames] = useState([])
@@ -83,7 +85,7 @@ const Add_Expenses_Payment = () => {
             <div className='main-content' id='mainbody'>
 
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/expenses-payment'>Expense Payment</Link> / <Link className='t-theme-color'>Add Expense Payment</Link></p>
+                    <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to={`/expenses-payment/${employeeId}`}>Expense Payment</Link> / <Link className='t-theme-color'>Add Expense Payment</Link></p>
 
                 </div>
 

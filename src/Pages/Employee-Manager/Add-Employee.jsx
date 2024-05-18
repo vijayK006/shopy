@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import Topbar from '../../layouts/Topbar'
 import Sidebar from '../../layouts/Sidebar'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import axios from 'axios';
 import { AiFillPicture } from "react-icons/ai";
 
 const Add_Employe = () => {
+    const { employeeId } = useParams();
 
 
     const [profile_photodoc, setProfile_photodoc] = useState(null)
 
-
     const [loading, setLoading] = useState(false);
-
     const navigate = useNavigate();
-
-
     const [valueData, setValueData] = useState({
         name: '',
         email: '',
@@ -122,7 +119,7 @@ const Add_Employe = () => {
             <div className='main-content' id='mainbody'>
 
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/employe-manager'>Employee Manager</Link> / <Link className='t-theme-color'>Add Employee Details</Link></p>
+                    <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to={`/employe-manager/${employeeId}`}>Employee Manager</Link> / <Link className='t-theme-color'>Add Employee Details</Link></p>
 
                 </div>
 

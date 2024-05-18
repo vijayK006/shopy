@@ -11,13 +11,9 @@ import { FaRegAddressCard } from 'react-icons/fa';
 
 const Sidebar = () => {
   const location = useLocation();
+  const role = localStorage.getItem('role')
+  console.log(role);
   const { employeeId } = useParams();
-
-  const [role, setRole] = useState(null);
-  useEffect(() => {
-    const storedRole = localStorage.getItem('role');
-    setRole(storedRole);
-  }, []);
 
   const [currentPage, setCurrentPage] = useState(location.pathname);
   useEffect(() => {
@@ -82,64 +78,84 @@ const Sidebar = () => {
 
 
             {/* Employee Master */}
-            {role === "useradmin" ? (
-              <NavLink className="disble-decoration" to="/employe-manager"><li className={`items ${currentPage === '/employe-manager' || currentPage === '/add-employee' || currentPage.startsWith('/edit-employee') ? 'active' : ''}`}><FaRegAddressCard className="icons" /> <span className='resp'>Employee Master</span></li></NavLink>
-            ):(
-<p>Denied</p>
+            {role === 'admin' ? (
+              <NavLink className="disble-decoration" to={`/employe-manager/${employeeId}`}><li className={`items ${currentPage.startsWith('/employe-manager') || currentPage.startsWith('/add-employee') || currentPage.startsWith('/edit-employee') ? 'active' : ''}`}><FaRegAddressCard className="icons" /> <span className='resp'>Employee Master</span></li></NavLink>
+            ) : (
+<p className='d-none'>NO PERMISSION FOR EMPLOYEE</p>
             )}
             {/* <NavLink className="disble-decoration" to="/employe-manager"><li className={`items ${currentPage === '/employe-manager' || currentPage === '/add-employee' || currentPage.startsWith('/edit-employee') ? 'active' : ''}`}><FaRegAddressCard className="icons" /> <span className='resp'>Employee Master</span></li></NavLink> */}
 
             {/* Employee Access */}
-            <NavLink className="disble-decoration" to="" >
+            {role === 'admin' ? (
+ <NavLink className="disble-decoration" to="" >
               <li className={`dropmenu items-drop  ${currentPage.startsWith('/access') || currentPage.startsWith('/update-access') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems1')} id='dropitems1'>
                 <IoPricetagsOutline className="icons" /> <span className='resp'>Employee Access <IoIosArrowDown /></span>
 
                 <ul className='submenu' >
-                  <NavLink to='/access'><li className={`droplink-text ${currentPage === '/access' ? 'link-active' : ''}`}><IoIosArrowForward />Add Access</li></NavLink>
+                  <NavLink to={`/access/${employeeId}`}><li className={`droplink-text ${currentPage.startsWith('/access') ? 'link-active' : ''}`}><IoIosArrowForward />Add Access</li></NavLink>
 
-                  <NavLink to='/update-access'><li className={`droplink-text ${currentPage.startsWith('/update-access') ? 'link-active' : ''}`}><IoIosArrowForward />Update Access</li></NavLink>
+                  <NavLink to={`/update-access/${employeeId}`}><li className={`droplink-text ${currentPage.startsWith('/update-access') ? 'link-active' : ''}`}><IoIosArrowForward />Update Access</li></NavLink>
                 </ul>
               </li>
             </NavLink>
+            ):(
+              <p className='d-none'>NO PERMISSION FOR EMPLOYEE</p>
+            )}
+           
 
             {/* Expenses Master */}
-            <NavLink className="disble-decoration" to="" >
-              <li className={`dropmenu items-drop  ${currentPage === '/expenses-master' || currentPage === '/add-expenses-master' || currentPage.startsWith('/edit-expenses-master') || currentPage.startsWith('/add-expenses-payment') || currentPage.startsWith('/expenses-payment') || currentPage.startsWith('/edit-expenses-payment') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems2')} id='dropitems2'>
+            {role === 'admin' ? (
+               <NavLink className="disble-decoration" to="" >
+              <li className={`dropmenu items-drop  ${currentPage.startsWith('/expenses-master') || currentPage.startsWith('/add-expenses-master') || currentPage.startsWith('/edit-expenses-master') || currentPage.startsWith('/add-expenses-payment') || currentPage.startsWith('/expenses-payment') || currentPage.startsWith('/edit-expenses-payment') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems2')} id='dropitems2'>
                 <IoPricetagsOutline className="icons" /> <span className='resp'>Expenses Master <IoIosArrowDown /></span>
 
                 <ul className='submenu' >
-                  <NavLink to='/add-expenses-master'><li className={`droplink-text ${currentPage === '/add-expenses-master' || currentPage === '/expenses-master' || currentPage.startsWith('/edit-expenses-master') ? 'link-active' : ''}`}><IoIosArrowForward /> Add Expense Category</li></NavLink>
+                  <NavLink to={`/add-expenses-master/${employeeId}`}><li className={`droplink-text ${currentPage.startsWith('/add-expenses-master') || currentPage.startsWith('/expenses-master') || currentPage.startsWith('/edit-expenses-master') ? 'link-active' : ''}`}><IoIosArrowForward /> Add Expense Category</li></NavLink>
 
-                  <NavLink to='/expenses-payment'><li className={`droplink-text ${currentPage.startsWith('/add-expenses-payment') || currentPage.startsWith('/expenses-payment') || currentPage.startsWith('/edit-expenses-payment') ? 'link-active' : ''}`}><IoIosArrowForward /> Expenses Payment</li></NavLink>
+                  <NavLink to={`/expenses-payment/${employeeId}`}><li className={`droplink-text ${currentPage.startsWith('/add-expenses-payment') || currentPage.startsWith('/expenses-payment') || currentPage.startsWith('/edit-expenses-payment') ? 'link-active' : ''}`}><IoIosArrowForward /> Expenses Payment</li></NavLink>
                 </ul>
               </li>
             </NavLink>
+            ):(
+              <p className='d-none'>NO PERMISSION FOR EMPLOYEE</p>
+            )}
+           
 
             {/* Target Master */}
-            <NavLink className="disble-decoration" to="" >
-              <li className={`dropmenu items-drop  ${currentPage === '/target-master' || currentPage === '/add-target-master' || currentPage.startsWith('/edit-target-master') || currentPage.startsWith('/target-out') || currentPage.startsWith('/add-target-out') || currentPage.startsWith('/edit-target-out') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems3')} id='dropitems3'>
+            {role === 'admin' ? (
+  <NavLink className="disble-decoration" to="" >
+              <li className={`dropmenu items-drop  ${currentPage.startsWith('/target-master') || currentPage.startsWith('/add-target-master') || currentPage.startsWith('/edit-target-master') || currentPage.startsWith('/target-out') || currentPage.startsWith('/add-target-out') || currentPage.startsWith('/edit-target-out') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems3')} id='dropitems3'>
                 <RxTarget className="icons" /> <span className='resp'>Target Master <IoIosArrowDown /></span>
 
                 <ul className='submenu' >
-                  <NavLink to='/target-master'><li className={`droplink-text ${currentPage === '/target-master' || currentPage === '/add-target-master' || currentPage.startsWith('/edit-target-master') ? 'link-active' : ''}`}><IoIosArrowForward /> View Target Master</li></NavLink>
+                  <NavLink to={`/target-master/${employeeId}`}><li className={`droplink-text ${currentPage.startsWith('/target-master') || currentPage.startsWith('/add-target-master') || currentPage.startsWith('/edit-target-master') ? 'link-active' : ''}`}><IoIosArrowForward /> View Target Master</li></NavLink>
 
-                  <NavLink to='/target-out'><li className={`droplink-text ${currentPage.startsWith('/target-out') || currentPage.startsWith('/add-target-out') || currentPage.startsWith('/edit-target-out') ? 'link-active' : ''}`}><IoIosArrowForward /> Target Master Out</li></NavLink>
+                  <NavLink to={`/target-out/${employeeId}`}><li className={`droplink-text ${currentPage.startsWith('/target-out') || currentPage.startsWith('/add-target-out') || currentPage.startsWith('/edit-target-out') ? 'link-active' : ''}`}><IoIosArrowForward /> Target Master Out</li></NavLink>
                 </ul>
               </li>
             </NavLink>
+            ):(
+              <p className='d-none'>NO PERMISSION FOR EMPLOYEE</p>
+            )}
+          
 
             {/* Reports */}
-            <NavLink className="disble-decoration" to="" >
-              <li className={`dropmenu items-drop  ${currentPage === '/target-report' || currentPage === '/expense-report' ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems4')} id='dropitems4'>
+            {role === 'admin' ? (
+  <NavLink className="disble-decoration" to="" >
+              <li className={`dropmenu items-drop  ${currentPage.startsWith('/target-report') || currentPage.startsWith('/expense-report')  ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems4')} id='dropitems4'>
                 <TbReport className="icons" /> <span className='resp'>Reports <IoIosArrowDown /></span>
 
                 <ul className='submenu' >
-                  <NavLink to='/target-report'><li className={`droplink-text ${currentPage === '/target-report' ? 'link-active' : ''}`}><IoIosArrowForward /> Target Master Report</li></NavLink>
+                  <NavLink to={`/target-report/${employeeId}`}><li className={`droplink-text ${currentPage.startsWith('/target-report') ? 'link-active' : ''}`}><IoIosArrowForward /> Target Master Report</li></NavLink>
 
-                  <NavLink to='/expense-report'><li className={`droplink-text ${currentPage === '/expense-report' ? 'link-active' : ''}`}><IoIosArrowForward /> Expense Master Report</li></NavLink>
+                  <NavLink to={`/expense-report/${employeeId}`}><li className={`droplink-text ${currentPage.startsWith('/expense-report') ? 'link-active' : ''}`}><IoIosArrowForward /> Expense Master Report</li></NavLink>
                 </ul>
               </li>
             </NavLink>
+            ):(
+              <p className='d-none'>NO PERMISSION FOR EMPLOYEE</p>
+            )}
+          
 
           </ul>
         </div>

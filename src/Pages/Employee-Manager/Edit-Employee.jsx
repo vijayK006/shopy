@@ -9,6 +9,8 @@ import { AiFillPicture } from "react-icons/ai";
 
 const Edit_employe = () => {
     const { id } = useParams();
+    const { employeeId } = useParams();
+
     const navigate = useNavigate();
     // const [selectedFile, setSelectedFile] = useState(null);
 
@@ -145,7 +147,7 @@ const Edit_employe = () => {
             <Sidebar />
             <div className='main-content' id='mainbody'>
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/employe-manager'>Employee Manager</Link> / <Link className='t-theme-color'>Edit Employee Details</Link></p>
+                    <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to={`/employe-manager/${employeeId}`}>Employee Manager</Link> / <Link className='t-theme-color'>Edit Employee Details</Link></p>
 
                 </div>
 

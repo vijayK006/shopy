@@ -57,15 +57,14 @@ const App = () => {
     <>
       <BrowserRouter>
         <Routes>
+          <Route path="/:employeeId" element={<ProtectRoute Component={Home} />} />
+          <Route path="/" element={<Home />} />
 
-       
           <Route path="/login" element={<Login />} />
           <Route path="/employee-login" element={<EmployeeLogin />} />
 
-          <Route path="/" element={<ProtectRoute Component={Home} />} />
-          <Route path="/:employeeId" element={<ProtectRoute Component={Home} />} />
- 
-
+          {/* <Route path="/" element={<ProtectRoute Component={Home} />} />
+          <Route path="/:employeeId" element={<ProtectRoute Component={Home} />} /> */}
 
           {/* Firm Master */}
           <Route path="/firm-master/:employeeId" element={<FirmMaster />} />
@@ -74,60 +73,45 @@ const App = () => {
 
           {/* Client Master */}
           <Route path="/client-master/:employeeId" element={<Clientmaster />} />
-          <Route path="/edit-client-master/:employeeId/:id" element={<Edit_Client_Master />}/>
+          <Route path="/edit-client-master/:employeeId/:id" element={<Edit_Client_Master />} />
           <Route path="/add-client-master/:employeeId" element={<Add_Client_Master />} />
 
           {/* Service Master */}
           <Route path="/service-master/:employeeId" element={<Servicemaster />} />
           <Route path="/add-service-master/:employeeId" element={<Add_Service_Master />} />
-          <Route path="/edit-service-master/:employeeId/:id" element={<Edit_Service_Master />}/>
+          <Route path="/edit-service-master/:employeeId/:id" element={<Edit_Service_Master />} />
 
           {/* Expenses Master */}
-          <Route path="/expenses-master" element={<Expense_Master />} />
-          <Route
-            path="/add-expenses-master"
-            element={<Add_Expenses_Master />}
-          />
-          <Route
-            path="/edit-expenses-master/:id"
-            element={<Edit_Expenese_Master />}
-          />
+          <Route path="/expenses-master/:employeeId" element={<Expense_Master />} />
+          <Route path="/add-expenses-master/:employeeId" element={<Add_Expenses_Master />} />
+          <Route path="/edit-expenses-master/:employeeId/:id" element={<Edit_Expenese_Master />} />
 
           {/* -------- */}
-          <Route
-            path="/add-expenses-payment"
-            element={<Add_Expenses_Payment />}
-          />
-          <Route path="/expenses-payment" element={<Expense_Payment />} />
-          <Route
-            path="/edit-expenses-payment/:id"
-            element={<Edit_Expense_Payment />}
-          />
+          <Route path="/add-expenses-payment/:employeeId" element={<Add_Expenses_Payment />} />
+          <Route path="/expenses-payment/:employeeId" element={<Expense_Payment />} />
+          <Route path="/edit-expenses-payment/:employeeId/:id" element={<Edit_Expense_Payment />} />
 
           {/* Employee Manager */}
-          <Route path="/employe-manager" element={<EmployeManager />} />
-          <Route path="/add-employee" element={<Add_Employe />} />
-          <Route path="/edit-employee/:id" element={<Edit_employe />} />
+          <Route path="/employe-manager/:employeeId" element={<EmployeManager />} />
+          <Route path="/add-employee/:employeeId" element={<Add_Employe />} />
+          <Route path="/edit-employee/:employeeId/:id" element={<Edit_employe />} />
           {/* --------- */}
-          <Route path="/access" element={<Access />} />
-          <Route path="/update-access" element={<Update_Access />} />
+          <Route path="/access/:employeeId" element={<Access />} />
+          <Route path="/update-access/:employeeId" element={<Update_Access />} />
 
 
           {/* Target Master */}
-          <Route path="/target-master" element={<TargetMaster />} />
-          <Route path="/add-target-master" element={<Add_Target_Master />} />
-          <Route
-            path="/edit-target-master/:id"
-            element={<Edit_Target_Master />}
-          />
+          <Route path="/target-master/:employeeId" element={<TargetMaster />} />
+          <Route path="/add-target-master/:employeeId" element={<Add_Target_Master />} />
+          <Route path="/edit-target-master/:employeeId/:id" element={<Edit_Target_Master />}/>
           {/* --------------- */}
-          <Route path="/target-out" element={<TargetOut />} />
-          <Route path="/add-target-out" element={<Add_Target_Out />} />
-          <Route path="/edit-target-out/:id" element={<Edit_Target_Out />} />
+          <Route path="/target-out/:employeeId" element={<TargetOut />} />
+          <Route path="/add-target-out/:employeeId" element={<Add_Target_Out />} />
+          <Route path="/edit-target-out/:employeeId/:id" element={<Edit_Target_Out />} />
 
-{/* Reports */}
-<Route path="/target-report" element={<TargetReport />} />
-<Route path="/expense-report" element={<ExpenseReport />} />
+          {/* Reports */}
+          <Route path="/target-report/:employeeId" element={<TargetReport />} />
+          <Route path="/expense-report/:employeeId" element={<ExpenseReport />} />
 
         </Routes>
       </BrowserRouter>

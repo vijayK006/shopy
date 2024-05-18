@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Topbar from '../../layouts/Topbar';
 import Sidebar from '../../layouts/Sidebar';
 import { FaFilter, FaRegEdit } from "react-icons/fa";
@@ -20,9 +20,7 @@ const TargetMaster = () => {
     const [totalQty, setTotalQty] = useState(0);
     const [selectedService, setSelectedService] = useState('');
     const [selectedEmployee, setSelectedEmployee] = useState('');
-
-
-
+    const { employeeId } = useParams();
 
 
     const fetchData = () => {
@@ -133,7 +131,7 @@ const TargetMaster = () => {
             width: 230,
             renderCell: (params) => (
                 <>
-                    <Link to={`/edit-target-master/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
+                    <Link to={`/edit-target-master/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
                         <FaRegEdit style={{ fontSize: '15px', marginBottom: '4px' }} />  View / Edit
                     </Link>
                     &nbsp;
@@ -184,7 +182,7 @@ const TargetMaster = () => {
 
                     </div>
                     <div className='actions'>
-                        <Link to='/add-target-master' className='btn btn-bg-orange btn-sm b-radius-50 '><MdNoteAdd style={{ fontSize: "18px", marginBottom: '2px' }} /> Add Target Master</Link>
+                        <Link to={`/add-target-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50 '><MdNoteAdd style={{ fontSize: "18px", marginBottom: '2px' }} /> Add Target Master</Link>
                         &nbsp;
                         &nbsp;
 

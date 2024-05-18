@@ -486,6 +486,7 @@ color: black;
 .submenu {
     list-style-type: none;
     padding: 5px 0px;
+    margin-top: 8px;
 }
 
 .submenu li {
@@ -508,7 +509,7 @@ color: black;
 }
 
 .opensubmenu {
-    height: 100px;
+    height: 110px;
 }
 
 .logo Img {
