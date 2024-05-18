@@ -58,7 +58,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/:employeeId" element={<ProtectRoute Component={Home} />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<ProtectRoute Component={Home} />} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/employee-login" element={<EmployeeLogin />} />
