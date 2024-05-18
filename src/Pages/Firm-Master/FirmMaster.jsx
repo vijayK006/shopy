@@ -12,7 +12,7 @@ const FirmMaster = () => {
   console.log(role);
     const [apiDatas, setApiDatas] = useState([]);
     const { employeeId } = useParams();
-    const [permissions, setPermissions] = useState({ add_firm: null, edit_firm: null, delete_firm: null });
+    const [permissions, setPermissions] = useState({ add_firm: null, edit_firm: null, delete_firm: null, view_firm:null });
 
 
   useEffect(() => {
@@ -103,19 +103,41 @@ const FirmMaster = () => {
           <Link  className='btn btn-outline-danger btn-sm' onClick={() => handleDelete(params.row.id)}>
            <AiOutlineDelete style={{fontSize:'15px', marginBottom:'4px'}}/> Delete
           </Link>*/}
-
-          {permissions.edit_firm === "yes" && (
+          { role === 'admin' ?(
             <Link to={`/edit-firm-master/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
               <FaRegEdit style={{ fontSize: '15px', marginBottom: '4px' }} /> View / Edit
             </Link>
+          ):(
+            (permissions.view_firm === "yes" || permissions.edit_firm === "yes") && (
+              <Link to={`/edit-firm-master/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
+              <FaRegEdit style={{ fontSize: '15px', marginBottom: '4px' }} /> View
+            </Link>
+          )
           )}
+
+          {/* {permissions.edit_firm === "yes" && (
+            <Link to={`/edit-firm-master/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
+              <FaRegEdit style={{ fontSize: '15px', marginBottom: '4px' }} /> View / Edit
+            </Link>
+          )} */}
           &nbsp;
           &nbsp;
-          {permissions.delete_firm === "yes" && (
+          { role === 'admin' ?(
             <button className='btn btn-outline-danger btn-sm' onClick={() => handleDelete(params.row.id)}>
               <AiOutlineDelete style={{ fontSize: '15px', marginBottom: '4px' }} /> Delete
             </button>
+          ):(
+            permissions.delete_firm === "yes" && (
+            <button className='btn btn-outline-danger btn-sm' onClick={() => handleDelete(params.row.id)}>
+              <AiOutlineDelete style={{ fontSize: '15px', marginBottom: '4px' }} /> Delete
+            </button>
+          )
           )}
+          {/* {permissions.delete_firm === "yes" && (
+            <button className='btn btn-outline-danger btn-sm' onClick={() => handleDelete(params.row.id)}>
+              <AiOutlineDelete style={{ fontSize: '15px', marginBottom: '4px' }} /> Delete
+            </button>
+          )} */}
         </>
 
       ),

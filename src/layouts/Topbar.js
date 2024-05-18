@@ -18,6 +18,7 @@ const Topbar = () => {
     navigate('/login');
     localStorage.clear()
   }
+
   return (
     <>
       <div className='top-bar'>

@@ -15,6 +15,8 @@ import { AiFillPicture } from "react-icons/ai";
 const Edit_Firm_Master = () => {
     const { id } = useParams();
     const { employeeId } = useParams();
+    const [permissions, setPermissions] = useState({ edit_firm: null });
+    const role = localStorage.getItem('role');
 
     const [countryid, setCountryid] = useState(0);
     const [stateid, setstateid] = useState(0);
@@ -44,6 +46,17 @@ const Edit_Firm_Master = () => {
                 console.error('Error fetching data:', err);
             });
     }, []);
+
+    useEffect(() => {
+        axios.get(`https://digitalshopee.online/api/employee-permission/get-permission.php?id=${employeeId}`)
+          .then(response => {
+            setPermissions(response.data[0]);
+            console.log(response.data[0]);
+          })
+          .catch(error => {
+            console.error("Error fetching permissions:", error);
+          });
+      }, [employeeId]);
 
     const [valueData, setValueData] = useState({
         firm_name: '',
@@ -216,10 +229,10 @@ const Edit_Firm_Master = () => {
                                 <input type='file' className='form-control d-none' id='logo' name='logo' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-1'/>
-                            <div className='col-md-4 py-1'/>
-                            
-                          
+                            <div className='col-md-4 py-1' />
+                            <div className='col-md-4 py-1' />
+
+
 
                             <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Firm Name</label>
@@ -335,9 +348,9 @@ const Edit_Firm_Master = () => {
                             </div>
 
                             <div className='col-md-3 py-2'>
-                            <label className='text-sm font-w-500 p-2'> Business Owner Sign</label>
+                                <label className='text-sm font-w-500 p-2'> Business Owner Sign</label>
 
-                            <input type='file' className='form-control' id='sign' name='sign' onChange={handleChange} />
+                                <input type='file' className='form-control' id='sign' name='sign' onChange={handleChange} />
 
                                 <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
                                     <label for='sign' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
@@ -348,9 +361,20 @@ const Edit_Firm_Master = () => {
                             </div>
 
 
-                            <div className='d-flex justify-content-end pt-4'>
-                                <button type='submit' className='btn btn-bg-orange ' style={{ width: "200px" }} >Update</button>
-                            </div>
+                            {role === 'admin' ? (
+                                <div className='d-flex justify-content-end pt-4'>
+                                    <button type='submit' className='btn btn-bg-orange ' style={{ width: "200px" }} >Update</button>
+                                </div>
+                            ) : (
+
+                                permissions.edit_firm === "yes" && (
+                                    <div className='d-flex justify-content-end pt-4'>
+                                        <button type='submit' className='btn btn-bg-orange ' style={{ width: "200px" }} >Update</button>
+                                    </div>
+                                )
+
+                            )}
+
 
                         </div>
 

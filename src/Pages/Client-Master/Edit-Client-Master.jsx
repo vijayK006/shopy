@@ -15,6 +15,8 @@ import { AiFillPicture } from "react-icons/ai";
 const Edit_Client_Master = () => {
     const { id } = useParams();
     const { employeeId } = useParams();
+    const [permissions, setPermissions] = useState({ edit_client: null });
+    const role = localStorage.getItem('role');
 
 
     const [countryid, setCountryid] = useState(0);
@@ -104,6 +106,18 @@ const Edit_Client_Master = () => {
             });
     }, [id]);
 
+    
+    useEffect(() => {
+        axios.get(`https://digitalshopee.online/api/employee-permission/get-permission.php?id=${employeeId}`)
+          .then(response => {
+            setPermissions(response.data[0]);
+            console.log(response.data[0]);
+          })
+          .catch(error => {
+            console.error("Error fetching permissions:", error);
+          });
+      }, [employeeId]);
+      
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -483,9 +497,20 @@ const Edit_Client_Master = () => {
                             </div>
 
                             
-                            <div className='d-flex justify-content-end pt-4'>
-                                <button type='submit' className='btn btn-bg-orange' style={{ width: "200px" }} >Update</button>
-                            </div>
+                          
+                            {role === 'admin' ? (
+                                <div className='d-flex justify-content-end pt-4'>
+                                    <button type='submit' className='btn btn-bg-orange ' style={{ width: "200px" }} >Update</button>
+                                </div>
+                            ) : (
+
+                                permissions.edit_client === "yes" && (
+                                    <div className='d-flex justify-content-end pt-4'>
+                                        <button type='submit' className='btn btn-bg-orange ' style={{ width: "200px" }} >Update</button>
+                                    </div>
+                                )
+
+                            )}
 
                         </div>
 

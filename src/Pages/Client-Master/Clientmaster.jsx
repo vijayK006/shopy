@@ -10,9 +10,10 @@ import axios from 'axios';
 
 
 const Clientmaster = () => {
+  const role = localStorage.getItem('role');
   const [apiDatas, setApiDatas] = useState([]);
   const { employeeId } = useParams();
-  const [permissions, setPermissions] = useState({ add_client: null, edit_client: null, delete_client: null });
+  const [permissions, setPermissions] = useState({ add_client: null, view_client: null, edit_client: null, delete_client: null });
 
   useEffect(() => {
     fetchData();
@@ -83,18 +84,31 @@ const Clientmaster = () => {
       width: 230,
       renderCell: (params) => (
         <>
-          {permissions.edit_client === "yes" && (
+
+          { role === 'admin' ?(
             <Link to={`/edit-client-master/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
-              <FaRegEdit style={{ fontSize: '15px', marginBottom: '4px' }} />  View / Edit
+              <FaRegEdit style={{ fontSize: '15px', marginBottom: '4px' }} /> View / Edit
             </Link>
+          ):(
+            (permissions.view_client=== "yes" || permissions.edit_client=== "yes") && (
+              <Link to={`/edit-client-master/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
+              <FaRegEdit style={{ fontSize: '15px', marginBottom: '4px' }} /> View
+            </Link>
+          )
           )}
 
           &nbsp;
           &nbsp;
-          {permissions.delete_client === "yes" && (
-            <Link className='btn btn-outline-danger btn-sm' onClick={() => handleDelete(params.row.id)}>
-            <AiOutlineDelete style={{ fontSize: '15px', marginBottom: '4px' }} /> Delete
-          </Link>
+          { role === 'admin' ?(
+            <button className='btn btn-outline-danger btn-sm' onClick={() => handleDelete(params.row.id)}>
+              <AiOutlineDelete style={{ fontSize: '15px', marginBottom: '4px' }} /> Delete
+            </button>
+          ):(
+            permissions.delete_client === "yes" && (
+            <button className='btn btn-outline-danger btn-sm' onClick={() => handleDelete(params.row.id)}>
+              <AiOutlineDelete style={{ fontSize: '15px', marginBottom: '4px' }} /> Delete
+            </button>
+          )
           )}
           
         </>
@@ -124,8 +138,13 @@ const Clientmaster = () => {
         <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50'>
           <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to='' className='t-theme-color'>Client Master</Link></p>
 
-{permissions.add_client === "yes" && (
+{ role === 'admin' ?(
   <Link to={`/add-client-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Client Master</Link>
+):(
+ permissions.add_client === "yes" && (
+  <Link to={`/add-client-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Client Master</Link>
+)
+
 )}
         </div>
 

@@ -8,6 +8,8 @@ import axios from 'axios';
 const Edit_Service_Master = () => {
     const { id } = useParams();
     const { employeeId } = useParams();
+    const [permissions, setPermissions] = useState({ edit_service: null });
+    const role = localStorage.getItem('role');
 
 
     const navigate = useNavigate();
@@ -40,6 +42,18 @@ const Edit_Service_Master = () => {
                 console.log(error);
             });
     }, [id]);
+
+    
+    useEffect(() => {
+        axios.get(`https://digitalshopee.online/api/employee-permission/get-permission.php?id=${employeeId}`)
+          .then(response => {
+            setPermissions(response.data[0]);
+            console.log(response.data[0]);
+          })
+          .catch(error => {
+            console.error("Error fetching permissions:", error);
+          });
+      }, [employeeId]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -145,10 +159,19 @@ const Edit_Service_Master = () => {
 
 
                       
+                            {role === 'admin' ? (
+                                <div className='d-flex justify-content-end pt-4'>
+                                    <button type='submit' className='btn btn-bg-orange ' style={{ width: "200px" }} >Update</button>
+                                </div>
+                            ) : (
 
-                            <div className='d-flex justify-content-end pt-4'>
-                                <button type='submit' className='btn btn-bg-orange' style={{ width: "200px" }} >Update</button>
-                            </div>
+                                permissions.edit_service === "yes" && (
+                                    <div className='d-flex justify-content-end pt-4'>
+                                        <button type='submit' className='btn btn-bg-orange ' style={{ width: "200px" }} >Update</button>
+                                    </div>
+                                )
+
+                            )}
 
                         </div>
 
