@@ -12,6 +12,13 @@ import { FaRegAddressCard } from 'react-icons/fa';
 const Sidebar = () => {
   const location = useLocation();
   const { employeeId } = useParams();
+
+  const [role, setRole] = useState(null);
+  useEffect(() => {
+    const storedRole = localStorage.getItem('role');
+    setRole(storedRole);
+  }, []);
+
   const [currentPage, setCurrentPage] = useState(location.pathname);
   useEffect(() => {
     setCurrentPage(location.pathname);
@@ -73,8 +80,14 @@ const Sidebar = () => {
             {/* Service Master */}
             <NavLink className="disble-decoration" to={`/service-master/${employeeId}`}><li className={`items ${currentPage.startsWith('/service-master') || currentPage.startsWith('/add-service-master') || currentPage.startsWith('/edit-service-master') ? 'active' : ''}`}><IoSettingsOutline className="icons" /> <span className='resp'>Service Master</span></li></NavLink>
 
+
             {/* Employee Master */}
-            <NavLink className="disble-decoration" to="/employe-manager"><li className={`items ${currentPage === '/employe-manager' || currentPage === '/add-employee' || currentPage.startsWith('/edit-employee') ? 'active' : ''}`}><FaRegAddressCard className="icons" /> <span className='resp'>Employee Master</span></li></NavLink>
+            {role === "useradmin" ? (
+              <NavLink className="disble-decoration" to="/employe-manager"><li className={`items ${currentPage === '/employe-manager' || currentPage === '/add-employee' || currentPage.startsWith('/edit-employee') ? 'active' : ''}`}><FaRegAddressCard className="icons" /> <span className='resp'>Employee Master</span></li></NavLink>
+            ):(
+<p>Denied</p>
+            )}
+            {/* <NavLink className="disble-decoration" to="/employe-manager"><li className={`items ${currentPage === '/employe-manager' || currentPage === '/add-employee' || currentPage.startsWith('/edit-employee') ? 'active' : ''}`}><FaRegAddressCard className="icons" /> <span className='resp'>Employee Master</span></li></NavLink> */}
 
             {/* Employee Access */}
             <NavLink className="disble-decoration" to="" >
