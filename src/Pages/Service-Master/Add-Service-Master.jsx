@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Topbar from '../../layouts/Topbar'
 import Sidebar from '../../layouts/Sidebar'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import axios from 'axios';
 
 const Add_Service_Master = () => {
+    const { employeeId } = useParams();
 
 
     const [stateid, setstateid] = useState(0);
@@ -24,7 +25,7 @@ const Add_Service_Master = () => {
  
 
     // useEffect(() => {
-    //     axios.get('https://shopee-firm.000webhostapp.com/api/service/get-service.php')
+    //     axios.get('https://digitalshopee.online/api/service/get-service.php')
     //         .then(res => {
     //             const migrateservicecode = res.data.map(firm => firm.code)
     //             setGetServiceCode(migrateservicecode)
@@ -56,7 +57,7 @@ const Add_Service_Master = () => {
         formData.append('documents', valueData.documents);
 
 
-        axios.post('https://shopee-firm.000webhostapp.com/api/service/add-service.php', formData, {
+        axios.post('https://digitalshopee.online/api/service/add-service.php', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -86,7 +87,7 @@ const Add_Service_Master = () => {
             <div className='main-content' id='mainbody'>
 
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/service-master'>Service Master</Link> / <Link className='t-theme-color'>Add Service Master Details</Link></p>
+                    <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to={`/service-master/${employeeId}`}>Service Master</Link> / <Link className='t-theme-color'>Add Service Master Details</Link></p>
 
                 </div>
 
@@ -94,39 +95,37 @@ const Add_Service_Master = () => {
                     <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Service Code</label>
+                            <div className='col-md-3 py-1'>
+                                <label className='text-sm font-w-500 p-2'> Service Code</label>
                                 <input type='text' className='form-control' value={valueData.code} name='code' placeholder='Please service code' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertname}</p> */}
                             </div>
 
 
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Service Name</label>
+                            <div className='col-md-3 py-2'>
+                                <label className='text-sm font-w-500 p-2'> Service Name</label>
                                 <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Please enter Service name' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertowner}</p> */}
                             </div>
 
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Service Expense</label>
+                            <div className='col-md-3 py-2'>
+                                <label className='text-sm font-w-500 p-2'> Service Amount</label>
+                                <input type='number' className='form-control' value={valueData.amount} name='amount' placeholder='Please enter service amount' onChange={handleChange} />
+                                {/* <p className='warning'>{alertaltphone}</p> */}
+                            </div>
+
+                            <div className='col-md-3 py-2'>
+                                <label className='text-sm font-w-500 p-2'> Service Expense</label>
                                 <input type='text' className='form-control' value={valueData.expense} name='expense' placeholder='Please enter expense' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertphone}</p> */}
                             </div>
 
 
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Service Amount</label>
-                                <input type='number' className='form-control' value={valueData.amount} name='amount' placeholder='Please enter service amount' onChange={handleChange} />
-                                {/* <p className='warning'>{alertaltphone}</p> */}
-
-
-                            </div>
-
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Required Documents</label>
+                            <div className='col-md-3 py-2'>
+                                <label className='text-sm font-w-500 p-2'> Required Documents</label>
                                 <input type='text' className='form-control' value={valueData.documents} name='documents' placeholder='Please enter documents' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertemail}</p> */}

@@ -8,7 +8,7 @@ const AddCreadentials = ({ cardtitle, icon: Icon, iconColor, borderRcolor, cardb
     }
 
     const admincardbordercolor = {
-        borderRight: borderRcolor
+        borderRight: borderRcolor,
     }
 
     const admincardbg = {

@@ -14,6 +14,10 @@ import { AiFillPicture } from "react-icons/ai";
 
 const Edit_Client_Master = () => {
     const { id } = useParams();
+    const { employeeId } = useParams();
+    const [permissions, setPermissions] = useState({ edit_client: null });
+    const role = localStorage.getItem('role');
+
 
     const [countryid, setCountryid] = useState(0);
     const [stateid, setstateid] = useState(0);
@@ -62,7 +66,7 @@ const Edit_Client_Master = () => {
 
 
     useEffect(() => {
-        axios.get(`https://shopee-firm.000webhostapp.com/api/client/get-client-by-id.php?id=${id}`)
+        axios.get(`https://digitalshopee.online/api/client/get-client-by-id.php?id=${id}`)
             .then(response => {
 
                 const firmData = response.data[0]; // Assuming response.data contains the firm data
@@ -102,6 +106,18 @@ const Edit_Client_Master = () => {
             });
     }, [id]);
 
+    
+    useEffect(() => {
+        axios.get(`https://digitalshopee.online/api/employee-permission/get-permission.php?id=${employeeId}`)
+          .then(response => {
+            setPermissions(response.data[0]);
+            console.log(response.data[0]);
+          })
+          .catch(error => {
+            console.error("Error fetching permissions:", error);
+          });
+      }, [employeeId]);
+      
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -152,7 +168,7 @@ const Edit_Client_Master = () => {
 
         const confirmDelete = window.confirm("Are you sure you want to update this Client Master");
         if (confirmDelete) {
-            axios.post(`https://shopee-firm.000webhostapp.com/api/client/edit-by-id-client.php?id=${id}`, formData, {
+            axios.post(`https://digitalshopee.online/api/client/edit-by-id-client.php?id=${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -168,7 +184,7 @@ const Edit_Client_Master = () => {
     };
 
     useEffect(() => {
-        axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
+        axios.get('https://digitalshopee.online/api/firm/get-firm.php')
             .then(res => {
                 const migratefirmname = res.data.map(firm => firm.firm_name)
                 setGetfirmnames(migratefirmname)
@@ -228,7 +244,7 @@ const Edit_Client_Master = () => {
             <Sidebar />
             <div className='main-content' id='mainbody'>
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/client-master'>Client Master</Link> / <Link className='t-theme-color'>Edit Client Master Details</Link></p>
+                    <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to={`/client-master/${employeeId}`}>Client Master</Link> / <Link className='t-theme-color'>Edit Client Master Details</Link></p>
 
                 </div>
 
@@ -239,112 +255,52 @@ const Edit_Client_Master = () => {
                             <div className='col-md-4 pt-1 pb-4  '>
                                 <label className='text-sm font-w-500 p-2'>Client Profile Picture</label>
                                 <div className='img-format main-field'>
-                                    <img id="client_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.client_photo}`} alt='' />
+                                    <img id="client_photo-preview" src={`https://digitalshopee.online/api/client/${valueData.client_photo}`} alt='' />
                                     <label for='client_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
                                 </div>
 
-                                <p className='px-2 pt-1'>Client Full Name </p>
+                                {/* <p className='px-2 pt-1'>Client Full Name </p> */}
                                 <input type='file' className='form-control mt-1 d-none' id='client_photo' name='client_photo' onChange={handleChange} />
                             </div>
                             <div className='col-md-4 pt-1 pb-4' />
                             <div className='col-md-4 pt-1 pb-4' />
 
-                            <div className='col-md-4 py-3 '>
-                                <label className='text-sm font-w-500 p-2'>Aadhar Card</label>
-                                <div className='img-format main-field'>
-                                    <img id="adhaar_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.adhaar_photo}`} alt='' />
-                                    <label for='adhaar_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
-                                </div>
 
-                                <input type='file' className='form-control d-none' id='adhaar_photo' name='adhaar_photo' onChange={handleChange} />
-
-                                <input type='text' className='form-control mt-1' value={valueData.adhaar} name='adhaar' placeholder='Please enter aadhar card number' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-3 '>
-                                <label className='text-sm font-w-500 p-2'>Pan Card</label>
-                                <div className='img-format main-field'>
-                                    <img id="pan_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.pan_photo}`} alt='' />
-                                    <label for='pan_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
-                                </div>
-
-                                <input type='file' className='form-control d-none' id='pan_photo' name='pan_photo' onChange={handleChange} />
-                                <input type='text' className='form-control mt-1' value={valueData.pan} name='pan' placeholder='Please enter PAN card number' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-3 '>
-                                <label className='text-sm font-w-500 p-2'>Voter-id</label>
-                                <div className='img-format main-field'>
-                                    <img id="voter_id_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.voter_id_photo}`} alt='' />
-                                </div>
-                                <label for='voter_id_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
-                                <input type='file' className='form-control d-none' id='voter_id_photo' name='voter_id_photo' onChange={handleChange} />
-
-                                <input type='text' className='form-control mt-1' value={valueData.voter_id} name='voter_id' placeholder='Please enter voter-id' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-3 '>
-                                <label className='text-sm font-w-500 p-2'>License</label>
-                                <div className='img-format main-field'>
-                                    <img id="license_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.license_photo}`} alt='' />
-                                    <label for='license_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
-                                </div>
-
-                                <input type='file' className='form-control d-none' id='license_photo' name='license_photo' onChange={handleChange} />
-                                <input type='text' className='form-control mt-1' value={valueData.license} name='license' placeholder='Please enter license number' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-3 '>
-                                <label className='text-sm font-w-500 p-2'>Ration Card </label>
-                                <div className='img-format main-field'>
-                                    <img id="ration_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.ration_photo}`} alt='' />
-                                    <label for='ration_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
-                                </div>
-
-                                <input type='file' className='form-control d-none' id='ration_photo' name='ration_photo' onChange={handleChange} />
-                                <input type='text' className='form-control mt-1' value={valueData.ration} name='ration' placeholder='Please enter ration card number' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-3 '>
-                                <label className='text-sm font-w-500 p-2'>Other Document</label>
-                                <div className='img-format main-field'>
-                                    <img id="other_photo-preview" src={`https://shopee-firm.000webhostapp.com/api/client/${valueData.other_photo}`} alt='' />
-                                    <label for='other_photo' className='actionbutton'><AiFillPicture className='icon' /> Edit Picture</label>
-                                </div>
-                                <input type='file' className='form-control d-none' id='other_photo' name='other_photo' onChange={handleChange} />
-                                <input type='text' className='form-control mt-1' value={valueData.other} name='other' placeholder='Please enter other document' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-3'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Client Name</label>
                                 <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Please enter name' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertname}</p> */}
                             </div>
 
+                            <div className='col-md-3 py-2'>
+                                <label className='text-sm font-w-500 p-2'>D O B</label>
+                                <input type='date' className='form-control' value={valueData.dob} name='dob' placeholder='Please enter Date of birth' onChange={handleChange} />
+                            </div>
 
-                            <div className='col-md-4 py-3'>
+
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.phone} name='phone' placeholder='Please enter mobile no.' onChange={handleChange} />
                             </div>
 
 
-                            <div className='col-md-4 py-3'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Alternate mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.alt_phone} name='alt_phone' placeholder='Please enter alternate mobile no. (Optional)' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-4 py-3'>
+                            <div className='col-md-3 py-2'>
+                                <label className='text-sm font-w-500 p-2'> Client Profession</label>
+                                <input type='text' className='form-control' value={valueData.profession} name='profession' placeholder='Please enter client profession' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Email ID</label>
                                 <input type='email' className='form-control' value={valueData.email} name='email' placeholder='Please enter email-id' onChange={handleChange} />
                             </div>
 
-                            {/* <div className='col-md-4 py-3'>
-                                <label className='text-sm font-w-500 p-2'>Client Category</label>
-                                <input type='text' className='form-control' value={valueData.category} name='category'  placeholder='Please enter email-id' onChange={handleChange} />
-                            </div> */}
-
-                            <div className='col-md-4 py-3'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Client Category</label>
                                 <select className='form-control' value={valueData.category} name='category' onChange={handleChange}>
                                     <option value="">Select client category </option>
@@ -354,32 +310,38 @@ const Edit_Client_Master = () => {
                                 </select>
                             </div>
 
-                            <div className='col-md-4 py-3'>
-                                <label className='text-sm font-w-500 p-2'>D O B</label>
-                                <input type='date' className='form-control' value={valueData.dob} name='dob' placeholder='Please enter Date of birth' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-3'>
-                                <label className='text-sm font-w-500 p-2'> Client Address</label>
-                                <input type='text' className='form-control' value={valueData.address} name='address' placeholder='Please enter client address' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-3'>
-                                <label className='text-sm font-w-500 p-2'> Client Profession</label>
-                                <input type='text' className='form-control' value={valueData.profession} name='profession' placeholder='Please enter client profession' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-3'>
-                                <label className='text-sm font-w-500 p-2'> Pin Code</label>
-                                <input type='text' className='form-control' value={valueData.pin} name='pin' placeholder='Please enter pin code' onChange={handleChange} />
-                            </div>
-
-                            <div className='col-md-4 py-3'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Reference</label>
                                 <input type='text' className='form-control' value={valueData.reference} name='reference' placeholder='Please enter reference' onChange={handleChange} />
                             </div>
 
-                            {/* <div className='col-md-4 py-3' style={{ display: "none" }}>
+                            <div className='col-md-3 py-2'>
+                                <label className='text-sm font-w-500 p-2'> Client Address</label>
+                                <input type='text' className='form-control' value={valueData.address} name='address' placeholder='Please enter client address' onChange={handleChange} />
+                            </div>
+
+
+
+                            {/* <div className='col-md-3 py-2'>
+                                <label className='text-sm font-w-500 p-2'>Client Category</label>
+                                <input type='text' className='form-control' value={valueData.category} name='category'  placeholder='Please enter email-id' onChange={handleChange} />
+                            </div> */}
+
+
+
+
+
+
+
+
+                            <div className='col-md-3 py-2'>
+                                <label className='text-sm font-w-500 p-2'> Pin Code</label>
+                                <input type='text' className='form-control' value={valueData.pin} name='pin' placeholder='Please enter pin code' onChange={handleChange} />
+                            </div>
+
+
+
+                            {/* <div className='col-md-3 py-2' style={{ display: "none" }}>
                                 <label className='text-sm font-w-500 p-2'> Country</label>
                                 <CountrySelect
                                     onChange={(e) => {
@@ -390,7 +352,7 @@ const Edit_Client_Master = () => {
                                 />
                             </div> */}
 
-                            <div className='col-md-4 py-3'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> State</label>
                                 <StateSelect
                                     countryid={countryid}
@@ -409,7 +371,7 @@ const Edit_Client_Master = () => {
 
                             </div>
 
-                            <div className='col-md-4 py-3'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> district</label>
                                 <CitySelect
                                     countryid={countryid}
@@ -428,14 +390,127 @@ const Edit_Client_Master = () => {
 
                             </div>
 
-                            <div className='col-md-4 py-3'>
+                            <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Taluka</label>
                                 <input type='text' className='form-control' value={valueData.taluk} name='taluk' placeholder='Please enter Taluka' onChange={handleChange} />
                             </div>
 
-                            <div className='d-flex justify-content-end pt-4'>
-                                <button type='submit' className='btn btn-bg-orange' style={{ width: "200px" }} >Update</button>
+                            <hr />
+
+
+
+                            <div className='col-md-3 py-2 '>
+
+                                <label className='text-sm font-w-500 p-2'>Aadhar Card</label>
+                                <input type='file' className='form-control' id='adhaar_photo' name='adhaar_photo' onChange={handleChange} />
+                                <input type='text' className='form-control mt-1' value={valueData.adhaar} name='adhaar' placeholder='Please enter aadhar card number' onChange={handleChange} />
+
+                                <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
+                                    <label for='adhaar_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
+                                    <a href={`https://digitalshopee.online/api/client/${valueData.adhaar_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                </div>
+
                             </div>
+
+                            <div className='col-md-3 py-2 '>
+
+                                <label className='text-sm font-w-500 p-2'>Pan Card</label>
+                                <input type='file' className='form-control' id='pan_photo' name='pan_photo' onChange={handleChange} />
+                                <input type='text' className='form-control mt-1' value={valueData.pan} name='pan' placeholder='Please enter PAN card number' onChange={handleChange} />
+
+                                <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
+                                    <label for='pan_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
+                                    <a href={`https://digitalshopee.online/api/client/${valueData.pan_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                </div>
+                            </div>
+
+                            <div className='col-md-3 py-2 '>
+
+                                <label className='text-sm font-w-500 p-2'>Voter-id</label>
+                                <input type='file' className='form-control' id='voter_id_photo' name='voter_id_photo' onChange={handleChange} />
+                                <input type='text' className='form-control mt-1' value={valueData.voter_id} name='voter_id' placeholder='Please enter voter-id' onChange={handleChange} />
+
+                                <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
+                                    <label for='voter_id_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
+                                    <a href={`https://digitalshopee.online/api/client/${valueData.voter_id_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                </div>
+                            </div>
+
+                            <div className='col-md-3 py-2 '>
+
+                                <label className='text-sm font-w-500 p-2'>Passport</label>
+                                <input type='file' className='form-control' id='license_photo' name='license_photo' onChange={handleChange} />
+                                <input type='text' className='form-control mt-1' value={valueData.license} name='license' placeholder='Please enter license number' onChange={handleChange} />
+
+                                <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
+                                    <label for='voter_id_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
+                                    <a href={`https://digitalshopee.online/api/client/${valueData.license_photo}`}  style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                </div>
+                            </div>
+
+                            <div className='col-md-3 py-2 '>
+
+                                <label className='text-sm font-w-500 p-2'>Ration Card </label>
+                                <input type='file' className='form-control' id='ration_photo' name='ration_photo' onChange={handleChange} />
+                                <input type='text' className='form-control mt-1' value={valueData.ration} name='license' placeholder='Please enter license number' onChange={handleChange} />
+
+                                <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
+                                    <label for='voter_id_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
+                                    <a href={`https://digitalshopee.online/api/client/${valueData.ration_photo}`}  style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                </div>
+                            </div>
+
+                            <div className='col-md-3 py-2 '>
+
+                                <label className='text-sm font-w-500 p-2'>Other Document</label>
+                                <input type='file' className='form-control' id='other_photo' name='other_photo' onChange={handleChange} />
+                                <input type='text' className='form-control mt-1' value={valueData.other} name='other' placeholder='Please enter other document' onChange={handleChange} />
+
+                                <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
+                                    <label for='voter_id_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
+                                    <a href={`https://digitalshopee.online/api/client/${valueData.other_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                </div>
+                            </div>
+
+                            <div className='col-md-3 py-2 '>
+
+                                <label className='text-sm font-w-500 p-2'>Other Document(beta)</label>
+                                <input type='file' className='form-control' id='other_photo' name='other_photo' onChange={handleChange} />
+                                <input type='text' className='form-control mt-1' value={valueData.other} name='other' placeholder='Please enter other document' onChange={handleChange} />
+
+                                <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
+                                    <label for='voter_id_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
+                                    <a href={`https://digitalshopee.online/api/client/${valueData.other_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                </div>
+                            </div>
+
+                            <div className='col-md-3 py-2 '>
+
+                                <label className='text-sm font-w-500 p-2'>Other Document(beta)</label>
+                                <input type='file' className='form-control' id='other_photo' name='other_photo' onChange={handleChange} />
+                                <input type='text' className='form-control mt-1' value={valueData.other} name='other' placeholder='Please enter other document' onChange={handleChange} />
+
+                                <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
+                                    <label for='voter_id_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
+                                    <a href={`https://digitalshopee.online/api/client/${valueData.other_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                </div>
+                            </div>
+
+                            
+                          
+                            {role === 'admin' ? (
+                                <div className='d-flex justify-content-end pt-4'>
+                                    <button type='submit' className='btn btn-bg-orange ' style={{ width: "200px" }} >Update</button>
+                                </div>
+                            ) : (
+
+                                permissions.edit_client === "yes" && (
+                                    <div className='d-flex justify-content-end pt-4'>
+                                        <button type='submit' className='btn btn-bg-orange ' style={{ width: "200px" }} >Update</button>
+                                    </div>
+                                )
+
+                            )}
 
                         </div>
 

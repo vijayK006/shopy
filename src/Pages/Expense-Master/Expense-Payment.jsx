@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Topbar from '../../layouts/Topbar';
 import Sidebar from '../../layouts/Sidebar';
 import { FaFilter, FaRegEdit } from "react-icons/fa";
@@ -12,19 +12,28 @@ import { LuIndianRupee } from 'react-icons/lu';
 import { BiReset } from 'react-icons/bi';
 import { TbFilterCog } from 'react-icons/tb';
 
-const TargetMaster = () => {
+const Expense_Payment = () => {
     const [apiDatas, setApiDatas] = useState([]);
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [totalAmount, setTotalAmount] = useState(0);
-    const [totalQty, setTotalQty] = useState(0);
     const [selectedService, setSelectedService] = useState('');
     const [selectedEmployee, setSelectedEmployee] = useState('');
-    const { employeeId } = useParams();
 
+
+    // const fetchData = () => {
+    //     axios.get('https://digitalshopee.online/api/expense-payment/get-payment.php')
+    //         .then(res => {
+    //             setApiDatas(res.data);
+    //             calculateTotalAmount(res.data);
+    //         })
+    //         .catch(err => {
+    //             console.error('Error fetching data:', err);
+    //         });
+    // }
 
     const fetchData = () => {
-        axios.get('https://digitalshopee.online/api/target/get-target.php')
+        axios.get('https://digitalshopee.online/api/expense-payment/get-payment.php')
             .then(res => {
                 const responseData = res.data || [];
                 if (Array.isArray(responseData)) {
@@ -48,14 +57,12 @@ const TargetMaster = () => {
         setStartDate('00-00-0000')
         setEndDate('00-00-0000')
         setTotalAmount(0)
-        const refer = document.getElementById('refer');
-        refer.style.display = "block"
     }
 
     const handleDelete = (id) => {
-        const confirmDelete = window.confirm("Are you sure you want to delete this Target Master?");
+        const confirmDelete = window.confirm("Are you sure you want to delete this Expense Payment?");
         if (confirmDelete) {
-            axios.post(`https://digitalshopee.online/api/target/delete-by-id-target.php?id=${id}`)
+            axios.post(`https://digitalshopee.online/api/expense-payment/delete-payment.php?id=${id}`)
                 .then(res => {
                     fetchData();
                 })
@@ -88,7 +95,7 @@ const TargetMaster = () => {
 
         // Filter by selected service
         if (selectedService) {
-            filteredData = filteredData.filter(item => item.service_id === selectedService);
+            filteredData = filteredData.filter(item => item.expense_id === selectedService);
         }
 
         if (selectedEmployee) {
@@ -99,31 +106,24 @@ const TargetMaster = () => {
         calculateTotalAmount(filteredData);
 
         setApiDatas(filteredData);
-
-        const refer = document.getElementById('refer');
-        refer.style.display = "none"
     }
 
     const calculateTotalAmount = (data) => {
-        const total = data.reduce((acc, item) => acc + parseFloat(item.total_amount), 0);
-        const totalqty = data.reduce((acc, item) => acc + parseFloat(item.no_of_orders), 0);
+        const total = data.reduce((acc, item) => acc + parseFloat(item.amount), 0);
         setTotalAmount(total);
-        setTotalQty(totalqty);
     }
 
     // Extract unique service names
-    const serviceNames = Array.from(new Set(apiDatas.map(item => item.service_id)));
+    const serviceNames = Array.from(new Set(apiDatas.map(item => item.expense_id)));
     const employeeNames = Array.from(new Set(apiDatas.map(item => item.employee_id)));
 
 
     const columns = [
         { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
-        { field: 'date', headerName: 'Date', type: 'Date', width: 100 },
-
-        { field: 'employee_id', headerName: 'Employe Name', width: 200 },
-        { field: 'service_id', headerName: 'Service Name', width: 150 },
-        { field: 'no_of_orders', headerName: 'Order Qty.', width: 100 },
-        { field: 'total_amount', headerName: 'Total Amount', width: 100 },
+        { field: 'date', headerName: 'Date', width: 200 },
+        { field: 'expense_id', headerName: 'Expense Name', width: 200 },
+        { field: 'amount', headerName: 'Expense Amount', width: 200 },
+        { field: 'remark', headerName: 'Description', width: 150 },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -131,7 +131,7 @@ const TargetMaster = () => {
             width: 230,
             renderCell: (params) => (
                 <>
-                    <Link to={`/edit-target-master/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
+                    <Link to={`/edit-expenses-payment/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
                         <FaRegEdit style={{ fontSize: '15px', marginBottom: '4px' }} />  View / Edit
                     </Link>
                     &nbsp;
@@ -147,11 +147,10 @@ const TargetMaster = () => {
     const rows = apiDatas.length > 0 ? apiDatas.map((item, index) => ({
         id: item.id || index,
         displayOrder: index + 1,
-        employee_id: item.employee_id,
-        service_id: item.service_id,
-        no_of_orders: item.no_of_orders,
-        total_amount: item.total_amount,
-        date: item.from_date,
+        date: item.date,
+        expense_id: item.expense_id,
+        amount: item.amount,
+        remark: item.remark,
     })) : [];
 
 
@@ -165,7 +164,7 @@ const TargetMaster = () => {
             <Sidebar />
             <div className='main-content' id='mainbody'>
                 <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50 bread-parent'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/target-master' className='t-theme-color'>Target Master</Link></p>
+                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='' className='t-theme-color'>Expense Payment</Link></p>
                     <div>
                         {/* <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                         <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
@@ -182,11 +181,10 @@ const TargetMaster = () => {
 
                     </div>
                     <div className='actions'>
-                        <Link to={`/add-target-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50 '><MdNoteAdd style={{ fontSize: "18px", marginBottom: '2px' }} /> Add Target Master</Link>
-                        &nbsp;
-                        &nbsp;
+                        <Link to='/add-expenses-payment' className='btn btn-bg-orange btn-sm b-radius-50 '><MdNoteAdd style={{ fontSize: "18px", marginBottom: '2px' }} /> Add Expense Payment</Link>
+                      
 
-                        <button type='button' className='btn btn-bg-orange btn-sm b-radius-50 ' onClick={filterbtn}><FaFilter style={{ marginBottom: '2px' }} /> Filter</button>
+                        {/* <button type='button' className='btn btn-bg-orange btn-sm b-radius-50 ' onClick={filterbtn}><FaFilter style={{ marginBottom: '2px' }} /> Filter</button> */}
 
                     </div>
 
@@ -222,18 +220,12 @@ const TargetMaster = () => {
                         </div>
 
                         <div className='d-flex gap-2 justify-content-end pb-3'>
-                            <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' id="refer" onClick={handleFilter}><TbFilterCog /> Check</button>
+                            <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={handleFilter}><TbFilterCog /> Check</button>
 
                             <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={loadall}><BiReset /> Reset</button>
                         </div>
 
-
-                        <div className='d-flex justify-content-between'>
-                            <p className='px-2'>Total Amount:<LuIndianRupee /> {totalAmount} </p>
-                            <p className='px-2'>Total Quality:{totalQty} </p>
-                        </div>
-
-
+                        <p>Total Amount: {totalAmount} <LuIndianRupee /></p>
 
 
                     </div>
@@ -254,4 +246,4 @@ const TargetMaster = () => {
     );
 };
 
-export default TargetMaster;
+export default Expense_Payment;

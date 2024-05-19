@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Topbar from '../../layouts/Topbar'
 import Sidebar from '../../layouts/Sidebar'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import axios from 'axios';
 
 const Add_Expenses_Master = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const { employeeId } = useParams();
+
 
 
     const [valueData, setValueData] = useState({
@@ -25,7 +27,7 @@ const Add_Expenses_Master = () => {
         formData.append('description', valueData.description);
 
 
-        axios.post('https://shopee-firm.000webhostapp.com/api/expense/add-expense.php', formData, {
+        axios.post('https://digitalshopee.online/api/expense/add-expense.php', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -55,7 +57,11 @@ const Add_Expenses_Master = () => {
             <div className='main-content' id='mainbody'>
 
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/expenses-master'>Expense Master</Link> / <Link className='t-theme-color'>Add Expense Master Details</Link></p>
+                    <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to={`/expenses-master/${employeeId}`}>Expense Master</Link> / <Link className='t-theme-color'>Add Expense Master Details</Link></p>
+
+                    <div className='actions'>
+                        <Link to={`/expenses-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50 '> View Expense List</Link>
+                    </div>
 
                 </div>
 
@@ -63,15 +69,15 @@ const Add_Expenses_Master = () => {
                     <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
-                        <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Expenses Name</label>
+                            <div className='col-md-3 py-1'>
+                                <label className='text-sm font-w-500 p-2'> Expenses Name</label>
                                 <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Enter expenses name' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertname}</p> */}
                             </div>
 
-                            <div className='col-md-4 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Enter Expenses Description</label>
+                            <div className='col-md-3 py-1'>
+                                <label className='text-sm font-w-500 p-2'> Expenses Description</label>
                                 <input type='text' className='form-control' value={valueData.description} name='description' placeholder='Enter expenses description' onChange={handleChange} />
 
                                 {/* <p className='warning'>{alertemail}</p> */}

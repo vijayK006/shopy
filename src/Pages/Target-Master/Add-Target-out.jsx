@@ -4,7 +4,7 @@ import Sidebar from '../../layouts/Sidebar';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const Add_Target_Master = () => {
+const Add_Target_Out = () => {
     const navigate = useNavigate();
     const { employeeId } = useParams();
 
@@ -48,25 +48,7 @@ const Add_Target_Master = () => {
         setTargets(newTargets);
     };
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     // Here you can iterate over formDataArray and submit each item in formData format
-    //     targets.forEach(formData => {
-    //         axios.post('https://digitalshopee.online/api/target/add-target.php', formData,
-    //         {
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             }
-    //         }
-    //         )
-    //             .then(res => {
-    //                 console.log('Target Submitted Successfully');
-    //             })
-    //             .catch(err => console.log(err));
-    //     });
-    //     // navigate('/target-master');
-    // };
-
+ 
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -81,7 +63,7 @@ const Add_Target_Master = () => {
           description: target.description
         }));
       
-        axios.post('https://digitalshopee.online/api/target/add-target.php', formattedTargets,
+        axios.post('https://digitalshopee.online/api/target-out/add-target.php', formattedTargets,
         {
             headers: {
                 'Content-Type': 'application/json'
@@ -126,7 +108,7 @@ const Add_Target_Master = () => {
             <Sidebar />
             <div className='main-content' id='mainbody'>
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to={`/target-master/${employeeId}`}>Target Master</Link> / <Link className='t-theme-color'>Add Target Master Details</Link></p>
+                    <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to={`/target-out/${employeeId}`}>Target Master Out</Link> / <Link className='t-theme-color'>Add Target Master Details</Link></p>
                 </div>
 
                 <div className='container-fluid mb-5'>
@@ -205,5 +187,5 @@ const Add_Target_Master = () => {
     );
 };
 
-export default Add_Target_Master;
+export default Add_Target_Out;
 

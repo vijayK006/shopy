@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Topbar from '../layouts/Topbar'
 import Sidebar from '../layouts/Sidebar'
 import Admincards from '../Components/Admin-cards';
@@ -9,18 +9,18 @@ import { PiCreditCard } from "react-icons/pi";
 import { GoPerson } from "react-icons/go";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineSettingsInputComponent } from "react-icons/md";
+import TargetStatus from '../Components/TargetStatus'
 
 
 const Home = () => {
+  const {employeeId} = useParams();
   const [firmmastercount, setFirmmasterCount] = useState([]);
   const [clientmastercount, setClientmastercount] = useState([]);
   const [servicemastercount, setServicemastercount] = useState([]);
   const [expensemastercount, setExpensemastercount] = useState([]);
 
-
-
   useEffect(() => {
-    axios.get('https://shopee-firm.000webhostapp.com/api/firm/get-firm.php')
+    axios.get('https://digitalshopee.online/api/firm/get-firm.php')
       .then(res => {
         setFirmmasterCount(res.data.length)
       })
@@ -30,7 +30,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    axios.get('https://shopee-firm.000webhostapp.com/api/client/get-client.php')
+    axios.get('https://digitalshopee.online/api/client/get-client.php')
       .then(res => {
         setClientmastercount(res.data.length)
       })
@@ -40,7 +40,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    axios.get('https://shopee-firm.000webhostapp.com/api/service/get-service.php')
+    axios.get('https://digitalshopee.online/api/service/get-service.php')
       .then(res => {
         setServicemastercount(res.data.length)
       })
@@ -50,7 +50,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    axios.get('https://shopee-firm.000webhostapp.com/api/expense/get-expense.php')
+    axios.get('https://digitalshopee.online/api/expense/get-expense.php')
       .then(res => {
         setExpensemastercount(res.data.length)
       })
@@ -77,7 +77,7 @@ const Home = () => {
               borderRcolor='3px solid #ff3e57'
               circlebg='white'
               datacount={firmmastercount}
-              pageLink='/firm-master'
+              pageLink={`/firm-master/${employeeId}`}
             >
             </Admincards>
 
@@ -88,7 +88,7 @@ const Home = () => {
               borderRcolor='3px solid #00cebe'
               circlebg='white'
               datacount={clientmastercount}
-              pageLink='/client-master'
+              pageLink={`/client-master/${employeeId}`}
             >
             </Admincards>
 
@@ -99,7 +99,7 @@ const Home = () => {
               borderRcolor='3px solid #ff3e57'
               circlebg='white'
               datacount={servicemastercount}
-              pageLink='/service-master'
+              pageLink={`/service-master/${employeeId}`}
             >
             </Admincards>
 
@@ -110,11 +110,13 @@ const Home = () => {
               borderRcolor='3px solid #ff3e57'
               circlebg='white'
               datacount={expensemastercount}
-              pageLink='/expenses-master'
+              pageLink={`/expenses-master/${employeeId}`}
             >
             </Admincards>
 
           </div>
+
+          <TargetStatus/>
 
         </div>
 

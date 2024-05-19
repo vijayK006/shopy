@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Topbar from '../../layouts/Topbar';
 import Sidebar from '../../layouts/Sidebar';
 import { FaRegEdit } from "react-icons/fa";
@@ -11,13 +11,14 @@ import axios from 'axios';
 
 const EmployeManager = () => {
     const [apiDatas, setApiDatas] = useState([]);
+    const { employeeId } = useParams();
  
     useEffect(() => {
       fetchData();
     }, []);
 
     const fetchData = () => {
-      axios.get('https://shopee-firm.000webhostapp.com/api/employee/get-employee.php')
+      axios.get('https://digitalshopee.online/api/employee/get-employee.php')
         .then(res => {
           setApiDatas(res.data)
 
@@ -28,7 +29,7 @@ const EmployeManager = () => {
     }
 
     useEffect(() => {
-      axios.get('https://shopee-firm.000webhostapp.com/api/employee/get-employee.php')
+      axios.get('https://digitalshopee.online/api/employee/get-employee.php')
         .then(res => {
           console.log(res.data)
           setApiDatas(res.data)
@@ -41,7 +42,7 @@ const EmployeManager = () => {
     const handleDelete = (id) => {
       const confirmDelete = window.confirm("Are you sure you want to delete this Employee");
       if (confirmDelete) {
-          axios.post(`https://shopee-firm.000webhostapp.com/api/employee/delete-employee.php?id=${id}`)
+          axios.post(`https://digitalshopee.online/api/employee/delete-employee.php?id=${id}`)
               .then(res => {
                   fetchData();
               })
@@ -55,9 +56,10 @@ const EmployeManager = () => {
     const columns = [
       { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
       { field: 'name', headerName: 'Employee Name', width: 200 },
-      { field: 'phone', headerName: 'Mobile No.', width: 200 },
-      { field: 'email', headerName: 'Email', width: 150 },
-      { field: 'address', headerName: 'Address', width: 200 },
+      { field: 'dob', headerName: 'DOB', width: 200 },
+      { field: 'phone', headerName: 'Mobile No.', width: 150 },
+      { field: 'post', headerName: 'Post', width: 200 },
+      { field: 'salary', headerName: 'Salary', width: 200 },
       // { field: 'dob', headerName: 'Date of Birth', width: 200 },
     //   {   field: 'age', headerName: 'Age', type: 'number', width: 90,},
       {
@@ -67,7 +69,7 @@ const EmployeManager = () => {
         width: 230,
         renderCell: (params) => (
           <>
-          <Link to={`/edit-employee/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
+          <Link to={`/edit-employee/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
           <FaRegEdit  style={{fontSize:'15px', marginBottom:'4px'}}/>  View / Edit 
           </Link>
           &nbsp;
@@ -87,10 +89,10 @@ const EmployeManager = () => {
         id: item.id || index,
     displayOrder: index + 1,
     name: item.name,
-    phone: item.phone,
-    email: item.email,
-    address: item.address,
     dob: item.dob,
+    salary: item.salary,
+    phone: item.phone,
+    post: item.post,
   })) : [];
       
 
@@ -102,8 +104,8 @@ const EmployeManager = () => {
 <div className='main-content' id='mainbody'>
 
 <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-<p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='' className='t-theme-color'>Employee Manager</Link></p>
-<Link to='/add-employee' className='btn btn-bg-orange btn-sm b-radius-50'>Add Employee</Link>
+<p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to='' className='t-theme-color'>Employee Manager</Link></p>
+<Link to={`/add-employee/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Employee</Link>
 </div>
 
 

@@ -12,7 +12,7 @@ import { LuIndianRupee } from 'react-icons/lu';
 import { BiReset } from 'react-icons/bi';
 import { TbFilterCog } from 'react-icons/tb';
 
-const TargetMaster = () => {
+const TargetOut = () => {
     const [apiDatas, setApiDatas] = useState([]);
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
@@ -24,7 +24,7 @@ const TargetMaster = () => {
 
 
     const fetchData = () => {
-        axios.get('https://digitalshopee.online/api/target/get-target.php')
+        axios.get('https://digitalshopee.online/api/target-out/get-target.php')
             .then(res => {
                 const responseData = res.data || [];
                 if (Array.isArray(responseData)) {
@@ -53,9 +53,9 @@ const TargetMaster = () => {
     }
 
     const handleDelete = (id) => {
-        const confirmDelete = window.confirm("Are you sure you want to delete this Target Master?");
+        const confirmDelete = window.confirm("Are you sure you want to delete this Service Master?");
         if (confirmDelete) {
-            axios.post(`https://digitalshopee.online/api/target/delete-by-id-target.php?id=${id}`)
+            axios.post(`https://digitalshopee.online/api/target-out/delete-by-id-target.php?id=${id}`)
                 .then(res => {
                     fetchData();
                 })
@@ -95,11 +95,11 @@ const TargetMaster = () => {
             filteredData = filteredData.filter(item => item.employee_id === selectedEmployee);
         }
 
+
         // Calculate total amount for filtered data
         calculateTotalAmount(filteredData);
 
         setApiDatas(filteredData);
-
         const refer = document.getElementById('refer');
         refer.style.display = "none"
     }
@@ -118,8 +118,7 @@ const TargetMaster = () => {
 
     const columns = [
         { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
-        { field: 'date', headerName: 'Date', type: 'Date', width: 100 },
-
+        { field: 'from_date', headerName: 'Date', type: 'Date', width: 100 },
         { field: 'employee_id', headerName: 'Employe Name', width: 200 },
         { field: 'service_id', headerName: 'Service Name', width: 150 },
         { field: 'no_of_orders', headerName: 'Order Qty.', width: 100 },
@@ -131,7 +130,7 @@ const TargetMaster = () => {
             width: 230,
             renderCell: (params) => (
                 <>
-                    <Link to={`/edit-target-master/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
+                    <Link to={`/edit-target-out/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
                         <FaRegEdit style={{ fontSize: '15px', marginBottom: '4px' }} />  View / Edit
                     </Link>
                     &nbsp;
@@ -151,7 +150,7 @@ const TargetMaster = () => {
         service_id: item.service_id,
         no_of_orders: item.no_of_orders,
         total_amount: item.total_amount,
-        date: item.from_date,
+        from_date: item.from_date,
     })) : [];
 
 
@@ -165,7 +164,7 @@ const TargetMaster = () => {
             <Sidebar />
             <div className='main-content' id='mainbody'>
                 <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50 bread-parent'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/target-master' className='t-theme-color'>Target Master</Link></p>
+                    <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to={`/target-out/${employeeId}`} className='t-theme-color'>Target Master Out</Link></p>
                     <div>
                         {/* <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                         <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
@@ -182,7 +181,7 @@ const TargetMaster = () => {
 
                     </div>
                     <div className='actions'>
-                        <Link to={`/add-target-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50 '><MdNoteAdd style={{ fontSize: "18px", marginBottom: '2px' }} /> Add Target Master</Link>
+                        <Link to={`/add-target-out/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50 '><MdNoteAdd style={{ fontSize: "18px", marginBottom: '2px' }} /> Add Target Out</Link>
                         &nbsp;
                         &nbsp;
 
@@ -222,19 +221,15 @@ const TargetMaster = () => {
                         </div>
 
                         <div className='d-flex gap-2 justify-content-end pb-3'>
-                            <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' id="refer" onClick={handleFilter}><TbFilterCog /> Check</button>
+                            <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' id='refer' onClick={handleFilter}><TbFilterCog /> Check</button>
 
                             <button type='button' className='btn btn-bg-orange btn-sm letter-spacing-1' onClick={loadall}><BiReset /> Reset</button>
                         </div>
-
 
                         <div className='d-flex justify-content-between'>
                             <p className='px-2'>Total Amount:<LuIndianRupee /> {totalAmount} </p>
                             <p className='px-2'>Total Quality:{totalQty} </p>
                         </div>
-
-
-
 
                     </div>
                 </div>
@@ -254,4 +249,4 @@ const TargetMaster = () => {
     );
 };
 
-export default TargetMaster;
+export default TargetOut;
