@@ -79,51 +79,51 @@ const App = () => {
           <Route path="/:employeeId" element={<ProtectRoute Component={Home} />} /> */}
 
           {/* Firm Master */}
-          <Route path="/firm-master/:employeeId" element={<FirmMaster />} />
-          <Route path="/edit-firm-master/:employeeId/:id" element={<Edit_Firm_Master />} />
-          <Route path="/add-firm-master/:employeeId" element={<Add_Firm_Master />} />
+          <Route path="/firm-master/:employeeId" element={<ProtectRoute Component={FirmMaster} />} />
+          <Route path="/edit-firm-master/:employeeId/:id" element={<ProtectRoute Component={Edit_Firm_Master} />} />
+          <Route path="/add-firm-master/:employeeId" element={<ProtectRoute Component={Add_Firm_Master} />} />
 
           {/* Client Master */}
-          <Route path="/client-master/:employeeId" element={<Clientmaster />} />
-          <Route path="/edit-client-master/:employeeId/:id" element={<Edit_Client_Master />} />
-          <Route path="/add-client-master/:employeeId" element={<Add_Client_Master />} />
+          <Route path="/client-master/:employeeId" element={<ProtectRoute Component={Clientmaster} />} />
+          <Route path="/edit-client-master/:employeeId/:id" element={<ProtectRoute Component={Edit_Client_Master} />} />
+          <Route path="/add-client-master/:employeeId" element={<ProtectRoute Component={Add_Client_Master} />} />
 
           {/* Service Master */}
-          <Route path="/service-master/:employeeId" element={<Servicemaster />} />
-          <Route path="/add-service-master/:employeeId" element={<Add_Service_Master />} />
-          <Route path="/edit-service-master/:employeeId/:id" element={<Edit_Service_Master />} />
+          <Route path="/service-master/:employeeId" element={<ProtectRoute Component={Servicemaster} />} />
+          <Route path="/add-service-master/:employeeId" element={<ProtectRoute Component={Add_Service_Master} />} />
+          <Route path="/edit-service-master/:employeeId/:id" element={<ProtectRoute Component={Edit_Service_Master} />} />
 
           {/* Expenses Master */}
-          <Route path="/expenses-master/:employeeId" element={<Expense_Master />} />
-          <Route path="/add-expenses-master/:employeeId" element={<Add_Expenses_Master />} />
-          <Route path="/edit-expenses-master/:employeeId/:id" element={<Edit_Expenese_Master />} />
+          <Route path="/expenses-master/:employeeId" element={<ProtectRoute Component={Expense_Master} />} />
+          <Route path="/add-expenses-master/:employeeId" element={<ProtectRoute Component={Add_Expenses_Master} />} />
+          <Route path="/edit-expenses-master/:employeeId/:id" element={<ProtectRoute Component={Edit_Expenese_Master} />} />
 
           {/* -------- */}
-          <Route path="/add-expenses-payment/:employeeId" element={<Add_Expenses_Payment />} />
-          <Route path="/expenses-payment/:employeeId" element={<Expense_Payment />} />
-          <Route path="/edit-expenses-payment/:employeeId/:id" element={<Edit_Expense_Payment />} />
+          <Route path="/add-expenses-payment/:employeeId" element={<ProtectRoute Component={Add_Expenses_Payment} />} />
+          <Route path="/expenses-payment/:employeeId" element={<ProtectRoute Component={Expense_Payment} />} />
+          <Route path="/edit-expenses-payment/:employeeId/:id" element={<ProtectRoute Component={Edit_Expense_Payment} />} />
 
           {/* Employee Manager */}
-          <Route path="/employe-manager/:employeeId" element={<EmployeManager />} />
-          <Route path="/add-employee/:employeeId" element={<Add_Employe />} />
-          <Route path="/edit-employee/:employeeId/:id" element={<Edit_employe />} />
+          <Route path="/employe-manager/:employeeId" element={<ProtectRoute Component={EmployeManager} />} />
+          <Route path="/add-employee/:employeeId" element={<ProtectRoute Component={Add_Employe} />} />
+          <Route path="/edit-employee/:employeeId/:id" element={<ProtectRoute Component={Edit_employe} />} />
           {/* --------- */}
-          <Route path="/access/:employeeId" element={<Access />} />
-          <Route path="/update-access/:employeeId" element={<Update_Access />} />
+          <Route path="/access/:employeeId" element={<ProtectRoute Component={Access} />} />
+          <Route path="/update-access/:employeeId" element={<ProtectRoute Component={Update_Access} />} />
 
 
           {/* Target Master */}
-          <Route path="/target-master/:employeeId" element={<TargetMaster />} />
-          <Route path="/add-target-master/:employeeId" element={<Add_Target_Master />} />
-          <Route path="/edit-target-master/:employeeId/:id" element={<Edit_Target_Master />}/>
+          <Route path="/target-master/:employeeId" element={<ProtectRoute Component={TargetMaster} />} />
+          <Route path="/add-target-master/:employeeId" element={<ProtectRoute Component={Add_Target_Master} />} />
+          <Route path="/edit-target-master/:employeeId/:id" element={<ProtectRoute Component={Edit_Target_Master} />}/>
           {/* --------------- */}
-          <Route path="/target-out/:employeeId" element={<TargetOut />} />
-          <Route path="/add-target-out/:employeeId" element={<Add_Target_Out />} />
-          <Route path="/edit-target-out/:employeeId/:id" element={<Edit_Target_Out />} />
+          <Route path="/target-out/:employeeId" element={<ProtectRoute Component={TargetOut} />} />
+          <Route path="/add-target-out/:employeeId" element={<ProtectRoute Component={Add_Target_Out} />} />
+          <Route path="/edit-target-out/:employeeId/:id" element={<ProtectRoute Component={Edit_Target_Out} />} />
 
           {/* Reports */}
-          <Route path="/target-report/:employeeId" element={<TargetReport />} />
-          <Route path="/expense-report/:employeeId" element={<ExpenseReport />} />
+          <Route path="/target-report/:employeeId" element={<ProtectRoute Component={TargetReport} />} />
+          <Route path="/expense-report/:employeeId" element={<ProtectRoute Component={ExpenseReport} />} />
 
         </Routes>
       </BrowserRouter>
