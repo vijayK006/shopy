@@ -1,0 +1,61 @@
+Client Master
+
+License --> Passport
+
+Client Name (have to display full)
+DOB
+Mobile No
+Professional
+reference 
+
+Employee Master
+
+Document list sequence
+1)Aadhar Card
+2)Pan Card
+3)Resume
+4)Educatio Docx
+5) Passport --> Other 
+
+Employee Dashboard
+1)Name 
+2)DOB 
+3)Mobile no.
+4)post
+5)Salaries 
+
+Expanse Payment Dashboard also in Add/Edit
+1)Date
+2)Exp
+3)Amount
+4)Decreption
+
+Target Master 
+1) Date 
+2) Employee name 
+3) Service Name
+4) Order Amount 
+
+Add Target Out 
+Remove To Date 
+
+1)Select Employee
+2)Select Service Name
+3) no. orders
+4) Total Amount
+5) Target Description
+
+Target Master Report 
+
+1) Date 
+2) Employee Name
+3) Service Name
+4) Quality
+5) Amount
+6) Type 
+
+
+Home Page 
+Target master
+
+

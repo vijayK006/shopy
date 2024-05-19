@@ -1,0 +1,57 @@
+- Remove "Enter" From all Masters
+- Rupee icons should come before total amount number in all page
+- While adding master remove image preview and replace with file fields for Example:- in Firm Master--> Add Firm Master :- Remove Image Preview(DO THIS ALL FOR MASTER's)
+
+Dashboard Menu --> Expense Master --> Add Expense (replace to)-->  Add Expense Category
+
+-------------------------------------------------------------------------------------------------------
+
+Add & Edit Firm master:- 
+- Have to add image size which client has given dimen 
+
+
+Add & Edit Client Master:- 
+- Add Other documents field  should be 3 file fields
+
+
+Add & Edit Service Master:-
+- Serviec Code
+- Service Name
+- Service Amount 
+- Service Expense
+- Service Required Docx
+
+
+Add & Edit Expense Master:-
+- Date should be first
+- Category
+- Expense Remark convert to Description
+- Expense total Amount
+- (Remove Category Employee)
+
+View Target Master & Target Master Out:-
+- Rupee icon should be in before total amount
+- Total Quality should be in filter section
+---------------------------------
+- Add From Date - To Date
+- Add Service --> Select Service 
+- Add Employee -->  Select Employee
+- No Of orders
+- Total Amount (editable)
+- Target Description	
+
+Reports--> Target Master Report 
+- Date
+- Service Name 
+- Employee Name 
+- Description [Pending]
+- Order Qty
+- Total Amount
+- Target Type -->  (tin -> Remove T and make I capital)  (tout ->Remove T and make O capital)
+------------------------------------
+Reports--> Expance Master report 
+- Date should be first
+- Category
+- Expense Remark replace to Expense Description
+- Expense total Amount
+- Remove Category Employee
