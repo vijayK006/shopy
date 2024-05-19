@@ -42,7 +42,7 @@ const Add_Expenses_Payment = () => {
         })
             .then(res => {
                 console.log('Expense Payment Added Successfully')
-                navigate('/expenses-payment')
+                navigate(`/expenses-payment/${employeeId}`)
             })
             .catch(err => console.log(err));
     };

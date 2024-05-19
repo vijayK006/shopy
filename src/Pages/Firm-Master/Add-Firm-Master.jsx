@@ -304,7 +304,7 @@ const [signimg, setSignimg] = useState(null)
                                     <img src={logoimg} alt='' />
                                 <label for='logo' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
                                 </div> */}
-                                <input type='file' className='form-control' id='logo' name='logo' onChange={handleChange} />
+                                <input type='file' className='form-control' id='logo' name='logo' accept='image/*' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-3 py-1'>
@@ -314,7 +314,7 @@ const [signimg, setSignimg] = useState(null)
                                 <label for='owner_image' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
 
                                 </div> */}
-                                <input type='file' className='form-control' id='owner_image' name='owner_image' onChange={handleChange} />
+                                <input type='file' className='form-control' id='owner_image' accept='.pdf, image/*' name='owner_image' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-3 py-1'>
@@ -323,7 +323,7 @@ const [signimg, setSignimg] = useState(null)
                                     <img src={signimg} alt='' />
                                 <label for='sign' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
                                 </div> */}
-                                <input type='file' className='form-control' id='sign' name='sign' onChange={handleChange} />
+                                <input type='file' className='form-control' id='sign' name='sign' accept='.pdf, image/*' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-3 py-2'>

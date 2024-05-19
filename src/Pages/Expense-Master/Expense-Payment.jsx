@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Topbar from '../../layouts/Topbar';
 import Sidebar from '../../layouts/Sidebar';
 import { FaFilter, FaRegEdit } from "react-icons/fa";
@@ -13,6 +13,8 @@ import { BiReset } from 'react-icons/bi';
 import { TbFilterCog } from 'react-icons/tb';
 
 const Expense_Payment = () => {
+  const { employeeId } = useParams();
+
     const [apiDatas, setApiDatas] = useState([]);
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
@@ -131,7 +133,7 @@ const Expense_Payment = () => {
             width: 230,
             renderCell: (params) => (
                 <>
-                    <Link to={`/edit-expenses-payment/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
+                    <Link to={`/edit-expenses-payment/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
                         <FaRegEdit style={{ fontSize: '15px', marginBottom: '4px' }} />  View / Edit
                     </Link>
                     &nbsp;
@@ -164,7 +166,7 @@ const Expense_Payment = () => {
             <Sidebar />
             <div className='main-content' id='mainbody'>
                 <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50 bread-parent'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='' className='t-theme-color'>Expense Payment</Link></p>
+                    <p className='margin-0 font-w-500'><Link to={`/$employeeId`}>Dashboard</Link> / <Link to='' className='t-theme-color'>Expense Payment</Link></p>
                     <div>
                         {/* <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                         <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
@@ -181,7 +183,7 @@ const Expense_Payment = () => {
 
                     </div>
                     <div className='actions'>
-                        <Link to='/add-expenses-payment' className='btn btn-bg-orange btn-sm b-radius-50 '><MdNoteAdd style={{ fontSize: "18px", marginBottom: '2px' }} /> Add Expense Payment</Link>
+                        <Link to={`/add-expenses-payment/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50 '><MdNoteAdd style={{ fontSize: "18px", marginBottom: '2px' }} /> Add Expense Payment</Link>
                       
 
                         {/* <button type='button' className='btn btn-bg-orange btn-sm b-radius-50 ' onClick={filterbtn}><FaFilter style={{ marginBottom: '2px' }} /> Filter</button> */}

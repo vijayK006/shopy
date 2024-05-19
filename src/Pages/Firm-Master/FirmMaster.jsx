@@ -170,15 +170,6 @@ const FirmMaster = () => {
 <Link to={`/add-firm-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
 )} */}
 
-{ role === 'admin' ?(
-<Link to={`/add-firm-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
-
-):(
- permissions.add_firm === "yes" && (
-<Link to={`/add-firm-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
-)
-
-)}
 
           {/* {role === "useradmin" ? (
   <Link to={`/add-firm-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
@@ -187,7 +178,7 @@ const FirmMaster = () => {
 )} */}
 
 
-          {role === "useradmin" ? (
+          {role === "admin" ? (
             <Link to={`/add-firm-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
           ) : (
             permissions.add_firm === "yes" && (
