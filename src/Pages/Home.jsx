@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Topbar from '../layouts/Topbar'
 import Sidebar from '../layouts/Sidebar'
 import Admincards from '../Components/Admin-cards';
@@ -13,6 +13,7 @@ import TargetStatus from '../Components/TargetStatus'
 
 
 const Home = () => {
+  const {employeeId} = useParams();
   const [firmmastercount, setFirmmasterCount] = useState([]);
   const [clientmastercount, setClientmastercount] = useState([]);
   const [servicemastercount, setServicemastercount] = useState([]);
@@ -76,7 +77,7 @@ const Home = () => {
               borderRcolor='3px solid #ff3e57'
               circlebg='white'
               datacount={firmmastercount}
-              pageLink='/firm-master'
+              pageLink={`/firm-master/${employeeId}`}
             >
             </Admincards>
 
@@ -87,7 +88,7 @@ const Home = () => {
               borderRcolor='3px solid #00cebe'
               circlebg='white'
               datacount={clientmastercount}
-              pageLink='/client-master'
+              pageLink={`/client-master/${employeeId}`}
             >
             </Admincards>
 
@@ -98,7 +99,7 @@ const Home = () => {
               borderRcolor='3px solid #ff3e57'
               circlebg='white'
               datacount={servicemastercount}
-              pageLink='/service-master'
+              pageLink={`/service-master/${employeeId}`}
             >
             </Admincards>
 
@@ -109,7 +110,7 @@ const Home = () => {
               borderRcolor='3px solid #ff3e57'
               circlebg='white'
               datacount={expensemastercount}
-              pageLink='/expenses-master'
+              pageLink={`/expenses-master/${employeeId}`}
             >
             </Admincards>
 
