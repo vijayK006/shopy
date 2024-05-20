@@ -22,9 +22,12 @@ const Edit_Firm_Master = () => {
     const [stateid, setstateid] = useState(0);
 
     const [getFirmMobilenumber, setGetFirmMobilenumber] = useState([])
-    const [alertphone, setAlertphone] = useState();
-
     const [alertname, setAlertname] = useState();
+    const [alertowner, setAlertowner] = useState();
+    const [alertphone, setAlertphone] = useState();
+    const [alertemail, setAlertemail] = useState();
+    const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
 
 
@@ -38,9 +41,9 @@ const Edit_Firm_Master = () => {
     useEffect(() => {
         axios.get('https://digitalshopee.online/api/firm/get-firm.php')
             .then(res => {
-                const migratephone = res.data.map(firm => firm.phone)
-                setGetFirmMobilenumber(migratephone)
-                console.log(migratephone)
+                const migratefirm = res.data.map(firm => ({ phone: firm.phone, id: firm.id }))
+                setGetFirmMobilenumber(migratefirm)
+                console.log(migratefirm)
             })
             .catch(err => {
                 console.error('Error fetching data:', err);
@@ -128,16 +131,81 @@ const Edit_Firm_Master = () => {
         formData.append('sign', valueData.sign);
 
 
-        const reglName = /^(([A-Za-z]+[,.]?[ ]?|[a-z]+['-]?)+)$/;
-        if (reglName.test(valueData.firm_name)) {
+     
+
+        const regname = /^[a-zA-Z\s]+$/;
+        if (regname.test(valueData.firm_name)) {
             setAlertname("");
-        } else if (!reglName.test(valueData.firm_name) && valueData.firm_name === "") {
-            setAlertname("Please fill you last name");
+            setLoading(true);
+        } else if (!regname.test(valueData.firm_name) && valueData.firm_name === "") {
+            setAlertname("Please fill your firm name");
             //   e.preventDefault();
+            setLoading(false);
             return;
         } else {
-            setAlertname("Name should not be in a number ");
+            setAlertname("Name should not be in a number");
             //   e.preventDefault();
+            setLoading(false);
+            return;
+        }
+
+        const regnameowner = /^(([A-Za-z]+[,.]?[ ]?|[a-z]+['-]?)+)$/;
+        if (regnameowner.test(valueData.owner_name)) {
+            setAlertowner("");
+            setLoading(true);
+        } else if (!regnameowner.test(valueData.owner_name) && valueData.owner_name === "") {
+            setAlertowner("Please fill owner name");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        } else {
+            setAlertowner("Name should not be in a number ");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        }
+        
+        const existingFirm = getFirmMobilenumber.find(firm => firm.phone === valueData.phone);
+        if (existingFirm) {
+            if (existingFirm.id === id) {
+                setLoading(true);
+            } else {
+                setAlertphone("This mobile number already exists. Please enter a different mobile number.");
+                setLoading(false);
+                return;
+            }
+        }
+
+        const regnumber = /^[0-9]{10}$/;
+        if (regnumber.test(valueData.phone)) {
+            setAlertphone("");
+            setLoading(true);
+        } else if (!regnumber.test(valueData.phone) && valueData.phone === "") {
+            setAlertphone("Please enter your mobile Number");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        } else {
+            setAlertphone("Mobile number should be 10 digits (no letters and spaces allowed).");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        }
+
+
+        const regemail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (regemail.test(valueData.email)) {
+            setAlertemail("");
+            setLoading(true);
+        } else if (valueData.email === "") {
+            setAlertemail("Please enter email-id");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        } else if (!regemail.test(valueData.email)) {
+            setAlertemail("Email-id is not valid");
+            //   e.preventDefault();
+            setLoading(false);
             return;
         }
 
@@ -152,7 +220,7 @@ const Edit_Firm_Master = () => {
             })
                 .then(res => {
                     console.log('Form Updated Successfully')
-                    navigate('/firm-master')
+                    navigate(`/firm-master/${employeeId}`)
                 })
                 .catch(err => console.log(err));
 
@@ -245,6 +313,8 @@ const Edit_Firm_Master = () => {
                             <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Owner Name</label>
                                 <input type='text' className='form-control' value={valueData.owner_name} name='owner_name' placeholder='Please enter owner name' onChange={handleChange} />
+                                <p className='warning'>{alertowner}</p>
+                            
                             </div>
 
                             <div className='col-md-3 py-2'>
@@ -264,6 +334,8 @@ const Edit_Firm_Master = () => {
                             <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Email ID</label>
                                 <input type='email' className='form-control' value={valueData.email} name='email' placeholder='Please enter email-id' onChange={handleChange} />
+                                <p className='warning'>{alertemail}</p>
+                        
                             </div>
 
                             <div className='col-md-3 py-2'>
@@ -337,7 +409,7 @@ const Edit_Firm_Master = () => {
                                 <label className='text-sm font-w-500 p-2'>Business Owner Photo</label>
 
 
-                                <input type='file' className='form-control' id='owner_image' name='owner_image' onChange={handleChange} />
+                                <input type='file' className='form-control' id='owner_image' name='owner_image' accept='.pdf, image/*' onChange={handleChange} />
 
                                 <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
                                     <label for='owner_image' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
@@ -350,7 +422,7 @@ const Edit_Firm_Master = () => {
                             <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Business Owner Sign</label>
 
-                                <input type='file' className='form-control' id='sign' name='sign' onChange={handleChange} />
+                                <input type='file' className='form-control' id='sign' name='sign' accept='.pdf, image/*'  onChange={handleChange} />
 
                                 <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
                                     <label for='sign' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
@@ -363,13 +435,31 @@ const Edit_Firm_Master = () => {
 
                             {role === 'admin' ? (
                                 <div className='d-flex justify-content-end pt-4'>
-                                    <button type='submit' className='btn btn-bg-orange ' style={{ width: "200px" }} >Update</button>
+                                    <button type='submit' className='btn btn-bg-orange ' style={{ width: "200px" }} disabled={loading}>
+                                    {loading ? ( // Conditional rendering for loading popup
+                                        <>
+                                            Update &nbsp; &nbsp;
+                                            <div className="spinner-border text-info spinner-border-sm scaleonload"></div>
+                                        </>
+                                    ) : (
+                                        "Update"
+                                    )}
+                                    </button>
                                 </div>
                             ) : (
 
                                 permissions.edit_firm === "yes" && (
                                     <div className='d-flex justify-content-end pt-4'>
-                                        <button type='submit' className='btn btn-bg-orange ' style={{ width: "200px" }} >Update</button>
+                                        <button type='submit' className='btn btn-bg-orange ' style={{ width: "200px" }} disabled={loading}>
+                                        {loading ? ( // Conditional rendering for loading popup
+                                        <>
+                                            Update &nbsp; &nbsp;
+                                            <div className="spinner-border text-info spinner-border-sm scaleonload"></div>
+                                        </>
+                                    ) : (
+                                        "Update"
+                                    )}
+                                        </button>
                                     </div>
                                 )
 
