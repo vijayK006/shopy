@@ -1001,3 +1001,17 @@ font-size: 20px;
 .border-1px{
     border: 1px solid  rgb(201, 201, 201);
 }
+
+.download-btn{
+    border: none;
+    color: white;
+    background-color: #ff5e1a;
+    border-radius: 50px;
+    font-size: 15px;
+    padding: 0px 10px;
+}
+
+.download-btn .icon{
+    font-size: 20px;
+
+} 

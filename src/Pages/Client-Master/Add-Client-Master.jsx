@@ -32,8 +32,8 @@ const Add_Client_Master = () => {
     const [alertprofession, setAlertprofession] = useState();
     const [alertphone, setAlertphone] = useState();
     const [alertemail, setAlertemail] = useState();
-    const [alertstate, setAlertstate] = useState();
-    const [alertdestrict, setAlertdestrict] = useState();
+    const [getClientMobilenumber, setGetClientMobilenumber] = useState([])
+
 
 
     useEffect(() => {
@@ -42,6 +42,18 @@ const Add_Client_Master = () => {
         setCountryid(defaultCountry.id);
 
     }, []);
+
+    useEffect(() => {
+        axios.get('https://digitalshopee.online/api/client/get-client.php')
+          .then(res => {
+            const migratephone = res.data.map(client=> client.phone)
+            setGetClientMobilenumber(migratephone)
+            console.log(migratephone)
+          })
+          .catch(err => {
+            console.error('Error fetching data:', err);
+          });
+      }, []);
 
     const [valueData, setValueData] = useState({
         address: '',
@@ -125,18 +137,9 @@ const Add_Client_Master = () => {
             return;
         }
 
-        const regprofession = /^[a-zA-Z\s]+$/;
-        if (regprofession.test(valueData.profession)) {
-            setAlertprofession("");
-            setLoading(true);
-        } else if (!regprofession.test(valueData.profession) && valueData.profession === "") {
-            setAlertprofession("Please fill profession ");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        } else {
-            setAlertprofession("Name should not be in a number ");
-            //   e.preventDefault();
+
+        if (getClientMobilenumber.includes(valueData.phone)) {
+            setAlertphone("This mobile number already exists. Please enter a different mobile number.");
             setLoading(false);
             return;
         }
@@ -175,28 +178,6 @@ const Add_Client_Master = () => {
         }
 
 
-        const regstate = /^[a-zA-Z\s]+$/;
-        if (regstate.test(valueData.state)) {
-            setAlertstate("");
-            setLoading(true);
-        } else if (!regstate.test(valueData.state) && valueData.state === "") {
-            setAlertstate("Select your state");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        }
-
-
-        const regdistrict = /^[a-zA-Z\s]+$/;
-        if (regdistrict.test(valueData.district)) {
-            setAlertdestrict("");
-            setLoading(true);
-        } else if (!regdistrict.test(valueData.district) && valueData.district === "") {
-            setAlertdestrict("Select district");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        }
 
         axios.post('https://digitalshopee.online/api/client/add-client.php', formData, {
             headers: {
@@ -204,7 +185,7 @@ const Add_Client_Master = () => {
             }
         })
             .then(res => {
-                navigate('/client-master')
+                navigate(`/client-master/${employeeId}`)
                 console.log('Client info Submitted Successfully')
             })
             .catch(err => console.log(err));
@@ -350,7 +331,7 @@ const Add_Client_Master = () => {
                                 <label className='text-sm font-w-500 p-2'> Profession</label>
                                 <input type='text' className='form-control' value={valueData.profession} name='profession' placeholder='Please enter client profession' onChange={handleChange} />
 
-                                <p className='warning'>{alertprofession}</p>
+                                {/* <p className='warning'>{alertprofession}</p> */}
                             </div>
 
                            
@@ -418,7 +399,7 @@ const Add_Client_Master = () => {
                                     value={valueData.state}
 
                                 />
-                                <p className='warning'>{alertstate}</p>
+                                {/* <p className='warning'>{alertstate}</p> */}
 
 
                                 {/* <input type='text' className='form-control' value={valueData.state} name='state' placeholder='Please enter state' onChange={handleChange} /> */}
@@ -442,7 +423,7 @@ const Add_Client_Master = () => {
                                     value={valueData.district}
 
                                 />
-                                <p className='warning'>{alertdestrict}</p>
+                                {/* <p className='warning'>{alertdestrict}</p> */}
 
 
                                 {/* <input type='text' className='form-control' value={valueData.district} name='district' placeholder='Please enter City' onChange={handleChange} /> */}

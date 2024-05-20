@@ -66,7 +66,7 @@ const Add_Employe = () => {
             }
         })
             .then(res => {
-                navigate('/employe-manager')
+                navigate(`/employe-manager/${employeeId}`)
                 console.log('Employee Submitted Successfully')
             })
             .catch(err => console.log(err));

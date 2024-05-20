@@ -11,6 +11,11 @@ const Edit_Service_Master = () => {
     const [permissions, setPermissions] = useState({ edit_service: null });
     const role = localStorage.getItem('role');
 
+    const [loading, setLoading] = useState(false);
+    const [alertservicecode, setAlertservicecode] = useState();
+    const [alertservicename, setAlertservicename] = useState();
+    const [alertserviceamount, setAlertserviceamount] = useState();
+    const [alertserviceexpense, setAlertserviceexpense] = useState();
 
     const navigate = useNavigate();
 
@@ -67,19 +72,70 @@ const Edit_Service_Master = () => {
         formData.append('documents', valueData.documents);
 
 
-        // const reglName = /^(([A-Za-z]+[,.]?[ ]?|[a-z]+['-]?)+)$/;
-        // if (reglName.test(valueData.firm_name)) {
-        //     setAlertname("");
-        // } else if (!reglName.test(valueData.firm_name) && valueData.firm_name === "") {
-        //     setAlertname("Please fill you last name");
-        //     //   e.preventDefault();
-        //     return;
-        // } else {
-        //     setAlertname("Name should not be in a number ");
-        //     //   e.preventDefault();
-        //     return;
-        // }
 
+        const regname = /^[a-zA-Z\s]+$/;
+        if (regname.test(valueData.name)) {
+            setAlertservicename("");
+            setLoading(true);
+        } else if (!regname.test(valueData.name) && valueData.name === "") {
+            setAlertservicename("Please fill your service name");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        } else {
+            setAlertservicename("Name should not be in a number");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        }
+
+        const regnumberamount = /^\d{1,20}$/;
+        if (regnumberamount.test(valueData.amount)) {
+            setAlertserviceamount("");
+            setLoading(true);
+        } else if (!regnumberamount.test(valueData.amount) && valueData.amount === "") {
+            setAlertserviceamount("Please enter your service amount");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        } else {
+            setAlertserviceamount("Service amount should not be more then 20 digits");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        }
+
+        const regnumbercode = /^\d{1,20}$/;
+        if (regnumbercode.test(valueData.code)) {
+            setAlertservicecode("");
+            setLoading(true);
+        } else if (!regnumbercode.test(valueData.code) && valueData.code === "") {
+            setAlertservicecode("Please enter your service code");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        } else {
+            setAlertservicecode("Service code should not be more then 20 digits");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        }
+
+        const regnumber = /^\d{1,20}$/;
+        if (regnumber.test(valueData.expense)) {
+            setAlertserviceexpense("");
+            setLoading(true);
+        } else if (!regnumber.test(valueData.expense) && valueData.expense === "") {
+            setAlertserviceexpense("Please enter your service expense");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        } else {
+            setAlertserviceexpense("Service expense should not be more then 20 digits");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        }
        
 
         const confirmUpdate = window.confirm("Are you sure you want to update this Service Master");
@@ -91,7 +147,7 @@ const Edit_Service_Master = () => {
             })
                 .then(res => {
                     console.log('Service Updated Successfully')
-                    navigate('/service-master')
+                    navigate(`/service-master/${employeeId}`)
                 })
                 .catch(err => console.log(err));
 
@@ -126,7 +182,7 @@ const Edit_Service_Master = () => {
                                 <label className='text-sm font-w-500 p-2'> Service Code</label>
                                 <input type='text' className='form-control' value={valueData.code} name='code' placeholder='Please service code' onChange={handleChange} />
 
-                                {/* <p className='warning'>{alertname}</p> */}
+                                <p className='warning'>{alertservicecode}</p>
                             </div>
 
 
@@ -134,20 +190,20 @@ const Edit_Service_Master = () => {
                                 <label className='text-sm font-w-500 p-2'> Service Name</label>
                                 <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Please enter Service name' onChange={handleChange} />
 
-                                {/* <p className='warning'>{alertowner}</p> */}
+                                <p className='warning'>{alertservicename}</p>
                             </div>
 
                             <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Service Amount</label>
                                 <input type='number' className='form-control' value={valueData.amount} name='amount' placeholder='Please enter service amount' onChange={handleChange} />
-                                {/* <p className='warning'>{alertaltphone}</p> */}
+                                <p className='warning'>{alertserviceamount}</p>
                             </div>
 
                             <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Service Expense</label>
                                 <input type='number' className='form-control' value={valueData.expense} name='expense' placeholder='Please enter expense' onChange={handleChange} />
 
-                                {/* <p className='warning'>{alertphone}</p> */}
+                                <p className='warning'>{alertserviceexpense}</p>
                             </div>
 
                             <div className='col-md-3 py-1'>
@@ -161,13 +217,31 @@ const Edit_Service_Master = () => {
                       
                             {role === 'admin' ? (
                                 <div className='d-flex justify-content-end pt-4'>
-                                    <button type='submit' className='btn btn-bg-orange ' style={{ width: "200px" }} >Update</button>
+                                    <button type='submit' className='btn btn-bg-orange ' style={{ width: "200px" }} >
+                                    {loading ? ( // Conditional rendering for loading popup
+                                        <>
+                                            Update &nbsp; &nbsp;
+                                            <div className="spinner-border text-info spinner-border-sm scaleonload"></div>
+                                        </>
+                                    ) : (
+                                        "Update"
+                                    )}
+                                    </button>
                                 </div>
                             ) : (
 
                                 permissions.edit_service === "yes" && (
                                     <div className='d-flex justify-content-end pt-4'>
-                                        <button type='submit' className='btn btn-bg-orange ' style={{ width: "200px" }} >Update</button>
+                                        <button type='submit' className='btn btn-bg-orange ' style={{ width: "200px" }} >
+                                        {loading ? ( // Conditional rendering for loading popup
+                                        <>
+                                            Update &nbsp; &nbsp;
+                                            <div className="spinner-border text-info spinner-border-sm scaleonload"></div>
+                                        </>
+                                    ) : (
+                                        "Update"
+                                    )}
+                                        </button>
                                     </div>
                                 )
 

@@ -28,8 +28,6 @@ const [signimg, setSignimg] = useState(null)
     const [alertowner, setAlertowner] = useState();
     const [alertphone, setAlertphone] = useState();
     const [alertemail, setAlertemail] = useState();
-    const [alertstate, setAlertstate] = useState();
-    const [alertdestrict, setAlertdestrict] = useState();
 
 
     useEffect(() => {
@@ -163,36 +161,13 @@ const [signimg, setSignimg] = useState(null)
         }
 
 
-        const regstate = /^[a-zA-Z\s]+$/;
-        if (regstate.test(valueData.state)) {
-            setAlertstate("");
-            setLoading(true);
-        } else if (!regstate.test(valueData.state) && valueData.state === "") {
-            setAlertstate("Select your state");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        }
-
-
-        const regdistrict = /^[a-zA-Z\s]+$/;
-        if (regdistrict.test(valueData.district)) {
-            setAlertdestrict("");
-            setLoading(true);
-        } else if (!regdistrict.test(valueData.district) && valueData.district === "") {
-            setAlertdestrict("Select district");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        }
-
         axios.post('https://digitalshopee.online/api/firm/add-firm.php', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
             .then(res => {
-                navigate('/firm-master')
+                navigate(`/firm-master/${employeeId}`)
                 console.log('Form Submitted Successfully')
             })
             .catch(err => console.log(err));
@@ -304,7 +279,7 @@ const [signimg, setSignimg] = useState(null)
                                     <img src={logoimg} alt='' />
                                 <label for='logo' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
                                 </div> */}
-                                <input type='file' className='form-control' id='logo' name='logo' onChange={handleChange} />
+                                <input type='file' className='form-control' id='logo' name='logo' accept='image/*' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-3 py-1'>
@@ -314,7 +289,7 @@ const [signimg, setSignimg] = useState(null)
                                 <label for='owner_image' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
 
                                 </div> */}
-                                <input type='file' className='form-control' id='owner_image' name='owner_image' onChange={handleChange} />
+                                <input type='file' className='form-control' id='owner_image' accept='.pdf, image/*' name='owner_image' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-3 py-1'>
@@ -323,7 +298,7 @@ const [signimg, setSignimg] = useState(null)
                                     <img src={signimg} alt='' />
                                 <label for='sign' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
                                 </div> */}
-                                <input type='file' className='form-control' id='sign' name='sign' onChange={handleChange} />
+                                <input type='file' className='form-control' id='sign' name='sign' accept='.pdf, image/*' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-3 py-2'>
@@ -423,7 +398,7 @@ const [signimg, setSignimg] = useState(null)
                                     value={valueData.state}
 
                                 />
-                                <p className='warning'>{alertstate}</p>
+                                {/* <p className='warning'>{alertstate}</p> */}
 
 
 
@@ -449,7 +424,7 @@ const [signimg, setSignimg] = useState(null)
                                     value={valueData.district}
 
                                 />
-                                <p className='warning'>{alertdestrict}</p>
+                                {/* <p className='warning'>{alertdestrict}</p> */}
 
 
                                 {/* <input type='text' className='form-control' value={valueData.district} name='district' placeholder='Please enter City' onChange={handleChange} /> */}

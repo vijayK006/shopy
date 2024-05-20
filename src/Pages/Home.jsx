@@ -110,7 +110,7 @@ const Home = () => {
               borderRcolor='3px solid #ff3e57'
               circlebg='white'
               datacount={expensemastercount}
-              pageLink={`/expenses-master/${employeeId}`}
+              // pageLink={`/expenses-master/${employeeId}`}
             >
             </Admincards>
 

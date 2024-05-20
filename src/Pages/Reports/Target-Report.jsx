@@ -77,7 +77,7 @@ const TargetReport = () => {
 
     // Filter by date range
     filteredData = filteredData.filter((item) => {
-      const itemDate = new Date(item.date);
+      const itemDate = new Date(item.from_date);
       const startDateObj = startDate ? new Date(startDate) : null;
       const endDateObj = endDate ? new Date(endDate) : null;
 
@@ -164,7 +164,8 @@ const TargetReport = () => {
 
   const columns = [
     { field: "displayOrder", headerName: "Sl.No", width: 70 },
-    { field: "date", headerName: "Date", type: "Date", width: 150 },
+    { field: "from_date", headerName: "From Date", width: 150 },
+    { field: "to_date", headerName: "To Date", width: 150 },
     { field: "service_id", headerName: "Service Name", width: 150 },
     { field: "employee_id", headerName: "Employe Name", width: 150 },
     { field: "no_of_orders", headerName: "Order Qty.", width: 150 },
@@ -183,7 +184,8 @@ const TargetReport = () => {
         service_id: item.service_id,
         no_of_orders: item.no_of_orders,
         total_amount: item.total_amount,
-        date: item.date,
+        from_date: item.from_date,
+        to_date: item.to_date,
       }))
       : [];
 
