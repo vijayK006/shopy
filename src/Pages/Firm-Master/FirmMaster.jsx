@@ -5,6 +5,10 @@ import Topbar from '../../layouts/Topbar';
 import Sidebar from '../../layouts/Sidebar';
 import { FaRegEdit } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
+import { MdOutlineDownloading } from "react-icons/md";
+
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 import axios from 'axios';
 
 const FirmMaster = () => {
@@ -41,6 +45,21 @@ const FirmMaster = () => {
         console.error('Error fetching data:', err);
       });
   }, []);
+
+  const downloadExcel = () => {
+
+    const transformedData = apiDatas.map(({id, logo, owner_image, sign, ...rest }) => rest);
+
+    const worksheet = XLSX.utils.json_to_sheet(transformedData);
+
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Data');
+
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+
+    saveAs(blob, 'firm-master.xlsx');
+  };
 
   useEffect(() => {
     axios.get(`https://digitalshopee.online/api/employee-permission/get-permission.php?id=${employeeId}`)
@@ -177,14 +196,19 @@ const FirmMaster = () => {
   <p>No Permision</p>
 )} */}
 
+<div className='d-flex gap-2'>
+<button type="button" className='download-btn' onClick={downloadExcel}><MdOutlineDownloading className='icon'/> Export to Excel</button>
 
-          {role === "admin" ? (
+{role === "admin" ? (
             <Link to={`/add-firm-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
           ) : (
             permissions.add_firm === "yes" && (
             <Link to={`/add-firm-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
           )
           )}
+
+</div>
+          
 
         </div>
 

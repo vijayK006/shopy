@@ -8,21 +8,14 @@ import axios from 'axios';
 const Add_Service_Master = () => {
     const { employeeId } = useParams();
 
-
-    const [stateid, setstateid] = useState(0);
     const [loading, setLoading] = useState(false);
-    const [getservicesode, setGetServiceCode] = useState([])
     const navigate = useNavigate();
 
-    const [alertname, setAlertname] = useState();
-    const [alertowner, setAlertowner] = useState();
-    const [alertphone, setAlertphone] = useState();
-    const [alertemail, setAlertemail] = useState();
-    const [alertstate, setAlertstate] = useState();
-    const [alertdestrict, setAlertdestrict] = useState();
+    const [alertservicecode, setAlertservicecode] = useState();
+    const [alertservicename, setAlertservicename] = useState();
+    const [alertserviceamount, setAlertserviceamount] = useState();
+    const [alertserviceexpense, setAlertserviceexpense] = useState();
 
-
- 
 
     // useEffect(() => {
     //     axios.get('https://digitalshopee.online/api/service/get-service.php')
@@ -57,13 +50,77 @@ const Add_Service_Master = () => {
         formData.append('documents', valueData.documents);
 
 
+        const regname = /^[a-zA-Z\s]+$/;
+        if (regname.test(valueData.name)) {
+            setAlertservicename("");
+            setLoading(true);
+        } else if (!regname.test(valueData.name) && valueData.name === "") {
+            setAlertservicename("Please fill your service name");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        } else {
+            setAlertservicename("Name should not be in a number");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        }
+
+        const regnumberamount = /^\d{1,20}$/;
+        if (regnumberamount.test(valueData.amount)) {
+            setAlertserviceamount("");
+            setLoading(true);
+        } else if (!regnumberamount.test(valueData.amount) && valueData.amount === "") {
+            setAlertserviceamount("Please enter your service amount");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        } else {
+            setAlertserviceamount("Service amount should not be more then 20 digits");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        }
+
+        const regnumbercode = /^\d{1,20}$/;
+        if (regnumbercode.test(valueData.code)) {
+            setAlertservicecode("");
+            setLoading(true);
+        } else if (!regnumbercode.test(valueData.code) && valueData.code === "") {
+            setAlertservicecode("Please enter your service code");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        } else {
+            setAlertservicecode("Service code should not be more then 20 digits");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        }
+
+        const regnumber = /^\d{1,20}$/;
+        if (regnumber.test(valueData.expense)) {
+            setAlertserviceexpense("");
+            setLoading(true);
+        } else if (!regnumber.test(valueData.expense) && valueData.expense === "") {
+            setAlertserviceexpense("Please enter your service expense");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        } else {
+            setAlertserviceexpense("Service expense should not be more then 20 digits");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        }
+
         axios.post('https://digitalshopee.online/api/service/add-service.php', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
             .then(res => {
-                navigate('/service-master')
+                navigate(`/service-master/${employeeId}`)
                 console.log('Service Submitted Successfully')
             })
             .catch(err => console.log(err));
@@ -76,8 +133,6 @@ const Add_Service_Master = () => {
         const { name, value } = e.target;
         setValueData({ ...valueData, [name]: value });
     };
-
-
 
 
     return (
@@ -99,7 +154,7 @@ const Add_Service_Master = () => {
                                 <label className='text-sm font-w-500 p-2'> Service Code</label>
                                 <input type='text' className='form-control' value={valueData.code} name='code' placeholder='Please service code' onChange={handleChange} />
 
-                                {/* <p className='warning'>{alertname}</p> */}
+                                <p className='warning'>{alertservicecode}</p>
                             </div>
 
 
@@ -107,20 +162,20 @@ const Add_Service_Master = () => {
                                 <label className='text-sm font-w-500 p-2'> Service Name</label>
                                 <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Please enter Service name' onChange={handleChange} />
 
-                                {/* <p className='warning'>{alertowner}</p> */}
+                                <p className='warning'>{alertservicename}</p>
                             </div>
 
                             <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Service Amount</label>
                                 <input type='number' className='form-control' value={valueData.amount} name='amount' placeholder='Please enter service amount' onChange={handleChange} />
-                                {/* <p className='warning'>{alertaltphone}</p> */}
+                                <p className='warning'>{alertserviceamount}</p>
                             </div>
 
                             <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Service Expense</label>
                                 <input type='text' className='form-control' value={valueData.expense} name='expense' placeholder='Please enter expense' onChange={handleChange} />
 
-                                {/* <p className='warning'>{alertphone}</p> */}
+                                <p className='warning'>{alertserviceexpense}</p>
                             </div>
 
 
