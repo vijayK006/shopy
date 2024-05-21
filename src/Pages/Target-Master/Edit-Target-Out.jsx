@@ -93,7 +93,8 @@ const Edit_Target_Out = () => {
             })
                 .then(res => {
                     console.log('Target Out Updated Successfully')
-                    navigate('/target-out')
+                    navigate(`/target-out/${employeeId}`)
+
                 })
                 .catch(err => console.log(err));
         }

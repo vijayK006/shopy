@@ -92,7 +92,8 @@ const Edit_Target_Master = () => {
             })
                 .then(res => {
                     console.log('Target Updated Successfully')
-                    navigate('/target-master')
+                    navigate(`/target-master/${employeeId}`)
+
                 })
                 .catch(err => console.log(err));
         }
