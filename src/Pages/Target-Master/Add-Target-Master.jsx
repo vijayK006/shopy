@@ -125,8 +125,14 @@ const Add_Target_Master = () => {
     useEffect(() => {
         axios.get('https://digitalshopee.online/api/employee/get-employee.php')
             .then(res => {
-                const migrateemploye = res.data.map(employee => employee.name)
-                setGetempoloyenames(migrateemploye)
+                // const migrateemploye = res.data.map(employee => employee.name)
+
+                const migrateemployename = res.data.map(employee => ({
+                    id: employee.id,
+                    name: employee.name
+                }));
+
+                setGetempoloyenames(migrateemployename)
             })
             .catch(err => {
                 console.error('Error fetching data:', err);
@@ -158,7 +164,7 @@ const Add_Target_Master = () => {
                 <div className='container-fluid mb-5'>
                     <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
-                        {/* Global Fields */}
+                            {/* Global Fields */}
                             <div className='row'>
                                 <div className='col-md-3 py-1'>
                                     <label className='text-sm font-w-500 p-2'>Target From Date</label>
@@ -174,8 +180,12 @@ const Add_Target_Master = () => {
                                     <label className='text-sm font-w-500 p-2'>Select Employee</label>
                                     <select className='form-control' value={globalEmployeeId} name='employee_id' onChange={handleGlobalChange}>
                                         <option value="">Select Employee</option>
-                                        {getempoloyenames.map((name, index) => (
+                                        {/* {getempoloyenames.map((name, index) => (
                                             <option key={index} value={name}>{name}</option>
+                                        ))} */}
+
+                                        {getempoloyenames.map((employee, index) => (
+                                            <option key={index} value={employee.id}>{employee.name}</option>
                                         ))}
                                     </select>
                                 </div>
@@ -211,8 +221,12 @@ const Add_Target_Master = () => {
                                         <label className='text-sm font-w-500 p-2'>Select Employee</label>
                                         <select className='form-control' value={target.employee_id} name='employee_id' onChange={(e) => handleChange(index, e)}>
                                             <option value="">Select Employee</option>
-                                            {getempoloyenames.map((name, index) => (
+                                            {/* {getempoloyenames.map((name, index) => (
                                                 <option key={index} value={name}>{name}</option>
+                                            ))} */}
+
+                                            {getempoloyenames.map((employee, index) => (
+                                                <option key={index} value={employee.id}>{employee.name}</option>
                                             ))}
                                         </select>
                                         {/* <p className='warning'>{alertowner}</p> */}
