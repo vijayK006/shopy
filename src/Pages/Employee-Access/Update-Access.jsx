@@ -3,9 +3,13 @@ import { Link } from 'react-router-dom';
 import Topbar from '../../layouts/Topbar';
 import Sidebar from '../../layouts/Sidebar';
 import axios from 'axios';
+import { CiCircleCheck } from "react-icons/ci";
+
 
 const Update_Access = () => {
     const [getemployenames, setGetemployenames] = useState([]);
+    const [loading, setLoading] = useState(false);
+
     const [valueData, setValueData] = useState({
         employee_id: '',
 
@@ -71,6 +75,7 @@ const Update_Access = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoading(true);   
 
         const formData = new FormData();
 
@@ -96,10 +101,10 @@ const Update_Access = () => {
         formData.append('edit_expense', valueData.edit_expense);
         formData.append('delete_expense', valueData.delete_expense);
 
-       
 
-        const confirmUpdate = window.confirm("Are you sure you want to update this Service Master");
+        const confirmUpdate = window.confirm("Are you sure you want to update this Employee Access");
         if (confirmUpdate) {
+            setLoading(true);
             axios.post(`https://digitalshopee.online/api/employee-permission/update-permission.php?id=${selectedEmployeeId}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -107,7 +112,14 @@ const Update_Access = () => {
             })
                 .then(res => {
                     console.log('Employee Access Updated Successfully')
-                    // navigate('/service-master')
+                    const alert = document.getElementById('alert');
+                    alert.classList.add('open-alert')
+                    setLoading(true);
+                    setTimeout(() => {
+                    alert.classList.remove('open-alert')
+            setLoading(false);
+                        
+                    }, 2000);
                 })
                 .catch(err => console.log(err));
 
@@ -175,6 +187,9 @@ const handleChange = (e) => {
                     </div>
                     <div className='col-md-4 py-2' />
                     <div className='col-md-4 py-2' />
+
+  {selectedEmployeeId && (
+<>
                     <div className='col-md-12 py-3'>
                         <p>Firm Master</p>
                         <div className='row'>
@@ -283,7 +298,7 @@ const handleChange = (e) => {
                         </div>
                     </div>
 
-                    <div className='col-md-12 py-3'>
+                    <div className='col-md-12 py-3 d-none'>
                         <p>Expense Master</p>
                         <div className='row'>
 
@@ -318,10 +333,32 @@ const handleChange = (e) => {
                         </div>
                     </div>
 
-                    <button type='submit' className='btn btn-bg-orange mt-5' style={{ width: "200px" }} >Update</button>
+                  
+                           <button type='submit' className='btn btn-bg-orange mt-5' style={{ width: "200px" }} disabled={loading}>
+                    {loading ? ( // Conditional rendering for loading popup
+                                        <>
+                                            Update &nbsp; &nbsp;
+                                            <div className="spinner-border text-info spinner-border-sm scaleonload"></div>
+                                        </>
+                                    ) : (
+                                        "Update"
+                                    )}
+                    </button>
+                    </>
+                    )}
+                 
                 </form>
                     
 
+                </div>
+            </div>
+
+            <div className='success-alert' id='alert'>
+                <div className='message'>
+                <div className='d-flex justify-content-center'>
+                    <CiCircleCheck  className='icon'/>
+                </div>
+                    <p className='pt-3'>Employee Access Added Successfully</p>
                 </div>
             </div>
         </>

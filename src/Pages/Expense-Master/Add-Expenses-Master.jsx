@@ -34,7 +34,7 @@ const Add_Expenses_Master = () => {
         })
             .then(res => {
                 console.log('Expense Updated Successfully')
-                navigate('/expenses-master')
+                navigate(`/expenses-master/${employeeId}`)
             })
             .catch(err => console.log(err));
     };

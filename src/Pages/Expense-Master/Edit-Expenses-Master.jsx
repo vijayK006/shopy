@@ -54,7 +54,7 @@ console.log(`delete id is ${deleteid}`)
             })
                 .then(res => {
                     console.log('Expense Updated Successfully')
-                    navigate('/expenses-master')
+                    navigate(`/expenses-master/${employeeId}`)
                 })
                 .catch(err => console.log(err));
 

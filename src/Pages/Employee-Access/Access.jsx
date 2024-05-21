@@ -8,6 +8,8 @@ import { CiCircleCheck } from "react-icons/ci";
 
 const Access = () => {
     const [getemployenames, setGetemployenames] = useState([]);
+    const [loading, setLoading] = useState(false);
+
     const [valueData, setValueData] = useState({
         employee_id: '',
 
@@ -34,6 +36,8 @@ const Access = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoading(true);
+
 
         const formData = new FormData();
 
@@ -69,6 +73,12 @@ const Access = () => {
                 console.log('Employee Access Added Successfully')
                 const alert = document.getElementById('alert');
                 alert.classList.add('open-alert')
+
+                setTimeout(() => {
+                    alert.classList.remove('open-alert')
+                    setLoading(false);
+
+                }, 2000);
             })
             .catch(err => console.log(err));
     };
@@ -128,6 +138,9 @@ const Access = () => {
                         </div>
                         <div className='col-md-4 py-2' />
                         <div className='col-md-4 py-2' />
+
+                        {valueData.employee_id !== "" && (
+                            <>
                         <div className='col-md-12 py-3'>
                             <p>Firm Master</p>
                             <div className='row'>
@@ -236,7 +249,7 @@ const Access = () => {
                             </div>
                         </div>
 
-                        <div className='col-md-12 py-3'>
+                        <div className='col-md-12 py-3 d-none'>
                             <p>Expense Master</p>
                             <div className='row'>
 
@@ -271,7 +284,23 @@ const Access = () => {
                             </div>
                         </div>
 
-                        <button type='submit' className='btn btn-bg-orange mt-5' style={{ width: "200px" }} >Submit</button>
+                      
+                            <button type='submit' className='btn btn-bg-orange mt-5' style={{ width: "200px" }} disabled={loading}>
+                                {loading ? ( // Conditional rendering for loading popup
+                                    <>
+                                        Submit &nbsp; &nbsp;
+                                        <div className="spinner-border text-info spinner-border-sm scaleonload"></div>
+                                    </>
+                                ) : (
+                                    "Submit"
+                                )}
+                            </button>
+                            </>
+                        )}
+
+
+
+
                     </form>
 
 
@@ -280,9 +309,9 @@ const Access = () => {
 
             <div className='success-alert' id='alert'>
                 <div className='message'>
-                <div className='d-flex justify-content-center'>
-                    <CiCircleCheck  className='icon'/>
-                </div>
+                    <div className='d-flex justify-content-center'>
+                        <CiCircleCheck className='icon' />
+                    </div>
                     <p className='pt-3'>Employee Access Added Successfully</p>
                 </div>
             </div>
