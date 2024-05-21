@@ -38,18 +38,6 @@ const Edit_Client_Master = () => {
         setCountryid(defaultCountry.id);
     }, []);
 
-    useEffect(() => {
-        axios.get('https://digitalshopee.online/api/client/get-client.php')
-            .then(res => {
-                const migratefirm = res.data.map(client => ({ phone: client.phone, id: client.id }))
-                setGetFirmMobilenumber(migratefirm)
-                console.log(migratefirm)
-            })
-            .catch(err => {
-                console.error('Error fetching data:', err);
-            });
-    }, []);
-
     const [valueData, setValueData] = useState({
         address: '',
         adhaar: '',
@@ -187,17 +175,6 @@ const Edit_Client_Master = () => {
             return;
         }
 
-        const existingFirm = getFirmMobilenumber.find(firm => firm.phone === valueData.phone);
-        if (existingFirm) {
-            if (existingFirm.id === id) {
-                setLoading(true);
-            } else {
-                setAlertphone("This mobile number already exists. Please enter a different mobile number.");
-                setLoading(false);
-                return;
-            }
-        }
-
         const regnumber = /^[0-9]{10}$/;
         if (regnumber.test(valueData.phone)) {
             setAlertphone("");
@@ -209,23 +186,6 @@ const Edit_Client_Master = () => {
             return;
         } else {
             setAlertphone("Mobile number should be 10 digits (no letters and spaces allowed).");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        }
-
-
-        const regemail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (regemail.test(valueData.email)) {
-            setAlertemail("");
-            setLoading(true);
-        } else if (valueData.email === "") {
-            setAlertemail("Please enter email-id");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        } else if (!regemail.test(valueData.email)) {
-            setAlertemail("Email-id is not valid");
             //   e.preventDefault();
             setLoading(false);
             return;
@@ -366,7 +326,6 @@ const Edit_Client_Master = () => {
                             <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Email ID</label>
                                 <input type='email' className='form-control' value={valueData.email} name='email' placeholder='Please enter email-id' onChange={handleChange} />
-                                <p className='warning'>{alertemail}</p>
                          
                             </div>
 

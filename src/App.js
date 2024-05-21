@@ -47,6 +47,8 @@ import TargetReport from './Pages/Reports/Target-Report';
 import ExpenseReport from './Pages/Reports/Expense-Report';
 import Update_Access from "./Pages/Employee-Access/Update-Access";
 import EmployeeLogin from "./Pages/EmployeeLogin";
+import Leadgeneration from "./Pages/Lead-Generation/Lead-generation";
+import Add_lead_generation from "./Pages/Lead-Generation/Add-lead-generation";
 
 
 const App = () => {
@@ -125,6 +127,9 @@ const App = () => {
           <Route path="/target-report/:employeeId" element={<ProtectRoute Component={TargetReport} />} />
           <Route path="/expense-report/:employeeId" element={<ProtectRoute Component={ExpenseReport} />} />
 
+{/* Lead Generation */}
+<Route path="/lead-generation/:employeeId" element={<ProtectRoute Component={Leadgeneration} />} />
+<Route path="/add-lead-generation/:employeeId" element={<ProtectRoute Component={Add_lead_generation} />} />
         </Routes>
       </BrowserRouter>
     </>

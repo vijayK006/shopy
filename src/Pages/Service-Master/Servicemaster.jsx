@@ -48,18 +48,18 @@ const Servicemaster = () => {
     }, []);
 
     const downloadExcel = () => {
-        
-    const transformedData = apiDatas.map(({id, ...rest }) => rest);
 
-    const worksheet = XLSX.utils.json_to_sheet(transformedData);
+        const transformedData = apiDatas.map(({ id, ...rest }) => rest);
+
+        const worksheet = XLSX.utils.json_to_sheet(transformedData);
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, 'Data');
-    
+
         const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
         const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
-    
+
         saveAs(blob, 'service-master.xlsx');
-      };
+    };
 
 
 
@@ -159,8 +159,8 @@ const Servicemaster = () => {
             document: item.documents,
         })) : [];
 
-        
-    
+
+
 
     return (
         <>
@@ -169,20 +169,20 @@ const Servicemaster = () => {
             <div className='main-content' id='mainbody'>
 
                 <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/service-master' className='t-theme-color'>Service Master</Link></p>
+                    <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to='' className='t-theme-color'>Service Master</Link></p>
 
-<div className='d-flex gap-2'>
-<button type="button" className='download-btn' onClick={downloadExcel}><MdOutlineDownloading className='icon'/> Export to Excel</button>
+                    <div className='d-flex gap-2'>
+                        <button type="button" className='download-btn' onClick={downloadExcel}><MdOutlineDownloading className='icon' /> Export to Excel</button>
 
-                    {role === 'admin' ? (
-                        <Link to={`/add-service-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Service Master</Link>
-                    ) : (
-                        permissions.add_service === "yes" && (
+                        {role === 'admin' ? (
                             <Link to={`/add-service-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Service Master</Link>
-                        )
+                        ) : (
+                            permissions.add_service === "yes" && (
+                                <Link to={`/add-service-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Service Master</Link>
+                            )
 
-                    )}
-</div>
+                        )}
+                    </div>
 
 
 

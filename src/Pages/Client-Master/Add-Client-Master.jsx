@@ -29,11 +29,7 @@ const Add_Client_Master = () => {
     const [other_photoImg, setOther_photoimg] = useState(null);
 
     const [alertname, setAlertname] = useState();
-    const [alertprofession, setAlertprofession] = useState();
     const [alertphone, setAlertphone] = useState();
-    const [alertemail, setAlertemail] = useState();
-    const [getClientMobilenumber, setGetClientMobilenumber] = useState([])
-
 
 
     useEffect(() => {
@@ -43,17 +39,6 @@ const Add_Client_Master = () => {
 
     }, []);
 
-    useEffect(() => {
-        axios.get('https://digitalshopee.online/api/client/get-client.php')
-          .then(res => {
-            const migratephone = res.data.map(client=> client.phone)
-            setGetClientMobilenumber(migratephone)
-            console.log(migratephone)
-          })
-          .catch(err => {
-            console.error('Error fetching data:', err);
-          });
-      }, []);
 
     const [valueData, setValueData] = useState({
         address: '',
@@ -138,12 +123,6 @@ const Add_Client_Master = () => {
         }
 
 
-        if (getClientMobilenumber.includes(valueData.phone)) {
-            setAlertphone("This mobile number already exists. Please enter a different mobile number.");
-            setLoading(false);
-            return;
-        }
-
         const regnumber = /^[0-9]{10}$/;
         if (regnumber.test(valueData.phone)) {
             setAlertphone("");
@@ -160,22 +139,6 @@ const Add_Client_Master = () => {
             return;
         }
 
-
-        const regemail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (regemail.test(valueData.email)) {
-            setAlertemail("");
-            setLoading(true);
-        } else if (valueData.email === "") {
-            setAlertemail("Please enter email-id");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        } else if (!regemail.test(valueData.email)) {
-            setAlertemail("Email-id is not valid");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        }
 
 
 
@@ -340,7 +303,7 @@ const Add_Client_Master = () => {
                                 <label className='text-sm font-w-500 p-2'> Email ID</label>
                                 <input type='text' className='form-control' value={valueData.email} name='email' placeholder='Please enter email-id' onChange={handleChange} />
 
-                                <p className='warning'>{alertemail}</p>
+                                {/* <p className='warning'>{alertemail}</p> */}
                             </div>
 
                             <div className='col-md-3 py-2'>
