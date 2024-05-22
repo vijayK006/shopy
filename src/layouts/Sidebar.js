@@ -77,7 +77,7 @@ const Sidebar = () => {
             <NavLink className="disble-decoration" to={`/service-master/${employeeId}`}><li className={`items ${currentPage.startsWith('/service-master') || currentPage.startsWith('/add-service-master') || currentPage.startsWith('/edit-service-master') ? 'active' : ''}`}><IoSettingsOutline className="icons" /> <span className='resp'>Service Master</span></li></NavLink>
 
   {/* Lead Generation */}
-  <NavLink className="disble-decoration" to={`/lead-generation/${employeeId}`}><li className={`items ${currentPage.startsWith('/lead-generation/') || currentPage.startsWith('/add-lead-generation') ? 'active' : ''}`}><IoSettingsOutline className="icons" /> <span className='resp'>Lead Generation</span></li></NavLink>
+  <NavLink className="disble-decoration" to={`/lead-generation/${employeeId}`}><li className={`items ${currentPage.startsWith('/lead-generation/') || currentPage.startsWith('/add-lead-generation') || currentPage.startsWith('/edit-lead-generation') ? 'active' : ''}`}><IoSettingsOutline className="icons" /> <span className='resp'>Lead Generation</span></li></NavLink>
 
             {/* Employee Master */}
             {role === 'admin' ? (

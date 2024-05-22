@@ -150,7 +150,7 @@ const Add_Target_Out = () => {
                                     <input type='date' className='form-control' value={globalFromDate} name='from_date' placeholder='' onChange={handleGlobalChange} />
                                 </div>
 
-                                <div className='col-md-3 py-1'>
+                                <div className='col-md-3 py-1 d-none'>
                                     <label className='text-sm font-w-500 p-2'>Target To Date</label>
                                     <input type='date' className='form-control' value={globalToDate} name='to_date' placeholder='' onChange={handleGlobalChange} />
                                 </div>
