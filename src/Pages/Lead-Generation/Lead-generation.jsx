@@ -93,7 +93,7 @@ const Leadgeneration = () => {
             renderCell: (params) => (
                 <>
                    
-            <Link to={`/edit-service-master/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
+            <Link to={`/edit-lead-generation/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
               <FaRegEdit  style={{fontSize:'15px', marginBottom:'4px'}}/>  View / Edit 
               </Link>
     
@@ -104,9 +104,6 @@ const Leadgeneration = () => {
               <Link  className='btn btn-outline-danger btn-sm' onClick={() => handleDelete(params.row.id)}>
                <AiOutlineDelete style={{fontSize:'15px', marginBottom:'4px'}}/> Delete
               </Link>
-    
-
-                   
 
                 </>
 

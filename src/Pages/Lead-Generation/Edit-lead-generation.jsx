@@ -5,14 +5,15 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import axios from 'axios';
 
-const Add_lead_generation = () => {
+const Edit_Lead_generation = () => {
+    const { id } = useParams();
     const { employeeId } = useParams();
 
-    const[getServiceName, setGetServiceName] = useState([]);
-    const [ ackNumber, setAckNumber] =  useState([])
+    const role = localStorage.getItem('role');
 
+    const [acknumber, setAcknumber] =useState([])
+    const [getServiceName, setGetServiceName] =useState([])
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
 
     const [alertleadname, setAlertleadname] = useState();
     const [alertphonenumber, setAlertphonenumber] = useState();
@@ -22,8 +23,11 @@ const Add_lead_generation = () => {
     const [alertworkdate, setAlertworkdate] = useState();
     const [alertaoknumber, setAlertaoknumber] = useState();
 
+    const navigate = useNavigate();
+
+
     const [valueData, setValueData] = useState({
-        name: '',
+          name: '',
         phone: '',
         service: '',
         document: '',
@@ -32,8 +36,56 @@ const Add_lead_generation = () => {
         work_date: '',
         ack_no: '',
         date: '',
-
     })
+
+    useEffect(() => {
+        axios.get('https://digitalshopee.online/api/lead-generation/get-lead.php')
+            .then(res => {
+                const migrateackno = res.data.map(lead => ({ ack_no: lead.ack_no, id: lead.id }))
+                setAcknumber(migrateackno)
+                console.log(migrateackno)
+            })
+            .catch(err => {
+                console.error('Error fetching data:', err);
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get('https://digitalshopee.online/api/service/get-service.php')
+            .then(res => {
+                const migrateservicename = res.data.map(service => service.name)
+                setGetServiceName(migrateservicename)
+            })
+            .catch(err => {
+                console.error('Error fetching data:', err);
+            });
+    }, []);
+
+
+    useEffect(() => {
+        axios.get(`https://digitalshopee.online/api/lead-generation/get-lead-id.php?id=${id}`)
+            .then(response => {
+
+                const firmData = response.data[0]; // Assuming response.data contains the firm data
+                setValueData({
+                    name: firmData.name,
+                    phone: firmData.phone,
+                    service: firmData.service,
+                    document: firmData.document,
+                    payment: firmData.payment,
+                    status: firmData.status,
+                    work_date: firmData.work_date,
+                    ack_no: firmData.ack_no,
+                    date: firmData.date,
+                 
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, [id]);
+
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -50,95 +102,12 @@ const Add_lead_generation = () => {
         formData.append('ack_no', valueData.ack_no);
         formData.append('date', valueData.date);
 
-      
 
-        if (!valueData.name === "") {
-            setAlertleadname("");
-            setLoading(true);
-        } else if (valueData.name === "") {
-            setAlertleadname("Please fill your lead name");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        } else{
-            setAlertleadname("");
-            setLoading(true);
-        }
-
-        
-        const regnumber = /^[0-9]{10}$/;
-        if (regnumber.test(valueData.phone)) {
-            setAlertphonenumber("");
-            setLoading(true);
-        } else if (!regnumber.test(valueData.phone) && valueData.phone === "") {
-            setAlertphonenumber("Please enter your mobile Number");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        } else {
-            setAlertphonenumber("Mobile number should be 10 digits (no letters and spaces allowed).");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        }
-
-        if (!valueData.service === "") {
-            setAlertservice("");
-            setLoading(true);
-        } else if (valueData.service === "") {
-            setAlertservice("Please select service");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        } else{
-            setAlertservice("");
-            setLoading(true);
-        }
-
-        if (!valueData.document === "") {
-            setAlertdocx("");
-            setLoading(true);
-        } else if (valueData.document === "") {
-            setAlertdocx("Please select document status");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        } else{
-            setAlertdocx("");
-            setLoading(true);
-        }
-
-        if (!valueData.payment === "") {
-            setAlertpayment("");
-            setLoading(true);
-        } else if (valueData.payment === "") {
-            setAlertpayment("Please select payment status");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        } else{
-            setAlertpayment("");
-            setLoading(true);
-        }
-
-        if (!valueData.work_date === "") {
-            setAlertworkdate("");
-            setLoading(true);
-        } else if (valueData.work_date === "") {
-            setAlertworkdate("Please select work date");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        } else{
-            setAlertworkdate("");
-            setLoading(true);
-        }
-
-        const regacknumber = /^\d{1,20}$/;
-        if (regacknumber.test(valueData.ack_no)) {
+        const regnumbercode = /^\d{1,20}$/;
+        if (regnumbercode.test(valueData.ack_no)) {
             setAlertaoknumber("");
             setLoading(true);
-        } else if (!regacknumber.test(valueData.ack_no) && valueData.ack_no === "") {
+        } else if (!regnumbercode.test(valueData.ack_no) && valueData.ack_no === "") {
             setAlertaoknumber("Please enter new acknowledge number");
             //   e.preventDefault();
             setLoading(false);
@@ -150,53 +119,42 @@ const Add_lead_generation = () => {
             return;
         }
 
-        if (ackNumber.includes(valueData.ack_no)) {
-            setAlertaoknumber("This acknowledge number is already exists. Please enter a different acknowledge number");
-            setLoading(false);
-            return;
+        const existingClient = acknumber.find(lead => lead.ack_no === valueData.ack_no);
+        if (existingClient) {
+            if (existingClient.id === id) {
+                setLoading(true);
+            } else {
+                setAlertaoknumber("This acknowledge number is already exists. Please enter a different acknowledge number.");
+                setLoading(false);
+                return;
+            }
+        }
+       
+
+        const confirmUpdate = window.confirm("Are you sure you want to update this lead generation");
+        if (confirmUpdate) {
+            axios.post(`https://digitalshopee.online/api/lead-generation/edit-lead.php?id=${id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then(res => {
+                    console.log('Lead Updated Successfully')
+                    navigate(`/lead-generation/${employeeId}`)
+                })
+                .catch(err => console.log(err));
+
         }
 
-
-        axios.post('https://digitalshopee.online/api/lead-generation/add-lead.php', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        })
-            .then(res => {
-                navigate(`/lead-generation/${employeeId}`)
-                console.log('Lead generation Submitted Successfully')
-            })
-            .catch(err => console.log(err));
     };
 
-    useEffect(() => {
-        axios.get('https://digitalshopee.online/api/lead-generation/get-lead.php')
-            .then(res => {
-                const migrateAckno = res.data.map(lead => lead.ack_no)
-                setAckNumber(migrateAckno)
-                console.log(migrateAckno)
-            })
-            .catch(err => {
-                console.error('Error fetching data:', err);
-            });
-    }, []);
 
-
-    useEffect(() => {
-        axios.get('https://digitalshopee.online/api/service/get-service.php')
-            .then(res => {
-                const migrateservicename = res.data.map(service => service.name)
-                setGetServiceName(migrateservicename)
-            })
-            .catch(err => {
-                console.error('Error fetching data:', err);
-            });
-    }, []);
-
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setValueData({ ...valueData, [name]: value });
+        setValueData({   ...valueData,   [name]: value });
     };
+
 
 
     return (
@@ -204,14 +162,13 @@ const Add_lead_generation = () => {
             <Topbar />
             <Sidebar />
             <div className='main-content' id='mainbody'>
-
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to={`/lead-generation/${employeeId}`}>Lead Generation</Link> / <Link className='t-theme-color'>Add Lead Generation Details</Link></p>
+                    <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to={`/lead-generation/${employeeId}`}>Lead Generation</Link> / <Link className='t-theme-color'>Edit Lead Generation Details</Link></p>
 
                 </div>
 
                 <div className='container-fluid mb-5'>
-                    <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
                         <div className='col-md-3 py-1'>
@@ -313,13 +270,11 @@ const Add_lead_generation = () => {
 
 
                     </form>
+
                 </div>
-
-
-
             </div>
         </>
     )
 }
 
-export default Add_lead_generation
+export default Edit_Lead_generation

@@ -49,6 +49,7 @@ import Update_Access from "./Pages/Employee-Access/Update-Access";
 import EmployeeLogin from "./Pages/EmployeeLogin";
 import Leadgeneration from "./Pages/Lead-Generation/Lead-generation";
 import Add_lead_generation from "./Pages/Lead-Generation/Add-lead-generation";
+import Edit_Lead_generation from "./Pages/Lead-Generation/Edit-lead-generation";
 
 
 const App = () => {
@@ -117,7 +118,7 @@ const App = () => {
           {/* Target Master */}
           <Route path="/target-master/:employeeId" element={<ProtectRoute Component={TargetMaster} />} />
           <Route path="/add-target-master/:employeeId" element={<ProtectRoute Component={Add_Target_Master} />} />
-          <Route path="/edit-target-master/:employeeId/:id" element={<ProtectRoute Component={Edit_Target_Master} />}/>
+          <Route path="/edit-target-master/:employeeId/:id" element={<ProtectRoute Component={Edit_Target_Master} />} />
           {/* --------------- */}
           <Route path="/target-out/:employeeId" element={<ProtectRoute Component={TargetOut} />} />
           <Route path="/add-target-out/:employeeId" element={<ProtectRoute Component={Add_Target_Out} />} />
@@ -127,9 +128,10 @@ const App = () => {
           <Route path="/target-report/:employeeId" element={<ProtectRoute Component={TargetReport} />} />
           <Route path="/expense-report/:employeeId" element={<ProtectRoute Component={ExpenseReport} />} />
 
-{/* Lead Generation */}
-<Route path="/lead-generation/:employeeId" element={<ProtectRoute Component={Leadgeneration} />} />
-<Route path="/add-lead-generation/:employeeId" element={<ProtectRoute Component={Add_lead_generation} />} />
+          {/* Lead Generation */}
+          <Route path="/lead-generation/:employeeId" element={<ProtectRoute Component={Leadgeneration} />} />
+          <Route path="/add-lead-generation/:employeeId" element={<ProtectRoute Component={Add_lead_generation} />} />
+          <Route path="/edit-lead-generation/:employeeId/:id" element={<ProtectRoute Component={Edit_Lead_generation} />} />
         </Routes>
       </BrowserRouter>
     </>

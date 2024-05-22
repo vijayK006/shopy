@@ -21,7 +21,7 @@ const Add_Service_Master = () => {
     useEffect(() => {
         axios.get('https://digitalshopee.online/api/service/get-service.php')
             .then(res => {
-                const migrateservicecode = res.data.map(firm => firm.code)
+                const migrateservicecode = res.data.map(service => service.code)
                 setGetServiceCode(migrateservicecode)
                 console.log(migrateservicecode)
             })
