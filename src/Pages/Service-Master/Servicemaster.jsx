@@ -89,8 +89,8 @@ const Servicemaster = () => {
 
     const columns = [
         { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
-        { field: 'code', headerName: 'Service Code', width: 200 },
-        { field: 'name', headerName: 'Service Name', width: 200 },
+        { field: 'code', headerName: 'Service Code', width: 100 },
+        { field: 'name', headerName: 'Service Name', width: 300 },
         { field: 'amount', headerName: 'Amount', width: 150 },
         { field: 'expencse', headerName: 'Service Expencses', width: 200 },
         // { field: 'document', headerName: 'Required Documents', width: 200 },

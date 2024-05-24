@@ -79,10 +79,10 @@ const Leadgeneration = () => {
     const columns = [
         { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
         { field: 'name', headerName: 'Name', width: 200 },
-        { field: 'phone', headerName: 'Mobile no.', width: 200 },
-        { field: 'service', headerName: 'Service', width: 150 },
-        { field: 'work_date', headerName: 'Work Date', width: 200 },
-        { field: 'ack_no', headerName: 'Acknowledge no.', width: 200 },
+        { field: 'phone', headerName: 'Mobile no.', width: 100 },
+        { field: 'service', headerName: 'Service', width: 300 },
+        { field: 'work_date', headerName: 'Work Date', width: 100 },
+        { field: 'ack_no', headerName: 'Acknowledge no.', width: 100 },
         // { field: 'document', headerName: 'Required Documents', width: 200 },
         //   {   field: 'age', headerName: 'Age', type: 'number', width: 90,},
         {
@@ -125,7 +125,6 @@ const Leadgeneration = () => {
 
         
     
-
     return (
         <>
             <Topbar />
