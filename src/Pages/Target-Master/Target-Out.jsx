@@ -30,6 +30,7 @@ const TargetOut = () => {
                 if (Array.isArray(responseData)) {
                     setApiDatas(responseData);
                     calculateTotalAmount(responseData);
+                    console.log(responseData)
                 } else {
                     console.error('Invalid data format:', responseData);
                 }
