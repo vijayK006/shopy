@@ -40,9 +40,9 @@ const TargetStatus_Employee = () => {
       { field: "to_date", headerName: "To Date", width: 150 },
       { field: "service_id", headerName: "Service Name", width: 300 },
     //   { field: "employee_id", headerName: "Employe Name", width: 200 },
-      { field: "no_of_orders", headerName: "Order Qty.", width: 150 },
+      { field: "no_of_orders", headerName: "Order Qty.", width: 100 },
       { field: "total_amount", headerName: "Total Amount", width: 150 },
-      { field: "target_type", headerName: "Target Type", width: 150 },
+      { field: "target_type", headerName: "Target Type", width: 100 },
     ];
   
     const rows =

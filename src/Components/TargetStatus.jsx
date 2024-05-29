@@ -8,7 +8,7 @@ const TargetStatus = () => {
     const [apiDatas, setApiDatas] = useState([]);
     const fetchData = () => {
       axios
-        .get("https://digitalshopee.online/api/report/target-report.php")
+        .get("https://digitalshopee.online/api/target/get-target.php")
         .then((res) => {
           const responseData = res.data || [];
           if (Array.isArray(responseData)) {
