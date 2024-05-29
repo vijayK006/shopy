@@ -158,6 +158,9 @@ const Sidebar = () => {
               <p className='d-none'>NO PERMISSION FOR EMPLOYEE</p>
             )}
 
+{/* Bill Generation */}
+            <NavLink className="disble-decoration" to={`/bill/${employeeId}`}><li className={`items ${currentPage.startsWith('/bill') ? 'active' : ''}`}><IoSettingsOutline className="icons" /> <span className='resp'>Bill Generation</span></li></NavLink>
+
 
           </ul>
         </div>

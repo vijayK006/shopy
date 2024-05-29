@@ -89,12 +89,11 @@ const Servicemaster = () => {
 
     const columns = [
         { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
-        { field: 'code', headerName: 'Service Code', width: 200 },
-        { field: 'name', headerName: 'Service Name', width: 200 },
+        { field: 'code', headerName: 'Service Code', width: 100 },
+        { field: 'name', headerName: 'Service Name', width: 300 },
         { field: 'amount', headerName: 'Amount', width: 150 },
-        { field: 'expencse', headerName: 'Service Expencses', width: 200 },
-        // { field: 'document', headerName: 'Required Documents', width: 200 },
-        //   {   field: 'age', headerName: 'Age', type: 'number', width: 90,},
+        ...(role === 'admin' ? [{ field: 'expense', headerName: 'Service Expenses', width: 200 }] : []),
+
         {
             field: 'actions',
             headerName: 'Actions',
@@ -148,6 +147,7 @@ const Servicemaster = () => {
 
     ];
 
+
     const rows = apiDatas.length > 0 ?
         apiDatas.map((item, index) => ({
             id: item.id || index,
@@ -155,7 +155,8 @@ const Servicemaster = () => {
             code: item.code,
             name: item.name,
             amount: item.amount,
-            expencse: item.expense,
+            // expencse: item.expense,
+            ...(role === 'admin' ? { expense: item.expense } : {}),
             document: item.documents,
         })) : [];
 

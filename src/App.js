@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
@@ -50,6 +50,7 @@ import EmployeeLogin from "./Pages/EmployeeLogin";
 import Leadgeneration from "./Pages/Lead-Generation/Lead-generation";
 import Add_lead_generation from "./Pages/Lead-Generation/Add-lead-generation";
 import Edit_Lead_generation from "./Pages/Lead-Generation/Edit-lead-generation";
+import Bill from "./Pages/Bill";
 
 
 const App = () => {
@@ -132,6 +133,9 @@ const App = () => {
           <Route path="/lead-generation/:employeeId" element={<ProtectRoute Component={Leadgeneration} />} />
           <Route path="/add-lead-generation/:employeeId" element={<ProtectRoute Component={Add_lead_generation} />} />
           <Route path="/edit-lead-generation/:employeeId/:id" element={<ProtectRoute Component={Edit_Lead_generation} />} />
+
+          {/* Bill */}
+          <Route path="/Bill/:employeeId" element={<ProtectRoute Component={Bill} />} />
         </Routes>
       </BrowserRouter>
     </>
