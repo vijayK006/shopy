@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 
-const TargetStatus = () => {
+const TargetStatus_Employee = () => {
+    const { employeeId } = useParams();
     const [apiDatas, setApiDatas] = useState([]);
     const fetchData = () => {
       axios
-        .get("https://digitalshopee.online/api/report/target-report.php")
+        .get(`https://digitalshopee.online/api/other/employee-target-api.php?id=${employeeId}`)
         .then((res) => {
           const responseData = res.data || [];
           if (Array.isArray(responseData)) {
@@ -36,8 +38,8 @@ const TargetStatus = () => {
       { field: "displayOrder", headerName: "Sl.No", width: 70 },
       { field: "from_date", headerName: "From Date", width: 150 },
       { field: "to_date", headerName: "To Date", width: 150 },
-      { field: "service_id", headerName: "Service Name", width: 200 },
-      { field: "employee_id", headerName: "Employe Name", width: 200 },
+      { field: "service_id", headerName: "Service Name", width: 300 },
+    //   { field: "employee_id", headerName: "Employe Name", width: 200 },
       { field: "no_of_orders", headerName: "Order Qty.", width: 150 },
       { field: "total_amount", headerName: "Total Amount", width: 150 },
       { field: "target_type", headerName: "Target Type", width: 150 },
@@ -50,7 +52,7 @@ const TargetStatus = () => {
           displayOrder: index + 1,
           // target_type: item.target_type,
           target_type: item.target_type === 'tin' ? 'In' : item.target_type === 'tout' ? 'Out' : 'Unknown',
-          employee_id: item.employee_name,
+        //   employee_id: item.employee_name,
           service_id: item.service_id,
           no_of_orders: item.no_of_orders,
           total_amount: item.total_amount,
@@ -79,4 +81,4 @@ const TargetStatus = () => {
   )
 }
 
-export default TargetStatus
+export default TargetStatus_Employee

@@ -10,10 +10,13 @@ import { GoPerson } from "react-icons/go";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineSettingsInputComponent } from "react-icons/md";
 import TargetStatus from '../Components/TargetStatus'
+import TargetStatus_Employee from '../Components/TargetStatus-Employe'
 
 
 const Home = () => {
   const {employeeId} = useParams();
+  const role = localStorage.getItem('role')
+
   const [firmmastercount, setFirmmasterCount] = useState([]);
   const [clientmastercount, setClientmastercount] = useState([]);
   const [servicemastercount, setServicemastercount] = useState([]);
@@ -115,8 +118,12 @@ const Home = () => {
             </Admincards>
 
           </div>
+          {role === 'admin' ? (
+                      <TargetStatus/>
+          ):(
+            <TargetStatus_Employee/>
+          )}
 
-          <TargetStatus/>
 
         </div>
 
