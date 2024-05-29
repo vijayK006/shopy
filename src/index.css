@@ -89,6 +89,13 @@ input:focus {
     /* Darker color on hover */
 }
 
+.css-de9k3v-MuiDataGrid-selectedRowCount, .css-eozsn7{
+    visibility: hidden !important;
+}
+
+.css-az8st9-MuiDataGrid-root .MuiDataGrid-row.Mui-selected, .css-g1du22 .MuiDataGrid-row.Mui-selected {
+    background-color: #ff5f1a0a;
+}
 /* -------------- */
 
 /* ---------------------------------------------------------------------------------------------------------------------- */

@@ -313,8 +313,7 @@ const TargetReport = () => {
               <LuIndianRupee />
             </p>
             <p>
-              Bal Orders: {totalOrdersTin - totalOrdersTout} | Bal Amount:
-              {totalAmountTin - totalAmountTout} <LuIndianRupee />
+              Bal Orders: {totalOrdersTin - totalOrdersTout} | Bal Amount: {totalAmountTin - totalAmountTout} <LuIndianRupee />
             </p>
           </div>
         </div>
