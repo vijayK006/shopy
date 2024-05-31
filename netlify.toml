@@ -2,10 +2,6 @@
   command = "CI='' npm run build"
   publish = "build"
 
-  [[plugins]]
-  package = "@netlify/plugin-memory-management"
-
   [build.environment]
   NODE_OPTIONS = "--max_old_space_size=4096"
 
-  
