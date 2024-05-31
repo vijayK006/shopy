@@ -1,88 +1,3 @@
-// import React, { useEffect, useState } from 'react';
-// import { DataGrid } from '@mui/x-data-grid';
-
-// import axios from 'axios';
-// import { useParams } from 'react-router-dom';
-
-
-// const TargetStatus_Employee = () => {
-//     const { employeeId } = useParams();
-//     const [apiDatas, setApiDatas] = useState([]);
-//     const fetchData = () => {
-//       axios
-//         .get(`https://digitalshopee.online/api/other/employee-target-api.php?id=${employeeId}`)
-//         .then((res) => {
-//           const responseData = res.data || [];
-//           if (Array.isArray(responseData)) {
-//             setApiDatas(responseData);
-//             console.log(responseData)
-
-//           } else {
-//             console.error("Invalid data format:", responseData);
-//           }
-//         })
-//         .catch((err) => {
-//           console.error("Error fetching data:", err);
-//         });
-//     };
-
-
-
-
-//     useEffect(() => {
-//       fetchData();
-//     }, []);
-
-
-//     const columns = [
-//       { field: "displayOrder", headerName: "Sl.No", width: 70 },
-//       { field: "from_date", headerName: "From Date", width: 150 },
-//       { field: "to_date", headerName: "To Date", width: 150 },
-//       { field: "service_id", headerName: "Service Name", width: 300 },
-//     //   { field: "employee_id", headerName: "Employe Name", width: 200 },
-//       { field: "no_of_orders", headerName: "Order Qty.", width: 100 },
-//       { field: "total_amount", headerName: "Total Amount", width: 150 },
-//       { field: "target_type", headerName: "Target Type", width: 100 },
-//     ];
-
-//     const rows =
-//       apiDatas.length > 0
-//         ? apiDatas.map((item, index) => ({
-//           id: item.id || index,
-//           displayOrder: index + 1,
-//           // target_type: item.target_type,
-//           target_type: item.target_type === 'tin' ? 'In' : item.target_type === 'tout' ? 'Out' : 'Unknown',
-//         //   employee_id: item.employee_name,
-//           service_id: item.service_id,
-//           no_of_orders: item.no_of_orders,
-//           total_amount: item.total_amount,
-//           from_date: item.from_date,
-//           to_date: item.to_date,
-//         }))
-//         : [];
-
-//     const filterbtn = () => {
-//       const filtermenu = document.getElementById("filtermenu");
-//       filtermenu.classList.toggle("openfilter");
-//     };
-
-//   return (
-//     <div>
-//        <div style={{ height: '60vh', width: '100%' }} className="bg-white pt-3">
-//                     <DataGrid
-//                         rows={rows}
-//                         columns={columns}
-//                         pageSize={5} // Specify the page size
-//                     />
-
-
-//                 </div>
-//     </div>
-//   )
-// }
-
-// export default TargetStatus_Employee
-
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
@@ -116,9 +31,8 @@ const TargetStatus_Employee = () => {
 
   const fetchData = () => {
     axios
-      .get(`https://digitalshopee.online/api/report/target-report.php`)
-    
-      // https://digitalshopee.online/api/other/employee-target-api.php?id=${employeeId}`)
+      .get(`https://digitalshopee.online/api/other/employee-target-api.php?id=${employeeId}`)
+      // https://digitalshopee.online/api/other/employee-target-api.php?id=${employeeId}
       .then((res) => {
         const responseData = res.data || [];
         if (Array.isArray(responseData)) {
@@ -137,20 +51,46 @@ const TargetStatus_Employee = () => {
       .catch((err) => {
         console.error("Error fetching data:", err);
       });
-
-      
   };
+
+
+
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   
   useEffect(() => {
-    fetchData();
-    // handleFilter();
+    // Get the current date
+    const currentDate = new Date();
+    
+    // Get the first day of the current month
+    const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    
+    // Get the last day of the current month
+    const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
+    // Format dates to YYYY-MM-DD
+    const formatDate = (date) => {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
+
+    // Set the start date and end date
+    setStartDate(formatDate(firstDayOfMonth));
+    setEndDate(formatDate(lastDayOfMonth));
   }, []);
+
+
 
   const loadall = () => {
     fetchData();
-    setStartDate("00-00-0000");
-    setEndDate("00-00-0000");
+        setStartDate(startDate);
+    setEndDate(endDate);
+    // setEndDate("00-00-0000");
     setSelectedService("");
     setTotalAmountTin(0);
     setTotalOrdersTin(0);
@@ -314,6 +254,7 @@ const TargetStatus_Employee = () => {
 
         <div className="filter-card shadow p-2 b-radius-10" id="filtermenu">
           <div className="d-flex gap-3 align-items-center">
+      
             <div className="form-head">
               <input
                 type="date"

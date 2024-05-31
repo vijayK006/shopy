@@ -134,26 +134,16 @@ const Add_lead_generation = () => {
             setLoading(true);
         }
 
-        const regacknumber = /^\d{1,20}$/;
-        if (regacknumber.test(valueData.ack_no)) {
-            setAlertaoknumber("");
-            setLoading(true);
-        } else if (!regacknumber.test(valueData.ack_no) && valueData.ack_no === "") {
-            setAlertaoknumber("Please enter new acknowledge number");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        } else {
-            setAlertaoknumber("Acknowledge number should not be more then 20 digits");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        }
 
-        if (ackNumber.includes(valueData.ack_no)) {
-            setAlertaoknumber("This acknowledge number is already exists. Please enter a different acknowledge number");
+        if (valueData.ack_no === "") {
+            setAlertaoknumber("Please enter new acknowledge number");
             setLoading(false);
             return;
+
+        } else{
+            setAlertaoknumber("");
+            //   e.preventDefault();
+            setLoading(true);
         }
 
 
@@ -278,7 +268,7 @@ const Add_lead_generation = () => {
 
                             <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Acknowledge Number</label>
-                                <input type='number' className='form-control' value={valueData.ack_no} name='ack_no' placeholder='Please enter acknowledge number' onChange={handleChange} />
+                                <input type='text' className='form-control' value={valueData.ack_no} name='ack_no' placeholder='Please enter acknowledge number' onChange={handleChange} />
                          <p className='warning'>{alertaoknumber}</p>
                           
                             </div>

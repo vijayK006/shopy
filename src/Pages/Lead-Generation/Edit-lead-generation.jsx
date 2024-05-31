@@ -11,7 +11,6 @@ const Edit_Lead_generation = () => {
 
     const role = localStorage.getItem('role');
 
-    const [acknumber, setAcknumber] =useState([])
     const [getServiceName, setGetServiceName] =useState([])
     const [loading, setLoading] = useState(false);
 
@@ -37,18 +36,6 @@ const Edit_Lead_generation = () => {
         ack_no: '',
         date: '',
     })
-
-    useEffect(() => {
-        axios.get('https://digitalshopee.online/api/lead-generation/get-lead.php')
-            .then(res => {
-                const migrateackno = res.data.map(lead => ({ ack_no: lead.ack_no, id: lead.id }))
-                setAcknumber(migrateackno)
-                console.log(migrateackno)
-            })
-            .catch(err => {
-                console.error('Error fetching data:', err);
-            });
-    }, []);
 
     useEffect(() => {
         axios.get('https://digitalshopee.online/api/service/get-service.php')
@@ -103,33 +90,17 @@ const Edit_Lead_generation = () => {
         formData.append('date', valueData.date);
 
 
-        const regnumbercode = /^\d{1,20}$/;
-        if (regnumbercode.test(valueData.ack_no)) {
-            setAlertaoknumber("");
-            setLoading(true);
-        } else if (!regnumbercode.test(valueData.ack_no) && valueData.ack_no === "") {
+        if (valueData.ack_no === "") {
             setAlertaoknumber("Please enter new acknowledge number");
-            //   e.preventDefault();
             setLoading(false);
             return;
-        } else {
-            setAlertaoknumber("Acknowledge number should not be more then 20 digits");
+
+        } else{
+            setAlertaoknumber("");
             //   e.preventDefault();
-            setLoading(false);
-            return;
+            setLoading(true);
         }
 
-        const existingClient = acknumber.find(lead => lead.ack_no === valueData.ack_no);
-        if (existingClient) {
-            if (existingClient.id === id) {
-                setLoading(true);
-            } else {
-                setAlertaoknumber("This acknowledge number is already exists. Please enter a different acknowledge number.");
-                setLoading(false);
-                return;
-            }
-        }
-       
 
         const confirmUpdate = window.confirm("Are you sure you want to update this lead generation");
         if (confirmUpdate) {
@@ -235,8 +206,7 @@ const Edit_Lead_generation = () => {
 
                             <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Acknowledge Number</label>
-                                <input type='number' className='form-control' value={valueData.ack_no} name='ack_no' placeholder='Please enter acknowledge number' onChange={handleChange} />
-                         <p className='warning'>{alertaoknumber}</p>
+                                <input type='text' className='form-control' value={valueData.ack_no} name='ack_no' placeholder='Please enter acknowledge number' onChange={handleChange} />
                           
                             </div>
 
