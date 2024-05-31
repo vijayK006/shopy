@@ -112,11 +112,13 @@ const TargetStatus_Employee = () => {
   const [totalAmountTout, setTotalAmountTout] = useState(0);
   const [totalOrdersTout, setTotalOrdersTout] = useState(0);
   const [selectedService, setSelectedService] = useState("");
-  const [selectedEmployee, setSelectedEmployee] = useState('');
+  const [selectedEmployee, setSelectedEmployee] = useState(employeeId);
 
   const fetchData = () => {
     axios
-      .get(`https://digitalshopee.online/api/other/employee-target-api.php?id=${employeeId}`)
+      .get(`https://digitalshopee.online/api/report/target-report.php`)
+    
+      // https://digitalshopee.online/api/other/employee-target-api.php?id=${employeeId}`)
       .then((res) => {
         const responseData = res.data || [];
         if (Array.isArray(responseData)) {
@@ -135,13 +137,14 @@ const TargetStatus_Employee = () => {
       .catch((err) => {
         console.error("Error fetching data:", err);
       });
+
+      
   };
 
-
-
-
+  
   useEffect(() => {
     fetchData();
+    // handleFilter();
   }, []);
 
   const loadall = () => {
@@ -253,7 +256,7 @@ const TargetStatus_Employee = () => {
     { field: "from_date", headerName: "From Date", width: 150 },
     { field: "to_date", headerName: "To Date", width: 150 },
     { field: "service_id", headerName: "Service Name", width: 150 },
-    // { field: "employee_id", headerName: "Employe Name", width: 150 },
+    { field: "employee_id", headerName: "Employe Name", width: 150 },
     { field: "no_of_orders", headerName: "Order Qty.", width: 150 },
     { field: "total_amount", headerName: "Total Amount", width: 150 },
     { field: "target_type", headerName: "Target Type", width: 150 },
@@ -266,7 +269,7 @@ const TargetStatus_Employee = () => {
         displayOrder: index + 1,
         // target_type: item.target_type,
         target_type: item.target_type === 'tin' ? 'In' : item.target_type === 'tout' ? 'Out' : 'Unknown',
-        // employee_id: item.employee_name,
+        employee_id: item.employee_id,
         service_id: item.service_id,
         no_of_orders: item.no_of_orders,
         total_amount: item.total_amount,
@@ -347,6 +350,15 @@ const TargetStatus_Employee = () => {
               ))}
             </select>
           </div>
+
+          <div className='form-head'>
+              <select value={selectedEmployee} onChange={(e) => setSelectedEmployee(e.target.value)} className='filter-fields'>
+                <option value="">All Employees</option>
+                {employeeNames.filter(Boolean).map(employee => (
+                  <option key={employee} value={employee}>{employee}</option>
+                ))}
+              </select>
+            </div>
 
           <div className="d-flex gap-2 justify-content-end pb-3">
             <button
