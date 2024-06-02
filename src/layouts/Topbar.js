@@ -28,7 +28,7 @@ const Topbar = () => {
 
           <div className='logo'>
             {/* <img src="" alt="logo-not-found"/> */}
-            <h5 className='nav-logo'>dashboard</h5>
+            <h5 className='nav-logo'>Digital Shopee</h5>
           </div>
         </div>
 
@@ -37,7 +37,7 @@ const Topbar = () => {
         <div className='d-flex gap-2 px-4'>
             <img src={adminImg} alt='admin-img' className='topbar-thumb' />
             <div className='more'>
-              <span>Admin</span>
+              <span>Staff</span>
               <div className='status d-flex gap-1'>
                 <div className='tag' />
                 <p>Online</p>
