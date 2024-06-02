@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Link } from "react-router-dom";
-import Topbar from "../../layouts/Topbar";
-import Sidebar from "../../layouts/Sidebar";
+import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
+import { useTheme } from '@mui/material/styles';
+
+import { Link, useParams } from "react-router-dom";
+import Topbar from "../layouts/Topbar";
+import Sidebar from "../layouts/Sidebar";
 import { FaFilter, FaRegEdit } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import axios from "axios";
@@ -12,7 +15,10 @@ import { LuIndianRupee } from "react-icons/lu";
 import { BiReset } from "react-icons/bi";
 import { TbFilterCog } from "react-icons/tb";
 
-const TargetReport = () => {
+
+const TargetStatus_Employee = () => {
+  const { employeeId } = useParams();
+
   const [apiDatas, setApiDatas] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -21,11 +27,12 @@ const TargetReport = () => {
   const [totalAmountTout, setTotalAmountTout] = useState(0);
   const [totalOrdersTout, setTotalOrdersTout] = useState(0);
   const [selectedService, setSelectedService] = useState("");
-  const [selectedEmployee, setSelectedEmployee] = useState('');
+  const [selectedEmployee, setSelectedEmployee] = useState(employeeId);
 
   const fetchData = () => {
     axios
-      .get("https://digitalshopee.online/api/report/target-report.php")
+      .get(`https://digitalshopee.online/api/other/employee-target-api.php?id=${employeeId}`)
+      // https://digitalshopee.online/api/other/employee-target-api.php?id=${employeeId}
       .then((res) => {
         const responseData = res.data || [];
         if (Array.isArray(responseData)) {
@@ -36,12 +43,6 @@ const TargetReport = () => {
           calculateTotalAmountTout(responseData);
           calculateTotalOrdersTout(responseData);
 
-          // const resulttype = responseData.map(migratetype => migratetype.target_type);
-          // if (resulttype.indexOf("tin") !== -1) {
-          //   console.log('In');
-          // } else if (resulttype.indexOf("tout") !== -1) {
-          //   console.log('Out');
-          // }
 
         } else {
           console.error("Invalid data format:", responseData);
@@ -59,10 +60,38 @@ const TargetReport = () => {
     fetchData();
   }, []);
 
+  
+  useEffect(() => {
+    // Get the current date
+    const currentDate = new Date();
+    
+    // Get the first day of the current month
+    const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    
+    // Get the last day of the current month
+    const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
+    // Format dates to YYYY-MM-DD
+    const formatDate = (date) => {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
+
+    // Set the start date and end date
+    setStartDate(formatDate(firstDayOfMonth));
+    setEndDate(formatDate(lastDayOfMonth));
+  }, []);
+
+
+
   const loadall = () => {
     fetchData();
-    setStartDate("00-00-0000");
-    setEndDate("00-00-0000");
+        setStartDate(startDate);
+    setEndDate(endDate);
+    // setEndDate("00-00-0000");
+    setSelectedService("");
     setTotalAmountTin(0);
     setTotalOrdersTin(0);
     setTotalAmountTout(0);
@@ -193,90 +222,77 @@ const TargetReport = () => {
     const filtermenu = document.getElementById("filtermenu");
     filtermenu.classList.toggle("openfilter");
   };
+
+  const theme = useTheme();
+  const settings = {
+    width: 200,
+    height: 200,
+    value: 60,
+  };
+
   return (
     <>
-      <Topbar />
-      <Sidebar />
-      <div className="main-content" id="mainbody">
-        <div className="shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50 bread-parent">
-          <p className="margin-0 font-w-500">
-            <Link to="/">Dashboard</Link> /{" "}
-            <Link to="/target-master" className="t-theme-color">
-              Target Master Report
-            </Link>
-          </p>
-          <div>
-            {/* <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-                        <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-                        
-                        <select value={selectedService} onChange={(e) => setSelectedService(e.target.value)}>
-                            <option value="">All Services</option>
-                            {serviceNames.map(service => (  
-                                <option key={service} value={service}>{service}</option>
-                            ))}
-                        </select>
-                        <button onClick={handleFilter}>Filter</button>
-                        <button onClick={loadall}>reset</button>
-                        */}
-          </div>
-          <div className="actions">
-            {/* <Link
-              to="/add-target-master"
-              className="btn btn-bg-orange btn-sm b-radius-50 "
-            >
-              <MdNoteAdd style={{ fontSize: "18px", marginBottom: "2px" }} />{" "}
-              Add Target Master
-            </Link> */}
-            &nbsp; &nbsp;
-            <button
-              type="button"
-              className="btn btn-bg-orange btn-sm b-radius-50 "
-              onClick={filterbtn}
-            >
-              <FaFilter style={{ marginBottom: "2px" }} /> Filter
-            </button>
-          </div>
 
-          <div className="filter-card shadow p-2 b-radius-10" id="filtermenu">
-            <div className="d-flex gap-3 align-items-center">
-              <div className="form-head">
-                <input
-                  type="date"
-                  className="filter-fields"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                />
-              </div>
-              <span>
-                {" "}
-                <BsArrowLeftRight />{" "}
-              </span>
-              <div className="form-head">
-                <input
-                  type="date"
-                  className="filter-fields"
-                  value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
-                />
-              </div>
-            </div>
+      <div className="shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50 bread-parent">
+        <p className="margin-0 font-w-500">
+          <Link to="" className="t-theme-color">
+            Employee Target Report
+          </Link>
+        </p>
+        <div>
+    
+        </div>
+        <div className="actions">
+          <button
+            type="button"
+            className="btn btn-bg-orange btn-sm b-radius-50 "
+            onClick={filterbtn}
+          >
+            <FaFilter style={{ marginBottom: "2px" }} /> Filter
+          </button>
+        </div>
 
+        <div className="filter-card shadow p-2 b-radius-10" id="filtermenu">
+          <div className="d-flex gap-3 align-items-center">
+      
             <div className="form-head">
-              <select
-                value={selectedService}
-                onChange={(e) => setSelectedService(e.target.value)}
+              <input
+                type="date"
                 className="filter-fields"
-              >
-                <option value="">All Services</option>
-                {serviceNames.map((service) => (
-                  <option key={service} value={service}>
-                    {service}
-                  </option>
-                ))}
-              </select>
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
             </div>
+            <span>
+              {" "}
+              <BsArrowLeftRight />{" "}
+            </span>
+            <div className="form-head">
+              <input
+                type="date"
+                className="filter-fields"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+              />
+            </div>
+          </div>
 
-            <div className='form-head'>
+          <div className="form-head">
+            <select
+              value={selectedService}
+              onChange={(e) => setSelectedService(e.target.value)}
+              className="filter-fields"
+            >
+              <option value="">All Services</option>
+              {serviceNames.map((service) => (
+                <option key={service} value={service}>
+                  {service}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className='form-head'>
               <select value={selectedEmployee} onChange={(e) => setSelectedEmployee(e.target.value)} className='filter-fields'>
                 <option value="">All Employees</option>
                 {employeeNames.filter(Boolean).map(employee => (
@@ -285,49 +301,63 @@ const TargetReport = () => {
               </select>
             </div>
 
-            <div className="d-flex gap-2 justify-content-end pb-3">
-              <button
-                type="button"
-                className="btn btn-bg-orange btn-sm letter-spacing-1"
-                onClick={handleFilter}
-                id="refer"
-              >
-                <TbFilterCog /> Check
-              </button>
+          <div className="d-flex gap-2 justify-content-end pb-3">
+            <button
+              type="button"
+              className="btn btn-bg-orange btn-sm letter-spacing-1"
+              onClick={handleFilter}
+              id="refer"
+            >
+              <TbFilterCog /> Check
+            </button>
 
-              <button
-                type="button"
-                className="btn btn-bg-orange btn-sm letter-spacing-1"
-                onClick={loadall}
-              >
-                <BiReset /> Reset
-              </button>
-            </div>
-
-            <p>
-              Total Orders: {totalOrdersTin} | Total Amount: {totalAmountTin}{" "}
-              <LuIndianRupee />
-            </p>
-            <p>
-              Comp Orders: {totalOrdersTout} | Comp Amount: {totalAmountTout}{" "}
-              <LuIndianRupee />
-            </p>
-            <p>
-              Bal Orders: {totalOrdersTin - totalOrdersTout} | Bal Amount: {totalAmountTin - totalAmountTout} <LuIndianRupee />
-            </p>
+            <button
+              type="button"
+              className="btn btn-bg-orange btn-sm letter-spacing-1"
+              onClick={loadall}
+            >
+              <BiReset /> Reset
+            </button>
           </div>
-        </div>
 
-        <div style={{ height: "75vh", width: "100%" }} className="bg-white">
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={5} // Specify the page size
-          />
+          <p>
+            Total Orders: {totalOrdersTin} | Total Amount: {totalAmountTin}{" "}
+            <LuIndianRupee />
+          </p>
+          <p>
+            Comp Orders: {totalOrdersTout} | Comp Amount: {totalAmountTout}{" "}
+            <LuIndianRupee />
+          </p>
+          <p>
+            Bal Orders: {totalOrdersTin - totalOrdersTout} | Bal Amount: {totalAmountTin - totalAmountTout} <LuIndianRupee />
+          </p>
         </div>
+      </div>
+
+      <div style={{ height: "75vh", width: "100%" }} className="bg-white">
+        <DataGrid  rows={rows} columns={columns}   pageSize={5}  />
+
+{/* <Gauge
+  value={190}
+  startAngle={-110}
+  endAngle={110}
+  valueMax={200}
+  sx={{
+    [`& .${gaugeClasses.valueText}`]: {
+      fontSize: 30,
+      transform: 'translate(0px, 0px)',
+    },
+    [`& .${gaugeClasses.valueArc}`]: {
+          fill: 'orange',
+        },
+  }}
+  text={
+     ({ value, valueMax }) => `${value} / ${valueMax}`
+  }
+/> */}
       </div>
     </>
   );
 };
 
-export default TargetReport;
+export default TargetStatus_Employee;

@@ -15,7 +15,7 @@ const Topbar = () => {
   }
 
   const logout =()=>{
-    navigate('/employee-login');
+    navigate('/login');
     localStorage.clear()
   }
 

@@ -15,16 +15,20 @@ const Edit_Target_Master = () => {
     const [serviceAmount, setServiceAmount] = useState();
 
     useEffect(() => {
-                axios.get('https://digitalshopee.online/api/employee/get-employee.php')
-                    .then(res => {
-                        const migrateemploye = res.data.map(employee => employee.name)
-                        setGetempoloyenames(migrateemploye)
-                    })
-                    .catch(err => {
-                        console.error('Error fetching data:', err);
-                    });
-            }, []);
-        
+        axios.get('https://digitalshopee.online/api/employee/get-employee.php')
+            .then(res => {
+                // const migrateemploye = res.data.map(employee => employee.name)
+                const migrateemployename = res.data.map(employee => ({
+                    id: employee.id,
+                    name: employee.name
+                }));
+                setGetempoloyenames(migrateemployename)
+            })
+            .catch(err => {
+                console.error('Error fetching data:', err);
+            });
+    }, []);
+
 
     useEffect(() => {
         axios.get('https://digitalshopee.online/api/service/get-service.php')
@@ -92,13 +96,14 @@ const Edit_Target_Master = () => {
             })
                 .then(res => {
                     console.log('Target Updated Successfully')
-                    navigate('/target-master')
+                    navigate(`/target-master/${employeeId}`)
+
                 })
                 .catch(err => console.log(err));
         }
     };
 
-    
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setValueData({ ...valueData, [name]: value });
@@ -124,20 +129,20 @@ const Edit_Target_Master = () => {
                     <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
-                     
 
-                        <div className='col-md-4 py-1'>
+
+                            <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Target From Date</label>
                                 <input type='date' className='form-control' value={valueData.from_date} name='from_date' placeholder='' onChange={handleChange} />
                             </div>
 
-                            
+
                             <div className='col-md-4 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Target To Date</label>
-                                <input type='date' className='form-control'    value={valueData.to_date} name='to_date' placeholder=''   onChange={handleChange}/>
+                                <input type='date' className='form-control' value={valueData.to_date} name='to_date' placeholder='' onChange={handleChange} />
                             </div>
 
-                            <div className='col-md-12 py-1 border-bottom'/>
+                            <div className='col-md-12 py-1 border-bottom' />
                             <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Update Service</label>
                                 <select className='form-control' value={valueData.service_id} name='service_id' onChange={handleChange}>
@@ -149,15 +154,19 @@ const Edit_Target_Master = () => {
                             </div>
 
                             <div className='col-md-3 py-2'>
-                                 <label className='text-sm font-w-500 p-2'>Update Employee</label>
-                                 <select className='form-control' value={valueData.employee_id} name='employee_id' onChange={handleChange}>
-                                     <option value="">Select Employee</option>
-                                     {getempoloyenames.map((name, index) => (
+                                <label className='text-sm font-w-500 p-2'>Update Employee</label>
+                                <select className='form-control' value={valueData.employee_id} name='employee_id' onChange={handleChange}>
+                                    <option value="">Select Employee</option>
+                                    {/* {getempoloyenames.map((name, index) => (
                                          <option key={index} value={name}>{name}</option>
-                                     ))}
-                                 </select>
-                                 {/* <p className='warning'>{alertowner}</p> */}
-                             </div>
+                                     ))} */}
+
+                                    {getempoloyenames.map((employee, index) => (
+                                        <option key={index} value={employee.id}>{employee.name}</option>
+                                    ))}
+                                </select>
+                                {/* <p className='warning'>{alertowner}</p> */}
+                            </div>
 
                             <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>No. of Orders</label>

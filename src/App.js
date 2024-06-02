@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
@@ -47,23 +47,27 @@ import TargetReport from './Pages/Reports/Target-Report';
 import ExpenseReport from './Pages/Reports/Expense-Report';
 import Update_Access from "./Pages/Employee-Access/Update-Access";
 import EmployeeLogin from "./Pages/EmployeeLogin";
+import Leadgeneration from "./Pages/Lead-Generation/Lead-generation";
+import Add_lead_generation from "./Pages/Lead-Generation/Add-lead-generation";
+import Edit_Lead_generation from "./Pages/Lead-Generation/Edit-lead-generation";
+import Bill from "./Pages/Bill";
 
 
 const App = () => {
 
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      localStorage.clear();
-    };
+  // useEffect(() => {
+  //   const handleBeforeUnload = () => {
+  //     localStorage.clear();
+  //   };
 
-    // Add event listener for beforeunload
-    window.addEventListener('beforeunload', handleBeforeUnload);
+  //   // Add event listener for beforeunload
+  //   window.addEventListener('beforeunload', handleBeforeUnload);
 
-    // Cleanup event listener on component unmount
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, []);
+  //   // Cleanup event listener on component unmount
+  //   return () => {
+  //     window.removeEventListener('beforeunload', handleBeforeUnload);
+  //   };
+  // }, []);
 
   return (
     <>
@@ -115,7 +119,7 @@ const App = () => {
           {/* Target Master */}
           <Route path="/target-master/:employeeId" element={<ProtectRoute Component={TargetMaster} />} />
           <Route path="/add-target-master/:employeeId" element={<ProtectRoute Component={Add_Target_Master} />} />
-          <Route path="/edit-target-master/:employeeId/:id" element={<ProtectRoute Component={Edit_Target_Master} />}/>
+          <Route path="/edit-target-master/:employeeId/:id" element={<ProtectRoute Component={Edit_Target_Master} />} />
           {/* --------------- */}
           <Route path="/target-out/:employeeId" element={<ProtectRoute Component={TargetOut} />} />
           <Route path="/add-target-out/:employeeId" element={<ProtectRoute Component={Add_Target_Out} />} />
@@ -125,6 +129,13 @@ const App = () => {
           <Route path="/target-report/:employeeId" element={<ProtectRoute Component={TargetReport} />} />
           <Route path="/expense-report/:employeeId" element={<ProtectRoute Component={ExpenseReport} />} />
 
+          {/* Lead Generation */}
+          <Route path="/lead-generation/:employeeId" element={<ProtectRoute Component={Leadgeneration} />} />
+          <Route path="/add-lead-generation/:employeeId" element={<ProtectRoute Component={Add_lead_generation} />} />
+          <Route path="/edit-lead-generation/:employeeId/:id" element={<ProtectRoute Component={Edit_Lead_generation} />} />
+
+          {/* Bill */}
+          <Route path="/Bill/:employeeId" element={<ProtectRoute Component={Bill} />} />
         </Routes>
       </BrowserRouter>
     </>

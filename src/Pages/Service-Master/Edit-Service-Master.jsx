@@ -11,6 +11,7 @@ const Edit_Service_Master = () => {
     const [permissions, setPermissions] = useState({ edit_service: null });
     const role = localStorage.getItem('role');
 
+    const [servicemastercode, setServicemastercode] =useState([])
     const [loading, setLoading] = useState(false);
     const [alertservicecode, setAlertservicecode] = useState();
     const [alertservicename, setAlertservicename] = useState();
@@ -27,6 +28,18 @@ const Edit_Service_Master = () => {
         amount: '',
         documents: '',
     })
+
+    useEffect(() => {
+        axios.get('https://digitalshopee.online/api/service/get-service.php')
+            .then(res => {
+                const migrateservicecode = res.data.map(client => ({ code: client.code, id: client.id }))
+                setServicemastercode(migrateservicecode)
+                console.log(migrateservicecode)
+            })
+            .catch(err => {
+                console.error('Error fetching data:', err);
+            });
+    }, []);
 
 
     useEffect(() => {
@@ -73,21 +86,15 @@ const Edit_Service_Master = () => {
 
 
 
-        const regname = /^[a-zA-Z\s]+$/;
-        if (regname.test(valueData.name)) {
+        if (!valueData.name === "") {
             setAlertservicename("");
             setLoading(true);
-        } else if (!regname.test(valueData.name) && valueData.name === "") {
+        } else if (valueData.name === "") {
             setAlertservicename("Please fill your service name");
             //   e.preventDefault();
             setLoading(false);
             return;
-        } else {
-            setAlertservicename("Name should not be in a number");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        }
+        } 
 
         const regnumberamount = /^\d{1,20}$/;
         if (regnumberamount.test(valueData.amount)) {
@@ -105,6 +112,8 @@ const Edit_Service_Master = () => {
             return;
         }
 
+       
+
         const regnumbercode = /^\d{1,20}$/;
         if (regnumbercode.test(valueData.code)) {
             setAlertservicecode("");
@@ -119,6 +128,17 @@ const Edit_Service_Master = () => {
             //   e.preventDefault();
             setLoading(false);
             return;
+        }
+
+        const existingClient = servicemastercode.find(client => client.code === valueData.code);
+        if (existingClient) {
+            if (existingClient.id === id) {
+                setLoading(true);
+            } else {
+                setAlertservicecode("This service code is already exists. Please enter a different service code");
+                setLoading(false);
+                return;
+            }
         }
 
         const regnumber = /^\d{1,20}$/;

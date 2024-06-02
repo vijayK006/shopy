@@ -89,6 +89,13 @@ input:focus {
     /* Darker color on hover */
 }
 
+.css-de9k3v-MuiDataGrid-selectedRowCount, .css-eozsn7{
+    visibility: hidden !important;
+}
+
+.css-az8st9-MuiDataGrid-root .MuiDataGrid-row.Mui-selected, .css-g1du22 .MuiDataGrid-row.Mui-selected {
+    background-color: #ff5f1a0a;
+}
 /* -------------- */
 
 /* ---------------------------------------------------------------------------------------------------------------------- */
@@ -1015,3 +1022,40 @@ font-size: 20px;
     font-size: 20px;
 
 } 
+
+.success-alert{
+    position: fixed;
+    top: 0%;
+    z-index: 1111111;
+    height: 100%;
+    width: 100%;
+    transform: scale(0);
+    backdrop-filter: blur(6px);
+    overflow: hidden;
+transition: all 0.2s ease-in-out;
+}
+
+.open-alert{
+    transform: scale(1);
+    transition: all 0.2s ease-in-out;
+
+}
+
+.success-alert .message{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    text-align: center;
+    width: 30%;
+    padding: 20px 0px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px 0px #0000001c;
+
+}
+
+.success-alert .icon{
+    font-size: 60px;
+    color: #ff6423;
+}

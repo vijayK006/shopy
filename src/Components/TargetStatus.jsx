@@ -8,7 +8,7 @@ const TargetStatus = () => {
     const [apiDatas, setApiDatas] = useState([]);
     const fetchData = () => {
       axios
-        .get("https://digitalshopee.online/api/report/target-report.php")
+        .get("https://digitalshopee.online/api/target/get-target.php")
         .then((res) => {
           const responseData = res.data || [];
           if (Array.isArray(responseData)) {
@@ -50,7 +50,7 @@ const TargetStatus = () => {
           displayOrder: index + 1,
           // target_type: item.target_type,
           target_type: item.target_type === 'tin' ? 'In' : item.target_type === 'tout' ? 'Out' : 'Unknown',
-          employee_id: item.employee_id,
+          employee_id: item.employee_name,
           service_id: item.service_id,
           no_of_orders: item.no_of_orders,
           total_amount: item.total_amount,

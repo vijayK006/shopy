@@ -30,6 +30,7 @@ const TargetOut = () => {
                 if (Array.isArray(responseData)) {
                     setApiDatas(responseData);
                     calculateTotalAmount(responseData);
+                    console.log(responseData)
                 } else {
                     console.error('Invalid data format:', responseData);
                 }
@@ -118,12 +119,11 @@ const TargetOut = () => {
 
     const columns = [
         { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
-        { field: 'from_date', headerName: 'From Date', width: 100 },
-        { field: 'to_date', headerName: 'To Date', width: 100 },
+        { field: 'from_date', headerName: 'Date', width: 100 },
         { field: 'employee_id', headerName: 'Employe Name', width: 200 },
-        { field: 'service_id', headerName: 'Service Name', width: 150 },
+        { field: 'service_id', headerName: 'Service Name', width:200 },
         { field: 'no_of_orders', headerName: 'Order Qty.', width: 100 },
-        { field: 'total_amount', headerName: 'Total Amount', width: 100 },
+        { field: 'total_amount', headerName: 'Total Amount', width: 300 },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -152,7 +152,6 @@ const TargetOut = () => {
         no_of_orders: item.no_of_orders,
         total_amount: item.total_amount,
         from_date: item.from_date,
-        to_date: item.to_date,
     })) : [];
 
 

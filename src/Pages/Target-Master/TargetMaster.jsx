@@ -148,7 +148,7 @@ const TargetMaster = () => {
     const rows = apiDatas.length > 0 ? apiDatas.map((item, index) => ({
         id: item.id || index,
         displayOrder: index + 1,
-        employee_id: item.employee_id,
+        employee_id: item.employee_name,
         service_id: item.service_id,
         no_of_orders: item.no_of_orders,
         total_amount: item.total_amount,

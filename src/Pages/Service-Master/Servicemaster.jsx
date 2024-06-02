@@ -48,18 +48,18 @@ const Servicemaster = () => {
     }, []);
 
     const downloadExcel = () => {
-        
-    const transformedData = apiDatas.map(({id, ...rest }) => rest);
 
-    const worksheet = XLSX.utils.json_to_sheet(transformedData);
+        const transformedData = apiDatas.map(({ id, ...rest }) => rest);
+
+        const worksheet = XLSX.utils.json_to_sheet(transformedData);
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, 'Data');
-    
+
         const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
         const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
-    
+
         saveAs(blob, 'service-master.xlsx');
-      };
+    };
 
 
 
@@ -89,12 +89,11 @@ const Servicemaster = () => {
 
     const columns = [
         { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
-        { field: 'code', headerName: 'Service Code', width: 200 },
-        { field: 'name', headerName: 'Service Name', width: 200 },
+        { field: 'code', headerName: 'Service Code', width: 100 },
+        { field: 'name', headerName: 'Service Name', width: 300 },
         { field: 'amount', headerName: 'Amount', width: 150 },
-        { field: 'expencse', headerName: 'Service Expencses', width: 200 },
-        // { field: 'document', headerName: 'Required Documents', width: 200 },
-        //   {   field: 'age', headerName: 'Age', type: 'number', width: 90,},
+        ...(role === 'admin' ? [{ field: 'expense', headerName: 'Service Expenses', width: 200 }] : []),
+
         {
             field: 'actions',
             headerName: 'Actions',
@@ -148,6 +147,7 @@ const Servicemaster = () => {
 
     ];
 
+
     const rows = apiDatas.length > 0 ?
         apiDatas.map((item, index) => ({
             id: item.id || index,
@@ -155,12 +155,13 @@ const Servicemaster = () => {
             code: item.code,
             name: item.name,
             amount: item.amount,
-            expencse: item.expense,
+            // expencse: item.expense,
+            ...(role === 'admin' ? { expense: item.expense } : {}),
             document: item.documents,
         })) : [];
 
-        
-    
+
+
 
     return (
         <>
@@ -169,20 +170,20 @@ const Servicemaster = () => {
             <div className='main-content' id='mainbody'>
 
                 <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-                    <p className='margin-0 font-w-500'><Link to='/'>Dashboard</Link> / <Link to='/service-master' className='t-theme-color'>Service Master</Link></p>
+                    <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to='' className='t-theme-color'>Service Master</Link></p>
 
-<div className='d-flex gap-2'>
-<button type="button" className='download-btn' onClick={downloadExcel}><MdOutlineDownloading className='icon'/> Export to Excel</button>
+                    <div className='d-flex gap-2'>
+                        <button type="button" className='download-btn' onClick={downloadExcel}><MdOutlineDownloading className='icon' /> Export to Excel</button>
 
-                    {role === 'admin' ? (
-                        <Link to={`/add-service-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Service Master</Link>
-                    ) : (
-                        permissions.add_service === "yes" && (
+                        {role === 'admin' ? (
                             <Link to={`/add-service-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Service Master</Link>
-                        )
+                        ) : (
+                            permissions.add_service === "yes" && (
+                                <Link to={`/add-service-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Service Master</Link>
+                            )
 
-                    )}
-</div>
+                        )}
+                    </div>
 
 
 

@@ -142,7 +142,7 @@ const Login = () => {
                 </div>
                  <Link to='/employee-login' className='login-text-pass subheader-font'>want to go Employee Login ?</Link> 
 
-                {/* {loading ? ( // Conditional rendering for loading popup
+                {loading ? ( // Conditional rendering for loading popup
                                         <>
                                         
                                         <button type='submit' className='login-btn mt-4' >Sign In &nbsp; &nbsp;
@@ -152,7 +152,7 @@ const Login = () => {
                                         </>
                                     ) : (
                                       <button type='submit' className='login-btn mt-4' >Sign In</button>
-                                    )} */}
+                                    )}
               </form>
             </div>
 

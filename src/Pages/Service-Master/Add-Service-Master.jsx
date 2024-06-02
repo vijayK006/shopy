@@ -8,6 +8,7 @@ import axios from 'axios';
 const Add_Service_Master = () => {
     const { employeeId } = useParams();
 
+    const[getServiceCode, setGetServiceCode] = useState([]);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -17,17 +18,17 @@ const Add_Service_Master = () => {
     const [alertserviceexpense, setAlertserviceexpense] = useState();
 
 
-    // useEffect(() => {
-    //     axios.get('https://digitalshopee.online/api/service/get-service.php')
-    //         .then(res => {
-    //             const migrateservicecode = res.data.map(firm => firm.code)
-    //             setGetServiceCode(migrateservicecode)
-    //             console.log(migrateservicecode)
-    //         })
-    //         .catch(err => {
-    //             console.error('Error fetching data:', err);
-    //         });
-    // }, []);
+    useEffect(() => {
+        axios.get('https://digitalshopee.online/api/service/get-service.php')
+            .then(res => {
+                const migrateservicecode = res.data.map(service => service.code)
+                setGetServiceCode(migrateservicecode)
+                console.log(migrateservicecode)
+            })
+            .catch(err => {
+                console.error('Error fetching data:', err);
+            });
+    }, []);
 
     const [valueData, setValueData] = useState({
         code: '',
@@ -49,22 +50,40 @@ const Add_Service_Master = () => {
         formData.append('amount', valueData.amount);
         formData.append('documents', valueData.documents);
 
+      
 
-        const regname = /^[a-zA-Z\s]+$/;
-        if (regname.test(valueData.name)) {
-            setAlertservicename("");
+        const regnumbercode = /^\d{1,20}$/;
+        if (regnumbercode.test(valueData.code)) {
+            setAlertservicecode("");
             setLoading(true);
-        } else if (!regname.test(valueData.name) && valueData.name === "") {
-            setAlertservicename("Please fill your service name");
+        } else if (!regnumbercode.test(valueData.code) && valueData.code === "") {
+            setAlertservicecode("Please enter new service code");
             //   e.preventDefault();
             setLoading(false);
             return;
         } else {
-            setAlertservicename("Name should not be in a number");
+            setAlertservicecode("Service code should not be more then 20 digits");
             //   e.preventDefault();
             setLoading(false);
             return;
         }
+
+        if (getServiceCode.includes(valueData.code)) {
+            setAlertservicecode("This service code is already exists. Please enter a different service code.");
+            setLoading(false);
+            return;
+        }
+
+       
+        if (!valueData.name === "") {
+            setAlertservicename("");
+            setLoading(true);
+        } else if (valueData.name === "") {
+            setAlertservicename("Please fill your service name");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        } 
 
         const regnumberamount = /^\d{1,20}$/;
         if (regnumberamount.test(valueData.amount)) {
@@ -82,21 +101,8 @@ const Add_Service_Master = () => {
             return;
         }
 
-        const regnumbercode = /^\d{1,20}$/;
-        if (regnumbercode.test(valueData.code)) {
-            setAlertservicecode("");
-            setLoading(true);
-        } else if (!regnumbercode.test(valueData.code) && valueData.code === "") {
-            setAlertservicecode("Please enter your service code");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        } else {
-            setAlertservicecode("Service code should not be more then 20 digits");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        }
+          
+       
 
         const regnumber = /^\d{1,20}$/;
         if (regnumber.test(valueData.expense)) {
@@ -152,7 +158,7 @@ const Add_Service_Master = () => {
 
                             <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'> Service Code</label>
-                                <input type='text' className='form-control' value={valueData.code} name='code' placeholder='Please service code' onChange={handleChange} />
+                                <input type='number' className='form-control' value={valueData.code} name='code' placeholder='Please service code' onChange={handleChange} />
 
                                 <p className='warning'>{alertservicecode}</p>
                             </div>

@@ -76,6 +76,8 @@ const Sidebar = () => {
             {/* Service Master */}
             <NavLink className="disble-decoration" to={`/service-master/${employeeId}`}><li className={`items ${currentPage.startsWith('/service-master') || currentPage.startsWith('/add-service-master') || currentPage.startsWith('/edit-service-master') ? 'active' : ''}`}><IoSettingsOutline className="icons" /> <span className='resp'>Service Master</span></li></NavLink>
 
+            {/* Lead Generation */}
+            <NavLink className="disble-decoration" to={`/lead-generation/${employeeId}`}><li className={`items ${currentPage.startsWith('/lead-generation/') || currentPage.startsWith('/add-lead-generation') || currentPage.startsWith('/edit-lead-generation') ? 'active' : ''}`}><IoSettingsOutline className="icons" /> <span className='resp'>Lead Generation</span></li></NavLink>
 
             {/* Employee Master */}
             {role === 'admin' ? (
@@ -109,7 +111,7 @@ const Sidebar = () => {
                 <li className={`dropmenu items-drop  ${currentPage.startsWith('/expenses-master') || currentPage.startsWith('/add-expenses-master') || currentPage.startsWith('/edit-expenses-master') || currentPage.startsWith('/add-expenses-payment') || currentPage.startsWith('/expenses-payment') || currentPage.startsWith('/edit-expenses-payment') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems2')} id='dropitems2'>
                   <IoPricetagsOutline className="icons" /> <span className='resp'>Expenses Master <IoIosArrowDown /></span>
 
-                  <ul className='submenu' >
+                  <ul className='submenu'>
                     <NavLink to={`/add-expenses-master/${employeeId}`}><li className={`droplink-text ${currentPage.startsWith('/add-expenses-master') || currentPage.startsWith('/expenses-master') || currentPage.startsWith('/edit-expenses-master') ? 'link-active' : ''}`}><IoIosArrowForward /> Add Expense Category</li></NavLink>
 
                     <NavLink to={`/expenses-payment/${employeeId}`}><li className={`droplink-text ${currentPage.startsWith('/add-expenses-payment') || currentPage.startsWith('/expenses-payment') || currentPage.startsWith('/edit-expenses-payment') ? 'link-active' : ''}`}><IoIosArrowForward /> Expenses Payment</li></NavLink>
@@ -155,6 +157,9 @@ const Sidebar = () => {
             ) : (
               <p className='d-none'>NO PERMISSION FOR EMPLOYEE</p>
             )}
+
+            {/* Bill Generation */}
+            <NavLink className="disble-decoration" to={`/bill/${employeeId}`}><li className={`items ${currentPage.startsWith('/bill') ? 'active' : ''}`}><IoSettingsOutline className="icons" /> <span className='resp'>Bill Generation</span></li></NavLink>
 
 
           </ul>

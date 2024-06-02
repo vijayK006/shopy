@@ -67,7 +67,7 @@ const Clientmaster = () => {
 
 
   const handleDelete = (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this Firm Master");
+    const confirmDelete = window.confirm("Are you sure you want to delete this client master");
     if (confirmDelete) {
       axios.post(`https://digitalshopee.online/api/client/delete-by-id-client.php?id=${id}`)
         .then(res => {
