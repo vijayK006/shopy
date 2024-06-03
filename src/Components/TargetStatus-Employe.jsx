@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
-import { useTheme } from '@mui/material/styles';
 
 import { Link, useParams } from "react-router-dom";
 import Topbar from "../layouts/Topbar";
@@ -60,14 +59,14 @@ const TargetStatus_Employee = () => {
     fetchData();
   }, []);
 
-  
+
   useEffect(() => {
     // Get the current date
     const currentDate = new Date();
-    
+
     // Get the first day of the current month
     const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-    
+
     // Get the last day of the current month
     const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
 
@@ -88,7 +87,7 @@ const TargetStatus_Employee = () => {
 
   const loadall = () => {
     fetchData();
-        setStartDate(startDate);
+    setStartDate(startDate);
     setEndDate(endDate);
     // setEndDate("00-00-0000");
     setSelectedService("");
@@ -127,9 +126,9 @@ const TargetStatus_Employee = () => {
       );
     }
 
-    if (selectedEmployee) {
-      filteredData = filteredData.filter(item => item.employee_id === selectedEmployee);
-    }
+    // if (selectedEmployee) {
+    //   filteredData = filteredData.filter(item => item.employee_name === selectedEmployee);
+    // }
 
     // Calculate total amount for filtered data
     calculateTotalAmountTin(filteredData);
@@ -188,7 +187,7 @@ const TargetStatus_Employee = () => {
     new Set(apiDatas.map((item) => item.service_id))
   );
 
-  const employeeNames = Array.from(new Set(apiDatas.map(item => item.employee_id)));
+  // const employeeNames = Array.from(new Set(apiDatas.map(item => item.employee_name)));
 
 
   const columns = [
@@ -196,7 +195,7 @@ const TargetStatus_Employee = () => {
     { field: "from_date", headerName: "From Date", width: 150 },
     { field: "to_date", headerName: "To Date", width: 150 },
     { field: "service_id", headerName: "Service Name", width: 150 },
-    { field: "employee_id", headerName: "Employe Name", width: 150 },
+    // { field: "employee_id", headerName: "Employe Name", width: 150 },
     { field: "no_of_orders", headerName: "Order Qty.", width: 150 },
     { field: "total_amount", headerName: "Total Amount", width: 150 },
     { field: "target_type", headerName: "Target Type", width: 150 },
@@ -209,7 +208,7 @@ const TargetStatus_Employee = () => {
         displayOrder: index + 1,
         // target_type: item.target_type,
         target_type: item.target_type === 'tin' ? 'In' : item.target_type === 'tout' ? 'Out' : 'Unknown',
-        employee_id: item.employee_id,
+        // employee_id: item.employee_name,
         service_id: item.service_id,
         no_of_orders: item.no_of_orders,
         total_amount: item.total_amount,
@@ -223,38 +222,46 @@ const TargetStatus_Employee = () => {
     filtermenu.classList.toggle("openfilter");
   };
 
-  const theme = useTheme();
-  const settings = {
-    width: 200,
-    height: 200,
-    value: 60,
-  };
-
   return (
     <>
 
-      <div className="shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50 bread-parent">
-        <p className="margin-0 font-w-500">
-          <Link to="" className="t-theme-color">
-            Employee Target Report
-          </Link>
-        </p>
-        <div>
-    
+
+
+      <div className=" px-4 pb-2 position-relative  d-flex justify-content-start align-items-center gap-3">
+
+        <div className="actions">
+          <button
+            type="button"
+            className="btn btn-bg-orange btn-sm b-radius-50 "
+            onClick={handleFilter}
+          >
+             Target This Month
+          </button>
         </div>
+
+        <div className="actions">
+          <button
+            type="button"
+            className="btn btn-bg-orange btn-sm b-radius-50 "
+            onClick={loadall}
+          >
+            My All Targets
+          </button>
+        </div>
+
         <div className="actions">
           <button
             type="button"
             className="btn btn-bg-orange btn-sm b-radius-50 "
             onClick={filterbtn}
           >
-            <FaFilter style={{ marginBottom: "2px" }} /> Filter
+        More
           </button>
         </div>
 
         <div className="filter-card shadow p-2 b-radius-10" id="filtermenu">
           <div className="d-flex gap-3 align-items-center">
-      
+
             <div className="form-head">
               <input
                 type="date"
@@ -292,14 +299,14 @@ const TargetStatus_Employee = () => {
             </select>
           </div>
 
-          <div className='form-head'>
+          {/* <div className='form-head d-none'>
               <select value={selectedEmployee} onChange={(e) => setSelectedEmployee(e.target.value)} className='filter-fields'>
                 <option value="">All Employees</option>
                 {employeeNames.filter(Boolean).map(employee => (
                   <option key={employee} value={employee}>{employee}</option>
                 ))}
               </select>
-            </div>
+            </div> */}
 
           <div className="d-flex gap-2 justify-content-end pb-3">
             <button
@@ -334,27 +341,93 @@ const TargetStatus_Employee = () => {
         </div>
       </div>
 
-      <div style={{ height: "75vh", width: "100%" }} className="bg-white">
-        <DataGrid  rows={rows} columns={columns}   pageSize={5}  />
+      <div className="row">
+        <div className="col-3 position-relative">
+        <div className="d-flex justify-content-center">
+           <h6 className="gaige-header">Target Completed</h6>
+          <Gauge value={totalOrdersTout} startAngle={-110} endAngle={110} valueMax={totalOrdersTin} 
+           innerRadius="90%"
+  outerRadius="100%"
+  cornerRadius="50%"
+            sx={{
+              width: '170px',
+              height: '170px',
+              [`& .${gaugeClasses.valueText}`]: {
+                fontSize: 18,
+                transform: 'translate(0px, -30px)',
+              },
+              [`& .${gaugeClasses.valueArc}`]: {
+                fill: '#ff6423',
 
-{/* <Gauge
-  value={190}
-  startAngle={-110}
-  endAngle={110}
-  valueMax={200}
-  sx={{
-    [`& .${gaugeClasses.valueText}`]: {
-      fontSize: 30,
-      transform: 'translate(0px, 0px)',
-    },
-    [`& .${gaugeClasses.valueArc}`]: {
-          fill: 'orange',
-        },
-  }}
-  text={
-     ({ value, valueMax }) => `${value} / ${valueMax}`
-  }
-/> */}
+              },
+            }}
+            text={
+              ({ value, valueMax }) => `${value} / ${valueMax}`
+            }
+          />
+        </div>
+         
+        </div>
+
+        <div className="col-3 position-relative">
+        <div className="d-flex justify-content-center">
+          <h6 className="gaige-header">Target Pending</h6>
+          <Gauge value={totalOrdersTin - totalOrdersTout} startAngle={-110} endAngle={110} valueMax={totalOrdersTin}
+          innerRadius="90%"
+  outerRadius="100%"
+  cornerRadius="50%"
+            sx={{
+              width: '170px',
+              height: '170px',
+              [`& .${gaugeClasses.valueText}`]: {
+                fontSize: 18,
+                transform: 'translate(0px, -30px)',
+              },
+              [`& .${gaugeClasses.valueArc}`]: {
+                fill: '#ff6423',
+
+              },
+            }}
+            text={
+              ({ value, valueMax }) => `${value} / ${valueMax}`
+            }
+          />
+        </div>
+          
+        </div>
+
+        <div className="col-3 position-relative">
+        <div className="d-flex justify-content-center">
+          <h6 className="gaige-header">Total Target Amount</h6>
+          <Gauge value={totalAmountTout} startAngle={-110} endAngle={110} valueMax={totalAmountTin}
+          innerRadius="90%"
+  outerRadius="100%"
+  cornerRadius="50%"
+            sx={{
+              width: '170px',
+              height: '170px',
+              [`& .${gaugeClasses.valueText}`]: {
+                fontSize: 18,
+                transform: 'translate(0px, -30px)',
+
+              },
+              [`& .${gaugeClasses.valueArc}`]: {
+                fill: '#ff6423',
+
+              },
+            }}
+            text={
+              ({ value, valueMax }) => `${valueMax}`
+            }
+          />
+        </div>
+          
+        </div>
+
+      </div>
+
+      <div style={{ height: "50vh", width: "100%" }} className="bg-white mt-3">
+        <DataGrid rows={rows} columns={columns} pageSize={5} />
       </div>
     </>
   );

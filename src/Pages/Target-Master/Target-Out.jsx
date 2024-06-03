@@ -44,11 +44,37 @@ const TargetOut = () => {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        // Get the current date
+        const currentDate = new Date();
+        
+        // Get the first day of the current month
+        const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+        
+        // Get the last day of the current month
+        const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+    
+        // Format dates to YYYY-MM-DD
+        const formatDate = (date) => {
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, '0');
+          const day = String(date.getDate()).padStart(2, '0');
+          return `${year}-${month}-${day}`;
+        };
+    
+        // Set the start date and end date
+        setStartDate(formatDate(firstDayOfMonth));
+        setEndDate(formatDate(lastDayOfMonth));
+      }, []);
+
+ 
     const loadall = () => {
         fetchData();
-        setStartDate('00-00-0000')
-        setEndDate('00-00-0000')
+        setStartDate(startDate)
+        setEndDate(endDate)
         setTotalAmount(0)
+        setSelectedService('')
+setSelectedEmployee('')
         const refer = document.getElementById('refer');
         refer.style.display = "block"
     }
@@ -93,7 +119,7 @@ const TargetOut = () => {
         }
 
         if (selectedEmployee) {
-            filteredData = filteredData.filter(item => item.employee_id === selectedEmployee);
+            filteredData = filteredData.filter(item => item.employee_name === selectedEmployee);
         }
 
 
@@ -114,7 +140,7 @@ const TargetOut = () => {
 
     // Extract unique service names
     const serviceNames = Array.from(new Set(apiDatas.map(item => item.service_id)));
-    const employeeNames = Array.from(new Set(apiDatas.map(item => item.employee_id)));
+    const employeeNames = Array.from(new Set(apiDatas.map(item => item.employee_name)));
 
 
     const columns = [
@@ -147,7 +173,7 @@ const TargetOut = () => {
     const rows = apiDatas.length > 0 ? apiDatas.map((item, index) => ({
         id: item.id || index,
         displayOrder: index + 1,
-        employee_id: item.employee_id,
+        employee_id: item.employee_name,
         service_id: item.service_id,
         no_of_orders: item.no_of_orders,
         total_amount: item.total_amount,

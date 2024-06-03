@@ -10,6 +10,12 @@ import { AiFillPicture } from "react-icons/ai";
 const Edit_employe = () => {
     const { id } = useParams();
     const { employeeId } = useParams();
+    const [alertEmpName, setAlertEmpName] = useState();
+    const [alertEmpMobileNo, setAlertEmpMobileNo] = useState();
+    const [alertEmpEmail, setAlertEmpEmail] = useState();
+    const [alertEmpPassowrd, setAlertEmpPassowrd] = useState();
+    const [getemployeeMobilenumber, setGetemployeeMobilenumber] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
     // const [selectedFile, setSelectedFile] = useState(null);
@@ -34,6 +40,19 @@ const Edit_employe = () => {
         passport: null,
         education: null,
     })
+
+    useEffect(() => {
+        axios.get('https://digitalshopee.online/api/employee/get-employee.php')
+            .then(res => {
+                const migratefirm = res.data.map(employe => ({ phone: employe.phone, id: employe.id }))
+                setGetemployeeMobilenumber(migratefirm)
+                console.log(migratefirm)
+            })
+            .catch(err => {
+                console.error('Error fetching data:', err);
+            });
+    }, []);
+
 
 
     useEffect(() => {
@@ -93,6 +112,73 @@ const Edit_employe = () => {
         formData.append('passport', valueData.passport);
         formData.append('education', valueData.education);
 
+        
+        if (!valueData.name === "") {
+            setAlertEmpName("");
+            setLoading(true);
+        } else if (valueData.name === "") {
+            setAlertEmpName("Please fill your name");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        } else{
+            setAlertEmpName("");
+            setLoading(true);
+        }
+
+
+        if (getemployeeMobilenumber.includes(valueData.phone)) {
+            setAlertEmpMobileNo("This mobile number already exists. Please enter a different mobile number.");
+            setLoading(false);
+            return;
+        }
+
+        const regnumber = /^[0-9]{10}$/;
+        if (regnumber.test(valueData.phone)) {
+            setAlertEmpMobileNo("");
+            setLoading(true);
+        } else if (!regnumber.test(valueData.phone) && valueData.phone === "") {
+            setAlertEmpMobileNo("Please enter your mobile Number");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        } else {
+            setAlertEmpMobileNo("Mobile number should be 10 digits (no letters and spaces allowed).");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        }
+
+        const regemail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (regemail.test(valueData.email)) {
+            setAlertEmpEmail("");
+            setLoading(true);
+        } else if (valueData.email === "") {
+            setAlertEmpEmail("Please enter email-id");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        } else if (!regemail.test(valueData.email)) {
+            setAlertEmpEmail("Email-id is not valid");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        }
+
+
+        if (!valueData.password === "") {
+            setAlertEmpPassowrd("");
+            setLoading(true);
+        } else if (valueData.password === "") {
+            setAlertEmpPassowrd("Please enter password");
+            //   e.preventDefault();
+            setLoading(false);
+            return;
+        } else{
+            setAlertEmpPassowrd("");
+            setLoading(true);
+        }
+
 
         const confirmDelete = window.confirm("Are you sure you want to update this Firm Master");
         if (confirmDelete) {
@@ -103,7 +189,7 @@ const Edit_employe = () => {
             })
                 .then(res => {
                     console.log('Employee Updated Successfully')
-                    navigate('/employe-manager')
+                    navigate(`/employe-manager/${employeeId}`)
                 })
                 .catch(err => console.log(err));
 
@@ -171,21 +257,20 @@ const Edit_employe = () => {
                                 <label className='text-sm font-w-500 p-2'> Employee Name</label>
                                 <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Please enter name' onChange={handleChange} />
 
-                                {/* <p className='warning'>{alertname}</p> */}
+                                <p className='warning'>{alertEmpName}</p>
                             </div>
 
                             <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Empoloyee DOB</label>
                                 <input type='date' className='form-control' value={valueData.dob} name='dob' placeholder='' onChange={handleChange} />
 
-                                {/* <p className='warning'>{alertemail}</p> */}
                             </div>
 
                             <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.phone} name='phone' placeholder='Please enter mobile no.' onChange={handleChange} />
 
-                                {/* <p className='warning'>{alertphone}</p> */}
+                                <p className='warning'>{alertEmpMobileNo}</p>
                             </div>
 
 
@@ -193,56 +278,50 @@ const Edit_employe = () => {
                                 <label className='text-sm font-w-500 p-2'> Alternate Mobile No.</label>
                                 <input type='number' className='form-control' value={valueData.alt_phone} name='alt_phone' placeholder='Please enter alternate mobile no.' onChange={handleChange} />
 
-                                {/* <p className='warning'>{alertphone}</p> */}
                             </div>
 
                             <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Employee Email-id</label>
                                 <input type='text' className='form-control' value={valueData.email} name='email' placeholder='Please enter email-id' onChange={handleChange} />
 
-                                {/* <p className='warning'>{alertowner}</p> */}
+                                <p className='warning'>{alertEmpEmail}</p>
                             </div>
 
                             <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Employee Address</label>
                                 <input type='text' className='form-control' value={valueData.address} name='address' placeholder='Please enter address' onChange={handleChange} />
 
-                                {/* <p className='warning'>{alertname}</p> */}
                             </div>
 
                             <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Employee Post</label>
                                 <input type='text' className='form-control' value={valueData.post} name='post' placeholder='Please enter post' onChange={handleChange} />
 
-                                {/* <p className='warning'>{alertname}</p> */}
                             </div>
 
                             <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Employee Salary</label>
                                 <input type='number' className='form-control' value={valueData.salary} name='salary' placeholder='Please enter salary' onChange={handleChange} />
 
-                                {/* <p className='warning'>{alertname}</p> */}
                             </div>
 
                             <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Empoloyee DOJ</label>
                                 <input type='date' className='form-control' value={valueData.doj} name='doj' placeholder='' onChange={handleChange} />
 
-                                {/* <p className='warning'>{alertemail}</p> */}
                             </div>
 
                             <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Empoloyee DOR</label>
                                 <input type='date' className='form-control' value={valueData.dor} name='dor' placeholder='' onChange={handleChange} />
 
-                                {/* <p className='warning'>{alertemail}</p> */}
                             </div>
 
                             <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'> Empoloyee Password</label>
                                 <input type='text' className='form-control' value={valueData.password} name='password' placeholder='Enter new password' onChange={handleChange} />
 
-                                {/* <p className='warning'>{alertemail}</p> */}
+                                <p className='warning'>{alertEmpPassowrd}</p>
                             </div>
                             
                             <div className='col-12 py-3 border-top' />
@@ -319,7 +398,16 @@ const Edit_employe = () => {
                             </div>
 
                             <div className='d-flex justify-content-end pt-4'>
-                                <button type='submit' className='btn btn-bg-orange' style={{ width: "200px" }} >Update</button>
+                            <button type='submit' className='btn btn-bg-orange' style={{ width: "200px" }} disabled={loading}>
+                                    {loading ? ( // Conditional rendering for loading popup
+                                        <>
+                                            Updating &nbsp; &nbsp;
+                                            <div className="spinner-border text-danger spinner-border-sm scaleonload"></div>
+                                        </>
+                                    ) : (
+                                        "Update"
+                                    )}
+                                </button>
                             </div>
 
                         </div>

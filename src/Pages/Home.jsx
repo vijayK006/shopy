@@ -71,7 +71,10 @@ const Home = () => {
       <div className='main-content' id='mainbody'>
         <div className="container-fluid mt-3">
 
-          <div className='row'>
+        
+          {role === 'admin' ? (
+            <>
+                <div className='row'>
 
             <Admincards cardtitle="Firm Master"
               icon={PiCreditCard}
@@ -118,8 +121,10 @@ const Home = () => {
             </Admincards>
 
           </div>
-          {role === 'admin' ? (
+
                       <TargetStatus/>
+            </>
+
           ):(
             <TargetStatus_Employee/>
           )}

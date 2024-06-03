@@ -355,7 +355,7 @@ input:focus {
     justify-content: space-between;
     align-items: center;
     padding: 10px 80px;
-    z-index: 111;
+    z-index: 1111111111;
     background-color: white;
     border-bottom: 1px solid #dee2e6;
 }
@@ -1058,4 +1058,12 @@ transition: all 0.2s ease-in-out;
 .success-alert .icon{
     font-size: 60px;
     color: #ff6423;
+}
+
+.gaige-header{
+    position: absolute;
+    font-size: 12px;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
 }

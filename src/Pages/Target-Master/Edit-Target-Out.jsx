@@ -178,7 +178,7 @@ const Edit_Target_Out = () => {
 
                             <div className='col-md-4 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Total Amount</label>
-                                <input type='number' className='form-control' value={valueData.total_amount} name='total_amount' placeholder="0" />
+                                <input type='number' className='form-control' value={valueData.total_amount} name='total_amount' placeholder="0" onChange={handleChange}/>
                             </div>
 
                             <div className='col-md-6 py-2'>{/* not Connected */}

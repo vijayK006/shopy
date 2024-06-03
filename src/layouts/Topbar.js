@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Topbar = () => {
   const navigate = useNavigate();
+  const role = localStorage.getItem('role')
+
   const opentoggler = () => {
     document.getElementById('mainbody').classList.toggle('maintoggle');
     document.getElementById('sidemenu').classList.toggle('sidetoggle');
@@ -37,7 +39,13 @@ const Topbar = () => {
         <div className='d-flex gap-2 px-4'>
             <img src={adminImg} alt='admin-img' className='topbar-thumb' />
             <div className='more'>
+            {role === 'admin' ? (
+              <span>Admin</span>
+
+            ):(
               <span>Staff</span>
+
+            )}
               <div className='status d-flex gap-1'>
                 <div className='tag' />
                 <p>Online</p>

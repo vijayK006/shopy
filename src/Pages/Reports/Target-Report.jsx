@@ -52,7 +52,28 @@ const TargetReport = () => {
       });
   };
 
+  useEffect(() => {
+    // Get the current date
+    const currentDate = new Date();
 
+    // Get the first day of the current month
+    const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+
+    // Get the last day of the current month
+    const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
+    // Format dates to YYYY-MM-DD
+    const formatDate = (date) => {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
+
+    // Set the start date and end date
+    setStartDate(formatDate(firstDayOfMonth));
+    setEndDate(formatDate(lastDayOfMonth));
+  }, []);
 
 
   useEffect(() => {
@@ -61,8 +82,10 @@ const TargetReport = () => {
 
   const loadall = () => {
     fetchData();
-    setStartDate("00-00-0000");
-    setEndDate("00-00-0000");
+    setStartDate(startDate)
+    setEndDate(endDate)
+    setSelectedService('')
+    setSelectedEmployee('')
     setTotalAmountTin(0);
     setTotalOrdersTin(0);
     setTotalAmountTout(0);
@@ -99,7 +122,7 @@ const TargetReport = () => {
     }
 
     if (selectedEmployee) {
-      filteredData = filteredData.filter(item => item.employee_id === selectedEmployee);
+      filteredData = filteredData.filter(item => item.employee_name === selectedEmployee);
     }
 
     // Calculate total amount for filtered data
@@ -159,7 +182,7 @@ const TargetReport = () => {
     new Set(apiDatas.map((item) => item.service_id))
   );
 
-  const employeeNames = Array.from(new Set(apiDatas.map(item => item.employee_id)));
+  const employeeNames = Array.from(new Set(apiDatas.map(item => item.employee_name)));
 
 
   const columns = [
@@ -180,7 +203,7 @@ const TargetReport = () => {
         displayOrder: index + 1,
         // target_type: item.target_type,
         target_type: item.target_type === 'tin' ? 'In' : item.target_type === 'tout' ? 'Out' : 'Unknown',
-        employee_id: item.employee_id,
+        employee_id: item.employee_name,
         service_id: item.service_id,
         no_of_orders: item.no_of_orders,
         total_amount: item.total_amount,
@@ -206,27 +229,10 @@ const TargetReport = () => {
             </Link>
           </p>
           <div>
-            {/* <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-                        <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-                        
-                        <select value={selectedService} onChange={(e) => setSelectedService(e.target.value)}>
-                            <option value="">All Services</option>
-                            {serviceNames.map(service => (  
-                                <option key={service} value={service}>{service}</option>
-                            ))}
-                        </select>
-                        <button onClick={handleFilter}>Filter</button>
-                        <button onClick={loadall}>reset</button>
-                        */}
+
           </div>
           <div className="actions">
-            {/* <Link
-              to="/add-target-master"
-              className="btn btn-bg-orange btn-sm b-radius-50 "
-            >
-              <MdNoteAdd style={{ fontSize: "18px", marginBottom: "2px" }} />{" "}
-              Add Target Master
-            </Link> */}
+
             &nbsp; &nbsp;
             <button
               type="button"
