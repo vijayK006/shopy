@@ -159,7 +159,7 @@ const Sidebar = () => {
             )}
 
             {/* Bill Generation */}
-            <NavLink className="disble-decoration" to={`/bill/${employeeId}`}><li className={`items ${currentPage.startsWith('/bill') ? 'active' : ''}`}><IoSettingsOutline className="icons" /> <span className='resp'>Bill Generation</span></li></NavLink>
+            <NavLink className="disble-decoration" to={`/add-bill/${employeeId}`}><li className={`items ${currentPage.startsWith('/bill') ? 'active' : ''}`}><IoSettingsOutline className="icons" /> <span className='resp'>Bill Generation</span></li></NavLink>
 
 
           </ul>

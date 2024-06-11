@@ -75,33 +75,33 @@ const Add_Target_Out = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-      
-        const formattedTargets = targets.map(target => ({
-          employee_id: target.employee_id,
-          service_id: target.service_id,
-          no_of_orders: target.no_of_orders,
-          total_amount: target.total_amount,
-          from_date: target.from_date,
-          to_date: target.to_date,
-          description: target.description
-        }));
-      
-        axios.post('https://digitalshopee.online/api/target-out/add-target.php', formattedTargets,
-        {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-        )
-          .then(response => {
-            console.log('Target out submitted successfully');
-            navigate(`/target-out/${employeeId}`)
 
-          })
-          .catch(error => {
-            console.error('Error submitting data:', error);
-          });
-      };
+        const formattedTargets = targets.map(target => ({
+            employee_id: target.employee_id,
+            service_id: target.service_id,
+            no_of_orders: target.no_of_orders,
+            total_amount: target.total_amount,
+            from_date: target.from_date,
+            to_date: target.to_date,
+            description: target.description
+        }));
+
+        axios.post('https://digitalshopee.online/api/target-out/add-target.php', formattedTargets,
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        )
+            .then(response => {
+                console.log('Target out submitted successfully');
+                navigate(`/target-out/${employeeId}`)
+
+            })
+            .catch(error => {
+                console.error('Error submitting data:', error);
+            });
+    };
 
     useEffect(() => {
         axios.get('https://digitalshopee.online/api/employee/get-employee.php')
@@ -143,7 +143,7 @@ const Add_Target_Out = () => {
                 <div className='container-fluid mb-5'>
                     <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
-   {/* Global Fields */}
+                            {/* Global Fields */}
                             <div className='row'>
                                 <div className='col-md-3 py-1'>
                                     <label className='text-sm font-w-500 p-2'>Target From Date</label>
@@ -206,8 +206,8 @@ const Add_Target_Out = () => {
                                             ))} */}
 
                                             {getempoloyenames.map((employee, index) => (
-                                            <option key={index} value={employee.id}>{employee.name}</option>
-                                        ))}
+                                                <option key={index} value={employee.id}>{employee.name}</option>
+                                            ))}
                                         </select>
                                         {/* <p className='warning'>{alertowner}</p> */}
                                     </div>
