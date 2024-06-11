@@ -51,6 +51,7 @@ import Leadgeneration from "./Pages/Lead-Generation/Lead-generation";
 import Add_lead_generation from "./Pages/Lead-Generation/Add-lead-generation";
 import Edit_Lead_generation from "./Pages/Lead-Generation/Edit-lead-generation";
 import Bill from "./Pages/Bill";
+import Add_bill from "./Pages/Bill-Genaration/Add-bill";
 
 
 const App = () => {
@@ -136,6 +137,7 @@ const App = () => {
 
           {/* Bill */}
           <Route path="/Bill/:employeeId" element={<ProtectRoute Component={Bill} />} />
+          <Route path="/add-bill/:employeeId" element={<ProtectRoute Component={Add_bill} />} />
         </Routes>
       </BrowserRouter>
     </>
