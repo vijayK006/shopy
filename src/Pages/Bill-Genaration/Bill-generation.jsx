@@ -65,7 +65,7 @@ const BillGeneration = () => {
     const handleDelete = (id) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this Service Master");
         if (confirmDelete) {
-            axios.post(`https://digitalshopee.online/api/lead-generation/delete-lead.php?id=${id}`)
+            axios.post(`https://digitalshopee.online/api/bill/delete-bill.php?id=${id}`)
                 .then(res => {
                     fetchData();
                 })
@@ -92,7 +92,7 @@ const BillGeneration = () => {
             renderCell: (params) => (
                 <>
                    
-            <Link to={`/edit-lead-generation/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
+            <Link to={`/edit-bill/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
               <FaRegEdit  style={{fontSize:'15px', marginBottom:'4px'}}/>  View / Edit 
               </Link>
     
