@@ -59,19 +59,19 @@ import Bill_pdf from "./Pages/Bill-Genaration/Bill-pdf";
 
 const App = () => {
 
-  // useEffect(() => {
-  //   const handleBeforeUnload = () => {
-  //     localStorage.clear();
-  //   };
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      localStorage.clear();
+    };
 
-  //   // Add event listener for beforeunload
-  //   window.addEventListener('beforeunload', handleBeforeUnload);
+    // Add event listener for beforeunload
+    window.addEventListener('beforeunload', handleBeforeUnload);
 
-  //   // Cleanup event listener on component unmount
-  //   return () => {
-  //     window.removeEventListener('beforeunload', handleBeforeUnload);
-  //   };
-  // }, []);
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
 
   return (
     <>
