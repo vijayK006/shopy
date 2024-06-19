@@ -50,27 +50,28 @@ import EmployeeLogin from "./Pages/EmployeeLogin";
 import Leadgeneration from "./Pages/Lead-Generation/Lead-generation";
 import Add_lead_generation from "./Pages/Lead-Generation/Add-lead-generation";
 import Edit_Lead_generation from "./Pages/Lead-Generation/Edit-lead-generation";
-import Bill from "./Pages/Bill";
+
 import Add_bill from "./Pages/Bill-Genaration/Add-bill";
 import BillGeneration from "./Pages/Bill-Genaration/Bill-generation";
 import Edit_bill from "./Pages/Bill-Genaration/edit-bill";
+import Bill_pdf from "./Pages/Bill-Genaration/Bill-pdf";
 
 
 const App = () => {
 
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      localStorage.clear();
-    };
+  // useEffect(() => {
+  //   const handleBeforeUnload = () => {
+  //     localStorage.clear();
+  //   };
 
-    // Add event listener for beforeunload
-    window.addEventListener('beforeunload', handleBeforeUnload);
+  //   // Add event listener for beforeunload
+  //   window.addEventListener('beforeunload', handleBeforeUnload);
 
-    // Cleanup event listener on component unmount
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, []);
+  //   // Cleanup event listener on component unmount
+  //   return () => {
+  //     window.removeEventListener('beforeunload', handleBeforeUnload);
+  //   };
+  // }, []);
 
   return (
     <>
@@ -138,7 +139,7 @@ const App = () => {
           <Route path="/edit-lead-generation/:employeeId/:id" element={<ProtectRoute Component={Edit_Lead_generation} />} />
 
           {/* Bill */}
-          <Route path="/Bill/:employeeId" element={<ProtectRoute Component={Bill} />} />
+          <Route path="/bill-pdf/:employeeId/:id" element={<ProtectRoute Component={Bill_pdf} />} />
           <Route path="/add-bill/:employeeId" element={<ProtectRoute Component={Add_bill} />} />
           <Route path="/edit-bill/:employeeId/:id" element={<ProtectRoute Component={Edit_bill} />} />
           <Route path="/bill-generation/:employeeId" element={<ProtectRoute Component={BillGeneration} />} />

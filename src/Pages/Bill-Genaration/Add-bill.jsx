@@ -40,7 +40,7 @@ const Add_bill = () => {
     receipt: '',
     ack_no: '',
     remark_1: '',
-    totalamount: '',
+    total: '',
     items: [
       { service_code: '', service_name: '', quantity: '', amount: '', remark: '' }
     ]
@@ -109,7 +109,7 @@ const Add_bill = () => {
     formData.items.forEach(item => {
       totalAmount += parseFloat(item.amount) || 0;
     });
-    setFormData({ ...formData, totalamount: totalAmount }); // Update totalamount in formData
+    setFormData({ ...formData, total: totalAmount }); // Update totalamount in formData
   };
 
   return (
@@ -219,7 +219,7 @@ readOnly/>
 
             <div className='d-flex justify-content-between pt-4 gap-4'>
 {/* <p>Total Amount: {calculateTotalAmount()}</p> */}
-<input type='text' className='btn btn-bg-orange' value={formData.totalamount} name='totalamount' placeholder='Total Amount' onChange={handleChange} readOnly/>
+<input type='text' className='btn btn-bg-orange' value={formData.total} name='totalamount' placeholder='Total Amount' onChange={handleChange} readOnly/>
 
 <div className='d-flex gap-3'>
       <button type="button" onClick={addItem} className='btn btn-bg-orange mr-2'>Add Item</button>

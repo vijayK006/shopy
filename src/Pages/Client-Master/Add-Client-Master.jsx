@@ -9,7 +9,6 @@ import {
 } from "react-country-state-city/dist/cjs/index.js";
 import "react-country-state-city/dist/react-country-state-city.css";
 import axios from 'axios';
-import { AiFillPicture } from "react-icons/ai";
 
 
 const Add_Client_Master = () => {
@@ -39,6 +38,18 @@ const Add_Client_Master = () => {
 
     }, []);
 
+    const [getClientMobilenumber, setGetClientMobilenumber] = useState([])
+    useEffect(() => {
+        axios.get('https://digitalshopee.online/api/client/get-client.php')
+          .then(res => {
+            const migratephone = res.data.map(firm=> firm.phone)
+            setGetClientMobilenumber(migratephone)
+            console.log(migratephone)
+          })
+          .catch(err => {
+            console.error('Error fetching data:', err);
+          });
+      }, []);
 
     const [valueData, setValueData] = useState({
         address: '',
@@ -122,6 +133,11 @@ const Add_Client_Master = () => {
             return;
         }
 
+        if (getClientMobilenumber.includes(valueData.phone)) {
+            setAlertphone("This mobile number already exists. Please enter a different mobile number.");
+            setLoading(false);
+            return;
+        }
 
         const regnumber = /^[0-9]{10}$/;
         if (regnumber.test(valueData.phone)) {
@@ -261,10 +277,8 @@ const Add_Client_Master = () => {
                     <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
-                            
-
                             <div className='col-md-3 py-2'>
-                                <label className='text-sm font-w-500 p-2'> Client Name</label>
+                                <label className='text-sm font-w-500 p-2 position-relative'> Client Name <span className='manditory'>*</span></label>
 
                                 <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Please enter name' onChange={handleChange} />
 
@@ -277,7 +291,7 @@ const Add_Client_Master = () => {
                             </div>
 
                             <div className='col-md-3 py-2'>
-                                <label className='text-sm font-w-500 p-2'> Mobile No.</label>
+                                <label className='text-sm font-w-500 p-2 position-relative'> Mobile No. <span className='manditory'>*</span></label>
                                 <input type='number' className='form-control' value={valueData.phone} name='phone' placeholder='Please enter mobile no.' onChange={handleChange} />
 
                                 <p className='warning'>{alertphone}</p>

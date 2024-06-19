@@ -23,7 +23,7 @@ const Edit_Client_Master = () => {
     const [stateid, setstateid] = useState(0);
     const [getfirmnames, setGetfirmnames] = useState([])
 
-    const [getFirmMobilenumber, setGetFirmMobilenumber] = useState([])
+    const [getClientMobilenumber, setGetClientMobilenumber] = useState([])
     const [alertname, setAlertname] = useState();
     const [alertowner, setAlertowner] = useState();
     const [alertphone, setAlertphone] = useState();
@@ -31,6 +31,19 @@ const Edit_Client_Master = () => {
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
+
+
+    useEffect(() => {
+        axios.get('https://digitalshopee.online/api/firm/get-firm.php')
+            .then(res => {
+                const migratefirm = res.data.map(firm => ({ phone: firm.phone, id: firm.id }))
+                setGetClientMobilenumber(migratefirm)
+                console.log(migratefirm)
+            })
+            .catch(err => {
+                console.error('Error fetching data:', err);
+            });
+    }, []);
 
     useEffect(() => {
         // Set default country to India after the component mounts
@@ -58,7 +71,6 @@ const Edit_Client_Master = () => {
         profession: '',
         other: '',
         dob: '',
-
 
         client_photo: null,
         adhaar_photo: null,
@@ -158,7 +170,6 @@ const Edit_Client_Master = () => {
 
 
 
-
         const regname = /^[a-zA-Z\s]+$/;
         if (regname.test(valueData.name)) {
             setAlertname("");
@@ -171,6 +182,14 @@ const Edit_Client_Master = () => {
         } else {
             setAlertname("Name should not be in a number");
             //   e.preventDefault();
+            setLoading(false);
+            return;
+        }
+
+        
+
+        if (getClientMobilenumber.includes(valueData.phone)) {
+            setAlertphone("This mobile number already exists. Please enter a different mobile number.");
             setLoading(false);
             return;
         }
@@ -293,7 +312,7 @@ const Edit_Client_Master = () => {
 
 
                             <div className='col-md-3 py-2'>
-                                <label className='text-sm font-w-500 p-2'>Client Name</label>
+                                <label className='text-sm font-w-500 p-2 position-relative'>Client Name <span className='manditory'>*</span></label>
                                 <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Please enter name' onChange={handleChange} />
 
                                 <p className='warning'>{alertname}</p>
@@ -306,10 +325,9 @@ const Edit_Client_Master = () => {
 
 
                             <div className='col-md-3 py-2'>
-                                <label className='text-sm font-w-500 p-2'>Mobile No.</label>
+                                <label className='text-sm font-w-500 p-2 position-relative'>Mobile No. <span className='manditory'>*</span></label>
                                 <input type='number' className='form-control' value={valueData.phone} name='phone' placeholder='Please enter mobile no.' onChange={handleChange} />
                                 <p className='warning'>{alertphone}</p>
-                           
                             </div>
 
 

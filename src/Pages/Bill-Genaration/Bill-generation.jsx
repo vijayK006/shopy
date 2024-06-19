@@ -80,15 +80,15 @@ const BillGeneration = () => {
         { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
         { field: 'client_id', headerName: 'Client Name', width: 200 },
         { field: 'date', headerName: 'Date', width: 100 },
-        { field: 'receipt', headerName: 'Receipt', width: 300 },
-        { field: 'ack_no', headerName: 'Ack_no', width: 100 },
-        { field: 'remark_1', headerName: 'Remark', width: 200 },
+        { field: 'receipt', headerName: 'Receipt', width: 100 },
+        { field: 'ack_no', headerName: 'Ack_no', width: 200 },
+        { field: 'remark_1', headerName: 'Remark', width: 100 },
         //   {   field: 'age', headerName: 'Age', type: 'number', width: 90,},
         {
             field: 'actions',
             headerName: 'Actions',
             sortable: false,
-            width: 230,
+            width: 350,
             renderCell: (params) => (
                 <>
                    
@@ -102,6 +102,13 @@ const BillGeneration = () => {
         
               <Link  className='btn btn-outline-danger btn-sm' onClick={() => handleDelete(params.row.id)}>
                <AiOutlineDelete style={{fontSize:'15px', marginBottom:'4px'}}/> Delete
+              </Link>
+
+              &nbsp;
+              &nbsp;
+
+              <Link to={`/bill-pdf/${employeeId}/${params.row.id}`} className='btn btn-outline-secondary btn-sm'>
+               Bill PDF
               </Link>
 
                 </>
