@@ -11,7 +11,7 @@ const Edit_Lead_generation = () => {
 
     const role = localStorage.getItem('role');
 
-    const [getServiceName, setGetServiceName] =useState([])
+    const [getServiceName, setGetServiceName] = useState([])
     const [loading, setLoading] = useState(false);
 
     const [alertleadname, setAlertleadname] = useState();
@@ -26,7 +26,7 @@ const Edit_Lead_generation = () => {
 
 
     const [valueData, setValueData] = useState({
-          name: '',
+        name: '',
         phone: '',
         service: '',
         document: '',
@@ -64,7 +64,7 @@ const Edit_Lead_generation = () => {
                     work_date: firmData.work_date,
                     ack_no: firmData.ack_no,
                     date: firmData.date,
-                 
+
                 });
             })
             .catch(error => {
@@ -72,7 +72,7 @@ const Edit_Lead_generation = () => {
             });
     }, [id]);
 
-    
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -95,7 +95,7 @@ const Edit_Lead_generation = () => {
             setLoading(false);
             return;
 
-        } else{
+        } else {
             setAlertaoknumber("");
             //   e.preventDefault();
             setLoading(true);
@@ -120,10 +120,10 @@ const Edit_Lead_generation = () => {
     };
 
 
-    
+
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setValueData({   ...valueData,   [name]: value });
+        setValueData({ ...valueData, [name]: value });
     };
 
 
@@ -139,27 +139,32 @@ const Edit_Lead_generation = () => {
                 </div>
 
                 <div className='container-fluid mb-5'>
-                <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
 
-                        <div className='col-md-3 py-1'>
+                            <div className='col-md-3 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Date</label>
+                                <input type='date' className='form-control' value={valueData.date} name='date' onChange={handleChange} />
+                            </div>
+
+                            <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Lead Name</label>
                                 <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Please enter lead name' onChange={handleChange} />
-                         
-                         <p className='warning'>{alertleadname}</p>
+
+                                <p className='warning'>{alertleadname}</p>
                             </div>
 
                             <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Lead Phone Number</label>
                                 <input type='number' className='form-control' value={valueData.phone} name='phone' placeholder='Please enter lead phone number' onChange={handleChange} />
-                         <p className='warning'>{alertphonenumber}</p>
-                            
+                                <p className='warning'>{alertphonenumber}</p>
+
                             </div>
 
-                            
 
 
-                        <div className='col-md-3 py-1'>
+
+                            <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Select Service</label>
                                 <select className='form-control' value={valueData.service} name='service' onChange={handleChange}>
                                     <option value="">Select Service </option>
@@ -168,12 +173,12 @@ const Edit_Lead_generation = () => {
                                     ))}
                                 </select>
 
-                         <p className='warning'>{alertservice}</p>
+                                <p className='warning'>{alertservice}</p>
 
                             </div>
 
-                            
-                        <div className='col-md-3 py-1'>
+
+                            <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Documents Received</label>
                                 <select className='form-control' value={valueData.document} name='document' onChange={handleChange}>
                                     <option value="">Select Document Status </option>
@@ -181,7 +186,7 @@ const Edit_Lead_generation = () => {
                                     <option value="No">No </option>
                                 </select>
 
-                         <p className='warning'>{alertdocx}</p>
+                                <p className='warning'>{alertdocx}</p>
 
                             </div>
 
@@ -192,7 +197,7 @@ const Edit_Lead_generation = () => {
                                     <option value="Yes">Yes</option>
                                     <option value="No">No </option>
                                 </select>
-                         <p className='warning'>{alertpayment}</p>
+                                <p className='warning'>{alertpayment}</p>
 
                             </div>
 
@@ -200,20 +205,17 @@ const Edit_Lead_generation = () => {
                             <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Work Date</label>
                                 <input type='date' className='form-control' value={valueData.work_date} name='work_date' onChange={handleChange} />
-                         <p className='warning'>{alertworkdate}</p>
+                                <p className='warning'>{alertworkdate}</p>
 
                             </div>
 
                             <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Acknowledge Number</label>
                                 <input type='text' className='form-control' value={valueData.ack_no} name='ack_no' placeholder='Please enter acknowledge number' onChange={handleChange} />
-                          
+
                             </div>
 
-                            <div className='col-md-3 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Date</label>
-                                <input type='date' className='form-control' value={valueData.date} name='date' onChange={handleChange} />
-                            </div>
+
 
                             <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Status / Remark</label>

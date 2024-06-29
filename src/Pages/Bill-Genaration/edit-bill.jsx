@@ -32,8 +32,16 @@ const Edit_bill = () => {
         axios.get('https://digitalshopee.online/api/client/get-client.php')
             .then(res => {
                 // const migrateclientname = res.data.map(client => client.name)
-                const migrateClientName = res.data.map(client => client.name).sort((a, b) => a.localeCompare(b));
+                // const migrateClientName = res.data.map(client => client.name).sort((a, b) => a.localeCompare(b));
+                // setGetClientName(migrateClientName)
+                const migrateClientName = res.data
+                .map(client => ({
+                    id: client.id,
+                    name: client.name
+                }))
+                .sort((a, b) => a.name.localeCompare(b.name));
                 setGetClientName(migrateClientName)
+
             })
             .catch(err => {
                 console.error('Error fetching data:', err);
@@ -44,7 +52,8 @@ const Edit_bill = () => {
         // Fetch the bill data
         axios.get(`https://digitalshopee.online/api/bill/get-id-bill.php?id=${id}`)
             .then(response => {
-                const firmData = response.data[0]; // Assuming response.data contains the firm data
+                const firmData = response.data[0];
+                console.log(firmData) // Assuming response.data contains the firm data
                 setValueData({
                     id: firmData.id,
                     client_id: firmData.client_id,
@@ -102,6 +111,8 @@ const Edit_bill = () => {
             }
             items[index][key] = value;
             setValueData({ ...valueData, items });
+            // calculateTotalAmount();
+
         } else {
             setValueData({ ...valueData, [name]: value });
         }
@@ -119,6 +130,20 @@ const Edit_bill = () => {
         items.splice(index, 1);
         setValueData({ ...valueData, items });
     };
+
+    const calculateTotalAmount = () => {
+        let totalAmount = 0;
+        valueData.items.forEach(item => {
+            totalAmount += parseFloat(item.amount) || 0;
+        });
+        // setValueData({ ...valueData, total: totalAmount }); // Update totalamount in formData
+        setValueData(prevFormData => ({ ...prevFormData, total: totalAmount }));
+
+    };
+
+    useEffect(() => {
+        calculateTotalAmount();
+    }, [valueData.items]);
 
     return (
         <>
@@ -142,9 +167,9 @@ const Edit_bill = () => {
                                 <label className='text-sm font-w-500 p-2'>Select Client</label>
 
                                 <select className='form-control' value={valueData.client_id} name='client_id' onChange={handleChange}>
-                                    <option value="">Select Service </option>
-                                    {getClientName.map((name, index) => (
-                                        <option key={index} value={name}>{name}</option>
+                                    <option value="">Select Client </option>
+                                    {getClientName.map((clients, index) => (
+                                        <option key={index} value={clients.id}>{clients.name}</option>
                                     ))}
                                 </select>
                             </div>

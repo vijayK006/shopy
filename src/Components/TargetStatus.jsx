@@ -406,7 +406,6 @@ const TargetStatus = () => {
                 },
                 [`& .${gaugeClasses.valueArc}`]: {
                   fill: '#ff6423',
-
                 },
               }}
               text={

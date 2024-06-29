@@ -256,17 +256,17 @@
 
 // export default Add_Service_Master
 
-import React, { useEffect, useState } from 'react'
-import Topbar from '../../layouts/Topbar'
-import Sidebar from '../../layouts/Sidebar'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import Topbar from '../../layouts/Topbar';
+import Sidebar from '../../layouts/Sidebar';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import axios from 'axios';
 
 const Add_Service_Master = () => {
     const { employeeId } = useParams();
 
-    const[getServiceCode, setGetServiceCode] = useState([]);
+    const [getServiceCode, setGetServiceCode] = useState([]);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 

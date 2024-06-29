@@ -143,6 +143,8 @@ const App = () => {
           <Route path="/add-bill/:employeeId" element={<ProtectRoute Component={Add_bill} />} />
           <Route path="/edit-bill/:employeeId/:id" element={<ProtectRoute Component={Edit_bill} />} />
           <Route path="/bill-generation/:employeeId" element={<ProtectRoute Component={BillGeneration} />} />
+
+        
         </Routes>
       </BrowserRouter>
     </>

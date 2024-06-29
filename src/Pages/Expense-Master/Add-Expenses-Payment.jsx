@@ -19,7 +19,7 @@ const Add_Expenses_Payment = () => {
         employee_id: '',
         expense_id: '',
         amount: '',
-        date: '',
+        date: new Date().toISOString().substr(0, 10),
         remark: ''
     })
 

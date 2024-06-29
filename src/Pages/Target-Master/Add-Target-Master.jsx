@@ -11,7 +11,7 @@ const Add_Target_Master = () => {
     const [getempoloyenames, setGetempoloyenames] = useState([]);
     const [getservicenames, setGetservicenames] = useState([]);
 
-    const [globalFromDate, setGlobalFromDate] = useState('');
+    const [globalFromDate, setGlobalFromDate] = useState(new Date().toISOString().substr(0, 10));
     const [globalToDate, setGlobalToDate] = useState('');
     const [globalEmployeeId, setGlobalEmployeeId] = useState('');
 
@@ -176,7 +176,7 @@ const Add_Target_Master = () => {
                                     <input type='date' className='form-control' value={globalToDate} name='to_date' placeholder='' onChange={handleGlobalChange} />
                                 </div>
 
-                                <div className='col-md-3 py-2'>
+                                <div className='col-md-3 py-1'>
                                     <label className='text-sm font-w-500 p-2'>Select Employee</label>
                                     <select className='form-control' value={globalEmployeeId} name='employee_id' onChange={handleGlobalChange}>
                                         <option value="">Select Employee</option>
@@ -233,17 +233,17 @@ const Add_Target_Master = () => {
                                     </div>
 
                                     <div className='col-md-3 py-1'>
-                                        <label className='text-sm font-w-500 p-2'>no_of_orders</label>
+                                        <label className='text-sm font-w-500 p-2'>No Of Orders</label>
                                         <input type='number' className='form-control' value={target.no_of_orders} name='no_of_orders' placeholder='' onChange={(e) => handleChange(index, e)} />
                                     </div>
 
                                     <div className='col-md-3 py-1'>
-                                        <label className='text-sm font-w-500 p-2'>total amount</label>
+                                        <label className='text-sm font-w-500 p-2'>Total Amount</label>
                                         <input type='number' className='form-control' value={target.total_amount} name='total_amount' placeholder='' onChange={(e) => handleChange(index, e)} />
                                     </div>
 
                                     <div className='col-md-3 py-1'>
-                                        <label className='text-sm font-w-500 p-2'>description</label>
+                                        <label className='text-sm font-w-500 p-2'>Description</label>
                                         <input type='text' className='form-control' value={target.description} name='description' placeholder='' onChange={(e) => handleChange(index, e)} />
                                     </div>
                                     <div className='d-flex justify-content-between pt-4'>

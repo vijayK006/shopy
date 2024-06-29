@@ -1071,7 +1071,7 @@ select.filter-fields {
 
 .gaige-header {
     position: absolute;
-    font-size: 12px;
+    font-size: 13px;
     bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
@@ -1111,4 +1111,33 @@ input.btn-outline-theme::placeholder {
 
 .t-theme{
     color: #ff6423;
+}
+
+.t-gray{
+    color: gray !important;
+}
+
+.border-t-orange{
+border-top: 10px solid #ff5e1a;
+}
+
+.t-md{
+    font-size: 18px !important;
+}
+
+.t-lg{
+font-size: 20px;
+}
+
+.t-black{
+    color: black;
+}
+
+.table-dark{
+--bs-table-bg: #ff5e1a !important;
+--bs-table-border-color:var(--bs-table-bg);
+}
+
+.table-dark th{
+    font-weight: 300;
 }

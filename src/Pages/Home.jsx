@@ -10,11 +10,12 @@ import { GoPerson } from "react-icons/go";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineSettingsInputComponent } from "react-icons/md";
 import TargetStatus from '../Components/TargetStatus'
-import TargetStatus_Employee from '../Components/TargetStatus-Employe'
+import TargetStatus_Employee from '../Components/TargetStatus-Employe';
+import Sales_Details from '../Components/Sales-Details'
 
 
 const Home = () => {
-  const {employeeId} = useParams();
+  const { employeeId } = useParams();
   const role = localStorage.getItem('role')
 
   const [firmmastercount, setFirmmasterCount] = useState([]);
@@ -71,62 +72,63 @@ const Home = () => {
       <div className='main-content' id='mainbody'>
         <div className="container-fluid mt-3">
 
-        
+
           {role === 'admin' ? (
             <>
-                <div className='row'>
+              <div className='row'>
 
-            <Admincards cardtitle="Firm Master"
-              icon={PiCreditCard}
-              iconColor='#ff3e57'
-              cardbg='#ff3e57'
-              borderRcolor='3px solid #ff3e57'
-              circlebg='white'
-              datacount={firmmastercount}
-              pageLink={`/firm-master/${employeeId}`}
-            >
-            </Admincards>
+                <Admincards cardtitle="Firm Master"
+                  icon={PiCreditCard}
+                  iconColor='#ff3e57'
+                  cardbg='#ff3e57'
+                  borderRcolor='3px solid #ff3e57'
+                  circlebg='white'
+                  datacount={firmmastercount}
+                  pageLink={`/firm-master/${employeeId}`}
+                >
+                </Admincards>
 
-            <Admincards cardtitle="Client Master"
-              icon={GoPerson}
-              iconColor='#00cebe'
-              cardbg='#00cebe'
-              borderRcolor='3px solid #00cebe'
-              circlebg='white'
-              datacount={clientmastercount}
-              pageLink={`/client-master/${employeeId}`}
-            >
-            </Admincards>
+                <Admincards cardtitle="Client Master"
+                  icon={GoPerson}
+                  iconColor='#00cebe'
+                  cardbg='#00cebe'
+                  borderRcolor='3px solid #00cebe'
+                  circlebg='white'
+                  datacount={clientmastercount}
+                  pageLink={`/client-master/${employeeId}`}
+                >
+                </Admincards>
 
-            <Admincards cardtitle="Service Master"
-              icon={IoSettingsOutline}
-              iconColor='#f927a8'
-              cardbg='#f927a8'
-              borderRcolor='3px solid #ff3e57'
-              circlebg='white'
-              datacount={servicemastercount}
-              pageLink={`/service-master/${employeeId}`}
-            >
-            </Admincards>
+                <Admincards cardtitle="Service Master"
+                  icon={IoSettingsOutline}
+                  iconColor='#f927a8'
+                  cardbg='#f927a8'
+                  borderRcolor='3px solid #ff3e57'
+                  circlebg='white'
+                  datacount={servicemastercount}
+                  pageLink={`/service-master/${employeeId}`}
+                >
+                </Admincards>
 
-            <Admincards cardtitle="Expenses"
-              icon={MdOutlineSettingsInputComponent}
-              iconColor='#ff4c00'
-              cardbg='#ff4c00'
-              borderRcolor='3px solid #ff3e57'
-              circlebg='white'
-              datacount={expensemastercount}
-              // pageLink={`/expenses-master/${employeeId}`}
-            >
-            </Admincards>
+                <Admincards cardtitle="Expenses"
+                  icon={MdOutlineSettingsInputComponent}
+                  iconColor='#ff4c00'
+                  cardbg='#ff4c00'
+                  borderRcolor='3px solid #ff3e57'
+                  circlebg='white'
+                  datacount={expensemastercount}
+                // pageLink={`/expenses-master/${employeeId}`}
+                >
+                </Admincards>
 
-          </div>
+              </div>
 
-                      <TargetStatus/>
+              {/* <TargetStatus /> */}
+              <Sales_Details/>
             </>
 
-          ):(
-            <TargetStatus_Employee/>
+          ) : (
+            <TargetStatus_Employee />
           )}
 
 

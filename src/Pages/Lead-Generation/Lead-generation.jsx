@@ -46,19 +46,18 @@ const Leadgeneration = () => {
             });
     }, []);
 
-    // const downloadExcel = () => {
-        
-    // const transformedData = apiDatas.map(({id, ...rest }) => rest);
+    const downloadExcel = () => {
+    const transformedData = apiDatas.map(({id, ...rest }) => rest);
 
-    // const worksheet = XLSX.utils.json_to_sheet(transformedData);
-    //     const workbook = XLSX.utils.book_new();
-    //     XLSX.utils.book_append_sheet(workbook, worksheet, 'Data');
+    const worksheet = XLSX.utils.json_to_sheet(transformedData);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Data');
     
-    //     const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    //     const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+        const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+        const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
     
-    //     saveAs(blob, 'service-master.xlsx');
-    //   };
+        saveAs(blob, 'Lead generation.xlsx');
+      };
 
 
 
@@ -78,11 +77,13 @@ const Leadgeneration = () => {
 
     const columns = [
         { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
+        { field: 'date', headerName: 'Date', width: 200 },
         { field: 'name', headerName: 'Name', width: 200 },
+
         { field: 'phone', headerName: 'Mobile no.', width: 100 },
         { field: 'service', headerName: 'Service', width: 300 },
         { field: 'work_date', headerName: 'Work Date', width: 100 },
-        { field: 'ack_no', headerName: 'Acknowledge no.', width: 100 },
+        // { field: 'ack_no', headerName: 'Acknowledge no.', width: 100 },
         // { field: 'document', headerName: 'Required Documents', width: 200 },
         //   {   field: 'age', headerName: 'Age', type: 'number', width: 90,},
         {
@@ -116,10 +117,12 @@ const Leadgeneration = () => {
         apiDatas.map((item, index) => ({
             id: item.id || index,
             displayOrder: index + 1,
-            name: item.name,
+            date: item.date,
             phone: item.phone,
+            name: item.name,
             service: item.service,
             work_date: item.work_date,
+            document:item.document,
             ack_no: item.ack_no,
         })) : [];
 
@@ -135,7 +138,7 @@ const Leadgeneration = () => {
                     <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to="" className='t-theme-color'>Lead Generation</Link></p>
 
 <div className='d-flex gap-2'>
-{/* <button type="button" className='download-btn' onClick={downloadExcel}><MdOutlineDownloading className='icon'/> Export to Excel</button> */}
+<button type="button" className='download-btn' onClick={downloadExcel}><MdOutlineDownloading className='icon'/> Export to Excel</button>
 
                   
                         <Link to={`/add-lead-generation/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Lead Generation</Link>

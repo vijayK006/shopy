@@ -8,8 +8,8 @@ import axios from 'axios';
 const Add_lead_generation = () => {
     const { employeeId } = useParams();
 
-    const[getServiceName, setGetServiceName] = useState([]);
-    const [ ackNumber, setAckNumber] =  useState([])
+    const [getServiceName, setGetServiceName] = useState([]);
+    const [ackNumber, setAckNumber] = useState([])
 
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -50,7 +50,7 @@ const Add_lead_generation = () => {
         formData.append('ack_no', valueData.ack_no);
         formData.append('date', valueData.date);
 
-      
+
 
         if (!valueData.name === "") {
             setAlertleadname("");
@@ -60,12 +60,12 @@ const Add_lead_generation = () => {
             //   e.preventDefault();
             setLoading(false);
             return;
-        } else{
+        } else {
             setAlertleadname("");
             setLoading(true);
         }
 
-        
+
         const regnumber = /^[0-9]{10}$/;
         if (regnumber.test(valueData.phone)) {
             setAlertphonenumber("");
@@ -90,7 +90,7 @@ const Add_lead_generation = () => {
             //   e.preventDefault();
             setLoading(false);
             return;
-        } else{
+        } else {
             setAlertservice("");
             setLoading(true);
         }
@@ -103,7 +103,7 @@ const Add_lead_generation = () => {
             //   e.preventDefault();
             setLoading(false);
             return;
-        } else{
+        } else {
             setAlertdocx("");
             setLoading(true);
         }
@@ -116,7 +116,7 @@ const Add_lead_generation = () => {
             //   e.preventDefault();
             setLoading(false);
             return;
-        } else{
+        } else {
             setAlertpayment("");
             setLoading(true);
         }
@@ -129,7 +129,7 @@ const Add_lead_generation = () => {
             //   e.preventDefault();
             setLoading(false);
             return;
-        } else{
+        } else {
             setAlertworkdate("");
             setLoading(true);
         }
@@ -140,7 +140,7 @@ const Add_lead_generation = () => {
             setLoading(false);
             return;
 
-        } else{
+        } else {
             setAlertaoknumber("");
             //   e.preventDefault();
             setLoading(true);
@@ -203,25 +203,30 @@ const Add_lead_generation = () => {
                 <div className='container-fluid mb-5'>
                     <form onSubmit={handleSubmit}>
                         <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
-
-                        <div className='col-md-3 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Lead Name</label>
-                                <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Please enter lead name' onChange={handleChange} />
-                         
-                         <p className='warning'>{alertleadname}</p>
+                            
+                            <div className='col-md-3 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Date</label>
+                                <input type='date' className='form-control' value={valueData.date} name='date' onChange={handleChange} />
                             </div>
 
                             <div className='col-md-3 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Lead Phone Number</label>
-                                <input type='number' className='form-control' value={valueData.phone} name='phone' placeholder='Please enter lead phone number' onChange={handleChange} />
-                         <p className='warning'>{alertphonenumber}</p>
-                            
+                                <label className='text-sm font-w-500 p-2'>Lead Name</label>
+                                <input type='text' className='form-control' value={valueData.name} name='name' placeholder='Please enter lead name' onChange={handleChange} />
+
+                                <p className='warning'>{alertleadname}</p>
                             </div>
 
-                            
+                            <div className='col-md-3 py-1'>
+                                <label className='text-sm font-w-500 p-2'>Phone Number</label>
+                                <input type='number' className='form-control' value={valueData.phone} name='phone' placeholder='Please enter lead phone number' onChange={handleChange} />
+                                <p className='warning'>{alertphonenumber}</p>
+
+                            </div>
 
 
-                        <div className='col-md-3 py-1'>
+
+
+                            <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Select Service</label>
                                 <select className='form-control' value={valueData.service} name='service' onChange={handleChange}>
                                     <option value="">Select Service </option>
@@ -230,12 +235,12 @@ const Add_lead_generation = () => {
                                     ))}
                                 </select>
 
-                         <p className='warning'>{alertservice}</p>
+                                <p className='warning'>{alertservice}</p>
 
                             </div>
 
-                            
-                        <div className='col-md-3 py-1'>
+
+                            <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Documents Received</label>
                                 <select className='form-control' value={valueData.document} name='document' onChange={handleChange}>
                                     <option value="">Select Document Status </option>
@@ -243,7 +248,7 @@ const Add_lead_generation = () => {
                                     <option value="No">No </option>
                                 </select>
 
-                         <p className='warning'>{alertdocx}</p>
+                                <p className='warning'>{alertdocx}</p>
 
                             </div>
 
@@ -254,7 +259,7 @@ const Add_lead_generation = () => {
                                     <option value="Yes">Yes</option>
                                     <option value="No">No </option>
                                 </select>
-                         <p className='warning'>{alertpayment}</p>
+                                <p className='warning'>{alertpayment}</p>
 
                             </div>
 
@@ -262,21 +267,18 @@ const Add_lead_generation = () => {
                             <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Work Date</label>
                                 <input type='date' className='form-control' value={valueData.work_date} name='work_date' onChange={handleChange} />
-                         <p className='warning'>{alertworkdate}</p>
+                                <p className='warning'>{alertworkdate}</p>
 
                             </div>
 
                             <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Acknowledge Number</label>
                                 <input type='text' className='form-control' value={valueData.ack_no} name='ack_no' placeholder='Please enter acknowledge number' onChange={handleChange} />
-                         <p className='warning'>{alertaoknumber}</p>
-                          
+                                <p className='warning'>{alertaoknumber}</p>
+
                             </div>
 
-                            <div className='col-md-3 py-1'>
-                                <label className='text-sm font-w-500 p-2'>Date</label>
-                                <input type='date' className='form-control' value={valueData.date} name='date' onChange={handleChange} />
-                            </div>
+
 
                             <div className='col-md-3 py-1'>
                                 <label className='text-sm font-w-500 p-2'>Status / Remark</label>

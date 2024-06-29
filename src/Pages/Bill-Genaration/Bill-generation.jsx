@@ -78,7 +78,7 @@ const BillGeneration = () => {
 
     const columns = [
         { field: 'displayOrder', headerName: 'Sl.No', width: 70 },
-        { field: 'client_id', headerName: 'Client Name', width: 200 },
+        { field: 'client_name', headerName: 'Client Name', width: 200 },
         { field: 'date', headerName: 'Date', width: 100 },
         { field: 'receipt', headerName: 'Receipt', width: 100 },
         { field: 'ack_no', headerName: 'Ack_no', width: 200 },
@@ -122,10 +122,11 @@ const BillGeneration = () => {
         apiDatas.map((item, index) => ({
             id: item.id || index,
             displayOrder: index + 1,
-            client_id: item.client_id,
+            client_name: item.client_name,
             receipt: item.receipt,
             ack_no: item.ack_no,
             remark_1: item.remark_1,
+            date: item.date
         })) : [];
 
         

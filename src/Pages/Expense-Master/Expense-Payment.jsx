@@ -6,11 +6,14 @@ import Sidebar from '../../layouts/Sidebar';
 import { FaFilter, FaRegEdit } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import axios from 'axios';
-import { MdNoteAdd } from 'react-icons/md';
+import { MdNoteAdd, MdOutlineDownloading } from 'react-icons/md';
 import { BsArrowLeftRight } from 'react-icons/bs';
 import { LuIndianRupee } from 'react-icons/lu';
 import { BiReset } from 'react-icons/bi';
 import { TbFilterCog } from 'react-icons/tb';
+
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 
 const Expense_Payment = () => {
   const { employeeId } = useParams();
@@ -22,6 +25,25 @@ const Expense_Payment = () => {
     const [selectedService, setSelectedService] = useState('');
     const [selectedEmployee, setSelectedEmployee] = useState('');
 
+
+    const downloadExcel = () => {
+        const transformedData = apiDatas.map(({ id, client_photo,
+          adhaar_photo,
+          pan_photo,
+          voter_id_photo,
+          license_photo,
+          ration_photo,
+          other_photo, ...rest }) => rest);
+    
+        const worksheet = XLSX.utils.json_to_sheet(transformedData);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Data');
+    
+        const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+        const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+    
+        saveAs(blob, 'Expense Payment.xlsx');
+      };
 
     // const fetchData = () => {
     //     axios.get('https://digitalshopee.online/api/expense-payment/get-payment.php')
@@ -182,7 +204,9 @@ const Expense_Payment = () => {
                         */}
 
                     </div>
-                    <div className='actions'>
+                    <div className='actions gap-3 d-flex '>
+                    <button type="button" className='download-btn' onClick={downloadExcel}><MdOutlineDownloading className='icon'/> Export to Excel</button>
+
                         <Link to={`/add-expenses-payment/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50 '><MdNoteAdd style={{ fontSize: "18px", marginBottom: '2px' }} /> Add Expense Payment</Link>
                       
 
