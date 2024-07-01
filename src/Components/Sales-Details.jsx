@@ -15,8 +15,11 @@ const Sales_Details = () => {
     const [apiDatas, setApiDatas] = useState([]);
     const { employeeId } = useParams();
     const [totalAssignedAmount, setTotalAssignedAmount] = useState(0);
+    const [totalAssigned, setTotalAssigned] = useState(0);
     const [totalBalanceAmount, setTotalBalanceAmount] = useState(0);
+    const [totalBalance, setTotalBalance] = useState(0);
     const [totalCompletedAmount, setTotalCompletedAmount] = useState(0);
+    const [totalCompleted, setTotalCompleted] = useState(0);
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
 
@@ -126,13 +129,19 @@ const Sales_Details = () => {
 
     const calculateTotalBalanceAmount = (data) => {
         const totalBalAmount = data.reduce((acc, item) => acc + parseFloat(item.no_of_orders_balance_amount || 0), 0);
+        const totalBal = data.reduce((acc, item) => acc + parseFloat(item.no_of_orders_balance || 0), 0);
         setTotalBalanceAmount(totalBalAmount);
+        setTotalBalance(totalBal);
 
         const totalAssinAmount = data.reduce((acc, item) => acc + parseFloat(item.no_of_orders_assigned_amount || 0), 0);
+        const totalAssin = data.reduce((acc, item) => acc + parseFloat(item.no_of_orders_assigned || 0), 0);
         setTotalAssignedAmount(totalAssinAmount);
+        setTotalAssigned(totalAssin);
 
         const totalComptAmount = data.reduce((acc, item) => acc + parseFloat(item.no_of_orders_completed_amount || 0), 0);
+        const totalCompt = data.reduce((acc, item) => acc + parseFloat(item.no_of_orders_completed || 0), 0);
         setTotalCompletedAmount(totalComptAmount);
+        setTotalCompleted(totalCompt);
     };
 
     useEffect(() => {
@@ -226,9 +235,36 @@ const Sales_Details = () => {
 
                 <div className="row pb-4">
 
-                    <div className="col-3 position-relative">
+<div className="col-4 my-3">
+
+<div className='shadow p-3  b-radius-10'>
+<p className='t-theme'>Target Assigned</p>
+<h5 className='m-0 t-xxlg'>{totalAssigned}</h5>
+</div>
+
+</div>
+
+<div className="col-4 my-3">
+
+<div className='shadow p-3  b-radius-10'>
+<p className='t-theme'>Target Completed</p>
+<h5 className='m-0 t-xxlg'>{totalCompleted}</h5>
+</div>
+
+</div>
+
+<div className="col-4 my-3">
+
+<div className='shadow p-3  b-radius-10'>
+<p className='t-theme'>Target Balance</p>
+<h5 className='m-0 t-xxlg'>{totalBalance}</h5>
+</div>
+
+</div>
+
+                    <div className="col-4 position-relative">
                         <div className="d-flex justify-content-center">
-                            <h6 className="gaige-header">Assigned Amount</h6>
+                            <h6 className="gaige-header t-gray">Assigned Amount</h6>
                             <Gauge value={totalAssignedAmount} startAngle={-110} endAngle={110} valueMax={totalAssignedAmount + 1000}
                                 innerRadius="90%"
                                 outerRadius="100%"
@@ -253,9 +289,9 @@ const Sales_Details = () => {
 
                     </div>
 
-                    <div className="col-3 position-relative">
+                    <div className="col-4 position-relative">
                         <div className="d-flex justify-content-center">
-                            <h6 className="gaige-header">Completed Amount</h6>
+                            <h6 className="gaige-header t-gray">Completed Amount</h6>
                             <Gauge value={totalCompletedAmount} startAngle={-110} endAngle={110} valueMax={totalAssignedAmount}
                                 innerRadius="90%"
                                 outerRadius="100%"
@@ -280,9 +316,9 @@ const Sales_Details = () => {
 
                     </div>
 
-                    <div className="col-3 position-relative">
+                    <div className="col-4 position-relative">
                         <div className="d-flex justify-content-center">
-                            <h6 className="gaige-header"> Balance Amount</h6>
+                            <h6 className="gaige-header t-gray"> Balance Amount</h6>
                             <Gauge value={totalBalanceAmount} startAngle={-110} endAngle={110} valueMax={totalAssignedAmount}
                                 innerRadius="90%"
                                 outerRadius="100%"
@@ -306,7 +342,6 @@ const Sales_Details = () => {
                         </div>
 
                     </div>
-
 
 
 

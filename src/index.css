@@ -1141,3 +1141,9 @@ font-size: 20px;
 .table-dark th{
     font-weight: 300;
 }
+
+.t-xxlg{
+    font-size: 45px;
+    font-weight: 500;
+    color: gray;
+}
