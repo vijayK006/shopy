@@ -23,7 +23,7 @@ const Edit_Client_Master = () => {
     const [stateid, setstateid] = useState(0);
     const [getfirmnames, setGetfirmnames] = useState([])
 
-    const [getClientMobilenumber, setGetClientMobilenumber] = useState([])
+    const [getClientName, setGetClientName] = useState([])
     const [alertname, setAlertname] = useState();
     const [alertowner, setAlertowner] = useState();
     const [alertphone, setAlertphone] = useState();
@@ -34,11 +34,11 @@ const Edit_Client_Master = () => {
 
 
     useEffect(() => {
-        axios.get('https://digitalshopee.online/api/firm/get-firm.php')
+        axios.get('https://digitalshopee.online/api/client/get-client.php')
             .then(res => {
-                const migratefirm = res.data.map(firm => ({ phone: firm.phone, id: firm.id }))
-                setGetClientMobilenumber(migratefirm)
-                console.log(migratefirm)
+
+            const migrateClientnames = res.data.map(clientNames=> ({name:clientNames.name.toLowerCase().replace(/[^a-z0-9]/gi, ''), id:clientNames.id }))
+            setGetClientName(migrateClientnames)
             })
             .catch(err => {
                 console.error('Error fetching data:', err);
@@ -169,6 +169,16 @@ const Edit_Client_Master = () => {
         formData.append('other_photo', valueData.other_photo);
 
 
+        const existingClientName = getClientName.find(client => client.name === valueData.name.toLowerCase().replace(/[^a-z0-9]/gi, ''));
+        if (existingClientName) {
+            if (existingClientName.id === id) {
+                setLoading(true);
+            } else {
+                setAlertname("This client name already exists. Please enter a different client name.");
+                setLoading(false);
+                return;
+            }
+        }
 
         const regname = /^[a-zA-Z\s]+$/;
         if (regname.test(valueData.name)) {
@@ -182,14 +192,6 @@ const Edit_Client_Master = () => {
         } else {
             setAlertname("Name should not be in a number");
             //   e.preventDefault();
-            setLoading(false);
-            return;
-        }
-
-        
-
-        if (getClientMobilenumber.includes(valueData.phone)) {
-            setAlertphone("This mobile number already exists. Please enter a different mobile number.");
             setLoading(false);
             return;
         }
@@ -227,17 +229,6 @@ const Edit_Client_Master = () => {
         }
 
     };
-
-    useEffect(() => {
-        axios.get('https://digitalshopee.online/api/firm/get-firm.php')
-            .then(res => {
-                const migratefirmname = res.data.map(firm => firm.firm_name)
-                setGetfirmnames(migratefirmname)
-            })
-            .catch(err => {
-                console.error('Error fetching data:', err);
-            });
-    }, []);
 
     // const handleChange = (e) => {
     //     const { name, value } = e.target;

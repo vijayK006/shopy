@@ -38,13 +38,14 @@ const Add_Client_Master = () => {
 
     }, []);
 
-    const [getClientMobilenumber, setGetClientMobilenumber] = useState([])
+    const [migratedNames ,setMigratedNames] = useState([])
     useEffect(() => {
         axios.get('https://digitalshopee.online/api/client/get-client.php')
           .then(res => {
-            const migratephone = res.data.map(firm=> firm.phone)
-            setGetClientMobilenumber(migratephone)
-            console.log(migratephone)
+
+            const migrateClientnames = res.data.map(clientNames=> clientNames.name.toLowerCase().replace(/[^a-z0-9]/gi, ''))
+            setMigratedNames(migrateClientnames)
+
           })
           .catch(err => {
             console.error('Error fetching data:', err);
@@ -117,6 +118,13 @@ const Add_Client_Master = () => {
         formData.append('other_photo', valueData.other_photo);
 
 
+
+ if (migratedNames.includes(valueData.name.toLowerCase().replace(/[^a-z0-9]/gi, ''))) {
+    setAlertname("This client name already exists. Please enter a different client name.");
+            setLoading(false);
+            return;
+        }
+
         const regname = /^[a-zA-Z\s]+$/;
         if (regname.test(valueData.name)) {
             setAlertname("");
@@ -133,11 +141,6 @@ const Add_Client_Master = () => {
             return;
         }
 
-        if (getClientMobilenumber.includes(valueData.phone)) {
-            setAlertphone("This mobile number already exists. Please enter a different mobile number.");
-            setLoading(false);
-            return;
-        }
 
         const regnumber = /^[0-9]{10}$/;
         if (regnumber.test(valueData.phone)) {

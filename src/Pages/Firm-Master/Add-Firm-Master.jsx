@@ -169,6 +169,8 @@ const [signimg, setSignimg] = useState(null)
             .then(res => {
                 navigate(`/firm-master/${employeeId}`)
                 console.log('Form Submitted Successfully')
+                setLoading(false);
+
             })
             .catch(err => console.log(err));
     };
