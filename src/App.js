@@ -55,6 +55,9 @@ import Add_bill from "./Pages/Bill-Genaration/Add-bill";
 import BillGeneration from "./Pages/Bill-Genaration/Bill-generation";
 import Edit_bill from "./Pages/Bill-Genaration/edit-bill";
 import Bill_pdf from "./Pages/Bill-Genaration/Bill-pdf";
+import Add_sales from "./Pages/Sales-Manager/Add-Sales";
+import Sales_Manager from "./Pages/Sales-Manager/Sales-Manager";
+import Edit_Sales from "./Pages/Sales-Manager/Edit-Sales";
 
 
 const App = () => {
@@ -144,7 +147,11 @@ const App = () => {
           <Route path="/edit-bill/:employeeId/:id" element={<ProtectRoute Component={Edit_bill} />} />
           <Route path="/bill-generation/:employeeId" element={<ProtectRoute Component={BillGeneration} />} />
 
-        
+        {/* Sales Manager */}
+        <Route path="/add-sales/:employeeId" element={<ProtectRoute Component={Add_sales} />} />
+        <Route path="/sales-manager/:employeeId" element={<ProtectRoute Component={Sales_Manager} />} />
+        <Route path="/edit-sales/:employeeId/:id" element={<ProtectRoute Component={Edit_Sales} />} />
+
         </Routes>
       </BrowserRouter>
     </>

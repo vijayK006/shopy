@@ -159,8 +159,22 @@ const Sidebar = () => {
             )}
 
             {/* Bill Generation */}
-            <NavLink className="disble-decoration" to={`/bill-generation/${employeeId}`}><li className={`items ${currentPage.startsWith('/bill-generation') || currentPage.startsWith('/add-bill') || currentPage.startsWith('/edit-bill') ? 'active' : ''}`}><IoSettingsOutline className="icons" /> <span className='resp'>Bill Generation</span></li></NavLink>
+            <NavLink className="disble-decoration" to={`/bill-generation/${employeeId}`}>
+              <li className={`items ${currentPage.startsWith('/bill-generation') || currentPage.startsWith('/add-bill') || currentPage.startsWith('/edit-bill') ? 'active' : ''}`}>
+                <IoSettingsOutline className="icons" />
+                <span className='resp'>Bill Generation</span>
+              </li>
+            </NavLink>
 
+
+
+            {/* Sales Manager */}
+            <NavLink className="disble-decoration" to={`/sales-manager/${employeeId}`}>
+              <li className={`items ${currentPage.startsWith('/add-sales') || currentPage.startsWith('/sales-manager')  ? 'active' : ''}`}>
+                <IoSettingsOutline className="icons" />
+                <span className='resp'>Sales Manages</span>
+              </li>
+            </NavLink>
 
           </ul>
         </div>
