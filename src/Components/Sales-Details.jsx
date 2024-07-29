@@ -237,7 +237,7 @@ const Sales_Details = () => {
 
 <div className="col-4 my-3">
 
-<div className='shadow p-3  b-radius-10'>
+<div className='shadow p-3 bg-white  b-radius-10'>
 <p className='t-theme'>Target Assigned</p>
 <h5 className='m-0 t-xxlg'>{totalAssigned}</h5>
 </div>
@@ -246,7 +246,7 @@ const Sales_Details = () => {
 
 <div className="col-4 my-3">
 
-<div className='shadow p-3  b-radius-10'>
+<div className='shadow p-3 bg-white  b-radius-10'>
 <p className='t-theme'>Target Completed</p>
 <h5 className='m-0 t-xxlg'>{totalCompleted}</h5>
 </div>
@@ -255,7 +255,7 @@ const Sales_Details = () => {
 
 <div className="col-4 my-3">
 
-<div className='shadow p-3  b-radius-10'>
+<div className='shadow p-3 bg-white  b-radius-10'>
 <p className='t-theme'>Target Balance</p>
 <h5 className='m-0 t-xxlg'>{totalBalance}</h5>
 </div>

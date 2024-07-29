@@ -39,12 +39,16 @@ const Add_Client_Master = () => {
     }, []);
 
     const [migratedNames ,setMigratedNames] = useState([])
+    const [migratedNumber ,setMigratedNumber] = useState([])
     useEffect(() => {
         axios.get('https://digitalshopee.online/api/client/get-client.php')
           .then(res => {
 
             const migrateClientnames = res.data.map(clientNames=> clientNames.name.toLowerCase().replace(/[^a-z0-9]/gi, ''))
+            const migrateClientNumber = res.data.map(clientNames=> clientNames.phone)
+            console.log(migrateClientNumber)
             setMigratedNames(migrateClientnames)
+            setMigratedNumber(migrateClientNumber)
 
           })
           .catch(err => {
@@ -119,9 +123,9 @@ const Add_Client_Master = () => {
 
 
 
- if (migratedNames.includes(valueData.name.toLowerCase().replace(/[^a-z0-9]/gi, ''))) {
+ if (migratedNames.includes(valueData.name.toLowerCase().replace(/[^a-z0-9]/gi, '')) && migratedNumber.includes(valueData.phone) ) {
     setAlertname("This client name already exists. Please enter a different client name.");
-            setLoading(false);
+            setLoading(false);  
             return;
         }
 

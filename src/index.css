@@ -368,7 +368,7 @@ input.login-form::placeholder {
 
 .side-bar {
     position: fixed;
-    overflow: hidden;
+    overflow: auto;
     width: 200px;
     height: 95vh;
     bottom: 0px;
@@ -376,6 +376,29 @@ input.login-form::placeholder {
     transition: all 0.2s ease-in-out;
     box-shadow: 3px -2px 14px 0px #2125291a;
 }
+
+
+.side-bar::-webkit-scrollbar {
+    width: 2px; /* width of the scrollbar */
+}
+
+.side-bar:hover::-webkit-scrollbar {
+    width: 5px;
+}
+
+
+.side-bar::-webkit-scrollbar-thumb:vertical {
+    background-color:#dbdbdb ;
+}
+
+.side-bar:hover::-webkit-scrollbar-thumb:vertical {
+    background-color:#424242 ;
+}
+.side-bar::-webkit-scrollbar-thumb:horizontal{
+display: none;
+}
+
+
 
 .sidetoggle {
     width: 50px;

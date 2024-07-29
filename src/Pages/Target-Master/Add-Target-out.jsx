@@ -20,7 +20,7 @@ const Add_Target_Out = () => {
             service_id: '',
             no_of_orders: '',
             total_amount: '',
-            from_date:'',
+            from_date:globalFromDate,
             to_date: '',
             description: ''
         }
