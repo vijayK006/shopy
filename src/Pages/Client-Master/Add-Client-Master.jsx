@@ -26,6 +26,8 @@ const Add_Client_Master = () => {
     const [license_photoImg, setLicense_photoimg] = useState(null);
     const [ration_photoImg, setRation_photoimg] = useState(null);
     const [other_photoImg, setOther_photoimg] = useState(null);
+    const [document_text_1Img, setDocument_text_1Img] = useState(null);
+    const [document_text_2Img, setDocument_text_2Img] = useState(null);
 
     const [alertname, setAlertname] = useState();
     const [alertphone, setAlertphone] = useState();
@@ -75,6 +77,8 @@ const Add_Client_Master = () => {
         voter_id: '',
         profession: '',
         other: '',
+        document_text_1:'',
+        document_text_2:'',
         dob: '',
 
 
@@ -85,6 +89,8 @@ const Add_Client_Master = () => {
         license_photo: null,
         ration_photo: null,
         other_photo: null,
+        document_file_1: null,
+        document_file_2: null,
     })
 
     const handleSubmit = (e) => {
@@ -111,6 +117,8 @@ const Add_Client_Master = () => {
         formData.append('reference', valueData.reference);
         formData.append('voter_id', valueData.voter_id);
         formData.append('other', valueData.other);
+        formData.append('document_text_1', valueData.document_text_1);
+        formData.append('document_text_2', valueData.document_text_2);
         formData.append('dob', valueData.dob);
 
         formData.append('client_photo', valueData.client_photo);
@@ -120,6 +128,8 @@ const Add_Client_Master = () => {
         formData.append('license_photo', valueData.license_photo);
         formData.append('ration_photo', valueData.ration_photo);
         formData.append('other_photo', valueData.other_photo);
+        formData.append('document_file_1', valueData.document_file_1);
+        formData.append('document_file_2', valueData.document_file_2);
 
 
 
@@ -210,7 +220,7 @@ const Add_Client_Master = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        if (name === 'client_photo' || name === 'adhaar_photo' || name === 'pan_photo' || name === 'voter_id_photo' || name === 'license_photo' || name === 'ration_photo' || name === 'other_photo') {
+        if (name === 'client_photo' || name === 'adhaar_photo' || name === 'pan_photo' || name === 'voter_id_photo' || name === 'license_photo' || name === 'ration_photo' || name === 'other_photo' || name === 'document_file_1' || name === 'document_file_2') {
             const file = e.target.files && e.target.files[0]; // Check if e.target.files exists
             if (file) {
                 setValueData({
@@ -235,6 +245,10 @@ const Add_Client_Master = () => {
                         setRation_photoimg(reader.result);
                     } else if (name === 'other_photo') {
                         setOther_photoimg(reader.result);
+                    }else if (name === 'document_file_1') {
+                        setDocument_text_1Img(reader.result);
+                    }else if (name === 'document_file_2') {
+                        setDocument_text_2Img(reader.result);
                     }
                 };
                 reader.readAsDataURL(file);
@@ -502,34 +516,34 @@ const Add_Client_Master = () => {
                             </div>
 
                             <div className='col-md-3 py-2'>
-                                <label className='text-sm font-w-500 p-2'> Other Document(beta)</label>
+                                <label className='text-sm font-w-500 p-2'> Other Document</label>
                                 {/* <div className='img-format mb-1 main-field'>
                                     <img src={other_photoImg} alt='' />
                                     <label for='other_photo' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
                                 </div> */}
-                                <input type='file' className='form-control mb-1' id='other_photo' name='other_photo' onChange={handleChange} />
+                                <input type='file' className='form-control mb-1' id='document_file_1' name='document_file_1' onChange={handleChange} />
 
 
                                 <input type='text' className='form-control' 
-                                // value={valueData.other} 
-                                name='other' placeholder='Please enter other document' 
-                                // onChange={handleChange} 
+                                value={valueData.document_text_1} 
+                                name='document_text_1' placeholder='Please enter other document' 
+                                onChange={handleChange} 
                                 />
                             </div>
 
                             <div className='col-md-3 py-2'>
-                                <label className='text-sm font-w-500 p-2'> Other Document(beta)</label>
+                                <label className='text-sm font-w-500 p-2'> Other Document</label>
                                 {/* <div className='img-format mb-1 main-field'>
                                     <img src={other_photoImg} alt='' />
                                     <label for='other_photo' className='actionbutton'><AiFillPicture className='icon' /> Add Picture</label>
                                 </div> */}
-                                <input type='file' className='form-control mb-1' id='other_photo' name='other_photo' onChange={handleChange} />
+                                <input type='file' className='form-control mb-1' id='document_file_2' name='document_file_2' onChange={handleChange} />
 
 
                                 <input type='text' className='form-control' 
-                                // value={valueData.other} 
-                                name='other' placeholder='Please enter other document' 
-                                // onChange={handleChange} 
+                                value={valueData.document_text_2} 
+                                name='document_text_2' placeholder='Please enter other document' 
+                                onChange={handleChange} 
                                 />
                             </div>
                         

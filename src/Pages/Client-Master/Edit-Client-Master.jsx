@@ -70,6 +70,8 @@ const Edit_Client_Master = () => {
         voter_id: '',
         profession: '',
         other: '',
+        document_text_1: '',
+        document_text_2: '',
         dob: '',
 
         client_photo: null,
@@ -79,6 +81,8 @@ const Edit_Client_Master = () => {
         license_photo: null,
         ration_photo: null,
         other_photo: null,
+        document_file_1: null,
+        document_file_2: null,
     })
 
 
@@ -106,6 +110,8 @@ const Edit_Client_Master = () => {
                     reference: firmData.reference,
                     voter_id: firmData.voter_id,
                     other: firmData.other,
+                    document_text_1: firmData.document_text_1,
+                    document_text_2: firmData.document_text_2,
                     dob: firmData.dob,
 
                     // Assuming these are the correct keys for client_photo, owner_image, and sign
@@ -116,6 +122,8 @@ const Edit_Client_Master = () => {
                     license_photo: firmData.license_photo,
                     ration_photo: firmData.ration_photo,
                     other_photo: firmData.other_photo,
+                    document_file_1: firmData.document_file_1,
+                    document_file_2: firmData.document_file_2
                 });
             })
             .catch(error => {
@@ -158,6 +166,8 @@ const Edit_Client_Master = () => {
         formData.append('reference', valueData.reference);
         formData.append('voter_id', valueData.voter_id);
         formData.append('other', valueData.other);
+        formData.append('document_text_1', valueData.document_text_1);
+        formData.append('document_text_2', valueData.document_text_2);
         formData.append('dob', valueData.dob);
 
         formData.append('client_photo', valueData.client_photo);
@@ -167,6 +177,8 @@ const Edit_Client_Master = () => {
         formData.append('license_photo', valueData.license_photo);
         formData.append('ration_photo', valueData.ration_photo);
         formData.append('other_photo', valueData.other_photo);
+        formData.append('document_file_1', valueData.document_file_1);
+        formData.append('document_file_2', valueData.document_file_2);
 
 
         const existingClientName = getClientName.find(client => client.name === valueData.name.toLowerCase().replace(/[^a-z0-9]/gi, ''));
@@ -213,8 +225,8 @@ const Edit_Client_Master = () => {
         }
 
 
-        const confirmDelete = window.confirm("Are you sure you want to update this Client Master");
-        if (confirmDelete) {
+        const confirmUpdate = window.confirm("Are you sure you want to update this Client Master");
+        if (confirmUpdate) {
             axios.post(`https://digitalshopee.online/api/client/edit-by-id-client.php?id=${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -248,7 +260,7 @@ const Edit_Client_Master = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        if (name === 'client_photo' || name === 'adhaar_photo' || name === 'pan_photo' || name === 'voter_id_photo' || name === 'license_photo' || name === 'ration_photo' || name === 'other_photo') {
+        if (name === 'client_photo' || name === 'adhaar_photo' || name === 'pan_photo' || name === 'voter_id_photo' || name === 'license_photo' || name === 'ration_photo' || name === 'other_photo' || name === 'document_file_1' || name === 'document_file_2') {
             // Update state for image file
             setValueData({
                 ...valueData,
@@ -481,7 +493,7 @@ const Edit_Client_Master = () => {
                                 <input type='text' className='form-control mt-1' value={valueData.license} name='license' placeholder='Please enter license number' onChange={handleChange} />
 
                                 <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
-                                    <label for='voter_id_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
+                                    <label for='license_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
                                     <a href={`https://digitalshopee.online/api/client/${valueData.license_photo}`}  style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
                                 </div>
                             </div>
@@ -493,44 +505,44 @@ const Edit_Client_Master = () => {
                                 <input type='text' className='form-control mt-1' value={valueData.ration} name='license' placeholder='Please enter license number' onChange={handleChange} />
 
                                 <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
-                                    <label for='voter_id_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
+                                    <label for='ration_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
                                     <a href={`https://digitalshopee.online/api/client/${valueData.ration_photo}`}  style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
                                 </div>
                             </div>
 
                             <div className='col-md-3 py-2 '>
 
+                                <label className='text-sm font-w-500 p-2' for='other_photo'>Other Document</label>
+                                <input type='file' className='form-control' id='other_photo' name='other_photo' onChange={handleChange} />
+                                <input type='text' className='form-control mt-1' value={valueData.other} name='other' placeholder='Please enter other document' onChange={handleChange} />
+
+                                <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
+                                    <label for='other_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
+                                    <a href={`https://digitalshopee.online/api/client/${valueData.other_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                </div>
+                            </div>
+
+                            <div className='col-md-3 py-2 '>
+
+                                <label className='text-sm font-w-500 p-2'> Other Document</label>
+                                <input type='file' className='form-control' id='document_file_1' name='document_file_1' onChange={handleChange} />
+                                <input type='text' className='form-control mt-1' value={valueData.document_text_1} name='document_text_1' placeholder='Please enter other document' onChange={handleChange} />
+
+                                <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
+                                    <label for='document_file_1' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
+                                    <a href={`https://digitalshopee.online/api/client/${valueData.document_file_1}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                </div>
+                            </div>
+
+                            <div className='col-md-3 py-2 '>
+
                                 <label className='text-sm font-w-500 p-2'>Other Document</label>
-                                <input type='file' className='form-control' id='other_photo' name='other_photo' onChange={handleChange} />
-                                <input type='text' className='form-control mt-1' value={valueData.other} name='other' placeholder='Please enter other document' onChange={handleChange} />
+                                <input type='file' className='form-control' id='document_file_2' name='document_file_2' onChange={handleChange} />
+                                <input type='text' className='form-control mt-1' value={valueData.document_text_2} name='document_text_2' placeholder='Please enter other document' onChange={handleChange} />
 
                                 <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
-                                    <label for='voter_id_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
-                                    <a href={`https://digitalshopee.online/api/client/${valueData.other_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
-                                </div>
-                            </div>
-
-                            <div className='col-md-3 py-2 '>
-
-                                <label className='text-sm font-w-500 p-2'>Other Document(beta)</label>
-                                <input type='file' className='form-control' id='other_photo' name='other_photo' onChange={handleChange} />
-                                <input type='text' className='form-control mt-1' value={valueData.other} name='other' placeholder='Please enter other document' onChange={handleChange} />
-
-                                <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
-                                    <label for='voter_id_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
-                                    <a href={`https://digitalshopee.online/api/client/${valueData.other_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
-                                </div>
-                            </div>
-
-                            <div className='col-md-3 py-2 '>
-
-                                <label className='text-sm font-w-500 p-2'>Other Document(beta)</label>
-                                <input type='file' className='form-control' id='other_photo' name='other_photo' onChange={handleChange} />
-                                <input type='text' className='form-control mt-1' value={valueData.other} name='other' placeholder='Please enter other document' onChange={handleChange} />
-
-                                <div className='d-flex align-items-center justify-content-start gap-2 pt-1'>
-                                    <label for='voter_id_photo' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
-                                    <a href={`https://digitalshopee.online/api/client/${valueData.other_photo}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
+                                    <label for='document_file_2' className='file-data text-center' style={{ width: "100px" }}>Upload</label>
+                                    <a href={`https://digitalshopee.online/api/client/${valueData.document_file_2}`} style={{ width: "100px" }} className='file-data-outline text-center' target='_blank' rel="noreferrer">View </a>
                                 </div>
                             </div>
 

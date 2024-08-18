@@ -14,9 +14,9 @@ import axios from 'axios';
 const FirmMaster = () => {
   const role = localStorage.getItem('role');
   console.log(role);
-    const [apiDatas, setApiDatas] = useState([]);
-    const { employeeId } = useParams();
-    const [permissions, setPermissions] = useState({ add_firm: null, edit_firm: null, delete_firm: null, view_firm:null });
+  const [apiDatas, setApiDatas] = useState([]);
+  const { employeeId } = useParams();
+  const [permissions, setPermissions] = useState({ add_firm: null, edit_firm: null, delete_firm: null, view_firm: null });
 
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const FirmMaster = () => {
 
   const downloadExcel = () => {
 
-    const transformedData = apiDatas.map(({id, logo, owner_image, sign, ...rest }) => rest);
+    const transformedData = apiDatas.map(({ id, logo, owner_image, sign, ...rest }) => rest);
 
     const worksheet = XLSX.utils.json_to_sheet(transformedData);
 
@@ -122,16 +122,16 @@ const FirmMaster = () => {
           <Link  className='btn btn-outline-danger btn-sm' onClick={() => handleDelete(params.row.id)}>
            <AiOutlineDelete style={{fontSize:'15px', marginBottom:'4px'}}/> Delete
           </Link>*/}
-          { role === 'admin' ?(
+          {role === 'admin' ? (
             <Link to={`/edit-firm-master/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
               <FaRegEdit style={{ fontSize: '15px', marginBottom: '4px' }} /> View / Edit
             </Link>
-          ):(
+          ) : (
             (permissions.view_firm === "yes" || permissions.edit_firm === "yes") && (
               <Link to={`/edit-firm-master/${employeeId}/${params.row.id}`} className='btn btn-outline-warning btn-sm'>
-              <FaRegEdit style={{ fontSize: '15px', marginBottom: '4px' }} /> View
-            </Link>
-          )
+                <FaRegEdit style={{ fontSize: '15px', marginBottom: '4px' }} /> View
+              </Link>
+            )
           )}
 
           {/* {permissions.edit_firm === "yes" && (
@@ -141,16 +141,16 @@ const FirmMaster = () => {
           )} */}
           &nbsp;
           &nbsp;
-          { role === 'admin' ?(
+          {role === 'admin' ? (
             <button className='btn btn-outline-danger btn-sm' onClick={() => handleDelete(params.row.id)}>
               <AiOutlineDelete style={{ fontSize: '15px', marginBottom: '4px' }} /> Delete
             </button>
-          ):(
+          ) : (
             permissions.delete_firm === "yes" && (
-            <button className='btn btn-outline-danger btn-sm' onClick={() => handleDelete(params.row.id)}>
-              <AiOutlineDelete style={{ fontSize: '15px', marginBottom: '4px' }} /> Delete
-            </button>
-          )
+              <button className='btn btn-outline-danger btn-sm' onClick={() => handleDelete(params.row.id)}>
+                <AiOutlineDelete style={{ fontSize: '15px', marginBottom: '4px' }} /> Delete
+              </button>
+            )
           )}
           {/* {permissions.delete_firm === "yes" && (
             <button className='btn btn-outline-danger btn-sm' onClick={() => handleDelete(params.row.id)}>
@@ -183,9 +183,9 @@ const FirmMaster = () => {
       <Sidebar />
       <div className='main-content' id='mainbody'>
 
-<div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50'>
-<p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to='' className='t-theme-color'>Firm Master</Link></p>
-{/* {permissions.add_firm === "yes" && (
+        <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50'>
+          <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to='' className='t-theme-color'>Firm Master</Link></p>
+          {/* {permissions.add_firm === "yes" && (
 <Link to={`/add-firm-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
 )} */}
 
@@ -196,19 +196,19 @@ const FirmMaster = () => {
   <p>No Permision</p>
 )} */}
 
-<div className='d-flex gap-2'>
-<button type="button" className='download-btn' onClick={downloadExcel}><MdOutlineDownloading className='icon'/> Export to Excel</button>
+          <div className='d-flex gap-2'>
+            <button type="button" className='download-btn' onClick={downloadExcel}><MdOutlineDownloading className='icon' /> Export to Excel</button>
 
-{role === "admin" ? (
-            <Link to={`/add-firm-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
-          ) : (
-            permissions.add_firm === "yes" && (
-            <Link to={`/add-firm-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
-          )
-          )}
+            {role === "admin" ? (
+              <Link to={`/add-firm-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
+            ) : (
+              permissions.add_firm === "yes" && (
+                <Link to={`/add-firm-master/${employeeId}`} className='btn btn-bg-orange btn-sm b-radius-50'>Add Firm Master</Link>
+              )
+            )}
 
-</div>
-          
+          </div>
+
 
         </div>
 

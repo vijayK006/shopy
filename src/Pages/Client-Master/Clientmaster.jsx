@@ -26,8 +26,9 @@ const Clientmaster = () => {
   const fetchData = () => {
     axios.get('https://digitalshopee.online/api/client/get-client.php')
       .then(res => {
-        console.log(res.data)
-        setApiDatas(res.data)
+        let allData = res.data.reverse();
+        console.log(allData)
+        setApiDatas(allData)
 
       })
       .catch(err => {
@@ -35,16 +36,6 @@ const Clientmaster = () => {
       });
   }
 
-  useEffect(() => {
-    axios.get('https://digitalshopee.online/api/client/get-client.php')
-      .then(res => {
-        console.log(res.data)
-        setApiDatas(res.data)
-      })
-      .catch(err => {
-        console.error('Error fetching data:', err);
-      });
-  }, []);
 
   const downloadExcel = () => {
     const transformedData = apiDatas.map(({ id, client_photo,
