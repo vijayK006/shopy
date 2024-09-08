@@ -90,16 +90,16 @@ const Edit_Lead_generation = () => {
         formData.append('date', valueData.date);
 
 
-        if (valueData.ack_no === "") {
-            setAlertaoknumber("Please enter new acknowledge number");
-            setLoading(false);
-            return;
+        // if (valueData.ack_no === "") {
+        //     setAlertaoknumber("Please enter new acknowledge number");
+        //     setLoading(false);
+        //     return;
 
-        } else {
-            setAlertaoknumber("");
-            //   e.preventDefault();
-            setLoading(true);
-        }
+        // } else {
+        //     setAlertaoknumber("");
+        //     //   e.preventDefault();
+        //     setLoading(true);
+        // }
 
 
         const confirmUpdate = window.confirm("Are you sure you want to update this lead generation");

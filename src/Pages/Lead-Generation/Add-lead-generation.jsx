@@ -31,7 +31,7 @@ const Add_lead_generation = () => {
         status: '',
         work_date: '',
         ack_no: '',
-        date: '',
+        date: new Date().toISOString().substr(0, 10)
 
     })
 
@@ -95,18 +95,18 @@ const Add_lead_generation = () => {
             setLoading(true);
         }
 
-        if (!valueData.document === "") {
-            setAlertdocx("");
-            setLoading(true);
-        } else if (valueData.document === "") {
-            setAlertdocx("Please select document status");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        } else {
-            setAlertdocx("");
-            setLoading(true);
-        }
+        // if (!valueData.document === "") {
+        //     setAlertdocx("");
+        //     setLoading(true);
+        // } else if (valueData.document === "") {
+        //     setAlertdocx("Please select document status");
+        //     //   e.preventDefault();
+        //     setLoading(false);
+        //     return;
+        // } else {
+        //     setAlertdocx("");
+        //     setLoading(true);
+        // }
 
         if (!valueData.payment === "") {
             setAlertpayment("");
@@ -121,30 +121,30 @@ const Add_lead_generation = () => {
             setLoading(true);
         }
 
-        if (!valueData.work_date === "") {
-            setAlertworkdate("");
-            setLoading(true);
-        } else if (valueData.work_date === "") {
-            setAlertworkdate("Please select work date");
-            //   e.preventDefault();
-            setLoading(false);
-            return;
-        } else {
-            setAlertworkdate("");
-            setLoading(true);
-        }
+        // if (!valueData.work_date === "") {
+        //     setAlertworkdate("");
+        //     setLoading(true);
+        // } else if (valueData.work_date === "") {
+        //     setAlertworkdate("Please select work date");
+        //     //   e.preventDefault();
+        //     setLoading(false);
+        //     return;
+        // } else {
+        //     setAlertworkdate("");
+        //     setLoading(true);
+        // }
 
 
-        if (valueData.ack_no === "") {
-            setAlertaoknumber("Please enter new acknowledge number");
-            setLoading(false);
-            return;
+        // if (valueData.ack_no === "") {
+        //     setAlertaoknumber("Please enter new acknowledge number");
+        //     setLoading(false);
+        //     return;
 
-        } else {
-            setAlertaoknumber("");
-            //   e.preventDefault();
-            setLoading(true);
-        }
+        // } else {
+        //     setAlertaoknumber("");
+        //     //   e.preventDefault();
+        //     setLoading(true);
+        // }
 
 
         axios.post('https://digitalshopee.online/api/lead-generation/add-lead.php', formData, {

@@ -11,7 +11,7 @@ const Edit_Sales = () => {
     const navigate = useNavigate();
     const [serviceOptions, setServiceOptions] = useState([]);
     const [clientDetails, setClientDetails] = useState(null); // New state for client details
-const [storedClientId,setstoredClientId] =useState();
+    const [storedClientId, setstoredClientId] = useState();
 
     const [valueData, setValueData] = useState({
         client_id: '',
@@ -75,11 +75,11 @@ const [storedClientId,setstoredClientId] =useState();
                         service_name: '',
                         quantity: '',
                         amount: '',
-                        remark:'',
-                        discount:'',
-                        paid_status:'',
-                        paid_type:'',
-                        paid_amount:''
+                        remark: '',
+                        discount: '',
+                        paid_status: '',
+                        paid_type: '',
+                        paid_amount: ''
                     }]
                 });
             })
@@ -135,15 +135,15 @@ const [storedClientId,setstoredClientId] =useState();
             setValueData({ ...valueData, [name]: value });
         }
 
-        if (name === 'client_id') { 
+        if (name === 'client_id') {
             fetchClientData(value);
-        }else{
+        } else {
             setClientDetails(null);
         }
     };
 
 
-  
+
     const fetchClientData = (clientId) => {
         axios.get(`https://digitalshopee.online/api/client/get-client-by-id.php?id=${clientId}`)
             .then(response => {
@@ -156,18 +156,18 @@ const [storedClientId,setstoredClientId] =useState();
 
     };
 
-    useEffect(()=>{
-        if(storedClientId){
+    useEffect(() => {
+        if (storedClientId) {
             axios.get(`https://digitalshopee.online/api/client/get-client-by-id.php?id=${storedClientId}`)
-            .then(response => {
-                setClientDetails(response.data[0]);
-            })
-            .catch(error => {
-                console.error('Error fetching client details:', error);
-            });
+                .then(response => {
+                    setClientDetails(response.data[0]);
+                })
+                .catch(error => {
+                    console.error('Error fetching client details:', error);
+                });
         }
-    },[storedClientId])
-    
+    }, [storedClientId])
+
     const addItem = () => {
         setValueData({
             ...valueData,
@@ -202,7 +202,7 @@ const [storedClientId,setstoredClientId] =useState();
 
     };
 
-  
+
 
 
     const calculatePaidAmount = () => {
@@ -224,7 +224,7 @@ const [storedClientId,setstoredClientId] =useState();
     useEffect(() => {
         calculateTotalAmount();
         calculatePaidAmount()
-calculatePendingAmount()
+        calculatePendingAmount()
     }, [valueData.items]);
 
     return (
@@ -238,7 +238,7 @@ calculatePendingAmount()
 
                 <div className='container-fluid mb-5'>
                     <form onSubmit={handleSubmit}>
-                        <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
+                        <div className='row border p-3 mt-5 bg-white b-radius-10'>
 
                             <div className='col-md-3 py-1 d-none'>
                                 <label className='text-sm font-w-500 p-2'>id</label>
@@ -259,43 +259,43 @@ calculatePendingAmount()
                                 <label className='text-sm font-w-500 p-2'>Date</label>
                                 <input type='date' className='form-control' value={valueData.date} name='date' placeholder='' onChange={handleChange} />
                             </div>
-                          
-    
+
+                            </div>
 
                             {clientDetails && (
-                            <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
+                                <div className='row border p-3 mt-2 bg-white b-radius-10'>
                                     <h5 className='text-sm font-w-500 p-2'>Client Details</h5>
 
-                                <div className='col-md-3 py-1'>
-                                    <p className='mb-4'>Email: {clientDetails.email}</p>
-                                    <p className='mb-4'>Phone: {clientDetails.phone}</p>
-                                    <p className='mb-4'>Aadhaar No.: {clientDetails.adhaar}</p>
-                                    <p className='mb-4'>Category: {clientDetails.category}</p>
-                                </div>
+                                    <div className='col-md-3 py-1'>
+                                        <p className='mb-4'>Email: {clientDetails.email}</p>
+                                        <p className='mb-4'>Phone: {clientDetails.phone}</p>
+                                        <p className='mb-4'>Aadhaar No.: {clientDetails.adhaar}</p>
+                                        <p className='mb-4'>Category: {clientDetails.category}</p>
+                                    </div>
 
-                                <div className='col-md-3 py-1'>
-                                    <p className='mb-4'>DOB: {clientDetails.dob}</p>
-                                    <p className='mb-4'>Profession: {clientDetails.profession}</p>
-                                    <p className='mb-4'>Pan: {clientDetails.pan}</p>
-                                    <p className='mb-4'>Voter Id: {clientDetails.voter_id}</p>
-                                </div>
+                                    <div className='col-md-3 py-1'>
+                                        <p className='mb-4'>DOB: {clientDetails.dob}</p>
+                                        <p className='mb-4'>Profession: {clientDetails.profession}</p>
+                                        <p className='mb-4'>Pan: {clientDetails.pan}</p>
+                                        <p className='mb-4'>Voter Id: {clientDetails.voter_id}</p>
+                                    </div>
 
-                                <div className='col-md-3 py-1'>
-                                    <p className='mb-4'>License: {clientDetails.license}</p>
-                                    <p className='mb-4'>Ration: {clientDetails.ration}</p>
-                                    <p className='mb-4'>Reference: {clientDetails.reference}</p>
-                                </div>
+                                    <div className='col-md-3 py-1'>
+                                        <p className='mb-4'>License: {clientDetails.license}</p>
+                                        <p className='mb-4'>Ration: {clientDetails.ration}</p>
+                                        <p className='mb-4'>Reference: {clientDetails.reference}</p>
+                                    </div>
 
-                                <div className='col-md-3 py-1'>
-                                    <p className='mb-4'>Address: {clientDetails.address}</p>
-                                    <p className='mb-4'>Taluk: {clientDetails.taluk}</p>
-                                    <p className='mb-4'>District: {clientDetails.district}</p>
-                                    <p className='mb-4'>State: {clientDetails.state} - {clientDetails.pin}</p>
+                                    <div className='col-md-3 py-1'>
+                                        <p className='mb-4'>Address: {clientDetails.address}</p>
+                                        <p className='mb-4'>Taluk: {clientDetails.taluk}</p>
+                                        <p className='mb-4'>District: {clientDetails.district}</p>
+                                        <p className='mb-4'>State: {clientDetails.state} - {clientDetails.pin}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
 
-                        <hr />
+                            <hr />
 
                             {valueData.items.map((item, index) => (
                                 <div key={index} className='row shadow p-3 mt-2 bg-white b-radius-10'>
@@ -368,18 +368,18 @@ calculatePendingAmount()
                             ))}
 
                             <div className='d-flex justify-content-between pt-4'>
-                            <div className='d-flex gap-2'>
-                                <input type='text' className='btn btn-bg-orange' value={valueData.total} name='totalamount' placeholder='Total Amount' onChange={handleChange} readOnly />
-                                <button type='button' className='btn btn-bg-orange'>Paid Amount : {valueData.paid}</button>
-                                <button type='button' className='btn btn-bg-orange'>Pending Amount : {valueData.pending}</button>
-                            </div>
+                                <div className='d-flex gap-2'>
+                                    <input type='text' className='btn btn-bg-orange' value={valueData.total} name='totalamount' placeholder='Total Amount' onChange={handleChange} readOnly />
+                                    <button type='button' className='btn btn-bg-orange'>Paid Amount : {valueData.paid}</button>
+                                    <button type='button' className='btn btn-bg-orange'>Pending Amount : {valueData.pending}</button>
+                                </div>
                                 <div className='d-flex gap-3'>
                                     <button type='button' className='btn btn-bg-orange' onClick={addItem}>Add Item</button>
                                     <button type='submit' className='btn btn-bg-orange' style={{ width: "200px" }}>Submit</button>
                                 </div>
 
                             </div>
-                        </div>
+                     
                     </form>
                 </div>
             </div>

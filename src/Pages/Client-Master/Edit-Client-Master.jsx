@@ -143,6 +143,17 @@ const Edit_Client_Master = () => {
           });
       }, [employeeId]);
       
+      useEffect(() => {
+        axios.get('https://digitalshopee.online/api/firm/get-firm.php')
+            .then(res => {
+                const migratefirmname = res.data.map(firm => firm.firm_name)
+                setGetfirmnames(migratefirmname)
+            })
+            .catch(err => {
+                console.error('Error fetching data:', err);
+            });
+    }, []);
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -234,7 +245,7 @@ const Edit_Client_Master = () => {
             })
                 .then(res => {
                     console.log('Client Updated Successfully')
-                    navigate(`/client-master/${employeeId}`)
+                    // navigate(`/client-master/${employeeId}`)
                 })
                 .catch(err => console.log(err));
 
@@ -353,7 +364,7 @@ const Edit_Client_Master = () => {
                             <div className='col-md-3 py-2'>
                                 <label className='text-sm font-w-500 p-2'>Client Category</label>
                                 <select className='form-control' value={valueData.category} name='category' onChange={handleChange}>
-                                    <option value="">Select client category </option>
+                                    <option value="">Select firm category </option>
                                     {getfirmnames.map((name, index) => (
                                         <option key={index} value={name}>{name}</option>
                                     ))}

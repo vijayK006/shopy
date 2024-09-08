@@ -159,12 +159,12 @@ const Sidebar = () => {
             )}
 
             {/* Bill Generation */}
-            <NavLink className="disble-decoration" to={`/bill-generation/${employeeId}`}>
+            {/* <NavLink className="disble-decoration" to={`/bill-generation/${employeeId}`}>
               <li className={`items ${currentPage.startsWith('/bill-generation') || currentPage.startsWith('/add-bill') || currentPage.startsWith('/edit-bill') ? 'active' : ''}`}>
                 <IoSettingsOutline className="icons" />
                 <span className='resp'>Bill Generation</span>
               </li>
-            </NavLink>
+            </NavLink> */}
 
 
 
@@ -172,7 +172,7 @@ const Sidebar = () => {
             <NavLink className="disble-decoration" to={`/sales-manager/${employeeId}`}>
               <li className={`items ${currentPage.startsWith('/add-sales') || currentPage.startsWith('/sales-manager')  ? 'active' : ''}`}>
                 <IoSettingsOutline className="icons" />
-                <span className='resp'>Sales Manages</span>
+                <span className='resp'>Sales Manager</span>
               </li>
             </NavLink>
 

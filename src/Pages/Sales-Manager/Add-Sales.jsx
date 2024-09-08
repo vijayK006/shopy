@@ -56,6 +56,7 @@ const Add_sales = () => {
         ]
     });
 
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -65,28 +66,72 @@ const Add_sales = () => {
 
         if (name === 'client_id') {
             fetchClientData(value);
-        }else{
+        } else {
             setClientDetails(null);
         }
     };
 
+    // const handleItemChange = (index, e) => {
+    //     const { name, value } = e.target;
+    //     const items = [...formData.items];
+    //     items[index][name] = value;
+
+    //     if (name === 'service_name') {
+    //         const selectedService = getServiceName.find(service => service.name === value);
+    //         if (selectedService) {
+    //             items[index].amount = selectedService.amount;
+    //         } else {
+    //             items[index].amount = '';
+    //         }
+    //     }
+
+    //     if (name === 'quantity') {
+    //         const quantity = parseFloat(value) || 0;
+    //         const amount = parseFloat(items[index].amount) || 0;
+    
+    //         // Calculate the total amount based on quantity
+    //         items[index].amount = amount * quantity;
+    //     }
+    
+    //     // Update the field's value
+    //     items[index][name] = value;
+
+    //     setFormData({ ...formData, items });
+    // };
+
     const handleItemChange = (index, e) => {
         const { name, value } = e.target;
         const items = [...formData.items];
-        items[index][name] = value;
-
+    
+        // Store the service amount when the service is selected
         if (name === 'service_name') {
             const selectedService = getServiceName.find(service => service.name === value);
             if (selectedService) {
-                items[index].service_code = selectedService.code;
+                items[index].baseAmount = selectedService.amount; // Store the base amount separately
+                items[index].amount = selectedService.amount * (items[index].quantity || 1); // Set amount considering quantity
             } else {
-                items[index].service_code = '';
+                items[index].baseAmount = 0;
+                items[index].amount = 0;
             }
         }
-
+    
+        // Handle quantity change and calculate total amount
+        if (name === 'quantity') {
+            const quantity = parseFloat(value) || 0;
+            const baseAmount = parseFloat(items[index].baseAmount) || 0;
+    
+            // Calculate the total amount based on quantity
+            items[index].amount = baseAmount * quantity;
+        }
+    
+        // Update the field's value
+        items[index][name] = value;
+    
+        // Set the updated items back to the state
         setFormData({ ...formData, items });
     };
 
+    
     const addItem = () => {
         setFormData({
             ...formData,
@@ -169,11 +214,11 @@ const Add_sales = () => {
             <div className='main-content' id='mainbody'>
                 <div className='shadow px-3 py-2 mb-2 d-flex justify-content-between align-items-center bg-white b-radius-50'>
                     <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to={`/sales-manager/${employeeId}`}>Sales</Link> / <Link className='t-theme-color'>Add Sales</Link></p>
-                </div>  
+                </div>
 
                 <div className='container-fluid mb-5'>
                     <form onSubmit={handleSubmit}>
-                        <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
+                        <div className='row border p-3 mt-5 bg-white b-radius-10'>
                             <div className='row'>
                                 <div className='col-md-3 py-1'>
                                     <label className='text-sm font-w-500 p-2'>Client Name</label>
@@ -193,8 +238,8 @@ const Add_sales = () => {
                         </div>
 
                         {clientDetails && (
-                            <div className='row shadow p-3 mt-2 bg-white b-radius-10'>
-                                    <h5 className='text-sm font-w-500 p-2'>Client Details</h5>
+                            <div className='row border p-3 mt-2 bg-white b-radius-10'>
+                                <h5 className='text-sm font-w-500 p-2'>Client Details</h5>
 
                                 <div className='col-md-3 py-1'>
                                     <p className='mb-4'>Email: {clientDetails.email}</p>

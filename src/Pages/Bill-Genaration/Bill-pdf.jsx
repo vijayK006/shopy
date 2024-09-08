@@ -8,6 +8,7 @@ import axios from 'axios';
 const Bill_pdf = () => {
     const { id, employeeId } = useParams();
 
+
     const [valueData, setValueData] = useState({
         id: '',
         client_id: '',
@@ -19,10 +20,11 @@ const Bill_pdf = () => {
         items: [] // Ensure items is an array by default
     });
 
-
+    const [totalService, setTotalService] = useState(null);
+    const [totalQuality, setTotalQuality] = useState(null)
     useEffect(() => {
         // Fetch the bill data
-        axios.get(`https://digitalshopee.online/api/bill/get-id-bill.php?id=${id}`)
+        axios.get(`https://digitalshopee.online/api/sales/get-id-sales.php?id=${id}`)
             .then(response => {
                 const firmData = response.data[0]; // Assuming response.data contains the firm data
                 console.log(firmData)
@@ -38,6 +40,17 @@ const Bill_pdf = () => {
                     // items: firmData.items || [{ service_code: '', service_name: '', quantity: '', amount: '', remark: '' }]
                     items: firmData.items || []
                 });
+
+
+                const totalQuantity = firmData.items.reduce((acc, item) => {
+                    return acc + parseFloat(item.quantity);
+                }, 0);
+
+                setTotalQuality(totalQuantity);
+
+                const totalService = firmData.items.map(serviceLength=> serviceLength.service_name)
+                setTotalService(totalService.length);
+
             })
             .catch(error => {
                 console.log(error);
@@ -52,7 +65,7 @@ const Bill_pdf = () => {
 
                 <div className='shadow px-3 py-2 mb-3 d-flex justify-content-between align-items-center bg-white b-radius-50'>
                     <p className='margin-0 font-w-500'><Link to={`/${employeeId}`}>Dashboard</Link> / <Link to={`/bill-generation/${employeeId}`}>Bills</Link> / <Link className='t-theme-color'>Bill PFD</Link></p>
-                        
+
                     <div className=''>
                         <button
                             type='button'
@@ -91,41 +104,39 @@ const Bill_pdf = () => {
                     <table class="table">
                         <thead class="table-dark">
                             <tr>
-                                <th>Service Code</th>
+                                {/* <th>Service Code</th> */}
                                 <th>Service Name</th>
                                 <th>Remark</th>
-                                <th>Quantity</th>
-                                <th>Amount</th>
+                                <th className='text-center'>Quantity</th>
+                                <th className='text-center'>Amount</th>
                             </tr>
                         </thead>
                         <tbody>
 
                             {valueData.items.map((item, index) => (
                                 <tr key={index}>
-                                    <td>{item.service_code}</td>
+                                    {/* <td>{item.service_code}</td> */}
                                     <td>{item.service_name}</td>
                                     <td>{item.remark}</td>
-                                    <td>{item.quantity}</td>
-                                    <td>{item.amount}</td>
+                                    <td className='text-center'>{item.quantity}</td>
+                                    <td className='text-center'>{item.amount}</td>
 
                                 </tr>
                             ))}
 
                             <tr>
-                                <td><b>Total</b></td>
+                                <td><b>Total Service {totalService}</b></td>
                                 <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><b>{valueData.total}</b></td>
+                                <td className='text-center'><b>Total Quantity {totalQuality}</b></td>
+                                <td className='text-center'><b>{valueData.total}</b></td>
                             </tr>
 
                         </tbody>
                     </table>
 
-<div className='d-flex justify-content-between'>
+                    {/* <div className='d-flex justify-content-between'>
 <p className='py-3'>Remark: {valueData.remark_1}</p>
-
-</div>
+</div> */}
                 </div>
 
             </div>

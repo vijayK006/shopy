@@ -88,12 +88,12 @@ const Sales_Manager = () => {
                         <AiOutlineDelete style={{ fontSize: '15px', marginBottom: '4px' }} /> Delete
                     </Link>
 
-                    {/* &nbsp;
+                    &nbsp;
                     &nbsp;
 
                     <Link to={`/bill-pdf/${employeeId}/${params.row.id}`} className='btn btn-outline-secondary btn-sm'>
                         Bill PDF
-                    </Link> */}
+                    </Link>
 
                 </>
 
