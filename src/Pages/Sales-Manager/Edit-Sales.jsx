@@ -33,8 +33,6 @@ const Edit_Sales = () => {
         ]
     });
 
-
-
     const [getClientName, setGetClientName] = useState([]);
     useEffect(() => {
         axios.get('https://digitalshopee.online/api/client/get-client.php')
@@ -59,6 +57,7 @@ const Edit_Sales = () => {
             .then(response => {
                 const firmData = response.data[0];
                 const clientId = response.data[0].client_id;
+                // console.log(firmData);
                 setstoredClientId(clientId)
                 console.log(clientId) // Assuming response.data contains the firm data
                 setValueData({
@@ -115,35 +114,172 @@ const Edit_Sales = () => {
         }
     };
 
+
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     const [field, index, key] = name.split('-');
+    //     const items = [...valueData.items];
+
+    //     // Handle changes for items like service_name, quantity, etc.
+    //     if (field === 'item') {
+    //         if (key === 'service_name') {
+    //             const selectedService = serviceOptions.find(option => option.name === value);
+    //             if (selectedService) {
+    //                 items[index].baseAmount = selectedService.amount;
+    //                 items[index].amount = selectedService.amount * (items[index].quantity || 1);  // Calculate based on quantity
+    //             } else {
+    //                 items[index].baseAmount = 0;
+    //                 items[index].amount = 0;
+    //             }
+    //         }
+
+    //         if (key === 'quantity') {
+    //             const quantity = parseFloat(value) || 0;
+    //             const baseAmount = parseFloat(items[index].baseAmount) || 0;
+
+    //             // Recalculate the total amount based on the quantity
+    //             items[index].amount = baseAmount * quantity;
+    //         }
+
+    //         // Update the item's field with the new value
+    //         items[index][key] = value;
+    //         setValueData({ ...valueData, items });
+    //     } else {
+    //         // Handle other form fields (like client_id)
+    //         setValueData({ ...valueData, [name]: value });
+
+    //         if (name === 'client_id') {
+    //             if (value) {
+    //                 fetchClientData(value);
+    //             } else {
+    //                 setClientDetails(null);
+    //             }
+    //         }
+    //     }
+    // };
+
+    const [baseAmounts, setBaseAmounts] = useState(null);
+
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     const [field, index, key] = name.split('-');
+    //     const items = [...valueData.items];
+
+    //     if (field === 'item') {
+    //         const item = items[index];
+
+    //         if (key === 'service_name') {
+    //             // Update the service_name and store baseAmount
+    //             const selectedService = serviceOptions.find(option => option.name === value);
+    //             if (selectedService) {
+
+    //                 setBaseAmounts(selectedService.amount)
+    //                 item.service_name = value;
+    //                 item.amount = baseAmounts;
+    //             } else {
+    //                 item.baseAmount = 0;
+    //                 item.amount = 0;
+    //                 item.service_name = value;
+    //             }
+    //         }
+
+    //         if (key === 'quantity') {
+    //             // Recalculate amount based on the quantity and stored baseAmount
+    //             const baseAmount = parseFloat(baseAmounts) || 0;
+
+    //             const quantity = parseFloat(value) || 0;
+
+    //             item.amount = baseAmount * quantity;
+    //             item.quantity = value;  // Update quantity value
+    //         }
+
+    //         // Update the item's field with the new value
+    //         items[index] = item;
+    //         setValueData({ ...valueData, items });
+    //     } else {
+    //         // Handle other form fields (like client_id)
+    //         setValueData({ ...valueData, [name]: value });
+
+    //         if (name === 'client_id') {
+    //             if (value) {
+    //                 fetchClientData(value);
+    //             } else {
+    //                 setClientDetails(null);
+    //             }
+    //         }
+    //     }
+    // };
+
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         const [field, index, key] = name.split('-');
-
+        const items = [...valueData.items];
+    
+        console.log('Service Options:', serviceOptions); 
+        
         if (field === 'item') {
-            const items = [...valueData.items];
+            const item = items[index];
+    
             if (key === 'service_name') {
+                // Find the selected service from the serviceOptions
                 const selectedService = serviceOptions.find(option => option.name === value);
                 if (selectedService) {
-                    items[index].service_code = selectedService.code;
+                    console.log('Service Selected:', selectedService.name, 'Amount:', selectedService.amount);
+                    
+                    // Store service_name and baseAmount in the item object
+                    item.service_name = value;
+                    item.baseAmount = selectedService.amount;  // Store base amount
+                    
+                    // If quantity exists, recalculate the amount
+                    const quantity = parseFloat(item.quantity) || 0;
+                    item.amount = selectedService.amount * quantity;
+                } else {
+                    console.log('No service found, resetting amounts');
+                    item.baseAmount = 0;
+                    item.amount = 0;
+                    item.service_name = value;
                 }
             }
-            items[index][key] = value;
+    
+            if (key === 'quantity') {
+                console.log('Service Name:', item.service_name, 'Base Amount:', item.baseAmount);
+    
+                // Check if service_name and baseAmount exist
+                if (item.service_name && item.baseAmount) {
+                    const quantity = parseFloat(value) || 0;
+                    console.log('Recalculating amount for quantity:', quantity, 'Base Amount:', item.baseAmount);
+    
+                    // Recalculate amount based on stored baseAmount
+                    item.amount = item.baseAmount * quantity;
+                } else {
+                    console.log('Service not selected, cannot calculate amount');
+                    item.amount = 0;  // If service is not selected, amount is 0
+                }
+                item.quantity = value;  // Update the quantity field
+            }
+    
+            // Update the items list with the modified item
+            items[index] = item;
             setValueData({ ...valueData, items });
-            // calculateTotalAmount();
-
         } else {
+            // Handle other form fields (like client_id)
             setValueData({ ...valueData, [name]: value });
-        }
-
-        if (name === 'client_id') {
-            fetchClientData(value);
-        } else {
-            setClientDetails(null);
+    
+            if (name === 'client_id') {
+                if (value) {
+                    fetchClientData(value);
+                } else {
+                    setClientDetails(null);
+                }
+            }
         }
     };
-
-
-
+    
+    
+    
+    
+    
     const fetchClientData = (clientId) => {
         axios.get(`https://digitalshopee.online/api/client/get-client-by-id.php?id=${clientId}`)
             .then(response => {
@@ -203,8 +339,6 @@ const Edit_Sales = () => {
     };
 
 
-
-
     const calculatePaidAmount = () => {
         let paidAmount = 0;
         valueData.items.forEach(item => {
@@ -226,6 +360,7 @@ const Edit_Sales = () => {
         calculatePaidAmount()
         calculatePendingAmount()
     }, [valueData.items]);
+
 
     return (
         <>
@@ -260,126 +395,126 @@ const Edit_Sales = () => {
                                 <input type='date' className='form-control' value={valueData.date} name='date' placeholder='' onChange={handleChange} />
                             </div>
 
+                        </div>
+
+                        {clientDetails && (
+                            <div className='row border p-3 mt-2 bg-white b-radius-10'>
+                                <h5 className='text-sm font-w-500 p-2'>Client Details</h5>
+
+                                <div className='col-md-3 py-1'>
+                                    <p className='mb-4'>Email: {clientDetails.email}</p>
+                                    <p className='mb-4'>Phone: {clientDetails.phone}</p>
+                                    <p className='mb-4'>Aadhaar No.: {clientDetails.adhaar}</p>
+                                    <p className='mb-4'>Category: {clientDetails.category}</p>
+                                </div>
+
+                                <div className='col-md-3 py-1'>
+                                    <p className='mb-4'>DOB: {clientDetails.dob}</p>
+                                    <p className='mb-4'>Profession: {clientDetails.profession}</p>
+                                    <p className='mb-4'>Pan: {clientDetails.pan}</p>
+                                    <p className='mb-4'>Voter Id: {clientDetails.voter_id}</p>
+                                </div>
+
+                                <div className='col-md-3 py-1'>
+                                    <p className='mb-4'>License: {clientDetails.license}</p>
+                                    <p className='mb-4'>Ration: {clientDetails.ration}</p>
+                                    <p className='mb-4'>Reference: {clientDetails.reference}</p>
+                                </div>
+
+                                <div className='col-md-3 py-1'>
+                                    <p className='mb-4'>Address: {clientDetails.address}</p>
+                                    <p className='mb-4'>Taluk: {clientDetails.taluk}</p>
+                                    <p className='mb-4'>District: {clientDetails.district}</p>
+                                    <p className='mb-4'>State: {clientDetails.state} - {clientDetails.pin}</p>
+                                </div>
+                            </div>
+                        )}
+
+                        <hr />
+
+                        {valueData.items.map((item, index) => (
+                            <div key={index} className='row shadow p-3 mt-2 bg-white b-radius-10'>
+                                <div className='col-md-2 py-1'>
+                                    <label className='text-sm font-w-500 p-2'>Service Name</label>
+                                    <select
+                                        className='form-control'
+                                        value={item.service_name}
+                                        name={`item-${index}-service_name`}
+                                        onChange={handleChange}
+                                    >
+                                        <option value=''>Select Service Name</option>
+                                        {serviceOptions.map((option, idx) => (
+                                            <option key={idx} value={option.name}>
+                                                {option.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className='col-md-2 py-1'>
+                                    <label className='text-sm font-w-500 p-2'>Service Code</label>
+                                    <input type='text' className='form-control' value={item.service_code} name={`item-${index}-service_code`} placeholder='' readOnly />
+                                </div>
+                                <div className='col-md-2 py-1'>
+                                    <label className='text-sm font-w-500 p-2'>Quantity</label>
+                                    <input type='number' className='form-control' value={item.quantity} name={`item-${index}-quantity`} placeholder='' onChange={handleChange} />
+                                </div>
+                                <div className='col-md-2 py-1'>
+                                    <label className='text-sm font-w-500 p-2'>Amount</label>
+                                    <input type='number' className='form-control' value={item.amount} name={`item-${index}-amount`} placeholder='' onChange={handleChange} />
+                                </div>
+                                <div className='col-md-2 py-1'>
+                                    <label className='text-sm font-w-500 p-2'>Remark</label>
+                                    <input type='text' className='form-control' value={item.remark} name={`item-${index}-remark`} placeholder='' onChange={handleChange} />
+                                </div>
+
+                                <div className='col-md-2 py-1'>
+                                    <label className='text-sm font-w-500 p-2'>Discount</label>
+                                    <input type='text' className='form-control' value={item.discount} name={`item-${index}-discount`} placeholder='' onChange={handleChange} />
+                                </div>
+
+                                <div className='col-md-2 py-1'>
+                                    <label className='text-sm font-w-500 p-2'>Payment Type</label>
+                                    <select value={item.paid_type} name={`item-${index}-paid_type`} placeholder='' onChange={handleChange} className='form-control'>
+                                        <option value=''>Select payment type</option>
+                                        <option value='Full Paid'>Full Paid</option>
+                                        <option value='Partially Paid'>Partially Paid</option>
+                                        <option value='No Paid'>No Paid</option>
+                                    </select>
+                                </div>
+
+                                <div className='col-md-2 py-1'>
+                                    <label className='text-sm font-w-500 p-2'>Payment Type</label>
+                                    <select value={item.paid_status} name={`item-${index}-paid_status`} placeholder='' onChange={handleChange} className='form-control'>
+                                        <option value=''>Select payment Status</option>
+                                        <option value='Yes'>Yes</option>
+                                        <option value='No'>No</option>
+                                    </select>
+                                </div>
+
+                                <div className='col-md-2 py-1'>
+                                    <label className='text-sm font-w-500 p-2'>Paid Amount</label>
+                                    <input type='text' className='form-control' value={item.paid_amount} name={`item-${index}-paid_amount`} placeholder='' onChange={handleChange} />
+                                </div>
+
+                                <div className='col-md-2 py-1 d-flex align-items-end'>
+                                    <button type='button' className='btn btn-danger btn-sm' onClick={() => removeItem(index)}>Remove</button>
+                                </div>
+                            </div>
+                        ))}
+
+                        <div className='d-flex justify-content-between pt-4'>
+                            <div className='d-flex gap-2'>
+                                <input type='text' className='btn btn-bg-orange' value={valueData.total} name='totalamount' placeholder='Total Amount' onChange={handleChange} readOnly />
+                                <button type='button' className='btn btn-bg-orange'>Paid Amount : {valueData.paid}</button>
+                                <button type='button' className='btn btn-bg-orange'>Pending Amount : {valueData.pending}</button>
+                            </div>
+                            <div className='d-flex gap-3'>
+                                <button type='button' className='btn btn-bg-orange' onClick={addItem}>Add Item</button>
+                                <button type='submit' className='btn btn-bg-orange' style={{ width: "200px" }}>Submit</button>
                             </div>
 
-                            {clientDetails && (
-                                <div className='row border p-3 mt-2 bg-white b-radius-10'>
-                                    <h5 className='text-sm font-w-500 p-2'>Client Details</h5>
+                        </div>
 
-                                    <div className='col-md-3 py-1'>
-                                        <p className='mb-4'>Email: {clientDetails.email}</p>
-                                        <p className='mb-4'>Phone: {clientDetails.phone}</p>
-                                        <p className='mb-4'>Aadhaar No.: {clientDetails.adhaar}</p>
-                                        <p className='mb-4'>Category: {clientDetails.category}</p>
-                                    </div>
-
-                                    <div className='col-md-3 py-1'>
-                                        <p className='mb-4'>DOB: {clientDetails.dob}</p>
-                                        <p className='mb-4'>Profession: {clientDetails.profession}</p>
-                                        <p className='mb-4'>Pan: {clientDetails.pan}</p>
-                                        <p className='mb-4'>Voter Id: {clientDetails.voter_id}</p>
-                                    </div>
-
-                                    <div className='col-md-3 py-1'>
-                                        <p className='mb-4'>License: {clientDetails.license}</p>
-                                        <p className='mb-4'>Ration: {clientDetails.ration}</p>
-                                        <p className='mb-4'>Reference: {clientDetails.reference}</p>
-                                    </div>
-
-                                    <div className='col-md-3 py-1'>
-                                        <p className='mb-4'>Address: {clientDetails.address}</p>
-                                        <p className='mb-4'>Taluk: {clientDetails.taluk}</p>
-                                        <p className='mb-4'>District: {clientDetails.district}</p>
-                                        <p className='mb-4'>State: {clientDetails.state} - {clientDetails.pin}</p>
-                                    </div>
-                                </div>
-                            )}
-
-                            <hr />
-
-                            {valueData.items.map((item, index) => (
-                                <div key={index} className='row shadow p-3 mt-2 bg-white b-radius-10'>
-                                    <div className='col-md-2 py-1'>
-                                        <label className='text-sm font-w-500 p-2'>Service Name</label>
-                                        <select
-                                            className='form-control'
-                                            value={item.service_name}
-                                            name={`item-${index}-service_name`}
-                                            onChange={handleChange}
-                                        >
-                                            <option value=''>Select Service Name</option>
-                                            {serviceOptions.map((option, idx) => (
-                                                <option key={idx} value={option.name}>
-                                                    {option.name}
-                                                </option>
-                                            ))}
-                                        </select>
-                                    </div>
-                                    <div className='col-md-2 py-1'>
-                                        <label className='text-sm font-w-500 p-2'>Service Code</label>
-                                        <input type='text' className='form-control' value={item.service_code} name={`item-${index}-service_code`} placeholder='' readOnly />
-                                    </div>
-                                    <div className='col-md-2 py-1'>
-                                        <label className='text-sm font-w-500 p-2'>Quantity</label>
-                                        <input type='number' className='form-control' value={item.quantity} name={`item-${index}-quantity`} placeholder='' onChange={handleChange} />
-                                    </div>
-                                    <div className='col-md-2 py-1'>
-                                        <label className='text-sm font-w-500 p-2'>Amount</label>
-                                        <input type='number' className='form-control' value={item.amount} name={`item-${index}-amount`} placeholder='' onChange={handleChange} />
-                                    </div>
-                                    <div className='col-md-2 py-1'>
-                                        <label className='text-sm font-w-500 p-2'>Remark</label>
-                                        <input type='text' className='form-control' value={item.remark} name={`item-${index}-remark`} placeholder='' onChange={handleChange} />
-                                    </div>
-
-                                    <div className='col-md-2 py-1'>
-                                        <label className='text-sm font-w-500 p-2'>Discount</label>
-                                        <input type='text' className='form-control' value={item.discount} name={`item-${index}-discount`} placeholder='' onChange={handleChange} />
-                                    </div>
-
-                                    <div className='col-md-2 py-1'>
-                                        <label className='text-sm font-w-500 p-2'>Payment Type</label>
-                                        <select value={item.paid_type} name={`item-${index}-paid_type`} placeholder='' onChange={handleChange} className='form-control'>
-                                            <option value=''>Select payment type</option>
-                                            <option value='Full Paid'>Full Paid</option>
-                                            <option value='Partially Paid'>Partially Paid</option>
-                                            <option value='No Paid'>No Paid</option>
-                                        </select>
-                                    </div>
-
-                                    <div className='col-md-2 py-1'>
-                                        <label className='text-sm font-w-500 p-2'>Payment Type</label>
-                                        <select value={item.paid_status} name={`item-${index}-paid_status`} placeholder='' onChange={handleChange} className='form-control'>
-                                            <option value=''>Select payment Status</option>
-                                            <option value='Yes'>Yes</option>
-                                            <option value='No'>No</option>
-                                        </select>
-                                    </div>
-
-                                    <div className='col-md-2 py-1'>
-                                        <label className='text-sm font-w-500 p-2'>Paid Amount</label>
-                                        <input type='text' className='form-control' value={item.paid_amount} name={`item-${index}-paid_amount`} placeholder='' onChange={handleChange} />
-                                    </div>
-
-                                    <div className='col-md-2 py-1 d-flex align-items-end'>
-                                        <button type='button' className='btn btn-danger btn-sm' onClick={() => removeItem(index)}>Remove</button>
-                                    </div>
-                                </div>
-                            ))}
-
-                            <div className='d-flex justify-content-between pt-4'>
-                                <div className='d-flex gap-2'>
-                                    <input type='text' className='btn btn-bg-orange' value={valueData.total} name='totalamount' placeholder='Total Amount' onChange={handleChange} readOnly />
-                                    <button type='button' className='btn btn-bg-orange'>Paid Amount : {valueData.paid}</button>
-                                    <button type='button' className='btn btn-bg-orange'>Pending Amount : {valueData.pending}</button>
-                                </div>
-                                <div className='d-flex gap-3'>
-                                    <button type='button' className='btn btn-bg-orange' onClick={addItem}>Add Item</button>
-                                    <button type='submit' className='btn btn-bg-orange' style={{ width: "200px" }}>Submit</button>
-                                </div>
-
-                            </div>
-                     
                     </form>
                 </div>
             </div>
@@ -388,4 +523,3 @@ const Edit_Sales = () => {
 };
 
 export default Edit_Sales;
-

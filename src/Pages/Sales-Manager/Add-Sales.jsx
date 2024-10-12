@@ -285,7 +285,7 @@ const Add_sales = () => {
                                         </select>
                                     </div>
 
-                                    <div className='col-md-3 py-1'>
+                                    <div className='col-md-3 py-1 d-none'>
                                         <label className='text-sm font-w-500 p-2'>Service Code</label>
                                         <input type="text" name="service_code" placeholder="Service Code" className='form-control' value={item.service_code} onChange={(e) => handleItemChange(index, e)} readOnly />
                                     </div>
@@ -340,7 +340,7 @@ const Add_sales = () => {
                                     </div>
 
                                     <div className='d-flex justify-content-between pt-4'>
-                                        <button type="button" onClick={() => removeItem(index)} className='btn btn-bg-orange'>Remove</button>
+                                        <button type="button" onClick={() => removeItem(index)} className='btn btn-danger btn-sm'>Remove</button>
                                     </div>
                                 </div>
                             ))}

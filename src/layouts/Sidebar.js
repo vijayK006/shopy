@@ -125,17 +125,19 @@ const Sidebar = () => {
 
             {/* Target Master */}
             {role === 'admin' ? (
-              <NavLink className="disble-decoration" to="" >
-                <li className={`dropmenu items-drop  ${currentPage.startsWith('/target-master') || currentPage.startsWith('/add-target-master') || currentPage.startsWith('/edit-target-master') || currentPage.startsWith('/target-out') || currentPage.startsWith('/add-target-out') || currentPage.startsWith('/edit-target-out') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems3')} id='dropitems3'>
-                  <RxTarget className="icons" /> <span className='resp'>Target Master <IoIosArrowDown /></span>
+              // <NavLink className="disble-decoration" to="" >
+              //   <li className={`dropmenu items-drop  ${currentPage.startsWith('/target-master') || currentPage.startsWith('/add-target-master') || currentPage.startsWith('/edit-target-master') || currentPage.startsWith('/target-out') || currentPage.startsWith('/add-target-out') || currentPage.startsWith('/edit-target-out') ? 'active-drop' : ''}`} onClick={() => toggleDropdown('dropitems3')} id='dropitems3'>
+              //     <RxTarget className="icons" /> <span className='resp'>Target Master <IoIosArrowDown /></span>
 
-                  <ul className='submenu' >
-                    <NavLink to={`/target-master/${employeeId}`}><li className={`droplink-text ${currentPage.startsWith('/target-master') || currentPage.startsWith('/add-target-master') || currentPage.startsWith('/edit-target-master') ? 'link-active' : ''}`}><IoIosArrowForward /> View Target Master</li></NavLink>
+              //     <ul className='submenu' >
+              //       <NavLink to={`/target-master/${employeeId}`}><li className={`droplink-text ${currentPage.startsWith('/target-master') || currentPage.startsWith('/add-target-master') || currentPage.startsWith('/edit-target-master') ? 'link-active' : ''}`}><IoIosArrowForward /> View Target Master</li></NavLink>
 
-                    <NavLink to={`/target-out/${employeeId}`}><li className={`droplink-text ${currentPage.startsWith('/target-out') || currentPage.startsWith('/add-target-out') || currentPage.startsWith('/edit-target-out') ? 'link-active' : ''}`}><IoIosArrowForward /> Target Master Out</li></NavLink>
-                  </ul>
-                </li>
-              </NavLink>
+              //       <NavLink to={`/target-out/${employeeId}`}><li className={`droplink-text ${currentPage.startsWith('/target-out') || currentPage.startsWith('/add-target-out') || currentPage.startsWith('/edit-target-out') ? 'link-active' : ''}`}><IoIosArrowForward /> Target Master Out</li></NavLink>
+              //     </ul>
+              //   </li>
+              // </NavLink>
+
+              <NavLink className="disble-decoration" to={`/target-master/${employeeId}`}><li className={`items ${currentPage.startsWith('/target-master/') || currentPage.startsWith('/add-target-master') || currentPage.startsWith('/edit-target-master') ? 'active' : ''}`}><IoSettingsOutline className="icons" /> <span className='resp'>Target Master</span></li></NavLink>
             ) : (
               <p className='d-none'>NO PERMISSION FOR EMPLOYEE</p>
             )}
@@ -166,11 +168,9 @@ const Sidebar = () => {
               </li>
             </NavLink> */}
 
-
-
             {/* Sales Manager */}
             <NavLink className="disble-decoration" to={`/sales-manager/${employeeId}`}>
-              <li className={`items ${currentPage.startsWith('/add-sales') || currentPage.startsWith('/sales-manager')  ? 'active' : ''}`}>
+              <li className={`items ${currentPage.startsWith('/add-sales') || currentPage.startsWith('/sales-manager') ? 'active' : ''}`}>
                 <IoSettingsOutline className="icons" />
                 <span className='resp'>Sales Manager</span>
               </li>
